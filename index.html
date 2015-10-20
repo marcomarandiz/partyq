@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+	<title>partyq test</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		function Clear() {
+			document.getElementById("username").value="";
+			document.getElementById("password").value="";
+		}
+
+		/*$(document).ready(function () {
+			var height1 = $('.content').height()
+			var height2 = $('body').height()
+
+			if(height1 > height2) {
+				$('.sidebar').height(height1)
+			} else {
+				$('.sidebar').height(height2)
+			}
+		});*/
+	</script>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body class="body">
+	<!-- #737373 -->
+	<!-- #235e6f -->
+	<div class="logo">
+		<h1>partyq logo here</h1>
+		<span class="login">
+			<input type="text" value="username" id="username" onClick="Clear();" />
+			<input type="text" value="password" id="password" onClick="Clear();" />
+			<a href="#">login</a>
+			<a href="#">register</a>
+		</span>
+	</div>
+	<div class="menu">
+		<nav>
+			<ul>
+				<li><a href="#">home</a></li>
+				<li><a href="#">drop1</a>
+					<ul>
+						<li><a href="#">sub1</a></li>
+						<li><a href="#">sub1-2</a></li>
+						<li><a href="#">subdrop-1</a>
+							<ul>
+								<li><a href="#">subdrop-1-1</a></li>
+								<li><a href="#">subdrop-1-2</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li><a href="#">drop2</a>
+					<ul>
+						<li><a href="#">sub2-1</a></li>
+						<li><a href="#">sub2-2</a></li>
+					</ul>
+				</li>
+				<li><a href="#">link</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="container">
+		<content class="content">
+			<aside class="sidebar">
+				<p>this is a sidebar. float left or right, put it before or after the content, whatever</p>
+				<hr />
+				<p>this is a sidebar. float left or right, put it before or after the content, whatever</p>
+				<hr />
+				<p>I can't seem to get this to match the content height exactly when it's shorter, and it's pissing me off. If anyone has ideas, don't hesitate to lemme know.</p>
+				<hr />
+				<p>Sorry it seems relatively bland, I'm not sure what sort of design people wanted or the way we are implementing particular things, so I just kinda went with it. A generic content container, a generic sidebar, a generic menu...</p>
+				<hr />
+				<p>I was using some shitty JS to try and match the heights of these 2, but that ended up completely destroying any semblance of dynamic sizing, So I got rid of it.</p>
+			</aside>
+
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+			<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in vehicula libero. Proin sagittis massa ut ipsum auctor, id tincidunt tellus efficitur. Curabitur ac nulla venenatis, varius arcu vel, interdum ante. Ut volutpat dui at tellus elementum, ullamcorper aliquam est congue. Suspendisse pellentesque quam interdum varius egestas. Curabitur malesuada velit est, eget hendrerit purus dapibus ut. Sed maximus dictum facilisis. Nunc et odio eu mi convallis viverra. In vitae facilisis sapien, non condimentum felis. </p>
+		</conent>
+	</div>
+</body>
+</html>
