@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Queue.css';
 
 export default class Queue extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class Queue extends React.Component {
 
   render() {
     return (
-        <div>
+        <div className={styles.queue}>
             Queue
         </div>
     );
