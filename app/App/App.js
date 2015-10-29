@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './App.css';
+import History from '../History/History.js';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -8,7 +9,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-          partyq
+        partyq
+        <History />
       </div>
     );
   }
