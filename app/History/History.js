@@ -10,6 +10,7 @@ export default class History extends React.Component {
     return (
         <div className={styles.history}>
             History
+            <History_Songlist />
         </div>
     );
   }
