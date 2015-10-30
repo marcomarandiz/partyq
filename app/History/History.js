@@ -8,7 +8,7 @@ export default class History extends React.Component {
 
   render() {
     return (
-        <div className={styles.app}>
+        <div className={styles.history}>
             History
         </div>
     );
