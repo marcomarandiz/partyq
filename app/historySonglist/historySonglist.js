@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from './historySonglist.css';
+import styles from './HistorySonglist.css';
 
-export default class historySonglist extends React.Component {
+export default class HistorySonglist extends React.Component {
 	constructor(props) {
   super(props);
 	}
   render() {
     return (
-        <div className={styles.history_songlist}>
-            historySonglist
+        <div className={styles.historysonglist}>
+          HistorySonglist
         </div>
   	);
   }
