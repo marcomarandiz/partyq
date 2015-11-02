@@ -3,7 +3,7 @@ import styles from './HistorySonglist.css';
 
 export default class HistorySonglist extends React.Component {
 	constructor(props) {
-    super(props);
+  super(props);
 	}
   render() {
     return (
