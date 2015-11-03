@@ -8,7 +8,7 @@ export default class Song extends React.Component {
   render() {
     return (
       <div className={styles.song}>
-        Im a song listen to me
+        {this.props.song}
       </div>
     );
   }
