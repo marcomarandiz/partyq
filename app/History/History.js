@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './History.css';
+import HistorySonglist from '../HistorySonglist/HistorySonglist.js';
 
 export default class History extends React.Component {
   constructor(props) {
@@ -8,9 +9,10 @@ export default class History extends React.Component {
 
   render() {
     return (
-        <div className={styles.history}>
-            History
-        </div>
+      <div className={styles.history}>
+        History
+      <HistorySonglist songs = {['song-one', 'song-two']} />
+      </div>
     );
   }
 }
