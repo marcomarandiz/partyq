@@ -1,0 +1,33 @@
+.header {
+  margin-bottom: 2%;
+}
+
+.logo {
+  width: 50%;
+  color: #FFF;
+  float: left;
+  background-color: #00a0ba;
+  border-bottom: 1px solid #a7a7a7;
+}
+
+.nav {
+  width: 49%;
+  height: 29px;
+  float: right;
+  background-color: #00a0ba;
+  color: #FFF;
+  padding-top: 9px;
+  padding-right: 1%;
+  text-align: right;
+  border-bottom: 1px solid #a7a7a7;
+  font-size: larger;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.nav a:hover {
+  color: #a7a7a7;
+}
