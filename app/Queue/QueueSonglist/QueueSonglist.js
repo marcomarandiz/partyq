@@ -9,7 +9,7 @@ export default class QueueSonglist extends React.Component {
   render() {
     return (
         <div className={styles.queueSonglist}>
-          Queuesonglist
+        {this.props.songs}
         </div>
     );
   }

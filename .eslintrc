@@ -13,6 +13,7 @@
     "padded-blocks": 0,
     "no-console": 0,
     "comma-dangle": 0,
+    "react/prop-types": 0,
     "new-cap": [2, {
       "capIsNewExceptions": [
         "List", "Map", "Set", "OrderedSet", "Stack",
