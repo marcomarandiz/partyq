@@ -8,7 +8,7 @@ export default class CurrentSong extends React.Component {
   render() {
     return (
       <div className={styles.currentSong}>
-        current song
+        {this.props.currentSong}
       </div>
     );
   }
