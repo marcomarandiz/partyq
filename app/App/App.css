@@ -1,3 +1,13 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
 .app {
     background-color: #EEEEEE;
+	color: #000;
+	font-size: 80%; /*base font size is 14px*/
+	font-family: sans-serif;
+	line-height: 1.5;
+	text-align: left;
 }
