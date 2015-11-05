@@ -13,8 +13,8 @@ socket.on('state', state => {
   store.dispatch({type: 'SET_STATE', state});
 });
 
-store.dispatch({type: 'ADD_SONG', item: 'redux-song'});
-store.dispatch({type: 'ADD_SONG', item: 'second'});
+store.dispatch({type: 'ADD_SONG', song: 'redux-song'});
+store.dispatch({type: 'ADD_SONG', song: 'second'});
 
 console.log(store.getState());
 

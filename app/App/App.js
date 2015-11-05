@@ -24,9 +24,7 @@ class App extends React.Component {
 
 // Get the items from state
 function select(state) {
-  return {
-    queueSonglist: state.queueSonglist
-  };
+  return state;
 }
 
 // Wrap the component to inject dispatch and state into it
