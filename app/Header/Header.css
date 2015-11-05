@@ -1,5 +1,7 @@
 .header {
-  margin-bottom: 2%;
+  /*margin-bottom: 2%;*/
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .logo {
@@ -8,6 +10,8 @@
   float: left;
   background-color: #00a0ba;
   border-bottom: 1px solid #a7a7a7;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .nav {
@@ -21,6 +25,7 @@
   text-align: right;
   border-bottom: 1px solid #a7a7a7;
   font-size: larger;
+  margin-top: 0;
 }
 
 .nav a {
