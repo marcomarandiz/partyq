@@ -1,14 +1,17 @@
-import {Map} from 'immutable';
+import {List} from 'immutable';
+import { combineReducers } from 'redux';
 
-function setState(state, newState) {
-  return state.merge(newState);
-}
-
-export default function(state = Map(), action) {
+function queue(state = List(), action) {
   switch (action.type) {
-  case 'SET_STATE':
-    return setState(state, action.state);
+  case 'ADD_SONG':
+    return state.push(action.item);
   default:
     return state;
   }
 }
+
+const partyqApp = combineReducers({
+  queue
+});
+
+export default partyqApp;
