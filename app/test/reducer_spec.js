@@ -1,13 +1,10 @@
 import {expect} from 'chai';
-
 import reducer from '../reducer';
+import { addSong } from '../actions/queue';
 
 describe('reducer', () => {
   it('handles ADD_SONG', () => {
-    const action = {
-      type: 'ADD_SONG',
-      song: 'song-one'
-    };
+    const action = addSong('song-one');
 
     const nextState = reducer(undefined, action);
 
