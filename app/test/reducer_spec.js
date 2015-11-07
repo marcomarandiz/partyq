@@ -9,7 +9,7 @@ describe('reducer', () => {
     const nextState = reducer(undefined, action);
 
     expect(nextState).to.deep.equal({
-      queueSonglist: [{song_name: "song-one", upvotes: 0}]
+      queueSonglist: [{song: {song_name: 'song-one', upvotes: 0}}]
     });
   });
 });

@@ -1,8 +1,8 @@
 import * as types from '../constants/ActionTypes';
 
-export function addSong(song_name) {
+export function addSong(song) {
   return {
     type: types.ADD_SONG,
-    song: {song_name: song_name, upvotes: 0}
+    song
   };
 }
