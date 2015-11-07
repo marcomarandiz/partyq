@@ -3,6 +3,8 @@ import styles from './App.css';
 import History from '../History/History.js';
 import Queue from '../Queue/Queue.js';
 import Header from '../Header/Header.js';
+import AddSong from '../AddSong/AddSong.js';
+import AddModal from '../AddSong/AddModal.js';
 import { connect } from 'react-redux';
 
 class App extends React.Component {
@@ -16,6 +18,8 @@ class App extends React.Component {
         <Header />
         <History />
         <Queue queueSonglist={queueSonglist} />
+        <AddSong />
+        <AddModal/>
       </div>
 
     );
