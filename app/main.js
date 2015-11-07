@@ -16,6 +16,8 @@ socket.on('state', state => {
 store.dispatch({type: 'ADD_SONG', song: 'redux-song'});
 store.dispatch({type: 'ADD_SONG', song: 'second'});
 console.log(store.getState());
+store.dispatch({type: 'UPVOTE_SONG', index: 1});
+console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>
