@@ -11,7 +11,7 @@ function queueSonglist(state = [], action) {
   case UPVOTE_SONG:
     return [
       ...state.slice(0, action.index),
-      Object.assign({}, state[action.index], 
+      Object.assign({}, state[action.index],
         {
           upvotes: state[action.index].upvotes + 1
         }),
