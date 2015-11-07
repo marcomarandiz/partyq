@@ -13,13 +13,9 @@ socket.on('state', state => {
   store.dispatch({type: 'SET_STATE', state});
 });
 
-//Logs every state change
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-)
-
 store.dispatch({type: 'ADD_SONG', song: 'redux-song'});
 store.dispatch({type: 'ADD_SONG', song: 'second'});
+console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>
