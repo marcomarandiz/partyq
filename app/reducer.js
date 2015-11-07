@@ -1,17 +1,20 @@
-import {List} from 'immutable';
 import { combineReducers } from 'redux';
+import { ADD_SONG } from './constants/ActionTypes';
 
-function queue(state = List(), action) {
+function queueSonglist(state = [], action) {
   switch (action.type) {
-  case 'ADD_SONG':
-    return state.push(action.item);
+  case ADD_SONG:
+    return [
+      ...state,
+      action.song
+    ];
   default:
     return state;
   }
 }
 
 const partyqApp = combineReducers({
-  queue
+  queueSonglist
 });
 
 export default partyqApp;
