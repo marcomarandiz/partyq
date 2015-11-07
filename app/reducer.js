@@ -6,7 +6,7 @@ function queueSonglist(state = [], action) {
   case ADD_SONG:
     return [
       ...state,
-      {song: {song_name: action.song, upvotes: 0}}
+      {song_name: action.song, upvotes: 0}
     ];
   default:
     return state;
