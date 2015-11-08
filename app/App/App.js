@@ -5,7 +5,7 @@ import Queue from '../Queue/Queue.js';
 import Header from '../Header/Header.js';
 import AddSong from '../AddSong/AddSong.js';
 import { connect } from 'react-redux';
-import { addSong } from '../actions/song';
+import { addSong } from '../actions/queue';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends React.Component {
         <History />
         <Queue queueSonglist={queueSonglist} />
         <AddSong onAddSong={songName =>
-                             dispatch(addSong(songName))
+                            dispatch(addSong(songName))
                             }/>
       </div>
 
