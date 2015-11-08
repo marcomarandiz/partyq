@@ -4,3 +4,11 @@
     clear: both;
 
 }
+
+.addModal {
+    display: none;
+}
+
+.songInput {
+    color: red;
+}
