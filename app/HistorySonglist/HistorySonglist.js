@@ -7,7 +7,7 @@ export default class HistorySonglist extends React.Component {
     super(props);
   }
   render() {
-    const historySongList = this.props.songs.map(song => <Song song={song} />);
+    const historySongList = this.props.songs.map((song, index) => <Song key={index} song={song} />);
     return (
       <div className={styles.historysonglist}>
         {historySongList}
