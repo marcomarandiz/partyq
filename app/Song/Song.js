@@ -8,7 +8,7 @@ export default class Song extends React.Component {
   render() {
     return (
       <div className={styles.song}>
-        {this.props.song.song_name}
+        {this.props.song.song_name}: {this.props.song.upvotes}
       </div>
     );
   }
