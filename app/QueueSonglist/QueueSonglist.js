@@ -9,7 +9,7 @@ export default class QueueSonglist extends React.Component {
   }
 
   render() {
-    const songList = this.props.songs.map(song => <Song song={song} />);
+    const songList = this.props.songs.map((song, index) => <Song key={index} song={song} />);
     return (
         <div className={styles.queueSonglist}>
           <CurrentSong currentSong={'current song'} />
