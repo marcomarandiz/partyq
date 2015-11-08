@@ -17,7 +17,7 @@ export default class AddSong extends React.Component {
   render() {
     return (
       <div className={styles.addsong}>
-        <input className={styles.songInput} ref="songname" type="text" />
+        <input className={styles.songInput} ref='songname' type='text' />
         <button onClick={(event) => this.handleClick(event)}>
           AddSong
         </button>
