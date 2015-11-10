@@ -2,7 +2,8 @@ import { ADD_SONG, UPVOTE_SONG, NEXT_SONG } from './constants/ActionTypes';
 
 export const initialState = {
   queueSonglist: [],
-  historySonglist: []
+  historySonglist: [],
+  currentSong: {song: {}, isPlaying: false}
 };
 
 function queueSonglistReducer(state = initialState.queueSonglist, action) {
