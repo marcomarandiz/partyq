@@ -17,7 +17,13 @@ class App extends React.Component {
       <div className={styles.app}>
         <Header />
         <History />
-        <Queue queueSonglist={queueSonglist} />
+        <Queue queueSonglist={queueSonglist} onUpvoteSong={index => 
+                                                            {
+                                                              dispatch(upvoteSong(index))
+                                                              console.log(queueSongList)
+                                                            }
+                                                          } />
+
         <AddSong onAddSong={songName =>
                             dispatch(addSong(songName))
                             }/>
