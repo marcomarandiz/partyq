@@ -10,12 +10,11 @@ export default class QueueSonglist extends React.Component {
 
 
   handleUpvote(index) {
-    console.log(index);
     this.props.onUpvoteSong(index);
   }
 
   render() {
-    const songList = this.props.songs.map((song, index) => <Song key={index} song={song} index={index} handleUpvote={this.handleUpvote} />);
+    const songList = this.props.songs.map((song, index) => <Song key={index} song={song} index={index} handleUpvote={() => this.handleUpvote(index)} />);
     return (
         <div className={styles.queueSonglist}>
           <CurrentSong currentSong={'Sirens of the Sea'} />
