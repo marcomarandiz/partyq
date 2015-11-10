@@ -22,13 +22,6 @@ function queueSonglist(state = [], action) {
   }
 }
 
-function historySonglist(state = [], action) {
-    switch (action.type) {
-      default:
-        return state;
-    }
-}
-
 const partyqApp = combineReducers({
   queueSonglist
 });
