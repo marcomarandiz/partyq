@@ -12,7 +12,7 @@ export default class Song extends React.Component {
         <a href='#' onClick={() => this.props.handleUpvote(this.props.index)}>
           <img src='https://emoji.slack-edge.com//T0BPYMCNQ//steve//e3c6ac7cd44a97cf.jpg' alt='upvote' width='5%' height='5%'/>
         </a>
-      {/*this is nasty and hardcoded, need to figure out how to fix spacing*/}
+      {/* this is nasty and hardcoded, need to figure out how to fix spacing */}
         &nbsp;
         &nbsp;
         &nbsp;
