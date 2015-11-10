@@ -1,11 +1,11 @@
 import { ADD_SONG, UPVOTE_SONG, NEXT_SONG } from './constants/ActionTypes';
 
-const initialState = {
+export const initialState = {
   queueSonglist: [],
   historySonglist: []
 };
 
-function queueSonglist(state = initialState.queueSonglist, action) {
+function queueSonglistReducer(state = initialState.queueSonglist, action) {
   switch (action.type) {
   case ADD_SONG:
     return [
@@ -28,11 +28,23 @@ function queueSonglist(state = initialState.queueSonglist, action) {
 
 
 export default function mainReducer(state = initialState, action) {
+  const { queueSonglist, currentSong, historySonglist } = state;
   switch (action.type) {
+  case NEXT_SONG:
+    const nextSong = queueSonglist[0];
+    return {
+      ...state,
+      currentSong: nextSong,
+      queueSonglist: queueSonglist.slice(1),
+      historySonglist: [
+        ...historySonglist,
+        currentSong
+      ]
+    };
   default:
     return {
       ...initialState,
-      queueSonglist: queueSonglist(state.queueSonglist, action)
+      queueSonglist: queueSonglistReducer(queueSonglist, action)
     };
   }
 }
