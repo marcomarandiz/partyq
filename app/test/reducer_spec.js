@@ -14,7 +14,7 @@ describe('reducer', () => {
     });
   });
 
-  it('upvotes song with UPDATE_SONG', () => {
+  it('upvotes song with UPVOTE_SONG', () => {
     const initialState = {
       queueSonglist: [
         {

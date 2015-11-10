@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './App.css';
-import History from '../History/History.js';
-import Queue from '../Queue/Queue.js';
-import Header from '../Header/Header.js';
-import AddSong from '../AddSong/AddSong.js';
+import History from '../../components/History/History.js';
+import Queue from '../../components/Queue/Queue.js';
+import Header from '../../components/Header/Header.js';
+import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
-import { addSong } from '../actions/queue';
+import { addSong } from '../../actions/queue';
 
 class App extends React.Component {
   constructor(props) {
