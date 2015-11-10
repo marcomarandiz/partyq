@@ -3,6 +3,7 @@ import { ADD_SONG, UPVOTE_SONG, NEXT_SONG } from './constants/ActionTypes';
 export const initialState = {
   queueSonglist: [],
   historySonglist: [],
+  // comment for testing
   currentSong: {song: {}, isPlaying: false}
 };
 
@@ -45,7 +46,7 @@ export default function mainReducer(state = initialState, action) {
         queueSonglist: queueSonglist.slice(1),
         historySonglist: [
           ...historySonglist,
-          currentSong
+          currentSong.song
         ]
       };
     }
