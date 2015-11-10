@@ -1,14 +1,11 @@
 .currentSong {
   width: 75%;
   height: 75px;
-  background-color: #dfdfdf;
+  background-color: white;
   color: #000;
   border: 1px solid #a3a3a3;
   margin: 0 auto;
-  float: center;
   padding: 1%;
   border-radius: 10px;
-  -o-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
+  text-align: center;
 }

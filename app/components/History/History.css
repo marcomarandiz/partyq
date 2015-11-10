@@ -1,8 +1,8 @@
 .history {
-	width: 10px;
+	width: 150px;
 	float: left;
 	clear: both;
-	margin-top: 2%;
+	margin-top: 3%;
 }
 
 .history:hover {
