@@ -14,3 +14,8 @@
 .song:hover {
   background-color: #dfdfdf;
 }
+
+.upvote {
+  margin-right: 2%;
+  padding-right: 2%;
+}

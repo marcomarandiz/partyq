@@ -1,12 +1,7 @@
 .history {
-	width: 150px;
+	width: 10%;
 	float: left;
 	clear: both;
 	margin-top: 3%;
-}
-
-.history:hover {
-	width: 10%;
-	margin-left: 0;
-	padding-left: 0;
+	margin-left: -1.3%;
 }
