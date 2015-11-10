@@ -5,7 +5,7 @@ import Queue from '../Queue/Queue.js';
 import Header from '../Header/Header.js';
 import AddSong from '../AddSong/AddSong.js';
 import { connect } from 'react-redux';
-import { addSong } from '../actions/queue';
+import { addSong } from '../../actions/queue';
 
 class App extends React.Component {
   constructor(props) {
