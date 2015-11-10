@@ -6,19 +6,15 @@
 
 .logo {
   width: 50%;
-  color: #FFF;
-  float: left;
-  background-color: #00a0ba;
-  border-bottom: 1px solid #a7a7a7;
+  color: black;
+  float: right; 
   margin-top: 0;
   padding-top: 0;
 }
 
 .nav {
-  width: 49%;
   height: 29px;
-  float: right;
-  background-color: #00a0ba;
+  background-color: white;
   color: #FFF;
   padding-top: 9px;
   padding-right: 1%;
