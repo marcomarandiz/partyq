@@ -6,6 +6,14 @@ import nextSong from '../actions/nextSong';
 import { initialState as emptyState} from '../reducer';
 
 describe('reducer', () => {
+  it('does nothing when called NEXT_SONG with no current song', () => {
+    const action = nextSong();
+
+    const nextState = reducer(undefined, action);
+
+    expect(nextState).to.deep.equal(emptyState);
+  });
+
   it('handles NEXT_SONG when there is a current song', () => {
     const initialState = {
       ...emptyState,

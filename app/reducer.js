@@ -26,21 +26,29 @@ function queueSonglistReducer(state = initialState.queueSonglist, action) {
   }
 }
 
-
 export default function mainReducer(state = initialState, action) {
   const { queueSonglist, currentSong, historySonglist } = state;
   switch (action.type) {
   case NEXT_SONG:
-    const nextSong = queueSonglist[0];
-    return {
-      ...state,
-      currentSong: nextSong,
-      queueSonglist: queueSonglist.slice(1),
-      historySonglist: [
-        ...historySonglist,
-        currentSong
-      ]
-    };
+    // TODO: Move this out of NEXT_SONG and into own function
+    let newState = state;
+    if (state.currentSong) {
+      let nextSong = {};
+      if (state.queueSonglist.length > 0) {
+        nextSong = queueSonglist[0];
+      }
+
+      newState = {
+        ...state,
+        currentSong: nextSong,
+        queueSonglist: queueSonglist.slice(1),
+        historySonglist: [
+          ...historySonglist,
+          currentSong
+        ]
+      };
+    }
+    return newState;
   default:
     return {
       ...initialState,
