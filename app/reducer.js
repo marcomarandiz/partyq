@@ -1,7 +1,11 @@
-import { combineReducers } from 'redux';
-import { ADD_SONG, UPVOTE_SONG } from './constants/ActionTypes';
+import { ADD_SONG, UPVOTE_SONG, NEXT_SONG } from './constants/ActionTypes';
 
-function queueSonglist(state = [], action) {
+const initialState = {
+  queueSonglist: [],
+  historySonglist: []
+};
+
+function queueSonglist(state = initialState.queueSonglist, action) {
   switch (action.type) {
   case ADD_SONG:
     return [
@@ -22,8 +26,13 @@ function queueSonglist(state = [], action) {
   }
 }
 
-const partyqApp = combineReducers({
-  queueSonglist
-});
 
-export default partyqApp;
+export default function mainReducer(state = initialState, action) {
+  switch (action.type) {
+  default:
+    return {
+      ...initialState,
+      queueSonglist: queueSonglist(state.queueSonglist, action)
+    };
+  }
+}
