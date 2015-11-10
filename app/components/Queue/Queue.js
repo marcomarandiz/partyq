@@ -10,7 +10,7 @@ export default class Queue extends React.Component {
   render() {
     return (
         <div className={styles.queue}>
-          <QueueSonglist songs={this.props.queueSonglist} />
+          <QueueSonglist songs={this.props.queueSonglist} onUpvoteSong={this.props.onUpvoteSong} />
         </div>
     );
   }
