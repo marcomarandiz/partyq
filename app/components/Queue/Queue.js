@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Queue.css';
-import QueueSonglist from '../QueueSonglist/QueueSonglist';
+import QueueSonglist from '../QueueSonglist/QueueSonglist.js';
 
 export default class Queue extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export default class Queue extends React.Component {
   render() {
     return (
         <div className={styles.queue}>
-          <QueueSonglist songs={['Trap Queen', 'See You Again', 'Sorry']} />
+          <QueueSonglist songs={this.props.queueSonglist} />
         </div>
     );
   }

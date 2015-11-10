@@ -1,9 +1,8 @@
 .song {
   background-color: white;
   width: 70%;
-  float: middle;
   clear: both;
-  margin-left: 14.5%;
+  margin: 0 auto;
   padding-left: 1%;
   padding-bottom: 1%;
   padding-top: 1%;

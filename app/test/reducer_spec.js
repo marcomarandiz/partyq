@@ -1,22 +1,37 @@
-import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
-
 import reducer from '../reducer';
+import { addSong } from '../actions/queue';
+import { upvoteSong } from '../actions/song';
 
 describe('reducer', () => {
-  it('handles SET_STATE', () => {
-    const initialState = Map();
-    const action = {
-      type: 'SET_STATE',
-      state: Map({
-        items: List.of('item-one', 'item-two')
-      })
-    };
+  it('handles ADD_SONG', () => {
+    const action = addSong('song-one');
 
+    const nextState = reducer(undefined, action);
+
+    expect(nextState).to.deep.equal({
+      queueSonglist: [{song_name: 'song-one', upvotes: 0}]
+    });
+  });
+
+  it('upvotes song with UPVOTE_SONG', () => {
+    const initialState = {
+      queueSonglist: [
+        {
+          song_name: 'song', upvotes: 0
+        }
+      ]
+    };
+    const action = upvoteSong(0);
     const nextState = reducer(initialState, action);
 
-    expect(nextState).to.equal(fromJS({
-      items: List.of('item-one', 'item-two')
-    }));
+
+    expect(nextState).to.deep.equal({
+      queueSonglist: [
+        {
+          song_name: 'song', upvotes: 1
+        }
+      ]
+    });
   });
 });

@@ -14,7 +14,7 @@ export default class Header extends React.Component {
           </div>
           <div className={styles.nav}>
             <nav>
-              <a href="#">&#9776;</a>
+              <a href='#'>&#9776;</a>
             </nav>
           </div>
         </div>
