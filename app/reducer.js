@@ -20,7 +20,7 @@ function queueSonglistReducer(state = initialState.queueSonglist, action) {
           upvotes: state[action.index].upvotes + 1
         }),
       ...state.slice(action.index + 1)
-    ];
+    ].sort((a, b) => b.upvotes - a.upvotes);
   default:
     return state;
   }
@@ -49,7 +49,7 @@ export default function mainReducer(state = initialState, action) {
   case NEXT_SONG:
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;
-    if (state.currentSong) {
+    if (state.currentSong && Object.keys(state.currentSong).length !== 0 ) {
       let nextSong = {};
       if (state.queueSonglist.length > 0) {
         nextSong = queueSonglist[0];
@@ -67,7 +67,7 @@ export default function mainReducer(state = initialState, action) {
     }
     return newState;
   case ADD_SONG:
-    if (!state.currentSong) {
+    if (!state.currentSong || Object.keys(state.currentSong).length === 0) {
       return {
         ...state,
         currentSong: {song_name: action.song, isPlaying: false}
