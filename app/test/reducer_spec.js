@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import reducer from '../reducer';
 import { addSong } from '../actions/queue';
 import { upvoteSong } from '../actions/song';
+import { playSong, pauseSong } from '../actions/currentSong';
 import nextSong from '../actions/nextSong';
 import { initialState as emptyState } from '../reducer';
 
@@ -96,4 +97,34 @@ describe('reducer', () => {
       ]
     });
   });
+
+  it('plays song if there is current song and it is not playing', () => {
+    const initialState = {
+      ...emptyState,
+      currentSong: {song_name: 'current', isPlaying: false}
+    };
+    const action = playSong();
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.deep.equal({
+      ...initialState,
+      currentSong: {song_name: 'current', isPlaying: true}
+    });
+  });
+
+  it('pauses song if there is current song and it is playing', () => {
+    const initialState = {
+      ...emptyState,
+      currentSong: {song_name: 'current', isPlaying: true}
+    };
+    const action = pauseSong();
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.deep.equal({
+      ...initialState,
+      currentSong: {song_name: 'current', isPlaying: false}
+    });
+  });
 });
+
+

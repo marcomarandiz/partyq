@@ -1,12 +1,12 @@
 import * as types from '../constants/ActionTypes';
 
-export default function playSong() {
+export function playSong() {
   return {
     type: types.PLAY_SONG
   };
 }
 
-export default function pauseSong() {
+export function pauseSong() {
   return {
     type: types.PAUSE_SONG
   };
