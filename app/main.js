@@ -19,6 +19,10 @@ store.dispatch({type: 'ADD_SONG', song: 'third'});
 console.log(store.getState());
 store.dispatch({type: 'UPVOTE_SONG', index: 0});
 console.log(store.getState());
+store.dispatch({type: 'PLAY_SONG'});
+console.log(store.getState());
+store.dispatch({type: 'PAUSE_SONG'});
+console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>
