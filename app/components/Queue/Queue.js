@@ -16,6 +16,7 @@ export default class Queue extends React.Component {
             onUpvoteSong={this.props.onUpvoteSong}
             onPlaySong={() => this.props.onPlaySong()}
             onPauseSong={() => this.props.onPauseSong()}
+            onNextSong={() => this.props.onNextSong()}
           />
         </div>
     );
