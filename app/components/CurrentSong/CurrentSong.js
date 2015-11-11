@@ -13,19 +13,20 @@ export default class CurrentSong extends React.Component {
 
   handlePause() {
     console.log('pause');
-    this.props.onPauseSong(); 
+    this.props.onPauseSong();
   }
 
   render() {
     return (
+      // Formatting is nasty and hard coded and I copied it from Andrew :D
       <div className={styles.currentSong}>
         {this.props.currentSong.song_name}
-        <a href='#' onClick={() => this.handlePlay()}>
-          <img src='https://emoji.slack-edge.com//T0BPYMCNQ//steve//e3c6ac7cd44a97cf.jpg' alt='play' width='8%' height='100%'/>
-        </a>
-        <a href='#' onClick={() => this.handlePause()}>
-          <img src='https://emoji.slack-edge.com//T0BPYMCNQ//steve//e3c6ac7cd44a97cf.jpg' alt='pause' width='8%' height='100%'/>
-        </a>
+        &nbsp;
+        &nbsp;
+        <button type='button' onClick={() => this.handlePlay()}> Play </button>
+        &nbsp;
+        &nbsp;
+        <button type='button' onClick={() => this.handlePause()}> Pause </button>
       </div>
     );
   }
