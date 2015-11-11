@@ -13,12 +13,12 @@ class App extends React.Component {
     super(props);
   }
   render() {
-    const { dispatch, queueSonglist, currentSong } = this.props;
+    const { dispatch, queueSonglist } = this.props;
     return (
       <div className={styles.app}>
         <Header />
         <History />
-        <Queue queueSonglist={queueSonglist} currentSong={this.props.currentSong} onUpvoteSong={index =>
+        <Queue currentSong={this.props.currentSong} queueSonglist={queueSonglist} onUpvoteSong={index =>
                                                            dispatch(upvoteSong(index))
                                                           } />
 
