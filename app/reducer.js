@@ -2,7 +2,7 @@ import { ADD_SONG, UPVOTE_SONG, NEXT_SONG, PLAY_SONG, PAUSE_SONG } from './const
 
 export const initialState = {
   queueSonglist: [],
-  historySonglist: [],
+  historySonglist: []
 };
 
 function queueSonglistReducer(state = initialState.queueSonglist, action) {
