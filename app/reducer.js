@@ -3,7 +3,6 @@ import { ADD_SONG, UPVOTE_SONG, NEXT_SONG, PLAY_SONG, PAUSE_SONG } from './const
 export const initialState = {
   queueSonglist: [],
   historySonglist: [],
-  currentSong: null
 };
 
 function queueSonglistReducer(state = initialState.queueSonglist, action) {
@@ -67,6 +66,13 @@ export default function mainReducer(state = initialState, action) {
       };
     }
     return newState;
+  case ADD_SONG:
+    if (!state.currentSong){
+      return {
+        ...state,
+        currentSong: {song_name: action.song, isPlaying: false}
+      };
+    }
   default:
     return {
       ...initialState,
