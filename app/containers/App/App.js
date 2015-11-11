@@ -19,7 +19,9 @@ class App extends React.Component {
     return (
       <div className={styles.app}>
         <Header />
-        <History />
+        <History
+          historySonglist={this.props.historySonglist}
+        />
         <Queue
           currentSong={this.props.currentSong}
           onPlaySong={() => dispatch(playSong())}
