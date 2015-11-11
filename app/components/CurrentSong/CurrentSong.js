@@ -20,6 +20,8 @@ export default class CurrentSong extends React.Component {
     return (
       // Formatting is nasty and hard coded and I copied it from Andrew :D
       <div className={styles.currentSong}>
+        {this.props.currentSong.isPlaying ? 'Playing' : 'Paused'}:
+        &nbsp;
         {this.props.currentSong.song_name}
         &nbsp;
         &nbsp;
