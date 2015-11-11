@@ -1,10 +1,9 @@
-import { ADD_SONG, UPVOTE_SONG, NEXT_SONG } from './constants/ActionTypes';
+import { ADD_SONG, UPVOTE_SONG, NEXT_SONG, PLAY_SONG, PAUSE_SONG } from './constants/ActionTypes';
 
 export const initialState = {
   queueSonglist: [],
   historySonglist: [],
-  // comment for testing
-  currentSong: {song: {}, isPlaying: false}
+  currentSong: null
 };
 
 function queueSonglistReducer(state = initialState.queueSonglist, action) {
@@ -28,6 +27,23 @@ function queueSonglistReducer(state = initialState.queueSonglist, action) {
   }
 }
 
+function currentSongReducer(state = initialState.currentSong, action) {
+  switch (action.type) {
+  case PLAY_SONG:
+    return {
+      ...state,
+      isPlaying: true
+    };
+  case PAUSE_SONG:
+    return {
+      ...state,
+      isPlaying: false
+    };
+  default:
+    return state;
+  }
+}
+
 export default function mainReducer(state = initialState, action) {
   const { queueSonglist, currentSong, historySonglist } = state;
   switch (action.type) {
@@ -46,7 +62,7 @@ export default function mainReducer(state = initialState, action) {
         queueSonglist: queueSonglist.slice(1),
         historySonglist: [
           ...historySonglist,
-          currentSong.song
+          currentSong
         ]
       };
     }
@@ -54,7 +70,8 @@ export default function mainReducer(state = initialState, action) {
   default:
     return {
       ...initialState,
-      queueSonglist: queueSonglistReducer(queueSonglist, action)
+      queueSonglist: queueSonglistReducer(queueSonglist, action),
+      currentSong: currentSongReducer(currentSong, action)
     };
   }
 }
