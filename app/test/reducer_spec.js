@@ -2,8 +2,9 @@ import {expect} from 'chai';
 import reducer from '../reducer';
 import { addSong } from '../actions/queue';
 import { upvoteSong } from '../actions/song';
+import { playSong, pauseSong } from '../actions/currentSong';
 import nextSong from '../actions/nextSong';
-import { initialState as emptyState} from '../reducer';
+import { initialState as emptyState } from '../reducer';
 
 describe('reducer', () => {
   it('does nothing when called NEXT_SONG with no current song', () => {
@@ -48,14 +49,28 @@ describe('reducer', () => {
     });
   });
 
-
-  it('handles ADD_SONG', () => {
+  it('handles ADD_SONG when no current song', () => {
     const action = addSong('song-one');
 
     const nextState = reducer(undefined, action);
 
     expect(nextState).to.deep.equal({
       ...emptyState,
+      currentSong: {song_name: 'song-one', isPlaying: false}
+    });
+  });
+
+  it('handles ADD_SONG when there is a currentSong', () => {
+    const action = addSong('song-one');
+    const intitialState = {
+      ...emptyState,
+      currentSong: {song_name: 'current', isPlaying: false}
+    };
+
+    const nextState = reducer(intitialState, action);
+
+    expect(nextState).to.deep.equal({
+      ...intitialState,
       queueSonglist: [{song_name: 'song-one', upvotes: 0}]
     });
   });
@@ -63,6 +78,7 @@ describe('reducer', () => {
   it('upvotes song with UPVOTE_SONG', () => {
     const initialState = {
       ...emptyState,
+      currentSong: {song_name: 'current', isPlaying: false},
       queueSonglist: [
         {
           song_name: 'song', upvotes: 0
@@ -79,6 +95,34 @@ describe('reducer', () => {
           song_name: 'song', upvotes: 1
         }
       ]
+    });
+  });
+
+  it('plays song if there is current song and it is not playing', () => {
+    const initialState = {
+      ...emptyState,
+      currentSong: {song_name: 'current', isPlaying: false}
+    };
+    const action = playSong();
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.deep.equal({
+      ...initialState,
+      currentSong: {song_name: 'current', isPlaying: true}
+    });
+  });
+
+  it('pauses song if there is current song and it is playing', () => {
+    const initialState = {
+      ...emptyState,
+      currentSong: {song_name: 'current', isPlaying: true}
+    };
+    const action = pauseSong();
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.deep.equal({
+      ...initialState,
+      currentSong: {song_name: 'current', isPlaying: false}
     });
   });
 });

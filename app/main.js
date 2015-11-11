@@ -13,10 +13,15 @@ socket.on('state', state => {
   store.dispatch({type: 'SET_STATE', state});
 });
 
-store.dispatch({type: 'ADD_SONG', song: 'redux-song'});
+store.dispatch({type: 'ADD_SONG', song: 'first'});
 store.dispatch({type: 'ADD_SONG', song: 'second'});
+store.dispatch({type: 'ADD_SONG', song: 'third'});
 console.log(store.getState());
-store.dispatch({type: 'UPVOTE_SONG', index: 1});
+store.dispatch({type: 'UPVOTE_SONG', index: 0});
+console.log(store.getState());
+store.dispatch({type: 'PLAY_SONG'});
+console.log(store.getState());
+store.dispatch({type: 'PAUSE_SONG'});
 console.log(store.getState());
 
 ReactDOM.render(
