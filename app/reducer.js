@@ -2,7 +2,7 @@ import { ADD_SONG, UPVOTE_SONG, NEXT_SONG, PLAY_SONG, PAUSE_SONG } from './const
 
 export const initialState = {
   queueSonglist: [],
-  historySonglist: []
+  historySonglist: [],
 };
 
 function queueSonglistReducer(state = initialState.queueSonglist, action) {
@@ -20,7 +20,7 @@ function queueSonglistReducer(state = initialState.queueSonglist, action) {
           upvotes: state[action.index].upvotes + 1
         }),
       ...state.slice(action.index + 1)
-    ];
+    ].sort((a, b) => b.upvotes - a.upvotes);
   default:
     return state;
   }
