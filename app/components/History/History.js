@@ -10,7 +10,7 @@ export default class History extends React.Component {
   render() {
     return (
       <div className={styles.history}>
-        <HistorySonglist songs = {[{song_name: 'song-one'}, {song_name: 'song-two'}]} />
+        <HistorySonglist songs={this.props.historySonglist} />
       </div>
     );
   }

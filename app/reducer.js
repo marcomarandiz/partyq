@@ -78,7 +78,8 @@ export default function mainReducer(state = initialState, action) {
     return {
       ...initialState,
       queueSonglist: queueSonglistReducer(queueSonglist, action),
-      currentSong: currentSongReducer(currentSong, action)
+      currentSong: currentSongReducer(currentSong, action),
+      historySonglist
     };
   }
 }

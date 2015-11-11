@@ -7,6 +7,7 @@ import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import { addSong } from '../../actions/queue';
 import { upvoteSong } from '../../actions/song';
+import nextSong from '../../actions/nextSong';
 import { playSong, pauseSong } from '../../actions/currentSong';
 
 class App extends React.Component {
@@ -18,14 +19,17 @@ class App extends React.Component {
     return (
       <div className={styles.app}>
         <Header />
-        <History />
+        <History
+          historySonglist={this.props.historySonglist}
+        />
         <Queue
           currentSong={this.props.currentSong}
           onPlaySong={() => dispatch(playSong())}
           onPauseSong={()=> dispatch(pauseSong())}
           queueSonglist={queueSonglist}
-          onUpvoteSong={index => dispatch(upvoteSong(index))
-        } />
+          onUpvoteSong={index => dispatch(upvoteSong(index))}
+          onNextSong={() => dispatch(nextSong())}
+         />
         <AddSong onAddSong={songName =>
                             dispatch(addSong(songName))
                             }/>

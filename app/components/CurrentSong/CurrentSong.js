@@ -16,6 +16,11 @@ export default class CurrentSong extends React.Component {
     this.props.onPauseSong();
   }
 
+  handleNextSong() {
+    console.log('next song');
+    this.props.onNextSong();
+  }
+
   render() {
     return (
       // Formatting is nasty and hard coded and I copied it from Andrew :D
@@ -29,6 +34,9 @@ export default class CurrentSong extends React.Component {
         &nbsp;
         &nbsp;
         <button type='button' onClick={() => this.handlePause()}> Pause </button>
+        &nbsp;
+        &nbsp;
+        <button type='button' onClick={() => this.handleNextSong()}> Next </button>
       </div>
     );
   }
