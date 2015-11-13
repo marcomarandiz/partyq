@@ -11,7 +11,9 @@ services:
 before_install:
   - docker build -t stefaneng/partyq .
   - docker ps -a
-  - docker run -d -p 127.0.0.1:80:3000 stefaneng/partyq /bin/sh -c 'npm run lint && npm test && npm start'
+  - docker run -d -p 127.0.0.1:80:3000 stefaneng/partyq /bin/sh -c 'npm start'
 
 script:
+  - docker run stefaneng/partyq /bin/sh -c 'npm run lint'
+  - docker run stefaneng/partyq /bin/sh -c 'npm test'
   - curl -i localhost
