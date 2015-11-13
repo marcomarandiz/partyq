@@ -13,6 +13,7 @@ startServer(store);
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
+const hostname = process.env.HOSTNAME || '0.0.0.0';
 const app = express();
 
 if (!isDeveloping) {
@@ -42,7 +43,7 @@ app.get('*', function response(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-app.listen(port, 'localhost', function onStart(err) {
+app.listen(port, hostname, function onStart(err) {
   if (err) {
     console.log(err);
   }
