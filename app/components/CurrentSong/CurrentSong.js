@@ -5,6 +5,8 @@ import styles from './CurrentSong.css';
 export default class CurrentSong extends React.Component {
   constructor(props) {
     super(props);
+
+    this.youtube = {};
   }
 
   handlePlay() {
@@ -15,6 +17,8 @@ export default class CurrentSong extends React.Component {
   handlePause() {
     console.log('pause');
     this.props.onPauseSong();
+    console.log(this.youtube);
+    this.youtube.pauseVideo();
   }
 
   handleNextSong() {
@@ -22,19 +26,38 @@ export default class CurrentSong extends React.Component {
     this.props.onNextSong();
   }
 
+ 
+  _onReady(event, context) {
+    // context = this from react
+    // this = this for this function to Youtube API
+    event.target.setVolume(100);
+    context.youtube=event.target;
+      console.log(context);
+  }
+
+  _onEnd(event) {
+    //Handles events at the end of a song
+    context.youtube=event.target;
+  }
+
   render() {
     const opts = {
-      height: '10',
-      width: '10',
+      height: '500',
+      width: '500',
       playerVars: {
         autoplay: 1, // enables autoplay
         disablekb: 0 // disables keyboard controls
       }
     };
+
     return (
       // Formatting is nasty and hard coded and I copied it from Andrew :D
       <div className={styles.currentSong}>
-        <YouTube url={this.props.currentSong.song_name} opts={opts} />
+        <YouTube 
+          url={this.props.currentSong.song_name} 
+          opts={opts} onReady={(event) => this._onReady(event, this)} 
+          onEnd={this._onEnd} 
+        />
         {this.props.currentSong.isPlaying ? 'Playing' : 'Paused'}:
         &nbsp;
         {this.props.currentSong.song_name}
