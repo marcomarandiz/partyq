@@ -14,11 +14,11 @@ function queueReducer(state = initialState.queue, action) {
       return {
         ...state,
         currentSong: {
-          song_name: 'SongName',
-          artist: 'Artist',
+          title: null,
+          artist: null,
           url: action.song,
           vid: null,
-          src: 'YouTube',
+          src: null,
           uploadDate: null,
           upvotes: 0,
           duration: null
@@ -30,11 +30,11 @@ function queueReducer(state = initialState.queue, action) {
       songlist: [
         ...queueSonglist,
         {
-          song_name: 'SongName',
-          artist: 'Artist',
+          title: null,
+          artist: null,
           url: action.song,
           vid: null,
-          src: 'YouTube',
+          src: null,
           uploadDate: null,
           upvotes: 0,
           duration: null

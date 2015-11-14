@@ -59,7 +59,7 @@ export default class CurrentSong extends React.Component {
           onReady={(event) => this._onReady(event, this)}
           onEnd={(event) => this._onEnd(event, this)}
         />
-        {this.props.currentSong.song_name}
+        {this.props.currentSong.title}
         &nbsp;
         &nbsp;
         <player/>
