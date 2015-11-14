@@ -39,6 +39,9 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+    }, {
+      test: /\.(png|jpg|jpeg|gif|woff)$/,
+      loader: 'url-loader?limit=8192'
     }]
   }
 };
