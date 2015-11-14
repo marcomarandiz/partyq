@@ -23,21 +23,19 @@ class App extends React.Component {
   }
 
   render() {
-    const { dispatch, queueSonglist } = this.props;
+    const { dispatch } = this.props;
     return (
       <div className={styles.app} onPaste={(event) => dispatch(addSong(this.pasteLink(event)))}>
         <Header />
-        <History
-          historySonglist={this.props.historySonglist}
-        />
+        <History historySonglist={this.props.history.songlist} />
         <Queue
-          currentSong={this.props.currentSong}
+          currentSong={this.props.queue.currentSong}
+          songlist={this.props.queue.songlist}
           onPlaySong={() => dispatch(playSong())}
           onPauseSong={()=> dispatch(pauseSong())}
-          queueSonglist={queueSonglist}
+          queueSonglist={this.props.queue.songlist}
           onUpvoteSong={index => dispatch(upvoteSong(index))}
-          onNextSong={() => dispatch(nextSong())}
-         />
+          onNextSong={() => dispatch(nextSong())} />
         <AddSong onAddSong={songName =>
                             dispatch(addSong(songName))
                             }/>

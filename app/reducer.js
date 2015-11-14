@@ -14,8 +14,8 @@ function queueReducer(state = initialState.queue, action) {
       return {
         ...state,
         currentSong: {
-          song_name: null,
-          artist: null,
+          song_name: 'SongName',
+          artist: 'Artist',
           url: action.song,
           vid: null,
           src: 'YouTube',
@@ -30,8 +30,8 @@ function queueReducer(state = initialState.queue, action) {
       songlist: [
         ...queueSonglist,
         {
-          song_name: null,
-          artist: null,
+          song_name: 'SongName',
+          artist: 'Artist',
           url: action.song,
           vid: null,
           src: 'YouTube',

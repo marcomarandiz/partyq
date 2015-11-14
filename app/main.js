@@ -17,12 +17,14 @@ store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/watch?v=nfWlot6
 store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/watch?v=4d2lGAP5xvQ'});
 store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/watch?v=PhRa3REdozw'});
 console.log(store.getState());
-store.dispatch({type: 'UPVOTE_SONG', index: 0});
+store.dispatch({type: 'UPVOTE_SONG', index: 1});
 console.log(store.getState());
 store.dispatch({type: 'PLAY_SONG'});
 console.log(store.getState());
 store.dispatch({type: 'PAUSE_SONG'});
 console.log(store.getState());
+// store.dispatch({type: 'NEXT_SONG'});
+// console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>

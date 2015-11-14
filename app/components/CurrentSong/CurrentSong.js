@@ -58,7 +58,7 @@ export default class CurrentSong extends React.Component {
       // Formatting is nasty and hard coded and I copied it from Andrew :D
       <div className={styles.currentSong}>
         <YouTube
-          url={this.props.currentSong.song_name}
+          url={this.props.currentSong.url}
           opts={opts}
           onReady={(event) => this._onReady(event, this)}
           onEnd={(event) => this._onEnd(event, this)}
