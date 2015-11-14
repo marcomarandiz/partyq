@@ -19,7 +19,7 @@ export default class AddSong extends React.Component {
       <div className={styles.addsong}>
         <form onSubmit={(event) => this.handleClick(event)}>
           <input className={styles.songInput} ref='songname' type='text' />
-          <button {/* onClick={(event) => this.handleClick(event) */} type='submit'>
+          <button type='submit'>
             AddSong
           </button>
         </form>
