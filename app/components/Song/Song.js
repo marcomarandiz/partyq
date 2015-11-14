@@ -9,8 +9,8 @@ export default class Song extends React.Component {
   render() {
     return (
       <div className={styles.song}>
-        <a href='#' onClick={() => this.props.handleUpvote(this.props.index)}>
-          <img src={require('./steve.jpg')} alt='upvote' width='5%' height='5%'/>
+        <a href='#' onClick={() => this.props.handleUpvote(this.props.index)} className={styles.upvote}>
+          <img src={require('./upvote-icon.png')} alt='upvote' width='1%' height='1%'/>
         </a>
       {/* this is nasty and hardcoded, need to figure out how to fix spacing */}
         &nbsp;
