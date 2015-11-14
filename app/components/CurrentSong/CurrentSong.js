@@ -21,10 +21,12 @@ export default class CurrentSong extends React.Component {
     this.props.onNextSong();
   }
 
+
   render() {
     return (
       // Formatting is nasty and hard coded and I copied it from Andrew :D
       <div className={styles.currentSong}>
+        <iframe width='10' height='10' src='https://www.youtube.com/embed/dQw4w9WgXcQ'></iframe>
         {this.props.currentSong.isPlaying ? 'Playing' : 'Paused'}:
         &nbsp;
         {this.props.currentSong.song_name}
