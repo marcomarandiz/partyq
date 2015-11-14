@@ -19,12 +19,12 @@ describe('reducer', () => {
     const initialState = {
       ...emptyState,
       currentSong: {
-        song_name: 'song-one',
+        vid: 'song-one',
         upvotes: 0
       },
       queueSonglist: [
         {
-          song_name: 'song-two',
+          vid: 'song-two',
           upvotes: 0
         }
       ]
@@ -37,12 +37,12 @@ describe('reducer', () => {
       ...initialState,
       historySonglist: [
         {
-          song_name: 'song-one',
+          vid: 'song-one',
           upvotes: 0
         }
       ],
       currentSong: {
-        song_name: 'song-two',
+        vid: 'song-two',
         upvotes: 0
       },
       queueSonglist: []
@@ -56,7 +56,7 @@ describe('reducer', () => {
 
     expect(nextState).to.deep.equal({
       ...emptyState,
-      currentSong: {song_name: 'song-one', isPlaying: false}
+      currentSong: {vid: 'song-one', isPlaying: false}
     });
   });
 
@@ -64,24 +64,24 @@ describe('reducer', () => {
     const action = addSong('song-one');
     const intitialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: false}
+      currentSong: {vid: 'current', isPlaying: false}
     };
 
     const nextState = reducer(intitialState, action);
 
     expect(nextState).to.deep.equal({
       ...intitialState,
-      queueSonglist: [{song_name: 'song-one', upvotes: 0}]
+      queueSonglist: [{vid: 'song-one', upvotes: 0}]
     });
   });
 
   it('upvotes song with UPVOTE_SONG', () => {
     const initialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: false},
+      currentSong: {vid: 'current', isPlaying: false},
       queueSonglist: [
         {
-          song_name: 'song', upvotes: 0
+          vid: 'song', upvotes: 0
         }
       ]
     };
@@ -92,7 +92,7 @@ describe('reducer', () => {
       ...initialState,
       queueSonglist: [
         {
-          song_name: 'song', upvotes: 1
+          vid: 'song', upvotes: 1
         }
       ]
     });
@@ -101,28 +101,28 @@ describe('reducer', () => {
   it('plays song if there is current song and it is not playing', () => {
     const initialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: false}
+      currentSong: {vid: 'current', isPlaying: false}
     };
     const action = playSong();
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.deep.equal({
       ...initialState,
-      currentSong: {song_name: 'current', isPlaying: true}
+      currentSong: {vid: 'current', isPlaying: true}
     });
   });
 
   it('pauses song if there is current song and it is playing', () => {
     const initialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: true}
+      currentSong: {vid: 'current', isPlaying: true}
     };
     const action = pauseSong();
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.deep.equal({
       ...initialState,
-      currentSong: {song_name: 'current', isPlaying: false}
+      currentSong: {vid: 'current', isPlaying: false}
     });
   });
 });

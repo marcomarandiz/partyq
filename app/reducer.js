@@ -1,33 +1,58 @@
 import { ADD_SONG, UPVOTE_SONG, NEXT_SONG, PLAY_SONG, PAUSE_SONG } from './constants/ActionTypes';
 
 export const initialState = {
-  queueSonglist: [],
-  historySonglist: []
+  queue: { songlist: [], currentSong: null, isPlaying: false },
+  history: { songlist: []}
 };
 
-function queueSonglistReducer(state = initialState.queueSonglist, action) {
+function queueReducer(state = initialState.queue, action) {
+  const queueSonglist = state.songlist;
+  const currentSong = state.currentSong;
   switch (action.type) {
   case ADD_SONG:
-    return [
+    if (!currentSong || Object.keys(currentSong).length === 0) {
+      return {
+        ...state,
+        currentSong: {
+          song_name: null,
+          artist: null,
+          url: action.song,
+          vid: null,
+          src: 'YouTube',
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        }
+      };
+    }
+    return {
       ...state,
-      {song_name: action.song, upvotes: 0}
-    ];
-  case UPVOTE_SONG:
-    return [
-      ...state.slice(0, action.index),
-      Object.assign({}, state[action.index],
+      songlist: [
+        ...queueSonglist,
         {
-          upvotes: state[action.index].upvotes + 1
-        }),
-      ...state.slice(action.index + 1)
-    ].sort((a, b) => b.upvotes - a.upvotes);
-  default:
-    return state;
-  }
-}
-
-function currentSongReducer(state = initialState.currentSong, action) {
-  switch (action.type) {
+          song_name: null,
+          artist: null,
+          url: action.song,
+          vid: null,
+          src: 'YouTube',
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        }
+      ]
+    };
+  case UPVOTE_SONG:
+    return {
+      ...state,
+      songlist: [
+        ...queueSonglist.slice(0, action.index),
+        Object.assign({}, queueSonglist[action.index],
+          {
+            upvotes: queueSonglist[action.index].upvotes + 1
+          }),
+        ...queueSonglist.slice(action.index + 1)
+      ].sort((a, b) => b.upvotes - a.upvotes)
+    };
   case PLAY_SONG:
     return {
       ...state,
@@ -44,42 +69,36 @@ function currentSongReducer(state = initialState.currentSong, action) {
 }
 
 export default function mainReducer(state = initialState, action) {
-  const { queueSonglist, currentSong, historySonglist } = state;
+  const { queue, history } = state;
+  const queueSonglist = queue.songlist;
+  const currentSong = queue.currentSong;
+  const historySonglist = history.songlist;
   switch (action.type) {
   case NEXT_SONG:
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;
-    if (state.currentSong && Object.keys(state.currentSong).length !== 0 ) {
+    if (currentSong && Object.keys(currentSong).length !== 0 ) {
       let nextSong = {};
-      if (state.queueSonglist.length > 0) {
+      if (queueSonglist.length > 0) {
         nextSong = queueSonglist[0];
       }
 
       newState = {
         ...state,
-        currentSong: nextSong,
-        queueSonglist: queueSonglist.slice(1),
-        historySonglist: [
+        queue: {currentSong: nextSong, songlist: queueSonglist.slice(1)},
+        history: {songlist:
+        [
           ...historySonglist,
           currentSong
-        ]
+        ]}
       };
     }
     return newState;
-  case ADD_SONG:
-    if (!state.currentSong || Object.keys(state.currentSong).length === 0) {
-      return {
-        ...state,
-        currentSong: {song_name: action.song, isPlaying: false}
-      };
-    }
-    /* FALLTHROUGH */
   default:
     return {
       ...initialState,
-      queueSonglist: queueSonglistReducer(queueSonglist, action),
-      currentSong: currentSongReducer(currentSong, action),
-      historySonglist
+      queue: queueReducer(queue, action),
+      history
     };
   }
 }
