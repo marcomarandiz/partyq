@@ -7,6 +7,7 @@ export default class AddSong extends React.Component {
   }
 
   handleClick(event) {
+    event.preventDefault();
     const node = this.refs.songname;
     const text = node.value.trim();
     console.log(event);
@@ -18,7 +19,7 @@ export default class AddSong extends React.Component {
     return (
       <div className={styles.addsong}>
         <form onSubmit={(event) => this.handleClick(event)}>
-          <input className={styles.songInput} ref='songname' type='text' />
+          <input className={styles.songInput} ref='songname' type='text'/>
           <button type='submit'>
             AddSong
           </button>
