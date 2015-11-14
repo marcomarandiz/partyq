@@ -28,3 +28,12 @@
   visibility: hidden;
   display: none;
 }
+
+.thumbnail {
+  height: 30px;
+  width: 30px;
+}
+
+.length {
+    float: right;
+}
