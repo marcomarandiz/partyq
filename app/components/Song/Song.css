@@ -1,3 +1,8 @@
+@font-face {
+    font-family: songInfo;
+    src: url('https://fonts.googleapis.com/css?family=Muli:300,400');
+}
+
 .song {
   background-color: white;
   width: 70%;
@@ -33,7 +38,19 @@
     width: 85%;
     float: left;
     margin: 0 auto;
+    font-family: songInfo;
 }
+
+.title {
+    font-weight: normal;
+    font-size: 150%;
+}
+
+.artist {
+    font-weight: lighter;
+    font-size: 110%;
+}
+
 
 .thumbnail {
   height: 30px;
