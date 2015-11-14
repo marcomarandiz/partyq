@@ -14,10 +14,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  pasteLink(event) {
+    const link = event.clipboardData.getData('Text').trim();
+    console.log(link);
+    return link;
+    /* dispatch(addSong(link)) ; */
+  }
+
   render() {
     const { dispatch, queueSonglist } = this.props;
     return (
-      <div className={styles.app}>
+      <div className={styles.app} onPaste={(event) => dispatch(addSong(this.pasteLink(event)))}>
         <Header />
         <History
           historySonglist={this.props.historySonglist}
