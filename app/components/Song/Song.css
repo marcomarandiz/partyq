@@ -18,15 +18,20 @@
   transform: scaleY(1.3);
 }
 
-.song:hover .upvote {
+.song:hover .upvoteButton {
   display: inline;
   visibility: initial;
   /*transition: all .5s ease-in-out;*/
 }
 
-.upvote {
+.upvoteButton {
   visibility: hidden;
   display: none;
+}
+
+.songInfo {
+    width: 40%;
+    float: left;
 }
 
 .thumbnail {
@@ -34,6 +39,17 @@
   width: 30px;
 }
 
-.length {
+.thumbnailDiv {
+    width: 20%;
+    float: left;
+}
+
+.durationDiv {
+    width: 20%;
     float: right;
+}
+
+.upvoteDiv {
+    width: 20%;
+    float: left;
 }
