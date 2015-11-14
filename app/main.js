@@ -13,9 +13,9 @@ socket.on('state', state => {
   store.dispatch({type: 'SET_STATE', state});
 });
 
-store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/embed/dQw4w9WgXcQ'});
-store.dispatch({type: 'ADD_SONG', song: 'second'});
-store.dispatch({type: 'ADD_SONG', song: 'third'});
+store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/watch?v=nfWlot6h_JM'});
+store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/watch?v=4d2lGAP5xvQ'});
+store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/watch?v=PhRa3REdozw'});
 console.log(store.getState());
 store.dispatch({type: 'UPVOTE_SONG', index: 0});
 console.log(store.getState());
