@@ -1,16 +1,21 @@
 .historysong {
-  background-color: white;
+  background-color: #FFF;
   width: 70%;
   clear: both;
   margin: 0 auto;
   padding-left: 1%;
-  padding-bottom: 1%;
-  padding-top: 1%;
+  padding-bottom: 5%;
+  padding-top: 5%;
   border-bottom: 1px solid #a3a3a3;
   border-left: 1px solid #a3a3a3;
-  border-right: 1px solid #a3a3a3;
+  border-right: 5px solid red; /* youtube red */
+  opacity: 0.8;
 }
 
 .historysong:hover {
-  background-color: #dfdfdf;
+  background-color: #FFF;
+  opacity: 1;
+  padding-left: 20%;
+  transition: all .2s ease-in-out;
+  transform: scaleX(1.3);
 }

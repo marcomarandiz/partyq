@@ -9,13 +9,23 @@
   border-bottom: 1px solid #a3a3a3;
   border-left: 1px solid #a3a3a3;
   border-right: 1px solid #a3a3a3;
+  opacity: 0.8;
 }
 
 .song:hover {
-  background-color: #dfdfdf;
+  background-color: #FFF;
+  opacity: 1;
+  transition: all .2s ease-in-out;
+  transform: scaleY(1.3);
+}
+
+.song:hover .upvote {
+  display: inline;
+  visibility: initial;
+  /*transition: all .5s ease-in-out;*/
 }
 
 .upvote {
-  margin-right: 2%;
-  padding-right: 2%;
+  visibility: hidden;
+  display: none;
 }
