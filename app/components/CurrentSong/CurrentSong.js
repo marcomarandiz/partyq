@@ -26,9 +26,14 @@ export default class CurrentSong extends React.Component {
   }
 
   _onReady(event, context) {
+    // Set the playing status to true
+    context.props.onPlaySong();
+
+    // Max the volume out
+    event.target.setVolume(100);
+
     // context = this from react
     // this = this for this function to Youtube API
-    event.target.setVolume(100);
     context.youtube = event.target;
     console.log(context);
   }
@@ -58,16 +63,14 @@ export default class CurrentSong extends React.Component {
           onReady={(event) => this._onReady(event, this)}
           onEnd={(event) => this._onEnd(event, this)}
         />
-        {this.props.currentSong.isPlaying ? 'Playing' : 'Paused'}:
-        &nbsp;
         {this.props.currentSong.song_name}
         &nbsp;
         &nbsp;
         <player/>
-        <button type='button' onClick={() => this.handlePlay()}> Play </button>
-        &nbsp;
-        &nbsp;
-        <button type='button' onClick={() => this.handlePause()}> Pause </button>
+
+        {this.props.currentSong.isPlaying ?
+         <button type='button' onClick={() => this.handlePause()}> Pause </button> :
+         <button type='button' onClick={() => this.handlePlay()}> Play </button>}
         &nbsp;
         &nbsp;
         <button type='button' onClick={() => this.handleNextSong()}> Next </button>
