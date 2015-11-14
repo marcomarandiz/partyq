@@ -5,8 +5,6 @@ import styles from './CurrentSong.css';
 export default class CurrentSong extends React.Component {
   constructor(props) {
     super(props);
-
-    this.youtube = {};
   }
 
   handlePlay() {
