@@ -1,4 +1,5 @@
 import React from 'react';
+import YouTube from 'react-youtube';
 import styles from './CurrentSong.css';
 
 export default class CurrentSong extends React.Component {
@@ -22,10 +23,18 @@ export default class CurrentSong extends React.Component {
   }
 
   render() {
+    const opts = {
+      height: '10',
+      width: '10',
+      playerVars: {
+        autoplay: 1, // enables autoplay
+        disablekb: 0 // disables keyboard controls
+      }
+    };
     return (
       // Formatting is nasty and hard coded and I copied it from Andrew :D
       <div className={styles.currentSong}>
-        <iframe width='10' height='10' src={this.props.currentSong.song_name}></iframe>
+        <YouTube url={this.props.currentSong.song_name} opts={opts} />
         {this.props.currentSong.isPlaying ? 'Playing' : 'Paused'}:
         &nbsp;
         {this.props.currentSong.song_name}
