@@ -13,7 +13,7 @@ socket.on('state', state => {
   store.dispatch({type: 'SET_STATE', state});
 });
 
-store.dispatch({type: 'ADD_SONG', song: 'first'});
+store.dispatch({type: 'ADD_SONG', song: 'https://www.youtube.com/embed/dQw4w9WgXcQ'});
 store.dispatch({type: 'ADD_SONG', song: 'second'});
 store.dispatch({type: 'ADD_SONG', song: 'third'});
 console.log(store.getState());
