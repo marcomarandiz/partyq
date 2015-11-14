@@ -21,12 +21,12 @@
 .song:hover .upvoteButton {
   display: inline;
   visibility: initial;
+  opacity: 1;
   /*transition: all .5s ease-in-out;*/
 }
 
 .upvoteButton {
-  visibility: hidden;
-  display: none;
+    opacity: 0.25;
 }
 
 .songInfo {

@@ -19,9 +19,9 @@ export default class AddSong extends React.Component {
     return (
       <div className={styles.addsong}>
         <form onSubmit={(event) => this.handleClick(event)}>
-          <input className={styles.songInput} ref='songname' type='text'/>
-          <button type='submit'>
-            AddSong
+          <input className={styles.songInput} ref='songname' type='text' className={styles.songURL}/>
+          <button type='submit' className={styles.addButton}>
+            Add Song
           </button>
         </form>
       </div>
