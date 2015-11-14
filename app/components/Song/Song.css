@@ -21,10 +21,10 @@
 .song:hover .upvote {
   display: inline;
   visibility: initial;
+  opacity: 1;
   /*transition: all .5s ease-in-out;*/
 }
 
 .upvote {
-  visibility: hidden;
-  display: none;
+  opacity: 0.25;
 }
