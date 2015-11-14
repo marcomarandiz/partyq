@@ -30,6 +30,7 @@ class App extends React.Component {
         <History historySonglist={this.props.history.songlist} />
         <Queue
           currentSong={this.props.queue.currentSong}
+          isPlaying={this.props.queue.isPlaying}
           songlist={this.props.queue.songlist}
           onPlaySong={() => dispatch(playSong())}
           onPauseSong={()=> dispatch(pauseSong())}

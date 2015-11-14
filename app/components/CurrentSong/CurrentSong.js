@@ -8,20 +8,16 @@ export default class CurrentSong extends React.Component {
   }
 
   handlePlay() {
-    console.log('play');
     this.props.onPlaySong();
     this.youtube.playVideo();
   }
 
   handlePause() {
-    console.log('pause');
     this.props.onPauseSong();
-    // console.log(this.youtube);
     this.youtube.pauseVideo();
   }
 
   handleNextSong() {
-    console.log('next song');
     this.props.onNextSong();
   }
 
@@ -68,7 +64,7 @@ export default class CurrentSong extends React.Component {
         &nbsp;
         <player/>
 
-        {this.props.currentSong.isPlaying ?
+        {this.props.isPlaying ?
          <button type='button' onClick={() => this.handlePause()}> Pause </button> :
          <button type='button' onClick={() => this.handlePlay()}> Play </button>}
         &nbsp;
