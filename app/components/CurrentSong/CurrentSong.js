@@ -63,18 +63,14 @@ export default class CurrentSong extends React.Component {
           onReady={(event) => this._onReady(event, this)}
           onEnd={(event) => this._onEnd(event, this)}
         />
-        {this.props.currentSong.isPlaying ?
-         <button type='button' onClick={() => this.handlePause()}> Pause </button> :
-         <button type='button' onClick={() => this.handlePlay()}> Play </button>}
-
-
         {this.props.currentSong.song_name}
         &nbsp;
         &nbsp;
         <player/>
 
-        &nbsp;
-        &nbsp;
+        {this.props.currentSong.isPlaying ?
+         <button type='button' onClick={() => this.handlePause()}> Pause </button> :
+         <button type='button' onClick={() => this.handlePlay()}> Play </button>}
         &nbsp;
         &nbsp;
         <button type='button' onClick={() => this.handleNextSong()}> Next </button>
