@@ -9,7 +9,7 @@ import {setState} from './actions/setstate';
 
 const store = createStore(reducer);
 
-const socket = io(`${location.protocol}//${location.hostname}:8090/entries`);
+const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
 socket.on('state', state => {
   store.dispatch(setState(state));
 });
