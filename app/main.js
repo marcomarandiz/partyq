@@ -5,12 +5,13 @@ import io from 'socket.io-client';
 import reducer from './reducer';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
+import {setState} from './actions/setstate';
 
 const store = createStore(reducer);
 
 const socket = io(`${location.protocol}//${location.hostname}:8090/entries`);
 socket.on('state', state => {
-  store.dispatch({type: 'SET_STATE', state});
+  store.dispatch(setState(state));
 });
 
 store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=nfWlot6h_JM'});
