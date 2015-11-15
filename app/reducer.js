@@ -16,7 +16,7 @@ function queueReducer(state = initialState.queue, action) {
         currentSong: {
           title: null,
           artist: null,
-          url: action.song,
+          url: action.url,
           vid: null,
           src: null,
           uploadDate: null,
@@ -32,7 +32,7 @@ function queueReducer(state = initialState.queue, action) {
         {
           title: null,
           artist: null,
-          url: action.song,
+          url: action.url,
           vid: null,
           src: null,
           uploadDate: null,
