@@ -50,6 +50,13 @@ export default class CurrentSong extends React.Component {
       }
     };
 
+    // Make sure that play/pause stays up to date between clients
+    if (this.youtube && this.props.isPlaying) {
+      this.youtube.playVideo();
+    } else if (this.youtube && ! this.props.isPlaying) {
+      this.youtube.pauseVideo();
+    }
+
     return (
       // Formatting is nasty and hard coded and I copied it from Andrew :D
       <div className={styles.currentSong}>
