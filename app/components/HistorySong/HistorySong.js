@@ -8,8 +8,7 @@ export default class HistorySong extends React.Component {
   render() {
     return (
       <div className={styles.historysong}>
-      {/* this is nasty and hardcoded, need to figure out how to fix spacing */}
-        {this.props.song.song_name}
+        {this.props.song.title} {this.props.song.artist}
       </div>
     );
   }

@@ -18,34 +18,38 @@ describe('reducer', () => {
   it('handles NEXT_SONG when there is a current song', () => {
     const initialState = {
       ...emptyState,
-      currentSong: {
-        song_name: 'song-one',
-        upvotes: 0
-      },
-      queueSonglist: [
-        {
-          song_name: 'song-two',
+      queue: {
+        currentSong: {
+          vid: 'song-one',
           upvotes: 0
-        }
-      ]
+        },
+        songlist: [
+          {
+            vid: 'song-two',
+            upvotes: 0
+          }
+        ]
+      }
     };
-    const action = nextSong();
 
+    const action = nextSong();
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.deep.equal({
       ...initialState,
-      historySonglist: [
+      history: {songlist: [
         {
-          song_name: 'song-one',
+          vid: 'song-one',
           upvotes: 0
         }
-      ],
-      currentSong: {
-        song_name: 'song-two',
-        upvotes: 0
-      },
-      queueSonglist: []
+      ]},
+      queue: {
+        currentSong: {
+          vid: 'song-two',
+          upvotes: 0
+        },
+        songlist: []
+      }
     });
   });
 
@@ -56,7 +60,20 @@ describe('reducer', () => {
 
     expect(nextState).to.deep.equal({
       ...emptyState,
-      currentSong: {song_name: 'song-one', isPlaying: false}
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'song-one',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        isPlaying: false,
+        songlist: []
+      }
     });
   });
 
@@ -64,65 +81,178 @@ describe('reducer', () => {
     const action = addSong('song-one');
     const intitialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: false}
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        songlist: [],
+      }
     };
 
     const nextState = reducer(intitialState, action);
 
     expect(nextState).to.deep.equal({
       ...intitialState,
-      queueSonglist: [{song_name: 'song-one', upvotes: 0}]
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        songlist: [{
+          title: null,
+          artist: null,
+          url: 'song-one',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        }],
+      }
     });
   });
 
   it('upvotes song with UPVOTE_SONG', () => {
     const initialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: false},
-      queueSonglist: [
-        {
-          song_name: 'song', upvotes: 0
-        }
-      ]
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        songlist: [{
+          title: null,
+          artist: null,
+          url: 'song-one',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        }]
+      }
     };
     const action = upvoteSong(0);
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.deep.equal({
       ...initialState,
-      queueSonglist: [
-        {
-          song_name: 'song', upvotes: 1
+      queue: {
+        songlist: [{
+          title: null,
+          artist: null,
+          url: 'song-one',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 1,
+          duration: null
+        }],
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
         }
-      ]
+      }
     });
   });
 
   it('plays song if there is current song and it is not playing', () => {
     const initialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: false}
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+      }
     };
     const action = playSong();
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.deep.equal({
       ...initialState,
-      currentSong: {song_name: 'current', isPlaying: true}
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        isPlaying: true
+      }
     });
   });
 
   it('pauses song if there is current song and it is playing', () => {
     const initialState = {
       ...emptyState,
-      currentSong: {song_name: 'current', isPlaying: true}
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        isPlaying: true
+      }
     };
     const action = pauseSong();
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.deep.equal({
       ...initialState,
-      currentSong: {song_name: 'current', isPlaying: false}
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'current',
+          vid: null,
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        isPlaying: false
+      }
     });
   });
 });
