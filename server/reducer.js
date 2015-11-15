@@ -12,11 +12,20 @@ export const initialState = {
   history: { songlist: []}
 };
 
+//We should probably move this somewhere else
+function getVidFromUrl(url) {
+  // lazy query string parse for vid
+  var temp = url.split('v=');
+  var vid = temp[1].split('&');
+  return vid[0];
+}
+
 function queueReducer(state = initialState.queue, action) {
   const queueSonglist = state.songlist;
   const currentSong = state.currentSong;
   switch (action.type) {
   case ADD_SONG:
+    var vid = getVidFromUrl(action.url);
     if (!currentSong || Object.keys(currentSong).length === 0) {
       return {
         ...state,
@@ -24,7 +33,7 @@ function queueReducer(state = initialState.queue, action) {
           title: null,
           artist: null,
           url: action.url,
-          vid: null,
+          vid: vid,
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -40,7 +49,7 @@ function queueReducer(state = initialState.queue, action) {
           title: null,
           artist: null,
           url: action.url,
-          vid: null,
+          vid: vid,
           src: null,
           uploadDate: null,
           upvotes: 0,

@@ -54,7 +54,7 @@ describe('reducer', () => {
   });
 
   it('handles ADD_SONG when no current song', () => {
-    const action = addSong('song-one');
+    const action = addSong('song-one?v=');
 
     const nextState = reducer(undefined, action);
 
@@ -86,7 +86,7 @@ describe('reducer', () => {
           title: null,
           artist: null,
           url: 'current',
-          vid: null,
+          vid: '',
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -105,7 +105,7 @@ describe('reducer', () => {
           title: null,
           artist: null,
           url: 'current',
-          vid: null,
+          vid: '',
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -115,7 +115,7 @@ describe('reducer', () => {
           title: null,
           artist: null,
           url: 'song-one',
-          vid: null,
+          vid: '',
           src: null,
           uploadDate: null,
           upvotes: 0,
