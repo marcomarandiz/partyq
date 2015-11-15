@@ -5,10 +5,11 @@ import Queue from '../../components/Queue/Queue.js';
 import Header from '../../components/Header/Header.js';
 import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
-import { addSong } from '../../actions/queue';
-import { upvoteSong } from '../../actions/song';
-import nextSong from '../../actions/nextSong';
-import { playSong, pauseSong } from '../../actions/currentSong';
+
+import { addSong } from '../../../common/actions/queue';
+import { upvoteSong } from '../../../common/actions/song';
+import nextSong from '../../../common/actions/nextSong';
+import { playSong, pauseSong } from '../../../common/actions/currentSong';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,9 +18,7 @@ class App extends React.Component {
 
   pasteLink(event) {
     const link = event.clipboardData.getData('Text').trim();
-    console.log(link);
     return link;
-    /* dispatch(addSong(link)) ; */
   }
 
   render() {
