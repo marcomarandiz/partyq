@@ -15,6 +15,8 @@ export const initialState = {
 //We should probably move this somewhere else
 function getVidFromUrl(url) {
   // lazy query string parse for vid
+  if (url.indexOf('v=') == -1)
+    return ''; 
   var temp = url.split('v=');
   var vid = temp[1].split('&');
   return vid[0];
