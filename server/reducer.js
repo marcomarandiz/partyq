@@ -20,6 +20,7 @@ export default function reducer(state = initialState, action) {
   case SET_STATE:
     return action.state;
   default:
+    console.log('ACTION RECEIVED', action);
     return state;
   }
 }

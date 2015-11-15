@@ -16,7 +16,7 @@ export default function startServer(store) {
 
     // Feed action event from clients directly into store
     // Should probably put authentication here
-    //socket.on('action', store.dispatch.bind(store));
+    socket.on('action', store.dispatch.bind(store));
 
     // Update all the clients' state
     socket.on('state', state => {

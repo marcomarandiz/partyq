@@ -8,13 +8,13 @@ import {Provider} from 'react-redux';
 import setState from './actions/setstate';
 import remoteActionMiddleware from './remote_action_middleware';
 
+const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
+
 const createStoreWithMiddleware = applyMiddleware(
-  remoteActionMiddleware
+  remoteActionMiddleware(socket)
 )(createStore);
 
 const store = createStoreWithMiddleware(reducer);
-
-const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
 
 socket.on('state', state => {
   console.log('STATE RECEIVED', state);
