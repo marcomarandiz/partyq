@@ -1,19 +1,26 @@
 import Server from 'socket.io';
+import {setState} from './reducer';
 
 export default function startServer(store) {
   const io = new Server().attach(8090);
 
-  const entries = io.of('/partyq');
+  const partyq = io.of('/partyq');
+
   // Emit 'state' to socket.io when Store changes
   store.subscribe(
-    () => entries.emit('state', store.getState().toJS())
+    () => partyq.emit('state', store.getState())
   );
 
-  entries.on('connection', (socket) => {
-    console.log("Connected");
-    socket.emit('state', store.getState().toJS());
+  partyq.on('connection', (socket) => {
+    socket.emit('state', store.getState());
+
     // Feed action event from clients directly into store
     // Should probably put authentication here
-    socket.on('action', store.dispatch.bind(store));
+    //socket.on('action', store.dispatch.bind(store));
+
+    // Update all the clients' state
+    socket.on('state', state => {
+      store.dispatch(setState(state));
+    });
   });
 }

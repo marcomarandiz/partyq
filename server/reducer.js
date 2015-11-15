@@ -1,9 +1,24 @@
-import { setEntries, INITIAL_STATE } from './core';
+// TODO: Again, should abstract this into common file
+export const SET_STATE = 'SET_STATE';
 
-export default function reducer(state = INITIAL_STATE, action) {
+// TODO: Put in common file
+export function setState(state) {
+  return {
+    type: SET_STATE,
+    state
+  };
+}
+
+// TODO: Move this into a 'common' file so both front and backend can access.
+const initialState = {
+  queue: { songlist: [], currentSong: null, isPlaying: false },
+  history: { songlist: []}
+};;
+
+export default function reducer(state = initialState, action) {
   switch (action.type) {
-  case 'SET_ENTRIES':
-    return setEntries(state, action.entries);
+  case SET_STATE:
+    return action.state;
   default:
     return state;
   }

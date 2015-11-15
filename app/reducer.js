@@ -1,4 +1,11 @@
-import { ADD_SONG, UPVOTE_SONG, NEXT_SONG, PLAY_SONG, PAUSE_SONG } from './constants/ActionTypes';
+import {
+  ADD_SONG,
+  UPVOTE_SONG,
+  NEXT_SONG,
+  PLAY_SONG,
+  PAUSE_SONG,
+  SET_STATE
+} from './constants/ActionTypes';
 
 export const initialState = {
   queue: { songlist: [], currentSong: null, isPlaying: false },
@@ -74,6 +81,9 @@ export default function mainReducer(state = initialState, action) {
   const currentSong = queue.currentSong;
   const historySonglist = history.songlist;
   switch (action.type) {
+  case SET_STATE:
+    console.log(action.state);
+    return action.state;
   case NEXT_SONG:
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;

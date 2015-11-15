@@ -5,25 +5,34 @@ import io from 'socket.io-client';
 import reducer from './reducer';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {setState} from './actions/setstate';
+import setState from './actions/setstate';
 
 const store = createStore(reducer);
 
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
+
 socket.on('state', state => {
+  console.log('STATE RECEIVED', state);
   store.dispatch(setState(state));
 });
 
+store.subscribe(
+  () => {
+    console.log('STATE CHANGED');
+    socket.emit('state', store.getState());
+  }
+);
+
 store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=nfWlot6h_JM'});
-store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=4d2lGAP5xvQ'});
-store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=PhRa3REdozw'});
-console.log(store.getState());
-store.dispatch({type: 'UPVOTE_SONG', index: 1});
-console.log(store.getState());
-store.dispatch({type: 'PLAY_SONG'});
-console.log(store.getState());
-store.dispatch({type: 'PAUSE_SONG'});
-console.log(store.getState());
+// store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=4d2lGAP5xvQ'});
+// store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=PhRa3REdozw'});
+// console.log(store.getState());
+// store.dispatch({type: 'UPVOTE_SONG', index: 1});
+// console.log(store.getState());
+// store.dispatch({type: 'PLAY_SONG'});
+// console.log(store.getState());
+// store.dispatch({type: 'PAUSE_SONG'});
+// console.log(store.getState());
 // store.dispatch({type: 'NEXT_SONG'});
 // console.log(store.getState());
 
