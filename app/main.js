@@ -17,7 +17,6 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducer);
 
 socket.on('state', state => {
-  console.log('STATE RECEIVED', state);
   store.dispatch(setState(state));
 });
 
