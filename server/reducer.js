@@ -39,10 +39,11 @@ function updateSong(url) {
   song.upvotes = 0;
   song.thumbnail = null;
 
+  // Hard coded a key I made for this
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
                  + song.vid + '&key=' + 'AIzaSyBuXpZ6CN2-WkXnorwt1BC-67vjEFaUOGg';
 
-  // Need to make it so it waits for this to finish
+  // This won't work for any song that was added in server.js
   https.get(callAPIURL, function(res) {
     let data = '';
     res.on('data', function(chunk) {
@@ -59,7 +60,7 @@ function updateSong(url) {
       return song;
     });
   });
-  // This is what is returned
+
   return song;
 }
 
