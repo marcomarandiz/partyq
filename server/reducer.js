@@ -7,12 +7,14 @@ import {
   SET_STATE
 } from '../common/constants/ActionTypes';
 
+const https = require('https');
+
 export const initialState = {
   queue: { songlist: [], currentSong: null, isPlaying: false },
   history: { songlist: []}
 };
 
-// We should probably move this somewhere else
+// We should probably move all of this somewhere else
 function getVidFromUrl(url) {
   // lazy query string parse for vid
   if (url.indexOf('v=') === -1) {
@@ -35,9 +37,29 @@ function updateSong(url) {
   song.title = null;
   song.uploadDate = null;
   song.upvotes = 0;
+  song.thumbnail = null;
 
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
                  + song.vid + '&key=' + 'AIzaSyBuXpZ6CN2-WkXnorwt1BC-67vjEFaUOGg';
+
+  // Need to make it so it waits for this to finish
+  https.get(callAPIURL, function(res) {
+    let data = '';
+    res.on('data', function(chunk) {
+      data += chunk;
+    });
+    res.on('end', function() {
+      const youTubeSongData = JSON.parse(data);
+      song.artist = youTubeSongData.items[0].snippet.channelTitle;
+      song.duration = youTubeSongData.items[0].contentDetails.duration;
+      song.title = youTubeSongData.items[0].snippet.title;
+      song.uploadDate = youTubeSongData.items[0].snippet.publishedAt;
+      song.thumbnail = youTubeSongData.items[0].snippet.thumbnails.default.url;
+      console.log(song);
+      return song;
+    });
+  });
+  // This is what is returned
   return song;
 }
 

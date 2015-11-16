@@ -69,7 +69,8 @@ describe('reducer', () => {
           src: null,
           uploadDate: null,
           upvotes: 0,
-          duration: null
+          duration: null,
+          thumbnail: null
         },
         isPlaying: false,
         songlist: []
@@ -119,7 +120,8 @@ describe('reducer', () => {
           src: null,
           uploadDate: null,
           upvotes: 0,
-          duration: null
+          duration: null,
+          thumbnail: null
         }],
       }
     });
