@@ -12,14 +12,33 @@ export const initialState = {
   history: { songlist: []}
 };
 
-//We should probably move this somewhere else
+// We should probably move this somewhere else
 function getVidFromUrl(url) {
   // lazy query string parse for vid
-  if (url.indexOf('v=') == -1)
-    return ''; 
-  var temp = url.split('v=');
-  var vid = temp[1].split('&');
+  if (url.indexOf('v=') === -1) {
+    return '';
+  }
+  const temp = url.split('v=');
+  const vid = temp[1].split('&');
   return vid[0];
+}
+
+function updateSong(url) {
+  const song = {};
+  song.url = url;
+  song.vid = getVidFromUrl(url);
+
+  // Temporary will fix this stuff
+  song.artist = null;
+  song.duration = null;
+  song.src = null;
+  song.title = null;
+  song.uploadDate = null;
+  song.upvotes = 0;
+
+  const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
+                 + song.vid + '&key=' + 'AIzaSyBuXpZ6CN2-WkXnorwt1BC-67vjEFaUOGg';
+  return song;
 }
 
 function queueReducer(state = initialState.queue, action) {
@@ -27,36 +46,18 @@ function queueReducer(state = initialState.queue, action) {
   const currentSong = state.currentSong;
   switch (action.type) {
   case ADD_SONG:
-    var vid = getVidFromUrl(action.url);
+    const song = updateSong(action.url);
     if (!currentSong || Object.keys(currentSong).length === 0) {
       return {
         ...state,
-        currentSong: {
-          title: null,
-          artist: null,
-          url: action.url,
-          vid: vid,
-          src: null,
-          uploadDate: null,
-          upvotes: 0,
-          duration: null
-        }
+        currentSong: song
       };
     }
     return {
       ...state,
       songlist: [
         ...queueSonglist,
-        {
-          title: null,
-          artist: null,
-          url: action.url,
-          vid: vid,
-          src: null,
-          uploadDate: null,
-          upvotes: 0,
-          duration: null
-        }
+        song
       ]
     };
   case UPVOTE_SONG:
