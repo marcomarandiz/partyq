@@ -41,10 +41,14 @@ function updateSong(url) {
 
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
+  if (!process.env.YOUTUBE_API) {
+    console.log('You didnt put in an API key correctly so partyq will not pull song information from the YouTube API.');
+    console.log('To run with API key do $YOUTUBE_API={API_KEY_HERE} npm start');
+    return song;
+  }
 
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
                  + song.vid + '&key=' + process.env.YOUTUBE_API;
-
   // This won't work for any song that was added in server.js
   https.get(callAPIURL, function(res) {
     let data = '';
@@ -62,7 +66,6 @@ function updateSong(url) {
       return song;
     });
   });
-
   return song;
 }
 
