@@ -26,8 +26,8 @@ export default class Song extends React.Component {
             {/* replace image source above ^^ with actual thumbnail */}
         </div>
         <div className={styles.songInfo}>
-            <div className={styles.title}>This is a song title</div>
-            <div className={styles.artist}>by Random Artist A</div>
+            <div className={styles.title}>{this.props.song.title}</div>
+            <div className={styles.artist}>{this.props.song.artist}</div>
         </div>
         <span className={styles.duration}>5:43</span>
       </div>
