@@ -41,7 +41,6 @@
 }
 
 .song:hover .artist {
-  font-size: 110%;
   transform: scaleY(0.7);
 }
 
