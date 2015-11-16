@@ -9,11 +9,11 @@ export default class Song extends React.Component {
   render() {
     return (
       <div className={styles.song}>
-            <div className={styles.upvoteDiv}>
+            <div className={styles.upvote}>
                 <a href='#' onClick={() => this.props.handleUpvote(this.props.index)} className={styles.upvoteButton}>
                   <img src={require('./upvote-icon.png')} alt='upvote' width='35%' height='35%'/>
                 </a>
-                <div>
+                <div className={styles.upvoteCount}>
                     {this.props.song.upvotes}
                 </div>
             </div>
@@ -21,15 +21,15 @@ export default class Song extends React.Component {
         &nbsp;
         &nbsp;
         &nbsp;
-        <div className={styles.thumbnailDiv}>
-            <img className={styles.thumbnail} src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Q_logo_2015.svg/2000px-Q_logo_2015.svg.png' alt='thumbnail'/>
-            {/* replace image source above ^^ with actual thumbnail*/}
+        <div className={styles.thumbnail}>
+            <img className={styles.thumbnailImg} src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Q_logo_2015.svg/2000px-Q_logo_2015.svg.png' alt='thumbnail'/>
+            {/* replace image source above ^^ with actual thumbnail */}
         </div>
         <div className={styles.songInfo}>
-            <div className={styles.title}>Title</div>
-            <div className={styles.artist}>Artist</div>
+            <div className={styles.title}>This is a song title</div>
+            <div className={styles.artist}>by Random Artist A</div>
         </div>
-        <span className={styles.durationDiv}>5:43</span>
+        <span className={styles.duration}>5:43</span>
       </div>
     );
   }
