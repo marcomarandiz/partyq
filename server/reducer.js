@@ -39,9 +39,11 @@ function updateSong(url) {
   song.upvotes = 0;
   song.thumbnail = null;
 
-  // Hard coded a key I made for this
+  // key has to be passed in as an environment varibale
+  // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
+
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
-                 + song.vid + '&key=' + 'AIzaSyBuXpZ6CN2-WkXnorwt1BC-67vjEFaUOGg';
+                 + song.vid + '&key=' + process.env.YOUTUBE_API;
 
   // This won't work for any song that was added in server.js
   https.get(callAPIURL, function(res) {
