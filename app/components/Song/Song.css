@@ -6,28 +6,33 @@
 .song {
   background-color: white;
   width: 70%;
+  height: auto;
   margin: 0 auto;
   padding-left: 1%;
-  padding-bottom: 1%;
-  padding-top: 1%;
+  padding-top: 0.5%;
   border-bottom: 1px solid #a3a3a3;
-  border-left: 1px solid #a3a3a3;
+  border-left: 5px solid red; /* youtube red, base off source later */
   border-right: 1px solid #a3a3a3;
   opacity: 0.8;
+  overflow: hidden;
+  float: center;
 }
 
 .song:hover {
   background-color: #FFF;
+  position: relative;
+  z-index: 10;
   opacity: 1;
   transition: all .2s ease-in-out;
   transform: scaleY(1.3);
+  margin: 0 auto;
 }
 
 .song:hover .upvoteButton {
   display: inline;
   visibility: initial;
   opacity: 1;
-  /*transition: all .5s ease-in-out;*/
+  transition: all .5s ease-in-out;
 }
 
 .upvoteButton {
@@ -37,39 +42,55 @@
 .songInfo {
     width: 85%;
     float: left;
-    margin: 0 auto;
+    margin-right: 0%;
+    padding-right: 0%;
+    margin-left: 1%;
     font-family: songInfo;
 }
 
 .title {
     font-weight: normal;
     font-size: 150%;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .artist {
     font-weight: lighter;
     font-size: 110%;
+    font-style: italic;
+    margin-top: 0;
+    padding-top: 0;
+    margin-left: 1%;
 }
 
 
-.thumbnail {
+.thumbnailImg {
   height: 30px;
   width: 30px;
+  padding-left: 0%;
+  margin-left: 0%;
 }
 
-.thumbnailDiv {
+.thumbnail {
     margin: 0 auto;
-    width: 5%;
+    padding-left: 0%;
+    margin-left: -2%;
     float: left;
 }
 
-.durationDiv {
-    width: 5%;
+.duration {
     float: right;
+    margin-right: 1%;
+    padding-top: 1.5%;
 }
 
-.upvoteDiv {
+.upvote {
     margin: 0 auto;
     width: 5%;
     float: left;
+}
+
+.upvoteCount {
+  margin: 0 auto;
 }
