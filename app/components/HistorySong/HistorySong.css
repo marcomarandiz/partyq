@@ -14,7 +14,6 @@
 .historysong:hover {
   background-color: #FFF;
   opacity: 1;
-  padding-left: 20%;
   transition: all .2s ease-in-out;
   transform: scaleX(1.3);
 }
