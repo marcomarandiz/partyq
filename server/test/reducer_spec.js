@@ -65,11 +65,12 @@ describe('reducer', () => {
           title: null,
           artist: null,
           url: 'song-one',
-          vid: null,
+          vid: '',
           src: null,
           uploadDate: null,
           upvotes: 0,
-          duration: null
+          duration: null,
+          thumbnail: null
         },
         isPlaying: false,
         songlist: []
@@ -86,7 +87,7 @@ describe('reducer', () => {
           title: null,
           artist: null,
           url: 'current',
-          vid: null,
+          vid: '',
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -105,7 +106,7 @@ describe('reducer', () => {
           title: null,
           artist: null,
           url: 'current',
-          vid: null,
+          vid: '',
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -115,11 +116,12 @@ describe('reducer', () => {
           title: null,
           artist: null,
           url: 'song-one',
-          vid: null,
+          vid: '',
           src: null,
           uploadDate: null,
           upvotes: 0,
-          duration: null
+          duration: null,
+          thumbnail: null
         }],
       }
     });

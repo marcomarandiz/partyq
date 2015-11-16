@@ -7,45 +7,85 @@ import {
   SET_STATE
 } from '../common/constants/ActionTypes';
 
+const https = require('https');
+
 export const initialState = {
   queue: { songlist: [], currentSong: null, isPlaying: false },
   history: { songlist: []}
 };
+
+// We should probably move all of this somewhere else
+function getVidFromUrl(url) {
+  // lazy query string parse for vid
+  if (url.indexOf('v=') === -1) {
+    return '';
+  }
+  const temp = url.split('v=');
+  const vid = temp[1].split('&');
+  return vid[0];
+}
+
+function updateSong(url) {
+  const song = {};
+  song.url = url;
+  song.vid = getVidFromUrl(url);
+
+  // Temporary will fix this stuff
+  song.artist = null;
+  song.duration = null;
+  song.src = null;
+  song.title = null;
+  song.uploadDate = null;
+  song.upvotes = 0;
+  song.thumbnail = null;
+
+  // key has to be passed in as an environment varibale
+  // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
+  if (!process.env.YOUTUBE_API) {
+    console.log('You didnt put in an API key correctly so partyq will not pull song information from the YouTube API.');
+    console.log('To run with API key do $YOUTUBE_API={API_KEY_HERE} npm start');
+    return song;
+  }
+
+  const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
+                 + song.vid + '&key=' + process.env.YOUTUBE_API;
+  // This won't work for any song that was added in server.js
+  https.get(callAPIURL, function(res) {
+    let data = '';
+    res.on('data', function(chunk) {
+      data += chunk;
+    });
+    res.on('end', function() {
+      const youTubeSongData = JSON.parse(data);
+      song.artist = youTubeSongData.items[0].snippet.channelTitle;
+      song.duration = youTubeSongData.items[0].contentDetails.duration;
+      song.title = youTubeSongData.items[0].snippet.title;
+      song.uploadDate = youTubeSongData.items[0].snippet.publishedAt;
+      song.thumbnail = youTubeSongData.items[0].snippet.thumbnails.default.url;
+      console.log(song);
+      return song;
+    });
+  });
+  return song;
+}
 
 function queueReducer(state = initialState.queue, action) {
   const queueSonglist = state.songlist;
   const currentSong = state.currentSong;
   switch (action.type) {
   case ADD_SONG:
+    const song = updateSong(action.url);
     if (!currentSong || Object.keys(currentSong).length === 0) {
       return {
         ...state,
-        currentSong: {
-          title: null,
-          artist: null,
-          url: action.url,
-          vid: null,
-          src: null,
-          uploadDate: null,
-          upvotes: 0,
-          duration: null
-        }
+        currentSong: song
       };
     }
     return {
       ...state,
       songlist: [
         ...queueSonglist,
-        {
-          title: null,
-          artist: null,
-          url: action.url,
-          vid: null,
-          src: null,
-          uploadDate: null,
-          upvotes: 0,
-          duration: null
-        }
+        song
       ]
     };
   case UPVOTE_SONG:

@@ -13,8 +13,9 @@ export default function startServer(store) {
 
   store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=nfWlot6h_JM'});
   store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=4d2lGAP5xvQ'});
- store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=PhRa3REdozw'});
-  store.dispatch({type: 'UPVOTE_SONG', index: 0});
+  store.dispatch({type: 'ADD_SONG', url: 'https://www.youtube.com/watch?v=PhRa3REdozw'});
+  // Upvoting in here currently breaks ADD_SONG pulling info from youtube
+  // store.dispatch({type: 'UPVOTE_SONG', index: 0});
 
   partyq.on('connection', (socket) => {
     socket.emit('state', store.getState());
