@@ -54,18 +54,16 @@ describe('reducer', () => {
   });
 
   it('handles ADD_SONG when no current song', () => {
-    const action = addSong('song-one');
-
+    const action = addSong('https://www.youtube.com/watch?v=PofT3QGSkOo');
     const nextState = reducer(undefined, action);
-
     expect(nextState).to.deep.equal({
       ...emptyState,
       queue: {
         currentSong: {
           title: null,
           artist: null,
-          url: 'song-one',
-          vid: '',
+          url: 'https://www.youtube.com/watch?v=PofT3QGSkOo',
+          vid: 'PofT3QGSkOo',
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -79,15 +77,15 @@ describe('reducer', () => {
   });
 
   it('handles ADD_SONG when there is a currentSong', () => {
-    const action = addSong('song-one');
+    const action = addSong('https://www.youtube.com/watch?v=PofT3QGSkOo');
     const intitialState = {
       ...emptyState,
       queue: {
         currentSong: {
           title: null,
           artist: null,
-          url: 'current',
-          vid: '',
+          url: 'https://www.youtube.com/watch?v=nfWlot6h_JM',
+          vid: 'nfWlot6h_JM',
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -96,17 +94,15 @@ describe('reducer', () => {
         songlist: [],
       }
     };
-
     const nextState = reducer(intitialState, action);
-
     expect(nextState).to.deep.equal({
       ...intitialState,
       queue: {
         currentSong: {
           title: null,
           artist: null,
-          url: 'current',
-          vid: '',
+          url: 'https://www.youtube.com/watch?v=nfWlot6h_JM',
+          vid: 'nfWlot6h_JM',
           src: null,
           uploadDate: null,
           upvotes: 0,
@@ -115,14 +111,51 @@ describe('reducer', () => {
         songlist: [{
           title: null,
           artist: null,
-          url: 'song-one',
-          vid: '',
+          url: 'https://www.youtube.com/watch?v=PofT3QGSkOo',
+          vid: 'PofT3QGSkOo',
           src: null,
           uploadDate: null,
           upvotes: 0,
           duration: null,
           thumbnail: null
         }],
+      }
+    });
+  });
+
+  it('handles ADD_SONG when there is a currentSong and an invalid link', () => {
+    const action = addSong('song-one');
+    const intitialState = {
+      ...emptyState,
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'https://www.youtube.com/watch?v=nfWlot6h_JM',
+          vid: 'nfWlot6h_JM',
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        songlist: [],
+      }
+    };
+    const nextState = reducer(intitialState, action);
+    expect(nextState).to.deep.equal({
+      ...intitialState,
+      queue: {
+        currentSong: {
+          title: null,
+          artist: null,
+          url: 'https://www.youtube.com/watch?v=nfWlot6h_JM',
+          vid: 'nfWlot6h_JM',
+          src: null,
+          uploadDate: null,
+          upvotes: 0,
+          duration: null
+        },
+        songlist: [],
       }
     });
   });
