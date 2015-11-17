@@ -8,7 +8,7 @@ export default class HistorySong extends React.Component {
   render() {
     return (
       <div className={styles.historysong}>
-        {this.props.song.title} {this.props.song.artist}
+        {this.props.song.title} {this.props.song.artist} {this.props.song.endedAt}
       </div>
     );
   }

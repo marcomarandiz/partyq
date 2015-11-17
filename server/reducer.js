@@ -42,6 +42,7 @@ function updateSong(url) {
   song.uploadDate = null;
   song.upvotes = 0;
   song.thumbnail = null;
+  song.endedAt = null;
 
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
@@ -143,6 +144,7 @@ export default function mainReducer(state = initialState, action) {
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;
     if (currentSong && Object.keys(currentSong).length !== 0 ) {
+      currentSong.endedAt = Date.now();
       let nextSong = {};
       if (queueSonglist.length > 0) {
         nextSong = queueSonglist[0];
