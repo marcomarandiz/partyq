@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import YouTube from 'react-youtube';
 import styles from './CurrentSong.css';
 
@@ -81,3 +81,20 @@ export default class CurrentSong extends React.Component {
     );
   }
 }
+
+// Ensure that props are passed down properly
+CurrentSong.propTypes = {
+  currentSong: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    upvotes: PropTypes.number.isRequired,
+    artist: PropTypes.string,
+    src: PropTypes.string,
+    uploadDate: PropTypes.string,
+    thumbnail: PropTypes.string
+  }).isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  onPlaySong: PropTypes.func.isRequired,
+  onPauseSong: PropTypes.func.isRequired,
+  onNextSong: PropTypes.func.isRequired
+};
