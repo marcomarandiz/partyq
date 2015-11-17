@@ -93,7 +93,6 @@ CurrentSong.propTypes = {
     uploadDate: PropTypes.string,
     thumbnail: PropTypes.string
   }).isRequired,
-  isPlaying: PropTypes.bool.isRequired,
   onPlaySong: PropTypes.func.isRequired,
   onPauseSong: PropTypes.func.isRequired,
   onNextSong: PropTypes.func.isRequired
