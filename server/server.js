@@ -22,8 +22,8 @@ export default function startServer(store) {
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
-      // Attach the user id to the action so we know who upvoted
-      action.id = socket.id;
+      // Attach the remote address as id so we know who performed the actions
+      action.id = socket.request.connection.remoteAddress;
       store.dispatch.bind(store)(action);
     });
   });
