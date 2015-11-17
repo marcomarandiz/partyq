@@ -11,7 +11,7 @@ export default class Song extends React.Component {
       <div className={styles.song}>
             <div className={styles.upvote}>
                 <a href='#' onClick={() => this.props.handleUpvote(this.props.index)} className={styles.upvoteButton}>
-                  <img src={require('./upvote-icon.png')} alt='upvote' width='35%' height='35%'/>
+                  <i className='angle up icon'></i>
                 </a>
                 <div className={styles.upvoteCount}>
                     {this.props.song.upvotes}
