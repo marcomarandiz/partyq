@@ -49,7 +49,7 @@ function updateSong(url) {
 
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
                  + song.vid + '&key=' + process.env.YOUTUBE_API;
-  // This won't work for any song that was added in server.js
+
   https.get(callAPIURL, function(res) {
     let data = '';
     res.on('data', function(chunk) {
@@ -57,12 +57,21 @@ function updateSong(url) {
     });
     res.on('end', function() {
       const youTubeSongData = JSON.parse(data);
-      song.artist = youTubeSongData.items[0].snippet.channelTitle;
-      song.duration = youTubeSongData.items[0].contentDetails.duration;
-      song.title = youTubeSongData.items[0].snippet.title;
-      song.uploadDate = youTubeSongData.items[0].snippet.publishedAt;
-      song.thumbnail = youTubeSongData.items[0].snippet.thumbnails.default.url;
-      console.log(song);
+      if (youTubeSongData.error) {
+        console.log('API error');
+        console.log('Reason: ' + youTubeSongData.error.errors[0].reason);
+        console.log('Message: ' + youTubeSongData.error.errors[0].message);
+      } else if (!youTubeSongData.items[0]) {
+        console.log('Invalid VID: ' + song.vid);
+      } else {
+        song.artist = youTubeSongData.items[0].snippet.channelTitle;
+        song.duration = youTubeSongData.items[0].contentDetails.duration;
+        song.title = youTubeSongData.items[0].snippet.title;
+        song.uploadDate = youTubeSongData.items[0].snippet.publishedAt;
+        song.thumbnail = youTubeSongData.items[0].snippet.thumbnails.default.url;
+        song.src = 'youtube';
+        console.log(song);
+      }
       return song;
     });
   });
