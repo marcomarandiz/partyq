@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './App.css';
 import History from '../../components/History/History.js';
 import Queue from '../../components/Queue/Queue.js';
@@ -43,6 +43,21 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.shape({
+    songlist: PropTypes.arrayOf(
+      PropTypes.object
+    ).isRequired
+  }).isRequired,
+  queue: PropTypes.shape({
+    currentSong: PropTypes.object,
+    isPlaying: PropTypes.bool.isRequired,
+    songlist: PropTypes.arrayOf(
+      PropTypes.object
+    ).isRequired
+  }).isRequired
+};
 
 // Get the items from state
 function select(state) {
