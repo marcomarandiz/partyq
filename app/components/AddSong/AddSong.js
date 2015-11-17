@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './AddSong.css';
 
 export default class AddSong extends React.Component {
@@ -28,3 +28,7 @@ export default class AddSong extends React.Component {
     );
   }
 }
+
+AddSong.propTypes = {
+  onAddSong: PropTypes.func.isRequired
+};

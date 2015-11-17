@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './History.css';
 import HistorySonglist from '../HistorySonglist/HistorySonglist.js';
 
@@ -15,3 +15,9 @@ export default class History extends React.Component {
     );
   }
 }
+
+History.propTypes = {
+  historySonglist: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired
+};

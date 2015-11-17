@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './Queue.css';
 import QueueSonglist from '../QueueSonglist/QueueSonglist.js';
 import CurrentSong from '../CurrentSong/CurrentSong.js';
@@ -28,3 +28,16 @@ export default class Queue extends React.Component {
     );
   }
 }
+
+Queue.propTypes = {
+  // This should be required, but we are passing it in as null...
+  currentSong: PropTypes.object,
+  onPlaySong: PropTypes.func.isRequired,
+  onPauseSong: PropTypes.func.isRequired,
+  onNextSong: PropTypes.func.isRequired,
+  onUpvoteSong: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  songlist: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired
+};
