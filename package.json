@@ -73,6 +73,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "immutable": "^3.7.5",
+    "moment": "^2.10.6",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",

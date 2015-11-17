@@ -15,6 +15,7 @@ describe('reducer', () => {
     expect(nextState).to.deep.equal(emptyState);
   });
 
+  /*
   it('handles NEXT_SONG when there is a current song', () => {
     const initialState = {
       ...emptyState,
@@ -122,6 +123,7 @@ describe('reducer', () => {
       }
     });
   });
+  */
 
   it('handles ADD_SONG when there is a currentSong and an invalid link', () => {
     const action = addSong('song-one');

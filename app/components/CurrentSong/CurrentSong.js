@@ -58,10 +58,10 @@ export default class CurrentSong extends React.Component {
     }
 
     return (
-     
+
    // Formatting is nasty and hard coded and I copied it from Andrew :D
    <div>
-      <div className={styles.youtubeVideo}> 
+      <div className={styles.youtubeVideo}>
         <YouTube
           url={this.props.currentSong.url}
           opts={opts}
@@ -71,7 +71,7 @@ export default class CurrentSong extends React.Component {
       </div>
 
       <div className={styles.currentSong}>
-        
+
         {this.props.currentSong.title}
         &nbsp;
         &nbsp;
