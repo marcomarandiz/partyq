@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './QueueSonglist.css';
 import Song from '../Song/Song.js';
 
@@ -20,3 +20,10 @@ export default class QueueSonglist extends React.Component {
     );
   }
 }
+
+QueueSonglist.propTypes = {
+  onUpvoteSong: PropTypes.func.isRequired,
+  songs: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired
+};
