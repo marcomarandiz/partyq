@@ -42,8 +42,8 @@ export default class CurrentSong extends React.Component {
 
   render() {
     const opts = {
-      height: '0',
-      width: '0',
+      height: '45',
+      width: '60',
       playerVars: {
         autoplay: 1, // enables autoplay
         disablekb: 0 // disables keyboard controls
