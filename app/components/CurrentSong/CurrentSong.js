@@ -42,8 +42,8 @@ export default class CurrentSong extends React.Component {
 
   render() {
     const opts = {
-      height: '45',
-      width: '60',
+      height: '270',
+      width: '550',
       playerVars: {
         autoplay: 1, // enables autoplay
         disablekb: 0 // disables keyboard controls
@@ -58,14 +58,20 @@ export default class CurrentSong extends React.Component {
     }
 
     return (
-      // Formatting is nasty and hard coded and I copied it from Andrew :D
-      <div className={styles.currentSong}>
+     
+   // Formatting is nasty and hard coded and I copied it from Andrew :D
+   <div>
+      <div className={styles.youtubeVideo}> 
         <YouTube
           url={this.props.currentSong.url}
           opts={opts}
           onReady={(event) => this._onReady(event, this)}
           onEnd={(event) => this._onEnd(event, this)}
         />
+      </div>
+
+      <div className={styles.currentSong}>
+        
         {this.props.currentSong.title}
         &nbsp;
         &nbsp;
@@ -77,6 +83,7 @@ export default class CurrentSong extends React.Component {
         &nbsp;
         &nbsp;
         <button type='button' onClick={() => this.handleNextSong()}> Next </button>
+      </div>
       </div>
     );
   }
