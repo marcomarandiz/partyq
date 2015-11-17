@@ -30,7 +30,11 @@ function updateSong(url) {
   song.url = url;
   song.vid = getVidFromUrl(url);
 
-  // Temporary will fix this stuff
+  if (song.vid === '') {
+    console.log('Invalid URL. Not adding song.');
+    return song;
+  }
+
   song.artist = null;
   song.duration = null;
   song.src = null;
@@ -84,6 +88,9 @@ function queueReducer(state = initialState.queue, action) {
   switch (action.type) {
   case ADD_SONG:
     const song = updateSong(action.url);
+    if (song.vid === '') {
+      return state;
+    }
     if (!currentSong || Object.keys(currentSong).length === 0) {
       return {
         ...state,
