@@ -41,6 +41,7 @@ function updateSong(url) {
   song.title = null;
   song.uploadDate = null;
   song.upvotes = 0;
+  song.userUpvotes = [];
   song.thumbnail = null;
 
   // key has to be passed in as an environment varibale
@@ -85,6 +86,7 @@ function updateSong(url) {
 function queueReducer(state = initialState.queue, action) {
   const queueSonglist = state.songlist;
   const currentSong = state.currentSong;
+  const userid = action.id;
   switch (action.type) {
   case ADD_SONG:
     const song = updateSong(action.url);
@@ -105,16 +107,27 @@ function queueReducer(state = initialState.queue, action) {
       ]
     };
   case UPVOTE_SONG:
+    // Only upvote song if there user has not upvoted
+    // Just checks the list of all user upvotes to see if userid in it
+    if (queueSonglist[action.index].userUpvotes.indexOf(userid) > -1) {
+      return state;
+    }
     return {
       ...state,
+      // Upvote song is songlist
       songlist: [
         ...queueSonglist.slice(0, action.index),
         Object.assign({}, queueSonglist[action.index],
           {
-            upvotes: queueSonglist[action.index].upvotes + 1
+            upvotes: queueSonglist[action.index].upvotes + 1,
+            // Add userid to the usersUpvotes list
+            userUpvotes: [
+              ...queueSonglist[action.index].userUpvotes,
+              userid
+            ]
           }),
         ...queueSonglist.slice(action.index + 1)
-      ].sort((a, b) => b.upvotes - a.upvotes)
+      ].sort((a, b) => b.upvotes - a.upvotes),
     };
   case PLAY_SONG:
     return {

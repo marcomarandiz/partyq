@@ -19,9 +19,12 @@ export default function startServer(store) {
 
   partyq.on('connection', (socket) => {
     socket.emit('state', store.getState());
-
     // Feed action event from clients directly into store
     // Should probably put authentication here
-    socket.on('action', store.dispatch.bind(store));
+    socket.on('action', (action) => {
+      // Attach the user id to the action so we know who upvoted
+      action.id = socket.id;
+      store.dispatch.bind(store)(action);
+    });
   });
 }
