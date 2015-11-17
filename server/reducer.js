@@ -114,7 +114,7 @@ function queueReducer(state = initialState.queue, action) {
     }
     return {
       ...state,
-      // Upvote song is songlist
+      // Upvote song in songlist
       songlist: [
         ...queueSonglist.slice(0, action.index),
         Object.assign({}, queueSonglist[action.index],
@@ -127,6 +127,7 @@ function queueReducer(state = initialState.queue, action) {
             ]
           }),
         ...queueSonglist.slice(action.index + 1)
+        // Sort by upvotes, descending
       ].sort((a, b) => b.upvotes - a.upvotes),
     };
   case PLAY_SONG:
