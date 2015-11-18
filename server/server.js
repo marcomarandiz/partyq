@@ -1,6 +1,8 @@
 import Server from 'socket.io';
 import {setState} from './reducer';
 
+const development = process.env.NODE_ENV !== 'production';
+
 export default function startServer(store) {
   const io = new Server().attach(8090);
 
@@ -23,7 +25,11 @@ export default function startServer(store) {
     // Should probably put authentication here
     socket.on('action', (action) => {
       // Attach the remote address as id so we know who performed the actions
-      action.id = socket.request.connection.remoteAddress;
+      // If we are in production, use the ip address
+      // If we are developing, use the socket id
+      action.id = development ? socket.id :
+        socket.request.connection.remoteAddress;
+
       store.dispatch.bind(store)(action);
     });
   });
