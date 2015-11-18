@@ -11,7 +11,7 @@ const https = require('https');
 const moment = require('moment');
 
 export const initialState = {
-  queue: { songlist: [], currentSong: null, isPlaying: false },
+  queue: { songlist: [], currentSong: null, isPlaying: true },
   history: { songlist: []}
 };
 
@@ -167,7 +167,7 @@ export default function mainReducer(state = initialState, action) {
       }
       newState = {
         ...state,
-        queue: {currentSong: nextSong, songlist: queueSonglist.slice(1)},
+        queue: {currentSong: nextSong, songlist: queueSonglist.slice(1), isPlaying: queue.isPlaying},
         history: {songlist:
         [
           ...historySonglist,
