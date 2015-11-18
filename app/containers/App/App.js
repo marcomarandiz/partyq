@@ -26,7 +26,9 @@ class App extends React.Component {
     return (
       <div className={styles.app} onPaste={(event) => dispatch(addSong(this.pasteLink(event)))}>
         <Header />
-        <History historySonglist={this.props.history.songlist} />
+        <History
+          historySonglist={this.props.history.songlist}
+          onReAddSong={index => dispatch(reAddSong(index))} />
         <Queue
           currentSong={this.props.queue.currentSong}
           isPlaying={this.props.queue.isPlaying}
@@ -35,7 +37,6 @@ class App extends React.Component {
           onPauseSong={()=> dispatch(pauseSong())}
           queueSonglist={this.props.queue.songlist}
           onUpvoteSong={index => dispatch(upvoteSong(index))}
-//        onReAddSong={index => dispatch(ReAddSong(index))}
           onNextSong={() => dispatch(nextSong())} />
         <AddSong onAddSong={songName =>
                             dispatch(addSong(songName))
