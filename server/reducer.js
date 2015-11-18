@@ -162,12 +162,14 @@ export default function mainReducer(state = initialState, action) {
       const songEndMoment = moment();
       currentSong.endedAt = songEndMoment.format('dddd h:mm:ss a');
       let nextSong = {};
+      let isPlaying = queue.isPlaying;
       if (queueSonglist.length > 0) {
         nextSong = queueSonglist[0];
+        isPlaying = true;
       }
       newState = {
         ...state,
-        queue: {currentSong: nextSong, songlist: queueSonglist.slice(1), isPlaying: queue.isPlaying},
+        queue: {currentSong: nextSong, songlist: queueSonglist.slice(1), isPlaying: isPlaying},
         history: {songlist:
         [
           ...historySonglist,
