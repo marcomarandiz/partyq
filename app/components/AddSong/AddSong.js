@@ -29,14 +29,6 @@ export default class AddSong extends React.Component {
               <button className='ui button' onClick={() => this.handleClick(event)}>Add Song</button>
             </div>
           </form>
-
-          <div className='ui dimmer'>
-            <div className='content'>
-              <div className='center'>
-                <h1>Song Added</h1>
-              </div>
-            </div>
-          </div>
       </div>
     );
   }
