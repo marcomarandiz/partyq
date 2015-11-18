@@ -8,6 +8,7 @@ import {
 } from '../common/constants/ActionTypes';
 
 const https = require('https');
+const moment = require('moment');
 
 export const initialState = {
   queue: { songlist: [], currentSong: null, isPlaying: false },
@@ -41,7 +42,9 @@ function updateSong(url) {
   song.title = null;
   song.uploadDate = null;
   song.upvotes = 0;
+  song.userUpvotes = [];
   song.thumbnail = null;
+  song.endedAt = null;
 
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
@@ -85,6 +88,7 @@ function updateSong(url) {
 function queueReducer(state = initialState.queue, action) {
   const queueSonglist = state.songlist;
   const currentSong = state.currentSong;
+  const userid = action.id;
   switch (action.type) {
   case ADD_SONG:
     const song = updateSong(action.url);
@@ -105,16 +109,28 @@ function queueReducer(state = initialState.queue, action) {
       ]
     };
   case UPVOTE_SONG:
+    // Only upvote song if there user has not upvoted
+    // Just checks the list of all user upvotes to see if userid in it
+    if (queueSonglist[action.index].userUpvotes.indexOf(userid) > -1) {
+      return state;
+    }
     return {
       ...state,
+      // Upvote song in songlist
       songlist: [
         ...queueSonglist.slice(0, action.index),
         Object.assign({}, queueSonglist[action.index],
           {
-            upvotes: queueSonglist[action.index].upvotes + 1
+            upvotes: queueSonglist[action.index].upvotes + 1,
+            // Add userid to the usersUpvotes list
+            userUpvotes: [
+              ...queueSonglist[action.index].userUpvotes,
+              userid
+            ]
           }),
         ...queueSonglist.slice(action.index + 1)
-      ].sort((a, b) => b.upvotes - a.upvotes)
+        // Sort by upvotes, descending
+      ].sort((a, b) => b.upvotes - a.upvotes),
     };
   case PLAY_SONG:
     return {
@@ -143,11 +159,12 @@ export default function mainReducer(state = initialState, action) {
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;
     if (currentSong && Object.keys(currentSong).length !== 0 ) {
+      const songEndMoment = moment();
+      currentSong.endedAt = songEndMoment.format('dddd h:mm:ss a');
       let nextSong = {};
       if (queueSonglist.length > 0) {
         nextSong = queueSonglist[0];
       }
-
       newState = {
         ...state,
         queue: {currentSong: nextSong, songlist: queueSonglist.slice(1)},
