@@ -1,34 +1,5 @@
 .header {
-  /*margin-bottom: 2%;*/
-  margin: 0 auto;
-  padding-top: 0;
-}
-
-.logo {
-  width: 50%;
-  color: black;
-  float: right; 
-  margin: 0 auto;
-  padding-top: 0;
-}
-
-.nav {
-  height: 29px;
-  background-color: white;
-  color: #FFF;
-  padding-top: 9px;
-  padding-right: 1%;
-  text-align: right;
-  border-bottom: 1px solid #a7a7a7;
-  font-size: larger;
-  margin-top: 0;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #FFF;
-}
-
-.nav a:hover {
-  color: #a7a7a7;
+  text-align: center;
+  background-color: #FFF;
+  padding: 0 !important;
 }
