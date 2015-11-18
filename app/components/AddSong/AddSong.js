@@ -22,8 +22,8 @@ export default class AddSong extends React.Component {
         selector: {
           close: 'icon.checkmark'
         }
-     }).modal('show')
-     ;
+      }).modal('show')
+      ;
   }
 
   render() {
