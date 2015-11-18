@@ -13,7 +13,11 @@ export default class AddSong extends React.Component {
     console.log(event);
     this.props.onAddSong(text);
     node.value = '';
-    this.modal();
+    this.dim();
+  }
+
+  dim() {
+    $('.dimmable').dimmer('show').dimmer({duration: {show: 3000, hide: 0}}).dimmer('hide');
   }
 
   render() {
@@ -25,6 +29,14 @@ export default class AddSong extends React.Component {
               <button className='ui button' onClick={() => this.handeClick(event)}>Add Song</button>
             </div>
           </form>
+
+          <div className='ui dimmer'>
+            <div className='content'>
+              <div className='center'>
+                <h1>Song Added</h1>
+              </div>
+            </div>
+          </div>
       </div>
     );
   }
