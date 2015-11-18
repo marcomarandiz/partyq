@@ -10,6 +10,7 @@ import { addSong } from '../../../common/actions/queue';
 import { upvoteSong } from '../../../common/actions/song';
 import nextSong from '../../../common/actions/nextSong';
 import { playSong, pauseSong } from '../../../common/actions/currentSong';
+import { reAddSong } from '../../../common/actions/history';
 
 class App extends React.Component {
   constructor(props) {
