@@ -1,9 +1,7 @@
 .addsong{
     clear: both;
+    float: right;
 }
 
 .modal {
-	text-align: center !important;
-	margin: 0 auto !important;
-	border: 10px solid #FFF !important;
 }
