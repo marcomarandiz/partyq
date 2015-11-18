@@ -19,11 +19,11 @@ export default class AddSong extends React.Component {
   modal() {
     $('.ui.basic.modal')
       .modal({
-        selector: { 
+        selector: {
           close: 'icon.checkmark'
-        } 
+        }
      }).modal('show')
-    ;
+     ;
   }
 
   render() {
