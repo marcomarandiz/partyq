@@ -6,6 +6,11 @@ export default class HistorySonglist extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  handleReAddSong(index) {
+    this.props.onReAddSong(index);
+  }
+
   render() {
     const historySongList = this.props.songs.map((song, index) => <HistorySong key={index} song={song} />);
     return (
