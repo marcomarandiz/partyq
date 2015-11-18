@@ -11,7 +11,7 @@ export default class Header extends React.Component {
     .sticky({
       context: 'body'
     });
-  };
+  }
 
 
   render() {
