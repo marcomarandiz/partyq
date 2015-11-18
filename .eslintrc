@@ -6,6 +6,7 @@
     "mocha": true
   },
   "rules": {
+    "no-undef": 1,
     "id-length": 1,
     "no-unused-vars": 1,
     "jsx-quotes": [2, "prefer-single"],
