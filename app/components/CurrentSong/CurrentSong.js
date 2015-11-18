@@ -22,8 +22,10 @@ export default class CurrentSong extends React.Component {
   }
 
   _onReady(event, context) {
-    // Set the playing status to true
-    context.props.onPlaySong();
+    // Autoplay if isPlaying = true
+    if (context.props.isPlaying) {
+      context.props.onPlaySong();
+    }
 
     // Max the volume out
     event.target.setVolume(100);
@@ -45,7 +47,7 @@ export default class CurrentSong extends React.Component {
       height: '270',
       width: '550',
       playerVars: {
-        autoplay: 1, // enables autoplay
+        autoplay: 0, // enables autoplay
         disablekb: 0 // disables keyboard controls
       }
     };
