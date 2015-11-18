@@ -8,6 +8,7 @@ import {
 } from '../common/constants/ActionTypes';
 
 const https = require('https');
+const moment = require('moment');
 
 export const initialState = {
   queue: { songlist: [], currentSong: null, isPlaying: false },
@@ -43,6 +44,7 @@ function updateSong(url) {
   song.upvotes = 0;
   song.userUpvotes = [];
   song.thumbnail = null;
+  song.endedAt = null;
 
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
@@ -157,11 +159,12 @@ export default function mainReducer(state = initialState, action) {
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;
     if (currentSong && Object.keys(currentSong).length !== 0 ) {
+      const songEndMoment = moment();
+      currentSong.endedAt = songEndMoment.format('dddd h:mm:ss a');
       let nextSong = {};
       if (queueSonglist.length > 0) {
         nextSong = queueSonglist[0];
       }
-
       newState = {
         ...state,
         queue: {currentSong: nextSong, songlist: queueSonglist.slice(1)},
