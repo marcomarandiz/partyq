@@ -1,14 +1,9 @@
 .addsong{
-    float: right;
-    border: 1px solid #a3a3a3;
     clear: both;
-
 }
 
-.addModal {
-    display: none;
-}
-
-.songInput {
-    color: red;
+.modal {
+	text-align: center !important;
+	margin: 0 auto !important;
+	border: 10px solid #FFF !important;
 }
