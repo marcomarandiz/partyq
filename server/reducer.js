@@ -5,7 +5,7 @@ import {
   PLAY_SONG,
   PAUSE_SONG,
   SET_STATE,
-  RE_ADD_SONG
+  ADD_SONG_FROM_HISTORY
 } from '../common/constants/ActionTypes';
 
 const https = require('https');
@@ -177,7 +177,7 @@ export default function mainReducer(state = initialState, action) {
       };
     }
     return newState;
-  case RE_ADD_SONG:
+  case ADD_SONG_FROM_HISTORY:
     const song = historySonglist[action.index];
     song.upvotes = 0;
     song.endedAt = null;
