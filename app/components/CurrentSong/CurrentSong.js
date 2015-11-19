@@ -63,14 +63,13 @@ export default class CurrentSong extends React.Component {
 
    // Formatting is nasty and hard coded and I copied it from Andrew :D
    <div>
-      {/* <div className={styles.youtubeVideo}>
+      <div className={styles.youtubeVideo}>
         <YouTube
           url={this.props.currentSong.url}
           opts={opts}
           onReady={(event) => this._onReady(event, this)}
-          onEnd={(event) => this._onEnd(event, this)}
-        />
-      </div> Commenting this out currently breaks the ability to play things, just doing it for visual purposes*/}
+          onEnd={(event) => this._onEnd(event, this)}/>
+      </div>
 
       <div className={styles.currentSong}>
 
