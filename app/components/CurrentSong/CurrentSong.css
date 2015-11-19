@@ -1,18 +1,20 @@
 .currentSong {
   width: 75%;
   height: 75px;
-  background-color: #f9f9f9;
-  color: #000;
-  border: 1px solid #a3a3a3;
+  background-color: #3F3F3F;
+  border-bottom: 1px solid #000;
   margin: 0 auto;
+  margin-top: 1.78%;
   padding: 1%;
   border-radius: 5px;
   text-align: center;
 }
-.youtubeVideo 
-{
-	width: auto;
-	height: auto;
+
+.youtubeVideo {
 	margin: 0 auto;
-	text-align: center;
+  text-align: center;
+}
+
+.buttonAccents {
+  color: #30AAFF;
 }
