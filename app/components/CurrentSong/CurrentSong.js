@@ -70,7 +70,7 @@ export default class CurrentSong extends React.Component {
           onReady={(event) => this._onReady(event, this)}
           onEnd={(event) => this._onEnd(event, this)}
         />
-      </div> */}
+      </div> Commenting this out currently breaks the ability to play things, just doing it for visual purposes*/}
 
       <div className={styles.currentSong}>
 

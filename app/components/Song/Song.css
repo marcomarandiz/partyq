@@ -84,7 +84,7 @@
 .thumbnail {
     margin: 0 auto;
     padding-left: 0%;
-    padding-top: 1%;
+    padding-top: 0.5%;
     margin-left: -2%;
     float: left;
 }
@@ -103,4 +103,9 @@
 
 .upvoteCount {
   margin: 0 auto;
+}
+
+.ytThumb {
+  width: 30px;
+  height: 30px;
 }

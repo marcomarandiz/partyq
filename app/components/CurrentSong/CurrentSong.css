@@ -9,10 +9,8 @@
   border-radius: 5px;
   text-align: center;
 }
-.youtubeVideo 
-{
-	width: auto;
-	height: auto;
+
+.youtubeVideo {
 	margin: 0 auto;
-	text-align: center;
+  text-align: center;
 }
