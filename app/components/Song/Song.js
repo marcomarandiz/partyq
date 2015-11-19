@@ -8,7 +8,7 @@ export default class Song extends React.Component {
 
   render() {
     return (
-      <div className={'ui grid ' + styles.song}>
+      <div className={'ui grid segment red ' + styles.song}>
           <div className='two wide column'>
             <a href='#' onClick={() => this.props.handleUpvote(this.props.index)} className={styles.upvoteButton}>
               <i className={'big white angle up link icon '}></i>
