@@ -5,18 +5,18 @@
 
 .song {
 
-  background-color: #3A3A3D;
+  background-color: #3A3A3D !important;
   width: 100%;
-  height: 50px; /* don't use a phone sized screen until we get the overflow issue solved */
-  margin: 0 auto;
+  height: 65px !important; /* don't use a phone sized screen until we get the overflow issue solved */
+  margin: 0 auto !important;
   padding-left: 1%;
   padding-top: 0.5%;
-  border-bottom: 1px solid #1A1A1A;
+  border-bottom: 1px solid #1A1A1A !important;
   opacity: 0.8;
 }
 
 .song:hover {
-  background-color: #153a6a;
+  background-color: #153a6a !important;
   position: relative;
   z-index: 10;
   opacity: 1;
@@ -48,8 +48,8 @@
 }
 
 .songInfo {
-    margin-left: 1%;
     font-family: songInfo;
+    width: 100% !important;
 }
 
 .title {

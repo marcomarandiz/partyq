@@ -7,7 +7,7 @@ export default class HistorySong extends React.Component {
   }
   render() {
     return (
-      <div className={styles.historysong}>
+      <div className={'ui segment red ' + styles.historysong}>
         <div className={styles.historyContent}>
           {this.props.song.title} {this.props.song.artist} {this.props.song.endedAt}
         </div>
