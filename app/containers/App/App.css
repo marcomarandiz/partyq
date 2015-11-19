@@ -8,6 +8,17 @@
 	font-family: sans-serif;
 	line-height: 1.5;
 }
-body {
-	background-color: #8e008e;
+.application {
+	background-color: #0099ff !important;
 }
+
+.sidebar{
+	background-color: white !important;
+}
+
+.head {
+	color: black !important;
+	text-align: center;
+	font-size: 28px;
+}
+

@@ -27,22 +27,31 @@ class App extends React.Component {
     return (
       <div className={styles.app} onPaste={(event) => dispatch(addSong(this.pasteLink(event)))}>
         <Header />
+
+
+  <div className='ui bottom attached segment pushable'>
+      <div className={'ui visible inverted left vertical sidebar menu ' + styles.sidebar}>
+        <a className={'item ' + styles.head}>History</a>
         <History
           historySonglist={this.props.history.songlist}
           onReAddSong={index => dispatch(reAddSong(index))} />
-        <Queue
-          currentSong={this.props.queue.currentSong}
-          isPlaying={this.props.queue.isPlaying}
-          songlist={this.props.queue.songlist}
-          onPlaySong={() => dispatch(playSong())}
-          onPauseSong={()=> dispatch(pauseSong())}
-          queueSonglist={this.props.queue.songlist}
-          onUpvoteSong={index => dispatch(upvoteSong(index))}
-          onNextSong={() => dispatch(nextSong())} />
-        <AddSong onAddSong={songName =>
-                            dispatch(addSong(songName))
-                            }/>
       </div>
+      <div className='pusher'>
+        <div className={'ui basic segment ' + styles.application}>
+          <Queue
+              currentSong={this.props.queue.currentSong}
+              isPlaying={this.props.queue.isPlaying}
+              songlist={this.props.queue.songlist}
+              onPlaySong={() => dispatch(playSong())}
+              onPauseSong={()=> dispatch(pauseSong())}
+              queueSonglist={this.props.queue.songlist}
+              onUpvoteSong={index => dispatch(upvoteSong(index))}
+              onNextSong={() => dispatch(nextSong())} />
+            <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
+        </div>
+      </div>
+    </div>
+</div>
     );
   }
 }

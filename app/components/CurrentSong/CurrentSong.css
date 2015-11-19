@@ -1,18 +1,11 @@
 .currentSong {
-  width: 75%;
-  height: 75px;
   background-color: #f9f9f9;
-  color: #000;
-  border: 1px solid #a3a3a3;
-  margin: 0 auto;
   padding: 1%;
   border-radius: 5px;
   text-align: center;
 }
-.youtubeVideo 
+/*.youtubeVideo 
 {
 	width: auto;
 	height: auto;
-	margin: 0 auto;
-	text-align: center;
-}
+}*/

@@ -7,6 +7,7 @@ export default class CurrentSong extends React.Component {
     super(props);
   }
 
+
   handlePlay() {
     this.props.onPlaySong();
     this.youtube.playVideo();
@@ -44,8 +45,8 @@ export default class CurrentSong extends React.Component {
 
   render() {
     const opts = {
-      height: '270',
-      width: '550',
+      height: '300',
+      width: '100%',
       playerVars: {
         autoplay: 0, // enables autoplay
         disablekb: 0 // disables keyboard controls
@@ -58,35 +59,32 @@ export default class CurrentSong extends React.Component {
     } else if (this.youtube && ! this.props.isPlaying) {
       this.youtube.pauseVideo();
     }
-
     return (
-
-   // Formatting is nasty and hard coded and I copied it from Andrew :D
-   <div>
-      <div className={styles.youtubeVideo}>
-        <YouTube
-          url={this.props.currentSong.url}
-          opts={opts}
-          onReady={(event) => this._onReady(event, this)}
-          onEnd={(event) => this._onEnd(event, this)}
-        />
-      </div>
-
-      <div className={styles.currentSong}>
-
-        {this.props.currentSong.title}
-        &nbsp;
-        &nbsp;
-        <player/>
-
-        {this.props.isPlaying ?
-         <ui onClick={() => this.handlePause()}><i className='huge pause link icon'></i></ui> :
-         <ui onClick={() => this.handlePlay()}><i className='huge play link icon'></i></ui>}
-        &nbsp;
-        &nbsp;
-        <ui onClick={() => this.handleNextSong()}><i className='huge step forward link icon'></i></ui>
-      </div>
-      </div>
+    <div className='ui grid'>
+        <div className='row'>
+          <div className='eight wide column'>
+            <div className={styles.youtubeVideo}>
+            <YouTube
+            url={this.props.currentSong.url}
+            opts={opts}
+            onReady={(event) => this._onReady(event, this)}
+            onEnd={(event) => this._onEnd(event, this)}
+            />
+            </div>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='eight wide column'>
+            <div className={styles.currentSong}>
+            {this.props.currentSong.title}
+            {this.props.isPlaying ?
+            <ui onClick={() => this.handlePause()}><i className='huge pause link icon'></i></ui> :
+            <ui onClick={() => this.handlePlay()}><i className='huge play link icon'></i></ui>}
+            <ui onClick={() => this.handleNextSong()}><i className='huge step forward link icon'></i></ui>
+            </div>
+          </div>
+        </div>
+    </div>
     );
   }
 }
