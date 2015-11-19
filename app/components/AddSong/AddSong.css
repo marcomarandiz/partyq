@@ -3,5 +3,10 @@
     float: right;
 }
 
-.modal {
+.songURL {
+	background-color: #3A3A3D !important;
+}
+
+.addsongButton {
+	background-color: #153A6A !important;
 }

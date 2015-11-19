@@ -64,23 +64,22 @@ export default class CurrentSong extends React.Component {
         <div className='row'>
           <div className='eight wide column'>
             <div className={styles.youtubeVideo}>
-            <YouTube
-            url={this.props.currentSong.url}
-            opts={opts}
-            onReady={(event) => this._onReady(event, this)}
-            onEnd={(event) => this._onEnd(event, this)}
-            />
+              <YouTube
+                url={this.props.currentSong.url}
+                opts={opts}
+                onReady={(event) => this._onReady(event, this)}
+                onEnd={(event) => this._onEnd(event, this)}/>
             </div>
           </div>
         </div>
         <div className='row'>
           <div className='eight wide column'>
             <div className={styles.currentSong}>
-            {this.props.currentSong.title}
-            {this.props.isPlaying ?
-            <ui onClick={() => this.handlePause()}><i className='huge pause link icon'></i></ui> :
-            <ui onClick={() => this.handlePlay()}><i className='huge play link icon'></i></ui>}
-            <ui onClick={() => this.handleNextSong()}><i className='huge step forward link icon'></i></ui>
+                {this.props.currentSong.title}
+                {this.props.isPlaying ?
+                 <ui onClick={() => this.handlePause()}><i className={'huge pause link icon ' + styles.buttonAccents}></i></ui> :
+                 <ui onClick={() => this.handlePlay()}><i className={'huge play link icon ' + styles.buttonAccents}></i></ui>}
+                <ui onClick={() => this.handleNextSong()}><i className={'huge step forward link icon ' + styles.buttonAccents}></i></ui>
             </div>
           </div>
         </div>
