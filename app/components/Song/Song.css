@@ -4,6 +4,7 @@
 }
 
 .song {
+
   background-color: #3A3A3D;
   width: 100%;
   height: 50px; /* don't use a phone sized screen until we get the overflow issue solved */
@@ -11,11 +12,7 @@
   padding-left: 1%;
   padding-top: 0.5%;
   border-bottom: 1px solid #1A1A1A;
-  border-left: 5px solid red; /* youtube red, base off source later */
   opacity: 0.8;
-  /* overflow: hidden; --fixes the artist cutoff issue but introduces others. */
-  float: center;
-  display: run-in;
 }
 
 .song:hover {
@@ -33,7 +30,7 @@
 .song:hover .upvoteButton {
   display: inline;
   visibility: initial;
-  opacity: 1;
+  opacity: 10;
   transition: all .5s ease-in-out;
 }
 
@@ -51,59 +48,29 @@
 }
 
 .songInfo {
-    width: 85%;
-    float: left;
-    margin-right: 0%;
-    padding-right: 0%;
     margin-left: 1%;
     font-family: songInfo;
 }
 
 .title {
     font-size: 150%;
-    margin-bottom: 0;
-    padding-bottom: 0;
 }
 
 .artist {
     font-weight: lighter;
     font-size: 110%;
     font-style: italic;
-    margin-top: 0;
-    padding-top: 0;
-    margin-left: 1%;
 }
 
 
 .thumbnailImg {
   height: 30px;
   width: 30px;
-  padding-left: 0%;
-  margin-left: 0%;
 }
 
 .thumbnail {
-    margin: 0 auto;
-    padding-left: 0%;
-    padding-top: 0.5%;
-    margin-left: -2%;
-    float: left;
-}
-
-.duration {
-    float: right;
-    margin-right: 1%;
-    padding-top: 1.5%;
-}
-
-.upvote {
-    margin: 0 auto;
-    width: 5%;
-    float: left;
-}
-
-.upvoteCount {
-  margin: 0 auto;
+  margin-right: 2%;
+  float: left;
 }
 
 .ytThumb {

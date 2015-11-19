@@ -6,10 +6,9 @@ export default class History extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
-      <div className={styles.history}>
+       <div className={styles.history}>
         <HistorySonglist
           songs={this.props.historySonglist}
           onReAddSong={this.props.onReAddSong}
