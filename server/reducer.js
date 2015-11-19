@@ -159,27 +159,6 @@ export default function mainReducer(state = initialState, action) {
   case NEXT_SONG:
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;
-
-    // If no Current Song and there is song in Queue
-    // This logic should never come into play with current reducer
-
-    /*
-    if (Object.keys(currentSong).length === 0 ) {
-      if (queueSonglist.length > 0) {
-        return {
-          ...state,
-          queue: {
-            currentSong: queueSonglist[0],
-            songlist: queueSonglist.slice(1),
-            isPlaying: true
-          }
-        }
-      } else {
-        return state;
-      }
-    }
-    */
-
     if (Object.keys(currentSong).length !== 0 ) {
       const songEndMoment = moment();
       currentSong.endedAt = songEndMoment.format('dddd h:mm:ss a');
