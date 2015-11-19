@@ -12,7 +12,7 @@ const https = require('https');
 const moment = require('moment');
 
 export const initialState = {
-  queue: { songlist: [], currentSong: null, isPlaying: true },
+  queue: { songlist: [], currentSong: {}, isPlaying: true },
   history: { songlist: []}
 };
 
@@ -96,7 +96,7 @@ function queueReducer(state = initialState.queue, action) {
     if (song.vid === '') {
       return state;
     }
-    if (!currentSong || Object.keys(currentSong).length === 0) {
+    if (Object.keys(currentSong).length === 0 ) {
       return {
         ...state,
         currentSong: song
@@ -159,7 +159,7 @@ export default function mainReducer(state = initialState, action) {
   case NEXT_SONG:
     // TODO: Move this out of NEXT_SONG and into own function
     let newState = state;
-    if (currentSong && Object.keys(currentSong).length !== 0 ) {
+    if (Object.keys(currentSong).length !== 0 ) {
       const songEndMoment = moment();
       currentSong.endedAt = songEndMoment.format('dddd h:mm:ss a');
       let nextSong = {};
@@ -184,6 +184,16 @@ export default function mainReducer(state = initialState, action) {
     song.upvotes = 0;
     song.endedAt = null;
     song.userUpvotes = [];
+    if (Object.keys(currentSong).length === 0 ) {
+      return {
+        ...state,
+        queue: {
+          currentSong: song,
+          songlist: queueSonglist,
+          isPlaying: queue.isPlaying
+        }
+      };
+    }
     return {
       ...state,
       queue: {
