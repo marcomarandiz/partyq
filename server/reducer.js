@@ -209,7 +209,9 @@ export default function mainReducer(state = initialState, action) {
       return {
         ...state,
         queue: {
-          currentSong: song
+          currentSong: song,
+          songlist: queueSonglist,
+          isPlaying: queue.isPlaying
         }
       };
     }
