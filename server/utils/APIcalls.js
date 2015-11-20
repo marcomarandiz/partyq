@@ -26,12 +26,12 @@ export function youtubeAPI(url, vid) {
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
            + song.vid + '&key=' + process.env.YOUTUBE_API;
 
-  https.get(callAPIURL, function(res) {
+  https.get(callAPIURL, (res) => {
     let data = '';
-    res.on('data', function(chunk) {
+    res.on('data', (chunk) => {
       data += chunk;
     });
-    res.on('end', function() {
+    res.on('end', () => {
       const youTubeSongData = JSON.parse(data);
       if (youTubeSongData.error) {
         console.log('API error');
