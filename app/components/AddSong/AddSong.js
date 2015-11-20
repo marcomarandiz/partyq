@@ -17,6 +17,7 @@ export default class AddSong extends React.Component {
   }
 
   dim() {
+    $('.dimmer').css('background-color','rgba(255,0,0,0.8)');
     $('.dimmable').dimmer('show').dimmer({duration: {show: 3000, hide: 0}}).dimmer('hide');
   }
 
