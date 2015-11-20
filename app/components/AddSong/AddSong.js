@@ -6,6 +6,16 @@ export default class AddSong extends React.Component {
     super(props);
   }
 
+  modal() {
+    $('.ui.basic.modal')
+      .modal({
+        selector: { 
+          close: 'icon.checkmark'
+        } 
+     }).modal('show')
+    ;
+  }
+
   dimSuccess() {
     $('.dimmer').css('background-color', 'rgba(48, 170, 255, 1)');
     $('#dimmerIcon').removeClass('frown');
@@ -45,9 +55,13 @@ export default class AddSong extends React.Component {
           <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Add Song...'/>
           <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
         </div>*/}
-        <span className={'link ' + styles.addIcon}>
+        <span className={'link ' + styles.addIcon} onClick={() => this.modal()}>
           <i className='big add circle link icon'></i>Add Song
         </span>
+
+        <div className={'ui basic modal ' + styles.modal}>
+          <h1>test</h1>
+        </div>
       </div>
     );
   }
