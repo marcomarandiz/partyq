@@ -72,8 +72,9 @@ function updateSong(url) {
       } else if (!youTubeSongData.items[0]) {
         console.log('Invalid VID: ' + song.vid);
       } else {
+        song.duration = moment.duration(youTubeSongData.items[0].contentDetails.duration).asMilliseconds();
         song.artist = youTubeSongData.items[0].snippet.channelTitle;
-        song.duration = youTubeSongData.items[0].contentDetails.duration;
+        song.duration = moment.utc(song.duration).format('mm:ss');
         song.title = youTubeSongData.items[0].snippet.title;
         song.uploadDate = youTubeSongData.items[0].snippet.publishedAt;
         song.thumbnail = youTubeSongData.items[0].snippet.thumbnails.default.url;
