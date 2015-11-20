@@ -8,11 +8,17 @@ export default class History extends React.Component {
   }
   render() {
     return (
-       <div className={styles.history}>
-        <HistorySonglist
-          songs={this.props.historySonglist}
-          onReAddSong={this.props.onReAddSong}/>
+        <div className={'ui visible inverted left raised vertical sidebar menu ' + styles.sidebar}>
+          <div className='ui segments'>
+              <div className={styles.history}>
+                <HistorySonglist
+                  songs={this.props.historySonglist}
+                  onReAddSong={this.props.onReAddSong}
+                />
+              </div>
+          </div>
       </div>
+
     );
   }
 }

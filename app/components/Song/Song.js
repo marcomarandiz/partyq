@@ -9,9 +9,13 @@ export default class Song extends React.Component {
   render() {
     return (
       <div className={'ui grid segment red ' + styles.song}>
-          <div className='two wide column'>
-            <i className={'big white angle up link icon ' + styles.upvoteButton} onClick={() => this.props.handleUpvote(this.props.index)}></i>
-            {this.props.song.upvotes}
+          <div className='one wide column center aligned'>
+            <div>
+              <i className={'big white angle up link icon ' + styles.upvoteButton} onClick={() => this.props.handleUpvote(this.props.index)}></i>
+            </div>
+            <div>
+              {this.props.song.upvotes}
+            </div>
           </div>
           <div className='five wide column'>
                   <div className={styles.thumbnail}>
