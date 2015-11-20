@@ -1,5 +1,8 @@
 FROM node:4.2.2-slim
 
+RUN apt-get update
+RUN apt-get install git -y
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
