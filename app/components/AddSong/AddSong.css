@@ -1,12 +1,19 @@
 .addsong{
+    float: left;
     clear: both;
-    float: right;
+    margin-top: 1% !important;
+    margin-left: 0% !important;
+    border: 0 !important;
+    background-color: #1A1A1A !important;
+    width: 100%;
 }
 
 .songURL {
 	background-color: #3A3A3D !important;
+	color: #FFF !important;
 }
 
 .addsongButton {
 	background-color: #153A6A !important;
+	color: #FFF !important; /* Doesn't work, don't know why */
 }

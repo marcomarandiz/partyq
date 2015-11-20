@@ -8,14 +8,17 @@
 	font-family: sans-serif;
 	line-height: 1.5;
 	color: #C3C3C3;
+	border: 0 !important;
 }
 .application {
 	background-color: #1A1A1A !important;
 	margin: 0 0 0 0 !important;
+	border: 0 !important;
 }
 
 .sidebar{
 	background-color: #1A1A1A !important;
+	margin: 0 0 0 0 !important;
 }
 
 .head {
