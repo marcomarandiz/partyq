@@ -9,6 +9,8 @@ services:
   - docker
 
 before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq git
   - docker build -t stefaneng/partyq .
   - docker ps -a
   - docker run -d -p 127.0.0.1:80:3000 stefaneng/partyq /bin/sh -c 'npm start'
