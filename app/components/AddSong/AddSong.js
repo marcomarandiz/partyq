@@ -9,10 +9,10 @@ export default class AddSong extends React.Component {
   modal() {
     $('.ui.basic.modal')
       .modal({
-        selector: { 
+        selector: {
           close: '.button'
-        } 
-     }).modal('show')
+        }
+      }).modal('show')
     ;
   }
 
@@ -51,10 +51,10 @@ export default class AddSong extends React.Component {
   render() {
     return (
       <div className={styles.addsong}>
-        {/*<div className='ui input focus'>
+        {/* <div className='ui input focus'>
           <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Add Song...'/>
           <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
-        </div>*/}
+        </div> */}
         <span className={'link ' + styles.addIcon} onClick={() => this.modal()}>
           <i className='big add circle link icon'></i>Add Song
         </span>
