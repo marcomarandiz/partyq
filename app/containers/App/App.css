@@ -13,10 +13,12 @@
 .application {
 	background-color: #1A1A1A !important;
 	margin: 0 0 0 0 !important;
+	border: 0 !important;
 }
 
 .sidebar{
 	background-color: #1A1A1A !important;
+	margin: 0 0 0 0 !important;
 }
 
 .head {
