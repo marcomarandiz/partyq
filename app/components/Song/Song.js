@@ -31,7 +31,7 @@ export default class Song extends React.Component {
                 </div>
           </div>
           <div className='one wide column'>
-            <span className={styles.duration}>5:43</span>
+            <span className={styles.duration}>{this.props.song.duration}</span>
           </div>
       </div>
     );
