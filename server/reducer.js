@@ -9,6 +9,7 @@ import {
 } from '../common/constants/ActionTypes';
 import { youtubeAPI } from './utils/APIcalls.js';
 import { isLinkValid, getVidFromUrl } from '../common/utils/functions.js';
+import { sortByUpvotes } from './utils/lib';
 
 export const initialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: true },
@@ -50,7 +51,7 @@ function queueReducer(state = initialState.queue, action) {
     return {
       ...state,
       // Upvote song in songlist
-      songlist: [
+      songlist: sortByUpvotes([
         ...queueSonglist.slice(0, action.index),
         Object.assign({}, queueSonglist[action.index],
           {
@@ -62,8 +63,7 @@ function queueReducer(state = initialState.queue, action) {
             ]
           }),
         ...queueSonglist.slice(action.index + 1)
-        // Sort by upvotes, descending
-      ].sort((a, b) => b.upvotes - a.upvotes),
+      ]),
     };
   case PLAY_SONG:
     return {
