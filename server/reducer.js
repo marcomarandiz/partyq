@@ -7,17 +7,13 @@ import {
   SET_STATE,
   ADD_SONG_FROM_HISTORY
 } from '../common/constants/ActionTypes';
-
-const commonFunctions = require('../common/utils/functions.js');
-const api = require('./utils/APIcalls.js');
-const moment = require('moment');
+import { youtubeAPI } from './utils/APIcalls.js';
+import { isLinkValid, getVidFromUrl } from '../common/utils/functions.js';
 
 export const initialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: true },
   history: { songlist: []}
 };
-
-// We should probably move all of this somewhere else
 
 function queueReducer(state = initialState.queue, action) {
   const queueSonglist = state.songlist;
@@ -25,10 +21,10 @@ function queueReducer(state = initialState.queue, action) {
   const userid = action.id;
   switch (action.type) {
   case ADD_SONG:
-    if (!commonFunctions.linkIsValid(action.url)) {
+    if (!isLinkValid(action.url)) {
       return state;
     }
-    const song = api.callYoutube(action.url, commonFunctions.getVidFromUrl(action.url));
+    const song = youtubeAPI(action.url, getVidFromUrl(action.url));
     if (song.vid === '') {
       return state;
     }
