@@ -19,8 +19,9 @@ export default class QueueSonglist extends React.Component {
           <div className='ui dimmer'>
             <div className='content'>
               <div className='center'>
-                <i className='huge white outline smile icon'></i>
-                <h1>Song Added</h1>
+                <i id='dimmerIcon' className='huge white outline checkmark icon'></i>
+                <h1 id='dimmerTextMain'></h1>
+                <h2 id='dimmerTextSecondary'></h2>
               </div>
             </div>
           </div>
