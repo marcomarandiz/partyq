@@ -41,10 +41,13 @@ export default class AddSong extends React.Component {
   render() {
     return (
       <div className={styles.addsong}>
-        <div className='ui input focus'>
+        {/*<div className='ui input focus'>
           <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Add Song...'/>
           <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
-        </div>
+        </div>*/}
+        <span className={'link ' + styles.addIcon}>
+          <i className='big add circle link icon'></i>Add Song
+        </span>
       </div>
     );
   }
