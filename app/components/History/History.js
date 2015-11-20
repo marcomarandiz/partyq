@@ -11,8 +11,7 @@ export default class History extends React.Component {
        <div className={styles.history}>
         <HistorySonglist
           songs={this.props.historySonglist}
-          onReAddSong={this.props.onReAddSong}
-        />
+          onReAddSong={this.props.onReAddSong}/>
       </div>
     );
   }
