@@ -44,7 +44,7 @@ class App extends React.Component {
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
                       onNextSong={() => dispatch(nextSong())} />
-                  <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
+                    <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
                 </div>
               </div>
             </div>
