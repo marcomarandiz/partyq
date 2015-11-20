@@ -30,14 +30,9 @@ class App extends React.Component {
 
 
           <div className='ui bottom attached segment pushable'>
-              <div className={'ui visible inverted left raised vertical sidebar menu ' + styles.sidebar}>
-                <h2 className='ui center aligned header'>History</h2>
-                <div className='ui segments'>
-                    <History
-                      historySonglist={this.props.history.songlist}
-                      onReAddSong={index => dispatch(reAddSong(index))} />
-                </div>
-              </div>
+            <History
+              historySonglist={this.props.history.songlist}
+              onReAddSong={index => dispatch(reAddSong(index))} />
               <div className='pusher'>
                 <div className={'ui basic segment ' + styles.application}>
                   <Queue
