@@ -10,6 +10,7 @@ import {
 import { youtubeAPI } from './utils/APIcalls.js';
 import { isLinkValid, getVidFromUrl } from '../common/utils/functions.js';
 import { sortByUpvotes } from './utils/lib';
+import moment from 'moment';
 
 export const initialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: true },
