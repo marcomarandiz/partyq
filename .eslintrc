@@ -11,7 +11,7 @@
   "rules": {
     "no-undef": 1,
     "id-length": 1,
-    "no-unused-vars": 1,
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}],
     "jsx-quotes": [2, "prefer-single"],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
