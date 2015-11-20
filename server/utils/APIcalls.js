@@ -1,5 +1,5 @@
-const https = require('https');
-const moment = require('moment');
+import https from 'https';
+import moment from 'moment';
 
 export function youtubeAPI(url, vid) {
   const song = {};
