@@ -1,29 +1,22 @@
 .historysong {
-  background-color: #3A3A3C;
-  margin: 0 auto;
+  background-color: #3A3A3C !important;
+  margin: 0 auto !important;
   padding-left: 15%;
   padding-bottom: 5%;
   padding-top: 5%;
-  border-bottom: 1px solid #1A1A1A;
-/*  opacity: 0.8;*/
+  border-bottom: 1px solid #1A1A1A !important;
 }
 
 .historysong:hover {
-  background-color: #15386A;
-  opacity: 1;
-  transition: all .2s ease-in-out;
-  transform: scaleX(1.3);
-}
-
-.historysong:hover .historyContent {
-  transform: scaleX(1.1);
+  background-color: #15386A !important;
 }
 
 .historysong:hover .button {
-  background-color: #3A3A3C;
+  background-color: #3A3A3C !important;
+  color: #FFF;
 }
 
-.button {
-  background-color: #153A6A;
-  border-style: none;
+.historysong .button {
+  background-color: #153A6A !important;
+  color: #FFF;
 }

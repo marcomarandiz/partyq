@@ -11,10 +11,11 @@
 }
 .application {
 	background-color: #1A1A1A !important;
+	margin: 0 0 0 0 !important;
 }
 
 .sidebar{
-	background-color: white !important;
+	background-color: #1A1A1A !important;
 }
 
 .head {
