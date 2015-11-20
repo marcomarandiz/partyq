@@ -6,6 +6,9 @@
     border: 0 !important;
     background-color: #1A1A1A !important;
     width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 15%;
 }
 
 .songURL {
