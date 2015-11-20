@@ -29,7 +29,7 @@ class App extends React.Component {
         <Header />
 
 
-          <div className='ui bottom attached segment pushable'>
+          <div className={'ui bottom attached segment pushable ' + styles.app}>
             <History
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />

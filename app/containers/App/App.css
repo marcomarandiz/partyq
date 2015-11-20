@@ -8,6 +8,7 @@
 	font-family: sans-serif;
 	line-height: 1.5;
 	color: #C3C3C3;
+	border: 0 !important;
 }
 .application {
 	background-color: #1A1A1A !important;
