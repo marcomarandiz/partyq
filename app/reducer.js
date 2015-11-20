@@ -1,5 +1,4 @@
 import {SET_STATE} from '../common/constants/ActionTypes';
-import setState from '../common/actions/setstate';
 
 const initialState = {
   queue: { songlist: [], currentSong: null, isPlaying: false },

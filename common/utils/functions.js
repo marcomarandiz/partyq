@@ -5,7 +5,7 @@ export function isLinkValid(url) {
   }
   return true;
 }
-  
+
 export function getVidFromUrl(url) {
   const temp = url.split('v=');
   const vid = temp[1].split('&');
