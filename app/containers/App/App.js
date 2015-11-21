@@ -33,7 +33,7 @@ class App extends React.Component {
             <History
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />
-              <div className='pusher'>
+              <div className={'pusher ' + styles.pusher}>
                 <div className={'ui basic segment ' + styles.application}>
                   <Queue
                       currentSong={this.props.queue.currentSong}
