@@ -65,7 +65,10 @@ export default class AddSong extends React.Component {
             <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Song URL...'/>
             <i className='add circle icon'></i>
           </div>
-          <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
+          <button className={'ui right labeled icon button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>
+            Add Song
+            <i className='checkmark icon'></i>
+          </button>
         </div>
       </div>
     );
