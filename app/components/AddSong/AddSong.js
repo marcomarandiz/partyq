@@ -61,8 +61,9 @@ export default class AddSong extends React.Component {
 
         <div className={'ui basic modal ' + styles.modal}>
           <h1>Add a song:</h1>
-          <div className={'ui input focus ' + styles.songURL}>
+          <div className={'ui icon input focus ' + styles.songURL}>
             <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Song URL...'/>
+            <i className='add circle icon'></i>
           </div>
           <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
         </div>
