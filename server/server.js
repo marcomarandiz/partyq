@@ -1,5 +1,6 @@
 import Server from 'socket.io';
 import { youtubeAPI, handleAPIError } from './utils/APIcalls.js';
+import { ADD_SONG } from '../common/constants/ActionTypes';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -28,7 +29,7 @@ export default function startServer(store) {
       // Checks if action is 'ADD_SONG' and if it is
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song
-      if (action.type === 'ADD_SONG') {
+      if (action.type === ADD_SONG) {
         youtubeAPI(action.url, (error, song) => {
           if (error) {
             handleAPIError(error);
