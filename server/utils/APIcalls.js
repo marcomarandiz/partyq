@@ -1,12 +1,13 @@
 import https from 'https';
 import moment from 'moment';
+import { getVidFromUrl } from '../../common/utils/functions.js';
 
 // next is a callback
-export function youtubeAPI(url, vid, next) {
+export function youtubeAPI(url, next) {
   const song = {};
   const error = {};
   song.url = url;
-  song.vid = vid;
+  song.vid = getVidFromUrl(url);
   song.upvotes = 0;
   song.userUpvotes = [];
   song.endedAt = null;

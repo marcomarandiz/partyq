@@ -35,7 +35,7 @@ export default function startServer(store) {
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song
       if (action.type === 'ADD_SONG') {
-        youtubeAPI(action.url, action.vid, (error, song) => {
+        youtubeAPI(action.url, (error, song) => {
           if (error) {
             handleAPIError(error);
           } else {
