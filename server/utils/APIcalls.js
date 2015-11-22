@@ -51,15 +51,3 @@ export function youtubeAPI(url, next) {
     });
   });
 }
-
-export function handleAPIError(error) {
-  if (error.error) {
-    console.log('Error: ' + error.error);
-  }
-  if (error.reason) {
-    console.log('Reason: ' + error.reason);
-  }
-  if (error.message) {
-    console.log('Message: ' + error.message);
-  }
-}
