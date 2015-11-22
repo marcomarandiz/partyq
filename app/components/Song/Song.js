@@ -8,8 +8,8 @@ export default class Song extends React.Component {
 
   render() {
     return (
-      <div className={'ui grid segment red ' + styles.song}>
-          <div className='one wide column center aligned'>
+      <div className={'ui grid segment ' + styles.song}>
+          <div className={'two wide column center aligned ' + styles.twosongbackground}>
             <div>
               <i className={'big white angle up link icon ' + styles.upvoteButton} onClick={() => this.props.handleUpvote(this.props.index)}></i>
             </div>
@@ -17,7 +17,7 @@ export default class Song extends React.Component {
               {this.props.song.upvotes}
             </div>
           </div>
-          <div className='five wide column'>
+          <div className={'five wide column ' + styles.fivesongbackground}>
                   <div className={styles.thumbnail}>
                       <a href={this.props.song.url}><img src={this.props.song.thumbnail} className={styles.ytThumb} /></a>
                   </div>
@@ -30,7 +30,7 @@ export default class Song extends React.Component {
                   </div>
                 </div>
           </div>
-          <div className='one wide column'>
+          <div className={'one wide column ' + styles.onesongbackground}>
             <span className={styles.duration}>{this.props.song.duration}</span>
           </div>
       </div>

@@ -2,10 +2,30 @@
     font-family: songInfo;
     src: url('https://fonts.googleapis.com/css?family=Muli:300,400');
 }
+.twosongbackground{ 
+  background-color: #3A3A3D !important;
+  border-bottom: 1px solid #1A1A1A !important;
+  border-top: 2px solid #DB2828;
+  border-bottom-left-radius : 55px;
+  border-top-left-radius : 55px;
+}
+
+.fivesongbackground{ 
+  background-color: #3A3A3D !important;
+  border-bottom: 1px solid #1A1A1A !important;
+  border-top: 2px solid #DB2828;
+}
+
+.onesongbackground{ 
+  background-color: #3A3A3D !important;
+  border-bottom: 1px solid #1A1A1A !important;
+  border-top: 2px solid #DB2828;
+  border-bottom-right-radius : 55px;
+  border-top-right-radius : 55px;
+}
 
 .song {
-
-  background-color: #3A3A3D !important;
+  background-color: #1A1A1A !important;
   width: 100%;
   height: 100% !important; /* don't use a phone sized screen until we get the overflow issue solved */
   margin: 0 auto !important;
@@ -16,7 +36,6 @@
 }
 
 .song:hover {
-  background-color: #153a6a !important;
   position: relative;
   z-index: 10;
   opacity: 1;

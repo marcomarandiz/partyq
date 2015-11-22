@@ -7,7 +7,6 @@ export default class CurrentSong extends React.Component {
     super(props);
   }
 
-
   handlePlay() {
     this.props.onPlaySong();
     this.youtube.playVideo();
