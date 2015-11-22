@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import styles from './AddSong.css';
+import { isLinkValid } from '../../../common/utils/functions.js';
 
 export default class AddSong extends React.Component {
   constructor(props) {
@@ -38,10 +39,14 @@ export default class AddSong extends React.Component {
     event.preventDefault();
     const node = this.refs.songname;
     const text = node.value.trim();
-    console.log(event);
-    this.props.onAddSong(text);
+    if (isLinkValid(text)) {
+      this.props.onAddSong(text);
+      this.dimSuccess();
+    } else {
+      this.dimFailure();
+      console.log('Invalid link: ' + text);
+    }
     node.value = '';
-    this.dimSuccess();
   }
 
   dim() {

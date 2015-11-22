@@ -64,11 +64,13 @@ export default class CurrentSong extends React.Component {
         <div className='row'>
           <div className='eight wide column'>
             <div className={styles.youtubeVideo}>
-              <YouTube
-                url={this.props.currentSong.url}
-                opts={opts}
-                onReady={(event) => this._onReady(event, this)}
-                onEnd={(event) => this._onEnd(event, this)}/>
+              {this.props.currentSong.url ?
+               <YouTube
+                  url={this.props.currentSong.url}
+                  opts={opts}
+                  onReady={(event) => this._onReady(event, this)}
+                  onEnd={(event) => this._onEnd(event, this)}/> :
+               ''}
             </div>
           </div>
         </div>

@@ -11,21 +11,26 @@ import { upvoteSong } from '../../../common/actions/song';
 import nextSong from '../../../common/actions/nextSong';
 import { playSong, pauseSong } from '../../../common/actions/currentSong';
 import { reAddSong } from '../../../common/actions/history';
+import { isLinkValid } from '../../../common/utils/functions.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  pasteLink(event) {
+  pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    return link;
+    if (isLinkValid(link)) {
+      dispatch(addSong(link));
+    } else {
+      console.log('Invalid link: ' + link);
+    }
   }
 
   render() {
     const { dispatch } = this.props;
     return (
-      <div className={styles.app} onPaste={(event) => dispatch(addSong(this.pasteLink(event)))}>
+      <div className={styles.app} onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header />
 
 
