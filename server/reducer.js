@@ -28,7 +28,8 @@ function queueReducer(state = initialState.queue, action) {
     if (Object.keys(currentSong).length === 0 ) {
       return {
         ...state,
-        currentSong: action.song
+        currentSong: action.song,
+        isPlaying: true
       };
     }
     return {
@@ -137,6 +138,7 @@ export default function mainReducer(state = initialState, action) {
       ...state,
       queue: {
         ...queue,
+        currentSong: currentSong,
         songlist:
         [
           ...queueSonglist,
