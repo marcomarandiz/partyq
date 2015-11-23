@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import YouTube from 'react-youtube';
 import styles from './CurrentSong.css';
+import classNames from 'classnames';
 
 export default class CurrentSong extends React.Component {
   constructor(props) {
@@ -59,10 +60,10 @@ export default class CurrentSong extends React.Component {
       this.youtube.pauseVideo();
     }
     return (
-    <div className='ui grid'>
-        <div className='row'>
-          <div className='eight wide column'>
-            <div className={styles.youtubeVideo}>
+    <div className={classNames('ui', 'grid')}>
+        <div className={classNames('row')}>
+          <div className={classNames('eight', 'wide', 'column')}>
+            <div className={classNames(styles.youtubeVideo)}>
               {this.props.currentSong.url ?
                <YouTube
                   url={this.props.currentSong.url}
@@ -73,14 +74,18 @@ export default class CurrentSong extends React.Component {
             </div>
           </div>
         </div>
-        <div className='row'>
-          <div className='eight wide column'>
-            <div className={styles.currentSong}>
+        <div className={classNames('row')}>
+          <div className={classNames('eight', 'wide', 'column')}>
+            <div className={classNames(styles.currentSong)}>
                 {this.props.currentSong.title}
                 {this.props.isPlaying ?
-                 <ui onClick={() => this.handlePause()}><i className={'huge pause link icon ' + styles.buttonAccents}></i></ui> :
-                 <ui onClick={() => this.handlePlay()}><i className={'huge play link icon ' + styles.buttonAccents}></i></ui>}
-                <ui onClick={() => this.handleNextSong()}><i className={'huge step forward link icon ' + styles.buttonAccents}></i></ui>
+                 <ui onClick={() => this.handlePause()}>
+                  <i className={classNames('huge', 'pause', 'link', 'icon', styles.buttonAccents)}></i>
+                 </ui> :
+                 <ui onClick={() => this.handlePlay()}>
+                  <i className={classNames('huge', 'play', 'link', 'icon ', styles.buttonAccents)}></i></ui>}
+                <ui onClick={() => this.handleNextSong()}>
+                  <i className={classNames('huge', 'step', 'forward', 'link', 'icon', styles.buttonAccents)}></i></ui>
             </div>
           </div>
         </div>

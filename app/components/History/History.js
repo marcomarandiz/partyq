@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from './History.css';
 import HistorySonglist from '../HistorySonglist/HistorySonglist.js';
+import classNames from 'classnames';
 
 export default class History extends React.Component {
   constructor(props) {
@@ -8,15 +9,17 @@ export default class History extends React.Component {
   }
   render() {
     return (
-        <div className={'ui visible inverted left raised vertical sidebar menu ' + styles.sidebar}>
-          <div className='ui segments'>
-              <div className={styles.history}>
-                <HistorySonglist
-                  songs={this.props.historySonglist}
-                  onReAddSong={this.props.onReAddSong}
-                />
-              </div>
+        <div className={
+          classNames('ui', 'visible', 'inverted', 'left',
+                     'raised', 'vertical', 'sidebar', 'menu', styles.sidebar)}>
+        <div className={classNames('ui', 'segments')}>
+          <div className={styles.history}>
+            <HistorySonglist
+              songs={this.props.historySonglist}
+              onReAddSong={this.props.onReAddSong}
+            />
           </div>
+        </div>
       </div>
 
     );
