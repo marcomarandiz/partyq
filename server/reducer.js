@@ -100,8 +100,8 @@ export default function mainReducer(state = initialState, action) {
         queue: {currentSong: nextSong, songlist: queueSonglist.slice(1), isPlaying: isPlaying},
         history: {songlist:
         [
-          ...historySonglist,
-          currentSong
+          currentSong,
+          ...historySonglist
         ]}
       };
     }

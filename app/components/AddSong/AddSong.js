@@ -43,12 +43,53 @@ export default class AddSong extends React.Component {
     $('.dimmable').dimmer('show').dimmer({duration: {show: 2000, hide: 0}}).dimmer('hide');
   }
 
+  showModal() {
+    console.log('fired');
+    $('.ui.basic.modal').modal({
+      transition: 'slide down',
+      onApprove: () => {
+        console.log('on approve fired');
+        const node = this.refs.songname;
+        const text = node.value.trim();
+        if (isLinkValid(text)) {
+          this.props.onAddSong(text);
+          this.dimSuccess();
+        } else {
+          this.dimFailure();
+          console.log('Invalid link: ' + text);
+        }
+        node.value = '';
+        return true;
+      },
+      selector: {
+        approve: '.button',
+        close: '.button'
+      }
+    }).modal('show');
+  }
+
+
   render() {
     return (
       <div className={styles.addsong}>
-        <div className='ui input focus'>
+        {/* <div className='ui input focus'>
           <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Add Song...'/>
           <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
+        </div> */}
+        <span className={'link ' + styles.addIcon} onClick={() => this.showModal()}>
+          <i className='big add circle link icon'></i>Add Song
+        </span>
+
+        <div className={'ui basic modal ' + styles.modal}>
+          <h1>Add a song:</h1>
+          <div className={'ui icon input focus ' + styles.songURL}>
+            <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Song URL...'/>
+            <i className='add circle icon'></i>
+          </div>
+          <button className={'ui right labeled ok icon button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>
+            Add Song
+            <i className='checkmark icon'></i>
+          </button>
         </div>
       </div>
     );
