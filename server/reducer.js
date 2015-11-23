@@ -5,7 +5,8 @@ import {
   PLAY_SONG,
   PAUSE_SONG,
   SET_STATE,
-  ADD_SONG_FROM_HISTORY
+  ADD_SONG_FROM_HISTORY,
+  NEXT_READY
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
@@ -36,6 +37,11 @@ function queueReducer(state = initialState.queue, action) {
         ...queueSonglist,
         action.song
       ]
+    };
+  case NEXT_READY:
+    return {
+      ...state,
+      nextReady: true
     };
   case UPVOTE_SONG:
     // Only upvote song if there user has not upvoted
@@ -97,7 +103,13 @@ export default function mainReducer(state = initialState, action) {
       }
       newState = {
         ...state,
-        queue: {currentSong: nextSong, songlist: queueSonglist.slice(1), isPlaying: isPlaying},
+        queue: {
+          ...queue,
+          nextReady: false,
+          isPlaying: isPlaying,
+          currentSong: nextSong,
+          songlist: queueSonglist.slice(1),
+        },
         history: {songlist:
         [
           currentSong,
@@ -124,8 +136,7 @@ export default function mainReducer(state = initialState, action) {
     return {
       ...state,
       queue: {
-        currentSong: currentSong,
-        isPlaying: queue.isPlaying,
+        ...queue,
         songlist:
         [
           ...queueSonglist,

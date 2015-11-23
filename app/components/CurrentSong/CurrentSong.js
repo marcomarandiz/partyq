@@ -34,6 +34,7 @@ export default class CurrentSong extends React.Component {
     // context = this from react
     // this = this for this function to Youtube API
     context.youtube = event.target;
+    context.props.onNextReady();
     console.log(context);
   }
 

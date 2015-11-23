@@ -7,7 +7,7 @@ import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { addSong } from '../../../common/actions/queue';
+import { addSong, nextReady } from '../../../common/actions/queue';
 import { upvoteSong } from '../../../common/actions/song';
 import nextSong from '../../../common/actions/nextSong';
 import { playSong, pauseSong } from '../../../common/actions/currentSong';
@@ -52,7 +52,8 @@ class App extends React.Component {
                       onPauseSong={()=> dispatch(pauseSong())}
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
-                      onNextSong={() => dispatch(nextSong())} />
+                      onNextSong={() => dispatch(nextSong())}
+                      onNextReady={() => dispatch(nextReady())} />
                   <div className={
                       classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
                     <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
