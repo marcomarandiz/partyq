@@ -34,12 +34,12 @@ class App extends React.Component {
         <Header />
 
 
-          <div className={'ui bottom attached segment pushable ' + styles.app}>
+          <div className={'ui attached segment pushable ' + styles.app}>
             <History
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />
               <div className={'pusher ' + styles.pusher}>
-                <div className={'ui basic segment ' + styles.application}>
+                <div className={'ui basic attached segment ' + styles.application}>
                   <Queue
                       currentSong={this.props.queue.currentSong}
                       isPlaying={this.props.queue.isPlaying}
@@ -49,7 +49,9 @@ class App extends React.Component {
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
                       onNextSong={() => dispatch(nextSong())} />
-                  <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
+                  <div className={'ui basic attached segment ' + styles.app}>
+                    <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
+                  </div>
                 </div>
               </div>
             </div>

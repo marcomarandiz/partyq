@@ -17,3 +17,7 @@
 	background-color: #153A6A !important;
 	color: #FFF !important; /* Doesn't work, don't know why */
 }
+
+.addIcon {
+    color: #30AAFF !important;
+}
