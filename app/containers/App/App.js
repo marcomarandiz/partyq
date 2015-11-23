@@ -5,6 +5,7 @@ import Queue from '../../components/Queue/Queue.js';
 import Header from '../../components/Header/Header.js';
 import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import { addSong } from '../../../common/actions/queue';
 import { upvoteSong } from '../../../common/actions/song';
@@ -30,16 +31,19 @@ class App extends React.Component {
   render() {
     const { dispatch } = this.props;
     return (
-      <div className={styles.app} onPaste={(event) => this.pasteLink(event, dispatch)}>
+      <div
+        className={classNames(styles.app)}
+        onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header />
 
 
-          <div className={'ui attached segment pushable ' + styles.app}>
+          <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
             <History
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />
               <div className={'pusher ' + styles.pusher}>
-                <div className={'ui basic attached segment ' + styles.application}>
+                <div className={
+                    classNames('ui', 'basic', 'attached', 'segment', styles.application)}>
                   <Queue
                       currentSong={this.props.queue.currentSong}
                       isPlaying={this.props.queue.isPlaying}
@@ -49,7 +53,8 @@ class App extends React.Component {
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
                       onNextSong={() => dispatch(nextSong())} />
-                  <div className={'ui basic attached segment ' + styles.app}>
+                  <div className={
+                      classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
                     <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
                   </div>
                 </div>
