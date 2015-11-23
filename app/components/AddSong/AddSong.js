@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from './AddSong.css';
+import { isLinkValid } from '../../../common/utils/functions.js';
+import classNames from 'classnames';
 
 export default class AddSong extends React.Component {
   constructor(props) {
@@ -28,22 +30,74 @@ export default class AddSong extends React.Component {
     event.preventDefault();
     const node = this.refs.songname;
     const text = node.value.trim();
-    console.log(event);
-    this.props.onAddSong(text);
+    if (isLinkValid(text)) {
+      this.props.onAddSong(text);
+      this.dimSuccess();
+    } else {
+      this.dimFailure();
+      console.log('Invalid link: ' + text);
+    }
     node.value = '';
-    this.dimSuccess();
   }
 
   dim() {
     $('.dimmable').dimmer('show').dimmer({duration: {show: 2000, hide: 0}}).dimmer('hide');
   }
 
+  showModal() {
+    console.log('fired');
+    $('.ui.basic.modal').modal({
+      transition: 'slide down',
+      onApprove: () => {
+        console.log('on approve fired');
+        const node = this.refs.songname;
+        const text = node.value.trim();
+        if (isLinkValid(text)) {
+          this.props.onAddSong(text);
+          this.dimSuccess();
+        } else {
+          this.dimFailure();
+          console.log('Invalid link: ' + text);
+        }
+        node.value = '';
+        return true;
+      },
+      selector: {
+        approve: '.button',
+        close: '.button'
+      }
+    }).modal('show');
+  }
+
+
   render() {
     return (
-      <div className={styles.addsong}>
-        <div className='ui input focus'>
-          <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Add Song...'/>
-          <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
+      <div className={classNames(styles.addsong)}>
+        <span
+          className={classNames('link', styles.addIcon)}
+          onClick={() => this.showModal()}>
+          <i className={classNames('big', 'add', 'circle', 'link', 'icon')}></i>
+        Add Song
+        </span>
+
+        <div className={classNames('ui', 'basic', 'modal', styles.modal)}>
+          <h1>Add a song:</h1>
+          <div className={classNames('ui', 'icon', 'input', 'focus', styles.songURL)}>
+            <input
+              ref='songname'
+              type='text'
+              className={classNames(styles.songURL)}
+              type='text' placeholder='Song URL...'/>
+            <i className={classNames('add', 'circle', 'icon')}></i>
+          </div>
+          <button
+            className={
+                classNames('ui', 'right', 'labeled', 'ok',
+                           'icon', 'button', styles.addsongButton)}
+            onClick={() => this.handleClick(event)}>
+            Add Song
+          <i className={classNames('checkmark', 'icon')}></i>
+          </button>
         </div>
       </div>
     );

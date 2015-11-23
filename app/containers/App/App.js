@@ -5,36 +5,44 @@ import Queue from '../../components/Queue/Queue.js';
 import Header from '../../components/Header/Header.js';
 import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import { addSong } from '../../../common/actions/queue';
 import { upvoteSong } from '../../../common/actions/song';
 import nextSong from '../../../common/actions/nextSong';
 import { playSong, pauseSong } from '../../../common/actions/currentSong';
 import { reAddSong } from '../../../common/actions/history';
+import { isLinkValid } from '../../../common/utils/functions.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  pasteLink(event) {
+  pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    return link;
+    if (isLinkValid(link)) {
+      dispatch(addSong(link));
+    } else {
+      console.log('Invalid link: ', link);
+    }
   }
 
   render() {
     const { dispatch } = this.props;
     return (
-      <div className={styles.app} onPaste={(event) => dispatch(addSong(this.pasteLink(event)))}>
+      <div
+        className={classNames(styles.app)}
+        onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header />
 
 
-          <div className={'ui bottom attached segment pushable ' + styles.app}>
+          <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
             <History
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />
-              <div className={'pusher ' + styles.pusher}>
-                <div className={'ui basic segment ' + styles.application}>
+              <div className={classNames('pusher', styles.pusher)}>
+                <div className={classNames('ui basic segment', styles.application)}>
                   <div className='ui grid'>
                   <div className='three wide column'>
                   </div>

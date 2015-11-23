@@ -7,8 +7,6 @@ import {
   SET_STATE,
   ADD_SONG_FROM_HISTORY
 } from '../common/constants/ActionTypes';
-import { youtubeAPI } from './utils/APIcalls.js';
-import { isLinkValid, getVidFromUrl } from '../common/utils/functions.js';
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
 
@@ -23,24 +21,20 @@ function queueReducer(state = initialState.queue, action) {
   const userid = action.id;
   switch (action.type) {
   case ADD_SONG:
-    if (!isLinkValid(action.url)) {
-      return state;
-    }
-    const song = youtubeAPI(action.url, getVidFromUrl(action.url));
-    if (song.vid === '') {
+    if (!action.song) {
       return state;
     }
     if (Object.keys(currentSong).length === 0 ) {
       return {
         ...state,
-        currentSong: song
+        currentSong: action.song
       };
     }
     return {
       ...state,
       songlist: [
         ...queueSonglist,
-        song
+        action.song
       ]
     };
   case UPVOTE_SONG:
@@ -106,8 +100,8 @@ export default function mainReducer(state = initialState, action) {
         queue: {currentSong: nextSong, songlist: queueSonglist.slice(1), isPlaying: isPlaying},
         history: {songlist:
         [
-          ...historySonglist,
-          currentSong
+          currentSong,
+          ...historySonglist
         ]}
       };
     }

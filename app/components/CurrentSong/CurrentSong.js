@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import YouTube from 'react-youtube';
 import styles from './CurrentSong.css';
+import classNames from 'classnames';
 
 export default class CurrentSong extends React.Component {
   constructor(props) {
@@ -70,9 +71,9 @@ export default class CurrentSong extends React.Component {
       <div className={styles.currentSong}>
         {this.props.currentSong.title}
         {this.props.isPlaying ?
-        <ui onClick={() => this.handlePause()}><i className={'huge pause link icon ' + styles.buttonAccents}></i></ui> :
-        <ui onClick={() => this.handlePlay()}><i className={'huge play link icon ' + styles.buttonAccents}></i></ui>}
-        <ui onClick={() => this.handleNextSong()}><i className={'huge step forward link icon ' + styles.buttonAccents}></i></ui>
+        <ui onClick={() => this.handlePause()}><i className={classNames('huge pause link icon', styles.buttonAccents)}></i></ui> :
+        <ui onClick={() => this.handlePlay()}><i className={classNames('huge play link icon', styles.buttonAccents)}></i></ui>}
+        <ui onClick={() => this.handleNextSong()}><i className={classNames('huge step forward link icon', styles.buttonAccents)}></i></ui>
       </div>
     </div>
     );
