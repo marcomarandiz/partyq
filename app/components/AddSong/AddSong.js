@@ -73,11 +73,9 @@ export default class AddSong extends React.Component {
   render() {
     return (
       <div className={classNames(styles.addsong)}>
-        {/* <div className='ui input focus'>
-          <input ref='songname' type='text' className={styles.songURL} type='text' placeholder='Add Song...'/>
-          <button className={'ui button ' + styles.addsongButton} onClick={() => this.handleClick(event)}>Add Song</button>
-        </div> */}
-        <span className={'link ' + styles.addIcon} onClick={() => this.showModal()}>
+        <span
+          className={classNames('link', styles.addIcon)}
+          onClick={() => this.showModal()}>
           <i className={classNames('big', 'add', 'circle', 'link', 'icon')}></i>
         Add Song
         </span>
