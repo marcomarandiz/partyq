@@ -6,3 +6,9 @@ export function addSong(url) {
     url
   };
 }
+
+export function nextReady() {
+  return {
+    type: types.NEXT_READY
+  };
+}
