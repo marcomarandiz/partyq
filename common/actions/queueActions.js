@@ -1,8 +1,15 @@
 import * as types from '../constants/ActionTypes';
 
-export function addSong(url) {
+export function addSong(song) {
   return {
     type: types.ADD_SONG,
+    song
+  };
+}
+
+export function addSongRequest(url) {
+  return {
+    type: types.ADD_SONG_REQUEST,
     url
   };
 }

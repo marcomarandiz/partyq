@@ -9,7 +9,7 @@ export default class HistorySonglist extends React.Component {
   }
 
   handleReAddSong(index) {
-    this.props.onReAddSong(index);
+    this.props.onReAddSong(this.props.songs[index]);
   }
 
   render() {

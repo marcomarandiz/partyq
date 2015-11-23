@@ -5,7 +5,6 @@ import {
   PLAY_SONG,
   PAUSE_SONG,
   SET_STATE,
-  ADD_SONG_FROM_HISTORY,
   NEXT_READY
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
@@ -122,33 +121,6 @@ export default function mainReducer(state = initialState, action) {
       };
     }
     return newState;
-  case ADD_SONG_FROM_HISTORY:
-    const song = historySonglist[action.index];
-    song.upvotes = 0;
-    song.endedAt = null;
-    song.userUpvotes = [];
-    if (Object.keys(currentSong).length === 0 ) {
-      return {
-        ...state,
-        queue: {
-          currentSong: song,
-          songlist: queueSonglist,
-          isPlaying: queue.isPlaying
-        }
-      };
-    }
-    return {
-      ...state,
-      queue: {
-        ...queue,
-        currentSong: currentSong,
-        songlist:
-        [
-          ...queueSonglist,
-          song
-        ]
-      }
-    };
   default:
     return {
       ...initialState,

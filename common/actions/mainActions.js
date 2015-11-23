@@ -6,13 +6,6 @@ export function nextSong() {
   };
 }
 
-export function reAddSong(index) {
-  return {
-    type: types.ADD_SONG_FROM_HISTORY,
-    index
-  };
-}
-
 export function upvoteSong(index) {
   return {
     type: types.UPVOTE_SONG,

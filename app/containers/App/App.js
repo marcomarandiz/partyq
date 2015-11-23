@@ -7,8 +7,8 @@ import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { addSong, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
-import { nextSong, upvoteSong, reAddSong } from '../../../common/actions/mainActions';
+import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
+import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid } from '../../../common/utils/functions';
 
 class App extends React.Component {
@@ -19,7 +19,7 @@ class App extends React.Component {
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
     if (isLinkValid(link)) {
-      dispatch(addSong(link));
+      dispatch(addSongRequest(link));
     } else {
       console.log('Invalid link: ' + link);
     }
@@ -37,7 +37,7 @@ class App extends React.Component {
           <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
             <History
               historySonglist={this.props.history.songlist}
-              onReAddSong={index => dispatch(reAddSong(index))} />
+              onReAddSong={song => dispatch(addSong(song))} />
               <div className={'pusher ' + styles.pusher}>
                 <div className={
                     classNames('ui', 'basic', 'attached', 'segment', styles.application)}>
@@ -53,7 +53,7 @@ class App extends React.Component {
                       onNextReady={() => dispatch(nextReady())} />
                   <div className={
                       classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
-                    <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
+                    <AddSong onAddSong={songName => dispatch(addSongRequest(songName))}/>
                   </div>
                 </div>
               </div>
