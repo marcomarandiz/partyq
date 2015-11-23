@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import styles from './HistorySong.css';
+import classNames from 'classnames';
 
 export default class HistorySong extends React.Component {
   constructor(props) {
@@ -7,11 +8,16 @@ export default class HistorySong extends React.Component {
   }
   render() {
     return (
-      <div className={'ui segment red ' + styles.historysong}>
-        <div className={styles.historyContent}>
+      <div className={classNames('ui', 'segment', 'red', styles.historysong)}>
+        <div className={classNames(styles.historyContent)}>
           {this.props.song.title} {this.props.song.artist} {this.props.song.endedAt}
         </div>
-        <button className={'ui tiny button ' + styles.button} type='button' onClick={() => this.props.handleReAddSong(this.props.index)}>Add to q</button>
+        <button
+          className={classNames('ui', 'tiny', 'button', styles.button)}
+          type='button'
+          onClick={() => this.props.handleReAddSong(this.props.index)}>
+        Add to q
+        </button>
       </div>
     );
   }

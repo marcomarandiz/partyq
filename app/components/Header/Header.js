@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Header.css';
+import classNames from 'classnames';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class Header extends React.Component {
 
   render() {
     return (
-        <div className={'ui sticky ' + styles.header}>
+        <div className={classNames('ui', 'sticky', styles.header)}>
           <h1>partyq</h1>
         </div>
     );
