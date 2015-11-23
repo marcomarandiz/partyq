@@ -11,7 +11,7 @@ import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
 
 export const initialState = {
-  queue: { songlist: [], currentSong: {}, isPlaying: true },
+  queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
   history: { songlist: []}
 };
 
