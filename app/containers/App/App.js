@@ -35,16 +35,25 @@ class App extends React.Component {
               onReAddSong={index => dispatch(reAddSong(index))} />
               <div className={'pusher ' + styles.pusher}>
                 <div className={'ui basic segment ' + styles.application}>
+                  <div className='ui grid'>
+                  <div className='three wide column'>
+                  </div>
+                  <div className='seven wide column'>
                   <Queue
                       currentSong={this.props.queue.currentSong}
                       isPlaying={this.props.queue.isPlaying}
-                      songlist={this.props.queue.songlist}
+                      onNextSong={() => dispatch(nextSong())}
                       onPlaySong={() => dispatch(playSong())}
                       onPauseSong={()=> dispatch(pauseSong())}
+                      songlist={this.props.queue.songlist}
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
-                      onNextSong={() => dispatch(nextSong())} />
+                       />
                   <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
+                  </div>
+                  <div className='three wide column'>
+                  </div>
+                  </div>
                 </div>
               </div>
             </div>
