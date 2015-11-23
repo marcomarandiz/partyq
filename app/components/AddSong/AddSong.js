@@ -43,11 +43,11 @@ export default class AddSong extends React.Component {
     $('.dimmable').dimmer('show').dimmer({duration: {show: 2000, hide: 0}}).dimmer('hide');
   }
 
-  showModal () {
+  showModal() {
     console.log('fired');
     $('.ui.basic.modal').modal({
       transition: 'slide down',
-      onApprove: function() {
+      onApprove: () => {
         console.log('on approve fired');
         const node = this.refs.songname;
         const text = node.value.trim();
