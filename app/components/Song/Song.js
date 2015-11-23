@@ -9,8 +9,8 @@ export default class Song extends React.Component {
 
   render() {
     return (
-      <div className={classNames('ui', 'grid', 'segment', 'red ', styles.song)}>
-          <div className={classNames('one', 'wide', 'column', 'center', 'aligned')}>
+      <div className={classNames('ui', 'grid', 'segment', styles.song)}>
+          <div className={classNames('two', 'wide', 'column', 'center', 'aligned', styles.twosongbackground)}>
             <div>
               <i className={classNames('big', 'white', 'angle', 'up', 'link', 'icon', styles.upvoteButton)}
                  onClick={() => this.props.handleUpvote(this.props.index)}></i>
@@ -19,7 +19,7 @@ export default class Song extends React.Component {
               {this.props.song.upvotes}
             </div>
           </div>
-          <div className={classNames('five', 'wide', 'column')}>
+          <div className={classNames('five', 'wide', 'column', styles.fivesongbackground)}>
                   <div className={classNames(styles.thumbnail)}>
                       <a href={this.props.song.url}>
                         <img src={this.props.song.thumbnail}
@@ -35,7 +35,7 @@ export default class Song extends React.Component {
                   </div>
                 </div>
           </div>
-          <div className={classNames('one', 'wide', 'column')}>
+          <div className={classNames('one', 'wide', 'column', styles.onesongbackground)}>
             <span className={classNames(styles.duration)}>{this.props.song.duration}</span>
           </div>
       </div>
