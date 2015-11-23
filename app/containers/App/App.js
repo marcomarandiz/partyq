@@ -7,12 +7,9 @@ import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { addSong, nextReady } from '../../../common/actions/queue';
-import { upvoteSong } from '../../../common/actions/song';
-import nextSong from '../../../common/actions/nextSong';
-import { playSong, pauseSong } from '../../../common/actions/currentSong';
-import { reAddSong } from '../../../common/actions/history';
-import { isLinkValid } from '../../../common/utils/functions.js';
+import { addSong, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
+import { nextSong, upvoteSong, reAddSong } from '../../../common/actions/mainActions';
+import { isLinkValid } from '../../../common/utils/functions';
 
 class App extends React.Component {
   constructor(props) {
