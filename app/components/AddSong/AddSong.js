@@ -14,6 +14,7 @@ export default class AddSong extends React.Component {
     $('#dimmerTextMain').text('Song Added');
     $('#dimmerTextSecondary').text('');
     this.dim();
+    $('.dimmer').css('background-color', 'rgba(26, 26, 26, 0.8');
   }
 
   dimFailure() {
@@ -23,6 +24,7 @@ export default class AddSong extends React.Component {
     $('#dimmerTextMain').text('Invalid URL');
     $('#dimmerTextSecondary').text('Song Not Added');
     this.dim();
+    $('.dimmer').css('background-color', 'rgba(26, 26, 26, 0.8');
   }
 
   handleClick(event) {
