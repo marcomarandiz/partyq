@@ -40,13 +40,6 @@ export default class AddSong extends React.Component {
         console.log('on approve fired');
         const node = this.refs.songname;
         const text = node.value.trim();
-        if (isLinkValid(text)) {
-          this.props.onAddSong(text);
-          this.dimSuccess();
-        } else {
-          this.dimFailure();
-          console.log('Invalid link: ' + text);
-        }
         node.value = '';
         return true;
       },
