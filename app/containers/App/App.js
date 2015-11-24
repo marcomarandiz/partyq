@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header.js';
 import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import ga from 'react-ga';
 
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
@@ -14,6 +15,11 @@ import { isLinkValid } from '../../../common/utils/functions';
 class App extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    ga.initialize('UA-70628505-1');
+    ga.pageview('/');
   }
 
   pasteLink(event, dispatch) {

@@ -82,6 +82,7 @@
     "moment": "2.10.6",
     "react": "0.14.0",
     "react-dom": "0.14.0",
+    "react-ga": "1.2.0",
     "react-redux": "4.0.0",
     "react-youtube": "4.1.2",
     "redux": "3.0.4",
