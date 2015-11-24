@@ -35,8 +35,6 @@ class App extends React.Component {
         className={classNames(styles.app)}
         onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header />
-
-
           <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
             <History
               historySonglist={this.props.history.songlist}
