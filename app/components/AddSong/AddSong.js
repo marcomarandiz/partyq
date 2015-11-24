@@ -67,7 +67,7 @@ export default class AddSong extends React.Component {
             <input ref='songname' type='text' className={classNames(styles.songURL)} type='text' placeholder='Song URL...'/>
             <i className={classNames('add', 'circle', 'icon')}></i>
           </div>
-          <button className={classNames('ui', 'right', 'labeled', 'ok','icon', 'button', styles.addsongButton)}>
+          <button className={classNames('ui', 'right', 'labeled', 'ok', 'icon', 'button', styles.addsongButton)}>
             Add Song
           <i className={classNames('checkmark', 'icon')}></i>
           </button>
