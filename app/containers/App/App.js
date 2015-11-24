@@ -24,6 +24,10 @@ class App extends React.Component {
       console.error(error);
       notie.alert(3, 'Invalid URL: song not added', 2.5);
     });
+
+    socket.on(!'add_song_error', () => {
+      notie.alert(1, 'yay!', 3.0);
+    });
   }
 
   pasteLink(event, dispatch) {
