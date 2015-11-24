@@ -5,13 +5,13 @@ import {
   PLAY_SONG,
   PAUSE_SONG,
   SET_STATE,
-  ADD_SONG_FROM_HISTORY
+  NEXT_READY
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
 
 export const initialState = {
-  queue: { songlist: [], currentSong: {}, isPlaying: true },
+  queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
   history: { songlist: []}
 };
 
@@ -24,10 +24,14 @@ function queueReducer(state = initialState.queue, action) {
     if (!action.song) {
       return state;
     }
+    action.song.upvotes = 0;
+    action.song.userUpvotes = [];
+    action.song.endedAt = null;
     if (Object.keys(currentSong).length === 0 ) {
       return {
         ...state,
-        currentSong: action.song
+        currentSong: action.song,
+        isPlaying: true
       };
     }
     return {
@@ -36,6 +40,11 @@ function queueReducer(state = initialState.queue, action) {
         ...queueSonglist,
         action.song
       ]
+    };
+  case NEXT_READY:
+    return {
+      ...state,
+      nextReady: true
     };
   case UPVOTE_SONG:
     // Only upvote song if there user has not upvoted
@@ -97,7 +106,13 @@ export default function mainReducer(state = initialState, action) {
       }
       newState = {
         ...state,
-        queue: {currentSong: nextSong, songlist: queueSonglist.slice(1), isPlaying: isPlaying},
+        queue: {
+          ...queue,
+          nextReady: false,
+          isPlaying: isPlaying,
+          currentSong: nextSong,
+          songlist: queueSonglist.slice(1),
+        },
         history: {songlist:
         [
           currentSong,
@@ -106,33 +121,6 @@ export default function mainReducer(state = initialState, action) {
       };
     }
     return newState;
-  case ADD_SONG_FROM_HISTORY:
-    const song = historySonglist[action.index];
-    song.upvotes = 0;
-    song.endedAt = null;
-    song.userUpvotes = [];
-    if (Object.keys(currentSong).length === 0 ) {
-      return {
-        ...state,
-        queue: {
-          currentSong: song,
-          songlist: queueSonglist,
-          isPlaying: queue.isPlaying
-        }
-      };
-    }
-    return {
-      ...state,
-      queue: {
-        currentSong: currentSong,
-        isPlaying: queue.isPlaying,
-        songlist:
-        [
-          ...queueSonglist,
-          song
-        ]
-      }
-    };
   default:
     return {
       ...initialState,
