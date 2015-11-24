@@ -24,7 +24,7 @@ class App extends React.Component {
     if (isLinkValid(link)) {
       dispatch(addSong(link));
     } else {
-      console.log('Invalid link: ' + link);
+      console.log('Invalid link: ', link);
     }
   }
 
@@ -35,31 +35,35 @@ class App extends React.Component {
         className={classNames(styles.app)}
         onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header />
-
-
           <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
             <History
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />
-              <div className={'pusher ' + styles.pusher}>
-                <div className={
-                    classNames('ui', 'basic', 'attached', 'segment', styles.application)}>
+              <div className={classNames('pusher', styles.pusher)}>
+                <div className={classNames('ui', 'basic', 'segment', styles.application)}>
+                  <div className={classNames('ui', 'grid')}>
+                  <div className={classNames('three', 'wide', 'column')}>
+                  </div>
+                  <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
                       currentSong={this.props.queue.currentSong}
                       isPlaying={this.props.queue.isPlaying}
-                      songlist={this.props.queue.songlist}
+                      onNextSong={() => dispatch(nextSong())}
                       onPlaySong={() => dispatch(playSong())}
                       onPauseSong={()=> dispatch(pauseSong())}
+                      songlist={this.props.queue.songlist}
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
                       onNextSong={() => dispatch(nextSong())} />
                   <div className={
                       classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
                     <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
-                  </div>
+                 </div>
                 </div>
-              </div>
-            </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>
     );
   }
