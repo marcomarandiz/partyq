@@ -8,7 +8,9 @@ export default class AddSong extends React.Component {
     super(props);
   }
 
-  dimSuccess() {
+
+  // Leaving these here, commented out, in case we need them in the future.
+  /* dimSuccess() {
     $('.dimmer').css('background-color', 'rgba(48, 170, 255, 1)');
     $('#dimmerIcon').removeClass('frown');
     $('#dimmerIcon').addClass('checkmark');
@@ -28,7 +30,7 @@ export default class AddSong extends React.Component {
 
   dim() {
     $('.dimmable').dimmer('show').dimmer({duration: {show: 2000, hide: 0}}).dimmer('hide');
-  }
+  } */
 
   showModal() {
     console.log('fired');

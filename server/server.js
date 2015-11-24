@@ -39,6 +39,7 @@ export default function startServer(store) {
           } else {
             action.type = ADD_SONG;
             action.song = song;
+            socket.emit('add_song_success', song);
             store.dispatch.bind(store)(action);
           }
         });
