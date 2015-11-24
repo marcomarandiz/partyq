@@ -7,6 +7,7 @@ import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import io from 'socket.io-client';
+import notie from 'notie';
 
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
@@ -21,6 +22,7 @@ class App extends React.Component {
     // Called when youtube api fails to get video
     socket.on('add_song_error', (error) => {
       console.error(error);
+      notie.alert(3, 'Invalid URL: song not added', 2.5);
     });
   }
 
