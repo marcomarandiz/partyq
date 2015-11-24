@@ -1,0 +1,56 @@
+{
+    "containerDefinitions": [
+        {
+            "volumesFrom": null,
+            "memory": 128,
+            "extraHosts": null,
+            "dnsServers": null,
+            "disableNetworking": null,
+            "dnsSearchDomains": null,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 3000,
+                    "protocol": "tcp"
+                },
+                {
+                    "hostPort": 8090,
+                    "containerPort": 8090,
+                    "protocol": "tcp"
+                }
+            ],
+            "hostname": "partyq.io",
+            "essential": true,
+            "entryPoint": [],
+            "mountPoints": null,
+            "name": "partyq",
+            "ulimits": null,
+            "dockerSecurityOptions": null,
+            "environment": [
+                {
+                    "name": "PORT",
+                    "value": "3000"
+                },
+                {
+                    "name": "NODE_ENV",
+                    "value": "production"
+                }
+            ],
+            "links": null,
+            "workingDirectory": "/usr/src/app",
+            "readonlyRootFilesystem": null,
+            "image": "stefaneng/partyq:0.0.1-1",
+            "command": [
+                "npm",
+                "start"
+            ],
+            "user": null,
+            "dockerLabels": null,
+            "logConfiguration": null,
+            "cpu": 10,
+            "privileged": null
+        }
+    ],
+    "volumes": [],
+    "family": "partyq"
+}
