@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import styles from './AddSong.css';
-import { isLinkValid } from '../../../common/utils/functions.js';
 import classNames from 'classnames';
 
 export default class AddSong extends React.Component {
