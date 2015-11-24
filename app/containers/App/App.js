@@ -40,11 +40,11 @@ class App extends React.Component {
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />
               <div className={classNames('pusher', styles.pusher)}>
-                <div className={classNames('ui basic segment', styles.application)}>
-                  <div className='ui grid'>
-                  <div className='three wide column'>
+                <div className={classNames('ui', 'basic', 'segment', styles.application)}>
+                  <div className={classNames('ui', 'grid')}>
+                  <div className={classNames('three', 'wide', 'column')}>
                   </div>
-                  <div className='seven wide column'>
+                  <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
                       currentSong={this.props.queue.currentSong}
                       isPlaying={this.props.queue.isPlaying}
@@ -54,15 +54,16 @@ class App extends React.Component {
                       songlist={this.props.queue.songlist}
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
-                       />
-                  <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
-                  </div>
-                  <div className='three wide column'>
-                  </div>
-                  </div>
+                      onNextSong={() => dispatch(nextSong())} />
+                  <div className={
+                      classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
+                    <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
+                 </div>
                 </div>
-              </div>
-            </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>
     );
   }
