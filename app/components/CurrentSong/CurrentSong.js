@@ -60,9 +60,7 @@ export default class CurrentSong extends React.Component {
       this.youtube.pauseVideo();
     }
     return (
-    <div className={classNames('ui', 'grid')}>
-        <div className={classNames('row')}>
-          <div className={classNames('eight', 'wide', 'column')}>
+    <div>
             <div className={classNames(styles.youtubeVideo)}>
               {this.props.currentSong.url ?
                <YouTube
@@ -72,10 +70,6 @@ export default class CurrentSong extends React.Component {
                   onEnd={(event) => this._onEnd(event, this)}/> :
                ''}
             </div>
-          </div>
-        </div>
-        <div className={classNames('row')}>
-          <div className={classNames('eight', 'wide', 'column')}>
             <div className={classNames(styles.currentSong)}>
                 {this.props.currentSong.title}
                 {this.props.isPlaying ?
@@ -87,8 +81,6 @@ export default class CurrentSong extends React.Component {
                 <ui onClick={() => this.handleNextSong()}>
                   <i className={classNames('huge', 'step', 'forward', 'link', 'icon', styles.buttonAccents)}></i></ui>
             </div>
-          </div>
-        </div>
     </div>
     );
   }
