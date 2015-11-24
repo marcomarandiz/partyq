@@ -8,9 +8,6 @@ export function youtubeAPI(url, next) {
   const error = {};
   song.url = url;
   song.vid = getVidFromUrl(url);
-  song.upvotes = 0;
-  song.userUpvotes = [];
-  song.endedAt = null;
 
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
