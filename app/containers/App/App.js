@@ -25,8 +25,10 @@ class App extends React.Component {
       notie.alert(3, 'Invalid URL: song not added', 2.5);
     });
 
-    socket.on(!'add_song_error', () => {
-      notie.alert(1, 'yay!', 3.0);
+    // Called when youtube api succeeds
+    socket.on('add_song_success', (song) => {
+      console.log(song);
+      notie.alert(1, song.title + ' added!');
     });
   }
 
