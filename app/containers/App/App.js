@@ -7,12 +7,9 @@ import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { addSong } from '../../../common/actions/queue';
-import { upvoteSong } from '../../../common/actions/song';
-import nextSong from '../../../common/actions/nextSong';
-import { playSong, pauseSong } from '../../../common/actions/currentSong';
-import { reAddSong } from '../../../common/actions/history';
-import { isLinkValid } from '../../../common/utils/functions.js';
+import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
+import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
+import { isLinkValid } from '../../../common/utils/functions';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +19,7 @@ class App extends React.Component {
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
     if (isLinkValid(link)) {
-      dispatch(addSong(link));
+      dispatch(addSongRequest(link));
     } else {
       console.log('Invalid link: ', link);
     }
@@ -38,7 +35,7 @@ class App extends React.Component {
           <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
             <History
               historySonglist={this.props.history.songlist}
-              onReAddSong={index => dispatch(reAddSong(index))} />
+              onReAddSong={song => dispatch(addSong(song))} />
               <div className={classNames('pusher', styles.pusher)}>
                 <div className={classNames('ui', 'basic', 'segment', styles.application)}>
                   <div className={classNames('ui', 'grid')}>
@@ -54,11 +51,12 @@ class App extends React.Component {
                       songlist={this.props.queue.songlist}
                       queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
-                      onNextSong={() => dispatch(nextSong())} />
+                      onNextSong={() => dispatch(nextSong())}
+                      onNextReady={() => dispatch(nextReady())} />
                   <div className={
                       classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
-                    <AddSong onAddSong={songName =>dispatch(addSong(songName))}/>
-                 </div>
+                    <AddSong onAddSong={songName => dispatch(addSongRequest(songName))}/>
+                  </div>
                 </div>
         </div>
         </div>
