@@ -35,6 +35,7 @@
                     "name": "NODE_ENV",
                     "value": "production"
                 },
+                {
                     "name": "HOSTNAME",
                     "value": "partyq.io"
                 }
