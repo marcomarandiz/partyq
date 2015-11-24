@@ -24,7 +24,11 @@ class App extends React.Component {
     if (isLinkValid(link)) {
       dispatch(addSong(link));
     } else {
+<<<<<<< HEAD
       console.log('Invalid link: ', link);
+=======
+      console.log('Invalid link: ' + link);
+>>>>>>> origin/dev
     }
   }
 
@@ -35,16 +39,27 @@ class App extends React.Component {
         className={classNames(styles.app)}
         onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header />
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/dev
           <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
             <History
               historySonglist={this.props.history.songlist}
               onReAddSong={index => dispatch(reAddSong(index))} />
+<<<<<<< HEAD
               <div className={classNames('pusher', styles.pusher)}>
                 <div className={classNames('ui', 'basic', 'segment', styles.application)}>
                   <div className={classNames('ui', 'grid')}>
                   <div className={classNames('three', 'wide', 'column')}>
                   </div>
                   <div className={classNames('seven', 'wide', 'column')}>
+=======
+              <div className={'pusher ' + styles.pusher}>
+                <div className={
+                    classNames('ui', 'basic', 'attached', 'segment', styles.application)}>
+>>>>>>> origin/dev
                   <Queue
                       currentSong={this.props.queue.currentSong}
                       isPlaying={this.props.queue.isPlaying}
