@@ -26,20 +26,6 @@ export default class AddSong extends React.Component {
     this.dim();
   }
 
-  handleClick(event) {
-    event.preventDefault();
-    const node = this.refs.songname;
-    const text = node.value.trim();
-    if (isLinkValid(text)) {
-      this.props.onAddSong(text);
-      this.dimSuccess();
-    } else {
-      this.dimFailure();
-      console.log('Invalid link: ' + text);
-    }
-    node.value = '';
-  }
-
   dim() {
     $('.dimmable').dimmer('show').dimmer({duration: {show: 2000, hide: 0}}).dimmer('hide');
   }
@@ -62,10 +48,7 @@ export default class AddSong extends React.Component {
         node.value = '';
         return true;
       },
-      selector: {
-        approve: '.button',
-        close: '.button'
-      }
+      selector: { approve: '.button', close: '.button' }
     }).modal('show');
   }
 
@@ -73,28 +56,18 @@ export default class AddSong extends React.Component {
   render() {
     return (
       <div className={classNames(styles.addsong)}>
-        <span
-          className={classNames('link', styles.addIcon)}
-          onClick={() => this.showModal()}>
+        <span className={classNames('link', styles.addIcon)} onClick={() => this.showModal()}>
           <i className={classNames('big', 'add', 'circle', 'link', 'icon')}></i>
-        Add Song
+          Add Song
         </span>
 
         <div className={classNames('ui', 'basic', 'modal', styles.modal)}>
           <h1>Add a song:</h1>
           <div className={classNames('ui', 'icon', 'input', 'focus', styles.songURL)}>
-            <input
-              ref='songname'
-              type='text'
-              className={classNames(styles.songURL)}
-              type='text' placeholder='Song URL...'/>
+            <input ref='songname' type='text' className={classNames(styles.songURL)} type='text' placeholder='Song URL...'/>
             <i className={classNames('add', 'circle', 'icon')}></i>
           </div>
-          <button
-            className={
-                classNames('ui', 'right', 'labeled', 'ok',
-                           'icon', 'button', styles.addsongButton)}
-            onClick={() => this.handleClick(event)}>
+          <button className={classNames('ui', 'right', 'labeled', 'ok', 'icon', 'button', styles.addsongButton)}>
             Add Song
           <i className={classNames('checkmark', 'icon')}></i>
           </button>
