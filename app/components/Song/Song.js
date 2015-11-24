@@ -9,7 +9,7 @@ export default class Song extends React.Component {
 
   render() {
     return (
-      <div className={classNames('ui', 'grid', 'segment', styles.song)}>
+      <div className={classNames('ui', 'grid', 'red', 'segment', styles.song)}>
           <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.twosongbackground)}>
             <div>
               <i className={classNames('big', 'white', 'angle', 'up', 'link', 'icon', styles.upvoteButton)}
