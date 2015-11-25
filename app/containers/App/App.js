@@ -32,6 +32,10 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.props.ga.pageview('/');
+  }
+
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
     if (isLinkValid(link)) {
@@ -95,7 +99,8 @@ App.propTypes = {
     songlist: PropTypes.arrayOf(
       PropTypes.object
     ).isRequired
-  }).isRequired
+  }).isRequired,
+  ga: PropTypes.object.isRequired
 };
 
 // Get the items from state
