@@ -7,6 +7,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import remoteActionMiddleware from './remote_action_middleware';
 import setState from '../common/actions/setstate';
+import ga from 'react-ga';
 
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
 
@@ -22,7 +23,7 @@ socket.on('state', state => {
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <App ga={ga}/>
     </Provider>,
   document.getElementById('root')
 );

@@ -6,7 +6,6 @@ import Header from '../../components/Header/Header.js';
 import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import ga from 'react-ga';
 
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
@@ -18,8 +17,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    ga.initialize('UA-70628505-1');
-    ga.pageview('/');
+    this.props.ga.pageview('/');
   }
 
   pasteLink(event, dispatch) {
@@ -85,7 +83,8 @@ App.propTypes = {
     songlist: PropTypes.arrayOf(
       PropTypes.object
     ).isRequired
-  }).isRequired
+  }).isRequired,
+  ga: PropTypes.object.isRequired
 };
 
 // Get the items from state
