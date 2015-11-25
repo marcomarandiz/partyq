@@ -59,13 +59,18 @@ class App extends React.Component {
                   </div>
                   <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
+                      // I think we need to check if this is
+                      // development or production. Not sure
+                      // how to do this here.
+                      id={socket.id}
+
                       currentSong={this.props.queue.currentSong}
+                      songlist={this.props.queue.songlist}
                       isPlaying={this.props.queue.isPlaying}
+                      owner={this.props.owner}
                       onNextSong={() => dispatch(nextSong())}
                       onPlaySong={() => dispatch(playSong())}
                       onPauseSong={()=> dispatch(pauseSong())}
-                      songlist={this.props.queue.songlist}
-                      queueSonglist={this.props.queue.songlist}
                       onUpvoteSong={index => dispatch(upvoteSong(index))}
                       onNextSong={() => dispatch(nextSong())}
                       onNextReady={() => dispatch(nextReady())} />
