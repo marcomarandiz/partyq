@@ -2,9 +2,6 @@ import React from 'react';
 import styles from './Header.css';
 import classNames from 'classnames';
 import AddSong from '../../components/AddSong/AddSong.js';
-import { addSong, addSongRequest } from '../../../common/actions/queueActions';
-
-
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -22,7 +19,7 @@ export default class Header extends React.Component {
     return (
         <div className={classNames('ui', 'sticky', styles.header)}>
           <div className={classNames(styles.addSong)}>
-            <AddSong onAddSong={songName => dispatch(addSongRequest(songName))}/>
+            <AddSong/>
           </div>
           <h1>partyq</h1>
         </div>

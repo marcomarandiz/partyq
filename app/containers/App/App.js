@@ -47,7 +47,7 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header />
+        <Header onAddSong={songName => dispatch(addSongRequest(songName))}/>
         <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
           <History historySonglist={this.props.history.songlist} onReAddSong={song => dispatch(addSong(song))}/>
           <div className={classNames('pusher', styles.pusher)}>
