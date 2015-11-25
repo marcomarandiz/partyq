@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import io from 'socket.io-client';
 import notie from 'notie';
-
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid } from '../../../common/utils/functions';
