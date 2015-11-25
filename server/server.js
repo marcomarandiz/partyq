@@ -33,12 +33,13 @@ export default function startServer(store) {
         youtubeAPI(action.url, (error, song) => {
           if (error) {
             // Send the error back to the client
-            socket.emit('error', error);
+            socket.emit('add_song_error', error);
             // Log the error since we are not listening anywhere
             console.error(error);
           } else {
             action.type = ADD_SONG;
             action.song = song;
+            socket.emit('add_song_success', song);
             store.dispatch.bind(store)(action);
           }
         });

@@ -80,6 +80,7 @@
     "express": "4.13.3",
     "immutable": "3.7.5",
     "moment": "2.10.6",
+    "notie": "2.1.0",
     "react": "0.14.0",
     "react-dom": "0.14.0",
     "react-ga": "1.2.0",

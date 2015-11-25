@@ -6,14 +6,30 @@ import Header from '../../components/Header/Header.js';
 import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import io from 'socket.io-client';
+import notie from 'notie';
 
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid } from '../../../common/utils/functions';
 
+const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    // Called when youtube api fails to get video
+    socket.on('add_song_error', (error) => {
+      console.error(error);
+      notie.alert(3, 'Invalid URL: song not added', 2.5);
+    });
+
+    // Called when youtube api succeeds
+    socket.on('add_song_success', (song) => {
+      console.log(song);
+      notie.alert(1, song.title + ' added!');
+    });
   }
 
   componentDidMount() {

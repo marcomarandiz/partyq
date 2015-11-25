@@ -1,10 +1,8 @@
 .currentSong {
   background-color: #3F3F3F;
-  border-bottom: 1px solid #000;
   margin: 0 auto;
   margin-top: 1.78%;
   padding: 1%;
-  border-radius: 50px;
   text-align: center;
 }
 

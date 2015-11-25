@@ -4,24 +4,20 @@
 }
 .twosongbackground{ 
   background-color: #3A3A3D !important;
-  border-bottom: 1px solid #1A1A1A !important;
-  border-top: 2px solid #DB2828;
-  border-bottom-left-radius : 55px;
-  border-top-left-radius : 55px;
+  margin-top: 0 !important;
+  /* border-bottom-left-radius : 55px;
+  border-top-left-radius : 55px; */
 }
 
 .fivesongbackground{ 
   background-color: #3A3A3D !important;
-  border-bottom: 1px solid #1A1A1A !important;
-  border-top: 2px solid #DB2828;
+  margin-top: 0;
 }
 
 .onesongbackground{ 
   background-color: #3A3A3D !important;
-  border-bottom: 1px solid #1A1A1A !important;
-  border-top: 2px solid #DB2828;
-  border-bottom-right-radius : 55px;
-  border-top-right-radius : 55px;
+  /* border-bottom-right-radius : 55px;
+  border-top-right-radius : 55px; */
 }
 
 .song {
@@ -30,9 +26,11 @@
   height: 100% !important;*/ /* don't use a phone sized screen until we get the overflow issue solved */
   margin: 0 auto !important;
   padding-left: 1%;
-  padding-top: 0.5%;
-  border-bottom: 1px solid #1A1A1A !important;
   opacity: 0.8;
+  border-top-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
 }
 
 .song:hover {
