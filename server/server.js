@@ -14,8 +14,17 @@ export default function startServer(store) {
     () => partyq.emit('state', store.getState())
   );
 
+  let owner = null;
+
   partyq.on('connection', (socket) => {
     socket.emit('state', store.getState());
+
+    if (owner === null) {
+      owner = development ? socket.id :
+        socket.request.connection.remoteAddress;
+      console.log('Owner: ' + owner);
+    }
+
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
