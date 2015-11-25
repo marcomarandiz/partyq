@@ -23,6 +23,12 @@ export default function startServer(store) {
       owner = development ? socket.id :
         socket.request.connection.remoteAddress;
       console.log('Owner: ' + owner);
+      store.dispatch.bind(store)(
+        {
+          type: 'SET_OWNER',
+          id: owner
+        }
+      );
     }
 
     // Feed action event from clients directly into store

@@ -5,7 +5,8 @@ import {
   PLAY_SONG,
   PAUSE_SONG,
   SET_STATE,
-  NEXT_READY
+  NEXT_READY,
+  SET_OWNER
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
@@ -121,6 +122,11 @@ export default function mainReducer(state = initialState, action) {
       };
     }
     return newState;
+  case SET_OWNER:
+    return {
+      ...state,
+      owner: action.id
+    };
   default:
     return {
       ...initialState,
