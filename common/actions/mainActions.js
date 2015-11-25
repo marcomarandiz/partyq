@@ -15,7 +15,7 @@ export function upvoteSong(index) {
 
 export function setOwner(id) {
   return {
-    type: SET_OWNER,
+    type: types.SET_OWNER,
     id
   };
 }
