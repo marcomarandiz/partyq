@@ -12,3 +12,10 @@ export function upvoteSong(index) {
     index
   };
 }
+
+export function setOwner(id) {
+  return {
+    type: SET_OWNER,
+    id
+  };
+}
