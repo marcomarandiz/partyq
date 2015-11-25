@@ -3,7 +3,6 @@ import styles from './App.css';
 import History from '../../components/History/History.js';
 import Queue from '../../components/Queue/Queue.js';
 import Header from '../../components/Header/Header.js';
-import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import io from 'socket.io-client';
@@ -68,9 +67,6 @@ class App extends React.Component {
                     onUpvoteSong={index => dispatch(upvoteSong(index))}
                     onNextSong={() => dispatch(nextSong())}
                     onNextReady={() => dispatch(nextReady())} />
-                  <div className={classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
-                    <AddSong onAddSong={songName => dispatch(addSongRequest(songName))}/>
-                  </div>
                 </div>
               </div>
             </div>
