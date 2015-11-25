@@ -13,7 +13,8 @@ import moment from 'moment';
 
 export const initialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
-  history: { songlist: []}
+  history: { songlist: []},
+  production: process.env.NODE_ENV === 'production'
 };
 
 function queueReducer(state = initialState.queue, action) {

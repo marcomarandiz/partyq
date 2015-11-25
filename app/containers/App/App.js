@@ -59,10 +59,10 @@ class App extends React.Component {
                   </div>
                   <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
-                      // I think we need to check if this is
-                      // development or production. Not sure
-                      // how to do this here.
-                      id={socket.id}
+                      id={
+                        this.props.production ?
+                          socket.request.connection.remoteAddress :
+                          socket.id}
 
                       currentSong={this.props.queue.currentSong}
                       songlist={this.props.queue.songlist}
