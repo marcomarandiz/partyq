@@ -33,11 +33,9 @@ export default class AddSong extends React.Component {
   } */
 
   showModal() {
-    console.log('fired');
     $('.ui.basic.modal').modal({
       transition: 'slide down',
       onApprove: () => {
-        console.log('on approve fired');
         const node = this.refs.songname;
         const text = node.value.trim();
         if (isLinkValid(text)) {
