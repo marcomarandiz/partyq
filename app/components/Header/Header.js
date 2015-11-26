@@ -19,7 +19,7 @@ export default class Header extends React.Component {
     return (
         <div className={classNames('ui', 'sticky', styles.header)}>
           <div className={classNames(styles.addSong)}>
-            <AddSong/>
+            <AddSong onAddSong={this.props.onAddSong} />
           </div>
           <h1>partyq</h1>
         </div>
