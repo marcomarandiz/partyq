@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import styles from './AddSong.css';
 import { isLinkValid } from '../../../common/utils/functions.js';
 import classNames from 'classnames';
+import notie from 'notie';
 
 export default class AddSong extends React.Component {
   constructor(props) {
     super(props);
   }
-
 
   // Leaving these here, commented out, in case we need them in the future.
   /* dimSuccess() {
@@ -40,11 +40,10 @@ export default class AddSong extends React.Component {
         const text = node.value.trim();
         if (isLinkValid(text)) {
           this.props.onAddSong(text);
-      /*  this.dimSuccess();
+      //  this.dimSuccess();
         } else {
-          this.dimFailure();
-          console.log('Invalid link: ' + text);
-      */
+      //    this.dimFailure();
+          notie.alert(3, 'Invalid URL: song not added', 2.5);
         }
         node.value = '';
         return true;
