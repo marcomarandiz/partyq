@@ -3,12 +3,10 @@ import styles from './App.css';
 import History from '../../components/History/History.js';
 import Queue from '../../components/Queue/Queue.js';
 import Header from '../../components/Header/Header.js';
-import AddSong from '../../components/AddSong/AddSong.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import io from 'socket.io-client';
 import notie from 'notie';
-
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid } from '../../../common/utils/functions';
@@ -48,41 +46,32 @@ class App extends React.Component {
   render() {
     const { dispatch } = this.props;
     return (
-      <div
-        className={classNames(styles.app)}
-        onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header />
-          <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
-            <History
-              historySonglist={this.props.history.songlist}
-              onReAddSong={song => dispatch(addSong(song))} />
-              <div className={classNames('pusher', styles.pusher)}>
-                <div className={classNames('ui', 'basic', 'segment', styles.application)}>
-                  <div className={classNames('ui', 'grid')}>
-                  <div className={classNames('three', 'wide', 'column')}>
-                  </div>
-                  <div className={classNames('seven', 'wide', 'column')}>
+      <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
+        <Header onAddSong={songName => dispatch(addSongRequest(songName))}/>
+        <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
+          <History historySonglist={this.props.history.songlist} onReAddSong={song => dispatch(addSong(song))}/>
+          <div className={classNames('pusher', styles.pusher)}>
+            <div className={classNames('ui', 'basic', 'segment', styles.application)}>
+              <div className={classNames('ui', 'grid')}>
+                <div className={classNames('three', 'wide', 'column')}></div>
+                <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
-                      currentSong={this.props.queue.currentSong}
-                      isPlaying={this.props.queue.isPlaying}
-                      onNextSong={() => dispatch(nextSong())}
-                      onPlaySong={() => dispatch(playSong())}
-                      onPauseSong={()=> dispatch(pauseSong())}
-                      songlist={this.props.queue.songlist}
-                      queueSonglist={this.props.queue.songlist}
-                      onUpvoteSong={index => dispatch(upvoteSong(index))}
-                      onNextSong={() => dispatch(nextSong())}
-                      onNextReady={() => dispatch(nextReady())} />
-                  <div className={
-                      classNames('ui', 'basic', 'attached', 'segment', styles.app)}>
-                    <AddSong onAddSong={songName => dispatch(addSongRequest(songName))}/>
-                  </div>
+                    currentSong={this.props.queue.currentSong}
+                    isPlaying={this.props.queue.isPlaying}
+                    onNextSong={() => dispatch(nextSong())}
+                    onPlaySong={() => dispatch(playSong())}
+                    onPauseSong={()=> dispatch(pauseSong())}
+                    songlist={this.props.queue.songlist}
+                    queueSonglist={this.props.queue.songlist}
+                    onUpvoteSong={index => dispatch(upvoteSong(index))}
+                    onNextSong={() => dispatch(nextSong())}
+                    onNextReady={() => dispatch(nextReady())} />
                 </div>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-        </div>
-        </div>
-        </div>
+      </div>
     );
   }
 }
