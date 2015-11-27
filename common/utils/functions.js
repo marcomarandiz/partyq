@@ -1,13 +1,22 @@
+const youtubeRegex =
+  /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/watch(?:\.php)?\?.*v=)([a-zA-Z0-9\-_])/;
+
 export function isLinkValid(url) {
-  // lazy query string parse for vid
-  if (url.indexOf('v=') === -1) {
-    return false;
+  if (youtubeRegex.test(url)) {
+    return true;
   }
-  return true;
+  return false;
 }
 
 export function getVidFromUrl(url) {
-  const temp = url.split('v=');
-  const vid = temp[1].split('&');
-  return vid[0];
+  let vid = null;
+  if (!(url.indexOf('v=') === -1)) {
+    vid = url.split('v=');
+    vid = vid[1].split('&');
+    return vid[0];
+  } else if (url.indexOf('youtu.be') !== -1) {
+    vid = url.split('be/');
+    return vid[1];
+  }
+  return 'error';
 }
