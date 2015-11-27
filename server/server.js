@@ -39,6 +39,10 @@ export default function startServer(store) {
 
     // Handle disconnect
     socket.on('disconnect', () => {
+      if (id === owner) {
+        owner = null;
+        console.log('Owner \'' + id + '\' disconnnected.');
+      }
       console.log(id + ' disconnected.');
     });
 
