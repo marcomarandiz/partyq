@@ -9,7 +9,6 @@ export default class AddSong extends React.Component {
     super(props);
   }
 
-
   // Leaving these here, commented out, in case we need them in the future.
   /* dimSuccess() {
     $('.dimmer').css('background-color', 'rgba(48, 170, 255, 1)');
