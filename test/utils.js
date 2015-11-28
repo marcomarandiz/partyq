@@ -11,7 +11,6 @@ describe('utils', () => {
         expect(isLinkValid(url)).to.be.ok;
       });
 
-      /* FAILING TEST */
       it('handles /v/id style links', () => {
         const url = 'https://www.youtube.com/v/0zM3nApSvMg?fs=1&amp;hl=en_US&amp;rel=0';
 
