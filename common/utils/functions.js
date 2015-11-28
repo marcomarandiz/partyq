@@ -20,3 +20,12 @@ export function getVidFromUrl(url) {
   }
   return 'error';
 }
+
+export function songInQueue(queue, vid) {
+  if (queue.currentSong) {
+    if (queue.currentSong.vid === vid) {
+      return true;
+    }
+  }
+
+}
