@@ -1,18 +1,25 @@
 /* eslint "no-unused-expressions": 0 */
 
 import { expect } from 'chai';
-import { isLinkValid } from '../common/utils/functions';
+import { isLinkValid, getVidFromUrl } from '../common/utils/functions';
 
 describe('utils', () => {
-  const multipleQueryStringUrl = 'http://www.youtube.com/watch?v=abc123&feature=index';
-  const vIdUrl = 'https://www.youtube.com/v/0zM3nApSvMg?fs=1&amp;hl=en_US&amp;rel=0';
-  const shortYoutubeUrl = 'http://youtu.be/0zM3nApSvMg';
+  const multipleQueryStringUrl = 'http://www.youtube.com/watch?v=mbyG85GZ0PI&feature=index';
+  const vIdUrl = 'https://www.youtube.com/v/mbyG85GZ0PI?fs=1&amp;hl=en_US&amp;rel=0';
+  const shortYoutubeUrl = 'http://youtu.be/mbyG85GZ0PI';
   const googleUrl = 'https://google.com';
   const regularUrl = 'https://www.youtube.com/watch?v=mbyG85GZ0PI';
   const embedUrl = 'http://www.youtube.com/embed/mbyG85GZ0PI?rel=0';
+  const expectedId = 'mbyG85GZ0PI';
 
-  describe('valid urls', () => {
-    describe('youtube links', () => {
+  describe('youtube links', () => {
+    describe('getVidFromUrl', () => {
+      it('gets id with multiple query strings', () => {
+        expect(getVidFromUrl(multipleQueryStringUrl)).to.equal(expectedId);
+      });
+    });
+
+    describe('valid urls', () => {
       it('handles multiple query strings', () => {
         expect(isLinkValid(multipleQueryStringUrl)).to.be.ok;
       });
