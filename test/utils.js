@@ -21,6 +21,10 @@ describe('utils', () => {
       it('gets id from /v/id style links', () => {
         expect(getVidFromUrl(vIdUrl)).to.equal(expectedId);
       });
+
+      it('gets id from youtu.be/id links', () => {
+        expect(getVidFromUrl(shortYoutubeUrl)).to.equal(expectedId);
+      });
     });
 
     describe('valid urls', () => {
