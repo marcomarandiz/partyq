@@ -28,6 +28,12 @@ describe('utils', () => {
 
         expect(isLinkValid(url)).to.not.be.ok;
       });
+
+      it('handles regular single query string links', () => {
+        const url = 'https://www.youtube.com/watch?v=mbyG85GZ0PI';
+
+        expect(isLinkValid(url)).to.be.ok;
+      });
     });
   });
 
