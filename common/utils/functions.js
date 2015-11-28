@@ -27,7 +27,7 @@ export function songInQueue(queue, song) {
       return true;
     }
   }
-  if (!Object.keys(queue.songlist).length === 0) {
+  if (!(Object.keys(queue.songlist).length === 0)) {
     for (let counter = 0; counter < queue.songlist.length; counter++) {
       if (queue.songlist[counter].vid === song.vid) {
         return true;

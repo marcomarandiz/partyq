@@ -44,13 +44,23 @@ describe('utils', () => {
   });
 
   describe('song already in queue', () => {
+    const queue = {
+      currentSong: {title: 'song1', vid: '1234'},
+      songlist: [
+        {title: 'song3', vid: 'abcd'},
+        {title: 'song2', vid: '4321'}
+      ]};
     it('handles if song is the same as currentSong', () => {
       const song = {title: 'song1', vid: '1234'};
-      const queue = {
-        currentSong: {title: 'song1', vid: '1234'},
-        songlist: {}
-      };
       expect(songInQueue(queue, song)).to.be.ok;
+    });
+    it('handles if song is in songlist', () => {
+      const song = {title: 'song2', vid: '4321'};
+      expect(songInQueue(queue, song)).to.be.ok;
+    });
+    it('handles if song is not in queue', () => {
+      const song = {title: 'song3', vid: 'dcba'};
+      expect(songInQueue(queue, song)).not.to.be.ok;
     });
   });
 });
