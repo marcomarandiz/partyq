@@ -29,6 +29,10 @@ describe('utils', () => {
       it('gets id from regular single query string links', () => {
         expect(getVidFromUrl(regularUrl)).to.equal(expectedId);
       });
+
+      it('gets id from embed links', () => {
+        expect(getVidFromUrl(embedUrl)).to.equal(expectedId);
+      });
     });
 
     describe('valid urls', () => {
