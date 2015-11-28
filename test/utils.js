@@ -17,6 +17,10 @@ describe('utils', () => {
       it('gets id with multiple query strings', () => {
         expect(getVidFromUrl(multipleQueryStringUrl)).to.equal(expectedId);
       });
+
+      it('gets id from /v/id style links', () => {
+        expect(getVidFromUrl(vIdUrl)).to.equal(expectedId);
+      });
     });
 
     describe('valid urls', () => {
