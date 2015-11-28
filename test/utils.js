@@ -23,6 +23,12 @@ describe('utils', () => {
 
         expect(isLinkValid(url)).to.be.ok;
       });
+
+      it('should not handle google links', () => {
+        const url = 'https://google.com';
+
+        expect(isLinkValid(url)).to.not.be.ok;
+      });
     });
   });
 
