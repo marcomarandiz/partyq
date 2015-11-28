@@ -1,7 +1,7 @@
 /* eslint "no-unused-expressions": 0 */
 
 import { expect } from 'chai';
-import { isLinkValid } from '../common/utils/functions';
+import { isLinkValid, songInQueue } from '../common/utils/functions';
 
 describe('utils', () => {
   describe('valid urls', () => {
@@ -43,4 +43,14 @@ describe('utils', () => {
     });
   });
 
+  describe('song already in queue', () => {
+    it('handles if song is the same as currentSong', () => {
+      const song = {title: 'song1', vid: '1234'};
+      const queue = {
+        currentSong: {title: 'song1', vid: '1234'},
+        songlist: {}
+      };
+      expect(songInQueue(queue, song)).to.be.ok;
+    });
+  });
 });

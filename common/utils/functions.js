@@ -22,8 +22,8 @@ export function getVidFromUrl(url) {
 }
 
 export function songInQueue(queue, song) {
-  if (!Object.keys(queue.currentSong).length === 0 ) {
-    if (queue.currentSong.vid === song) {
+  if (!(Object.keys(queue.currentSong).length === 0)) {
+    if (queue.currentSong.vid === song.vid) {
       return true;
     }
   }
