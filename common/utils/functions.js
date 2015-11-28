@@ -21,11 +21,18 @@ export function getVidFromUrl(url) {
   return 'error';
 }
 
-export function songInQueue(queue, vid) {
-  if (queue.currentSong) {
-    if (queue.currentSong.vid === vid) {
+export function songInQueue(queue, song) {
+  if (!Object.keys(queue.currentSong).length === 0 ) {
+    if (queue.currentSong.vid === song) {
       return true;
     }
   }
-
+  if (!Object.keys(queue.songlist).length === 0) {
+    for (let counter = 0; counter < queue.songlist.length; counter++) {
+      if (queue.songlist[counter].vid === song.vid) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
