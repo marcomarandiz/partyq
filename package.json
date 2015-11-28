@@ -7,9 +7,10 @@
     "start": "babel-node index.js",
     "test:server": "mocha --compilers js:babel/register --require ./server/test/test_helper.js --recursive 'server/test/**/*.@(js|jsx)'",
     "test:client": "mocha --compilers js:babel-core/register --require ./app/test/test_helper.js --recursive 'app/test/**/*.@(js|jsx)'",
-    "test": "npm run test:client",
+    "test": "npm run test:common && npm run test:client",
     "test:server-watch": "npm run test:server -- --watch",
     "test:client-watch": "npm run test:client -- --watch",
+    "test:common": "mocha --compilers js:babel-core/register --recursive './test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint .",
     "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors"
