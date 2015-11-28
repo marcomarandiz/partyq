@@ -34,6 +34,12 @@ describe('utils', () => {
 
         expect(isLinkValid(url)).to.be.ok;
       });
+
+      it('handles embed links', () => {
+        const url = 'http://www.youtube.com/embed/mbyG85GZ0PI?rel=0';
+
+        expect(isLinkValid(url)).to.be.ok;
+      });
     });
   });
 

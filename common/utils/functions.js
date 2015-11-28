@@ -1,5 +1,5 @@
 const youtubeRegex =
-        /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/(?:watch(?:\.php)?\?.*v=)|v\/)([a-zA-Z0-9\-_])/;
+        /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/(?:watch(?:\.php)?\?.*v=)|v\/|embed\/)([a-zA-Z0-9\-_])/;
 
 export function isLinkValid(url) {
   if (youtubeRegex.test(url)) {
