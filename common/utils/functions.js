@@ -25,12 +25,11 @@ export function songInQueue(queue, id) {
       return true;
     }
   }
-  if (queue.songlist && !(Object.keys(queue.songlist).length === 0)) {
-    for (let counter = 0; counter < queue.songlist.length; counter++) {
-      if (queue.songlist[counter].vid === id) {
-        return true;
-      }
-    }
+
+  if (queue.songlist) {
+    // Find by song vid, and return as boolean
+    return Boolean(queue.songlist.find((song) => song.vid === id));
   }
+
   return false;
 }
