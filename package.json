@@ -4,7 +4,8 @@
   "description": "partyq",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch server --watch index.js index.js",
+    "start": "if [ \"$NODE_ENV\" = 'production' ]; then node index.js; else npm run start:dev; fi",
+    "start:dev": "nodemon --watch server --watch index.js index.js",
     "test:server": "mocha --compilers js:babel/register --require ./server/test/test_helper.js --recursive 'server/test/**/*.@(js|jsx)'",
     "test:client": "mocha --compilers js:babel-core/register --require ./app/test/test_helper.js --recursive 'app/test/**/*.@(js|jsx)'",
     "test": "npm run test:common && npm run test:client",
