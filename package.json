@@ -4,7 +4,7 @@
   "description": "partyq",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon --watch server --watch index.js index.js",
     "test:server": "mocha --compilers js:babel/register --require ./server/test/test_helper.js --recursive 'server/test/**/*.@(js|jsx)'",
     "test:client": "mocha --compilers js:babel-core/register --require ./app/test/test_helper.js --recursive 'app/test/**/*.@(js|jsx)'",
     "test": "npm run test:common && npm run test:client",
@@ -63,6 +63,7 @@
     "html-webpack-plugin": "1.6.2",
     "jsdom": "7.0.2",
     "mocha": "2.3.3",
+    "nodemon": "1.8.1",
     "postcss": "5.0.10",
     "postcss-loader": "0.7.0",
     "pre-commit": "stefaneng/pre-commit",
