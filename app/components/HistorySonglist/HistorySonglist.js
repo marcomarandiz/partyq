@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import styles from './HistorySonglist.css';
 import HistorySong from '../HistorySong/HistorySong.js';
 import classNames from 'classnames';
+import { songInQueue } from '../../../common/utils/functions.js';
 
 export default class HistorySonglist extends React.Component {
   constructor(props) {
@@ -9,7 +10,11 @@ export default class HistorySonglist extends React.Component {
   }
 
   handleReAddSong(index) {
-    this.props.onReAddSong(this.props.songs[index]);
+    if (!songInQueue(this.props.songs[index].vid)) {
+      this.props.onReAddSong(this.props.songs[index]);
+    } else {
+      console.log('Song already in queue: ' + this.props.songs[index].title);
+    }
   }
 
   render() {
