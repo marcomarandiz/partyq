@@ -51,16 +51,16 @@ describe('utils', () => {
         {title: 'song2', vid: '4321'}
       ]};
     it('handles if song is the same as currentSong', () => {
-      const song = {title: 'song1', vid: '1234'};
-      expect(songInQueue(queue, song)).to.be.ok;
+      const id = '1234';
+      expect(songInQueue(queue, id)).to.be.ok;
     });
     it('handles if song is in songlist', () => {
-      const song = {title: 'song2', vid: '4321'};
-      expect(songInQueue(queue, song)).to.be.ok;
+      const id = '4321';
+      expect(songInQueue(queue, id)).to.be.ok;
     });
     it('handles if song is not in queue', () => {
-      const song = {title: 'song3', vid: 'dcba'};
-      expect(songInQueue(queue, song)).not.to.be.ok;
+      const id = 'dcba';
+      expect(songInQueue(queue, id)).not.to.be.ok;
     });
   });
 });

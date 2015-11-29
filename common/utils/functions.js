@@ -21,15 +21,15 @@ export function getVidFromUrl(url) {
   return 'error';
 }
 
-export function songInQueue(queue, song) {
+export function songInQueue(queue, id) {
   if (!(Object.keys(queue.currentSong).length === 0)) {
-    if (queue.currentSong.vid === song.vid) {
+    if (queue.currentSong.vid === id) {
       return true;
     }
   }
   if (!(Object.keys(queue.songlist).length === 0)) {
     for (let counter = 0; counter < queue.songlist.length; counter++) {
-      if (queue.songlist[counter].vid === song.vid) {
+      if (queue.songlist[counter].vid === id) {
         return true;
       }
     }
