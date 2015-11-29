@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import styles from './AddSong.css';
-import { isLinkValid, getVidFromUrl, songInQueue } from '../../../common/utils/functions.js';
+import { isLinkValid } from '../../../common/utils/functions.js';
 import classNames from 'classnames';
 import notie from 'notie';
 
@@ -16,11 +16,7 @@ export default class AddSong extends React.Component {
         const node = this.refs.songname;
         const text = node.value.trim();
         if (isLinkValid(text)) {
-          if (!songInQueue(getVidFromUrl(text))) {
-            this.props.onAddSong(text);
-          } else {
-            notie.alert(3, 'Song already in queue, not added', 2.5);
-          }
+          this.props.onAddSong(text);
         } else {
           notie.alert(3, 'Invalid URL: song not added', 2.5);
         }

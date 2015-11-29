@@ -22,12 +22,12 @@ export function getVidFromUrl(url) {
 }
 
 export function songInQueue(queue, id) {
-  if (!(Object.keys(queue.currentSong).length === 0)) {
+  if (queue.currentSong && !(Object.keys(queue.currentSong).length === 0)) {
     if (queue.currentSong.vid === id) {
       return true;
     }
   }
-  if (!(Object.keys(queue.songlist).length === 0)) {
+  if (queue.songlist && !(Object.keys(queue.songlist).length === 0)) {
     for (let counter = 0; counter < queue.songlist.length; counter++) {
       if (queue.songlist[counter].vid === id) {
         return true;
