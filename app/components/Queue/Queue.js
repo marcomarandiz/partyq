@@ -13,7 +13,7 @@ export default class Queue extends React.Component {
     return (
       // Only show current song if there is one
         <div className={classNames(styles.queue)}>
-        {this.props.currentSong !== null ?
+        {this.props.currentSong !== null && this.props.owner === this.props.id ?
           <CurrentSong
             currentSong={this.props.currentSong}
             onPlaySong={() => this.props.onPlaySong()}
