@@ -1,0 +1,94 @@
+{
+  "name": "partyq",
+  "version": "0.0.0",
+  "description": "partyq",
+  "main": "index.js",
+  "scripts": {
+    "start": "if [ \"$NODE_ENV\" = 'production' ]; then node index.js; else npm run start:dev; fi",
+    "start:dev": "nodemon --watch server --watch index.js index.js",
+    "test:server": "mocha --compilers js:babel/register --require ./server/test/test_helper.js --recursive 'server/test/**/*.@(js|jsx)'",
+    "test:client": "mocha --compilers js:babel-core/register --require ./app/test/test_helper.js --recursive 'app/test/**/*.@(js|jsx)'",
+    "test": "npm run test:common && npm run test:client",
+    "test:server-watch": "npm run test:server -- --watch",
+    "test:client-watch": "npm run test:client -- --watch",
+    "test:common": "mocha --compilers js:babel-core/register --recursive './test/**/*.@(js|jsx)'",
+    "test:watch": "npm run test -- --watch",
+    "lint": "eslint .",
+    "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors"
+  },
+  "pre-commit.stash": true,
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CSUN-Comp490/partyq.git"
+  },
+  "keywords": [
+    "partyq"
+  ],
+  "author": {
+    "name": "Stefan Eng",
+    "email": "stefaneng13@gmail.com",
+    "url": "https://github.com/stefaneng"
+  },
+  "contributors": [
+    "Marco Jonker <marco.jonker.931@my.csun.edu>",
+    "Andrew Maynard <andrew.maynard.73@my.csun.edu>",
+    "Alexandr Kolesnik <alexandr.kolesnik.51@my.csun.edu>",
+    "Narbeh Movsesian <narbeh.movsesian.731@my.csun.edu>"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CSUN-Comp490/partyq/issues"
+  },
+  "homepage": "https://github.com/CSUN-Comp490/partyq#readme",
+  "devDependencies": {
+    "autoprefixer": "6.0.3",
+    "babel": "6.1.18",
+    "babel-core": "6.2.1",
+    "babel-eslint": "4.1.5",
+    "babel-loader": "6.2.0",
+    "babel-preset-es2015": "6.1.18",
+    "babel-preset-react": "6.1.18",
+    "babel-preset-stage-2": "6.1.18",
+    "babel-register": "6.2.0",
+    "chai": "3.4.0",
+    "css-loader": "0.21.0",
+    "eslint": "1.7.3",
+    "eslint-config-airbnb": "0.1.0",
+    "eslint-plugin-react": "3.6.3",
+    "extract-text-webpack-plugin": "0.8.2",
+    "file-loader": "0.8.4",
+    "html-webpack-plugin": "1.6.2",
+    "jsdom": "7.0.2",
+    "mocha": "2.3.3",
+    "nodemon": "1.8.1",
+    "postcss": "5.0.10",
+    "postcss-loader": "0.7.0",
+    "pre-commit": "stefaneng/pre-commit",
+    "rimraf": "2.4.3",
+    "stats-webpack-plugin": "0.2.2",
+    "style-loader": "0.13.0",
+    "url-loader": "0.5.6",
+    "webpack": "1.12.8",
+    "webpack-dev-middleware": "1.2.0",
+    "webpack-dev-server": "1.12.1",
+    "webpack-hot-middleware": "2.4.1"
+  },
+  "dependencies": {
+    "classnames": "2.2.0",
+    "express": "4.13.3",
+    "moment": "2.10.6",
+    "notie": "2.1.0",
+    "react": "0.14.0",
+    "react-dom": "0.14.0",
+    "react-ga": "1.2.0",
+    "react-redux": "4.0.0",
+    "react-youtube": "4.1.2",
+    "redux": "3.0.4",
+    "socket.io": "1.3.7",
+    "socket.io-client": "1.3.7"
+  }
+}

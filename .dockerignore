@@ -1,0 +1,4 @@
+node_modules
+*README*
+*.log
+aws/

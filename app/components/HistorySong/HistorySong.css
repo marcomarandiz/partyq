@@ -1,0 +1,22 @@
+.historysong {
+  background-color: #3A3A3C !important;
+  margin: 0 auto !important;
+  padding-left: 15%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  border-bottom: 1px solid #1A1A1A !important;
+}
+
+.historysong:hover {
+  background-color: #15386A !important;
+}
+
+.historysong:hover .button {
+  background-color: #3A3A3C !important;
+  color: #FFF;
+}
+
+.historysong .button {
+  background-color: #153A6A !important;
+  color: #FFF;
+}

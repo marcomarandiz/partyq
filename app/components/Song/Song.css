@@ -1,0 +1,97 @@
+@font-face {
+    font-family: songInfo;
+    src: url('https://fonts.googleapis.com/css?family=Muli:300,400');
+}
+.twosongbackground{ 
+  background-color: #3A3A3D !important;
+  margin-top: 0 !important;
+  /* border-bottom-left-radius : 55px;
+  border-top-left-radius : 55px; */
+}
+
+.fivesongbackground{ 
+  background-color: #3A3A3D !important;
+  margin-top: 0;
+}
+
+.onesongbackground{ 
+  background-color: #3A3A3D !important;
+  /* border-bottom-right-radius : 55px;
+  border-top-right-radius : 55px; */
+}
+
+.song {
+  background-color: #1A1A1A !important;
+  /*width: 100%;
+  height: 100% !important;*/ /* don't use a phone sized screen until we get the overflow issue solved */
+  margin: 0 auto !important;
+  padding-left: 1%;
+  opacity: 0.8;
+  border-top-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}
+
+.song:hover {
+  position: relative;
+  z-index: 10;
+  opacity: 1;
+  transition: all .2s ease-in-out;
+  transform: scaleY(1.3);
+  margin: 0 auto;
+  border-top: 1px solid #1A1A1A;
+  border-right: 1px solid #1A1A1A;
+}
+
+.song:hover .upvoteButton {
+  display: inline;
+  visibility: initial;
+  opacity: 10;
+  transition: all .5s ease-in-out;
+}
+
+.song:hover .title {
+  transform: scaleY(0.7);
+}
+
+.song:hover .artist {
+  transform: scaleY(0.7);
+}
+
+
+.upvoteButton {
+    opacity: 0.25;
+    color: #30AAFF;
+}
+
+.songInfo {
+    font-family: songInfo;
+    width: 100% !important;
+}
+
+.title {
+    font-size: 150%;
+}
+
+.artist {
+    font-weight: lighter;
+    font-size: 110%;
+    font-style: italic;
+}
+
+
+.thumbnailImg {
+  height: 30px;
+  width: 30px;
+}
+
+.thumbnail {
+  margin-right: 2%;
+  float: left;
+}
+
+.ytThumb {
+  width: 40px;
+  height: 30px;
+}

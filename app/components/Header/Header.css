@@ -1,0 +1,15 @@
+.header {
+  text-align: center;
+  background-color: #000;
+  color: #30AAFF;
+  position: relative;
+}
+
+.addSong {
+  float: left;
+}
+
+.logo{
+	 width: 70px !important;
+    height: 70px !important;
+}
