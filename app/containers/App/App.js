@@ -17,6 +17,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.props.ga.initialize('UA-70628505-1');
+
     // Called when youtube api fails to get video
     socket.on('add_song_error', (error) => {
       console.error(error);
