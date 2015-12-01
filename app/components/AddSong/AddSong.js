@@ -9,29 +9,6 @@ export default class AddSong extends React.Component {
     super(props);
   }
 
-  // Leaving these here, commented out, in case we need them in the future.
-  /* dimSuccess() {
-    $('.dimmer').css('background-color', 'rgba(48, 170, 255, 1)');
-    $('#dimmerIcon').removeClass('frown');
-    $('#dimmerIcon').addClass('checkmark');
-    $('#dimmerTextMain').text('Song Added');
-    $('#dimmerTextSecondary').text('');
-    this.dim();
-  }
-
-  dimFailure() {
-    $('.dimmer').css('background-color', 'rgba(255, 0, 0, 0.8)');
-    $('#dimmerIcon').removeClass('checkmark');
-    $('#dimmerIcon').addClass('frown');
-    $('#dimmerTextMain').text('Invalid URL');
-    $('#dimmerTextSecondary').text('Song Not Added');
-    this.dim();
-  }
-
-  dim() {
-    $('.dimmable').dimmer('show').dimmer({duration: {show: 2000, hide: 0}}).dimmer('hide');
-  } */
-
   showModal() {
     $('.ui.basic.modal').modal({
       transition: 'slide down',
