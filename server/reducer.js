@@ -87,7 +87,7 @@ function queueReducer(state = initialState.queue, action) {
 }
 
 export default function mainReducer(state = initialState, action) {
-  const { queue, history } = state;
+  const { queue, history, owner } = state;
   const queueSonglist = queue.songlist;
   const currentSong = queue.currentSong;
   const historySonglist = history.songlist;
@@ -132,7 +132,8 @@ export default function mainReducer(state = initialState, action) {
     return {
       ...initialState,
       queue: queueReducer(queue, action),
-      history
+      history,
+      owner
     };
   }
 }
