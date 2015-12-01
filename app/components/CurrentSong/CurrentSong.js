@@ -62,26 +62,37 @@ export default class CurrentSong extends React.Component {
     }
     return (
     <div>
-            <div className={classNames(styles.youtubeVideo)}>
-              {this.props.currentSong.url ?
-               <YouTube
-                  url={this.props.currentSong.url}
-                  opts={opts}
-                  onReady={(event) => this._onReady(event, this)}
-                  onEnd={(event) => this._onEnd(event, this)}/> :
-               ''}
-            </div>
-            <div className={classNames(styles.currentSong)}>
-                {this.props.currentSong.title}
-                {this.props.isPlaying ?
-                 <ui onClick={() => this.handlePause()}>
-                  <i className={classNames('huge', 'pause', 'link', 'icon', styles.buttonAccents)}></i>
-                 </ui> :
-                 <ui onClick={() => this.handlePlay()}>
-                  <i className={classNames('huge', 'play', 'link', 'icon ', styles.buttonAccents)}></i></ui>}
-                <ui onClick={() => this.handleNextSong()}>
-                  <i className={classNames('huge', 'step', 'forward', 'link', 'icon', styles.buttonAccents)}></i></ui>
-            </div>
+      <div className={classNames()}>
+        {this.props.currentSong.url ?
+        <YouTube
+        url={this.props.currentSong.url}
+        opts={opts}
+        onReady={(event) => this._onReady(event, this)}
+        onEnd={(event) => this._onEnd(event, this)}/> :
+        ''}
+      </div>
+      <div className={classNames('ui', 'grid', 'red', 'segment', styles.youtubeVideo)}>
+        <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.currentSong)}>
+          <div>
+            <i className={classNames('big', 'white', 'double', 'angle', 'up', 'link', 'icon', styles.upvoteButton)}
+            onClick={() => this.props.handleUpvote(this.props.index)}></i>
+          </div>
+          <div>
+            {this.props.currentSong.upvotes}
+          </div>
+        </div>
+        <div className={classNames('twelve', 'wide', 'column', styles.currentSong)}>
+          {this.props.currentSong.title}
+          {this.props.isPlaying ?
+          <ui onClick={() => this.handlePause()}>
+          <i className={classNames('huge', 'pause', 'link', 'icon', styles.buttonAccents)}></i>
+          </ui> :
+          <ui onClick={() => this.handlePlay()}>
+          <i className={classNames('huge', 'play', 'link', 'icon', styles.buttonAccents)}></i></ui>}
+          <ui onClick={() => this.handleNextSong()}>
+          <i className={classNames('huge', 'step', 'forward', 'link', 'icon', styles.buttonAccents)}></i></ui>
+        </div>
+      </div>
     </div>
     );
   }
