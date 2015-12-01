@@ -9,6 +9,10 @@ export default class AddSong extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    $('#addModalButton').click((event) => event.preventDefault());
+  }
+
   showModal() {
     $('.ui.basic.modal').modal({
       transition: 'slide down',
@@ -29,10 +33,6 @@ export default class AddSong extends React.Component {
     }).modal('show');
   }
 
-  handleClick(event) {
-    event.preventDefault();
-  }
-
   render() {
     return (
       <div className={classNames(styles.addsong)}>
@@ -43,7 +43,7 @@ export default class AddSong extends React.Component {
 
         <div className={classNames('ui', 'basic', 'modal', styles.modal)}>
           <h1>Add a song:</h1>
-          <form onSubmit={(event) => this.handleClick(event)}>
+          <form>
             <div className={classNames('ui', 'icon', 'input', 'focus', styles.songURL)}>
               <input ref='songname' type='text' className={classNames(styles.songURL)} type='text' placeholder='Song URL...'/>
               <i className={classNames('add', 'circle', 'icon')}></i>
