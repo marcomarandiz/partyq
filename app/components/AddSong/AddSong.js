@@ -29,6 +29,9 @@ export default class AddSong extends React.Component {
     }).modal('show');
   }
 
+  handleClick(event) {
+    event.preventDefault();
+  }
 
   render() {
     return (
@@ -40,14 +43,16 @@ export default class AddSong extends React.Component {
 
         <div className={classNames('ui', 'basic', 'modal', styles.modal)}>
           <h1>Add a song:</h1>
-          <div className={classNames('ui', 'icon', 'input', 'focus', styles.songURL)}>
-            <input ref='songname' type='text' className={classNames(styles.songURL)} type='text' placeholder='Song URL...'/>
-            <i className={classNames('add', 'circle', 'icon')}></i>
-          </div>
-          <button className={classNames('ui', 'right', 'labeled', 'ok', 'icon', 'button', styles.addsongButton)}>
-            Add Song
-          <i className={classNames('checkmark', 'icon')}></i>
-          </button>
+          <form onSubmit={(event) => this.handleClick(event)}>
+            <div className={classNames('ui', 'icon', 'input', 'focus', styles.songURL)}>
+              <input ref='songname' type='text' className={classNames(styles.songURL)} type='text' placeholder='Song URL...'/>
+              <i className={classNames('add', 'circle', 'icon')}></i>
+            </div>
+            <button id='addModalButton' type='submit' className={classNames('ui', 'right', 'labeled', 'ok', 'icon', 'button', styles.addsongButton)}>
+                Add Song
+              <i className={classNames('checkmark', 'icon')}></i>
+            </button>
+          </form>
         </div>
       </div>
     );
