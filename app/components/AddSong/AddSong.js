@@ -21,9 +21,7 @@ export default class AddSong extends React.Component {
         const text = node.value.trim();
         if (isLinkValid(text)) {
           this.props.onAddSong(text);
-      //  this.dimSuccess();
         } else {
-      //    this.dimFailure();
           notie.alert(3, 'Invalid URL: song not added', 2.5);
         }
         node.value = '';
