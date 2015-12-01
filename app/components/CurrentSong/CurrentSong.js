@@ -69,7 +69,7 @@ export default class CurrentSong extends React.Component {
         opts={opts}
         onReady={(event) => this._onReady(event, this)}
         onEnd={(event) => this._onEnd(event, this)}/> :
-        ''}
+        'Add songs to the queue!'}
       </div>
       <div className={classNames('ui', 'grid', 'red', 'segment', styles.youtubeVideo)}>
         <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.currentSong)}>
