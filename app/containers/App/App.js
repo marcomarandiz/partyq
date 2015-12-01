@@ -96,6 +96,7 @@ class App extends React.Component {
                     onPlaySong={() => dispatch(playSong())}
                     onPauseSong={()=> dispatch(pauseSong())}
                     songlist={this.props.queue.songlist}
+                    owner={this.props.owner}
                     queueSonglist={this.props.queue.songlist}
                     onUpvoteSong={index => dispatch(upvoteSong(index))}
                     onNextSong={() => dispatch(nextSong())}
