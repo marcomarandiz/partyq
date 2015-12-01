@@ -84,11 +84,7 @@ class App extends React.Component {
                 <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
 
-                    id={
-                      this.props.production ?
-                        socket.request.connection.remoteAddress :
-                        socket.id
-                        }
+                    id={socket.id}
 
                     currentSong={this.props.queue.currentSong}
                     isPlaying={this.props.queue.isPlaying}

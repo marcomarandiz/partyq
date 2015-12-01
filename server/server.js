@@ -2,8 +2,6 @@ import Server from 'socket.io';
 import { youtubeAPI } from './utils/APIcalls.js';
 import { ADD_SONG, ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 
-const development = process.env.NODE_ENV !== 'production';
-
 export default function startServer(store) {
   const io = new Server().attach(8090);
 
@@ -20,8 +18,7 @@ export default function startServer(store) {
     socket.emit('state', store.getState());
 
     // Determine id here so we can use it in other functions
-    const id = development ? socket.id :
-        socket.request.connection.remoteAddress;
+    const id = socket.id;
 
     console.log(id + ' connected.');
 
