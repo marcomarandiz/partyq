@@ -18,3 +18,20 @@ export function getVidFromUrl(url) {
 
   return 'error';
 }
+
+export function songInQueue(queue, id) {
+  if (queue.currentSong && !(Object.keys(queue.currentSong).length === 0)) {
+    if (queue.currentSong.vid === id) {
+      return true;
+    }
+  }
+
+  if (queue.songlist) {
+    // Find by song vid, and return as boolean
+    return Boolean(queue.songlist.find((song) => song.vid === id));
+    // Need to change to this when we start upvoting songs on duplicate adds
+    // return (queue.songlist.findIndex((song) => song.vid === id));
+  }
+
+  return false;
+}

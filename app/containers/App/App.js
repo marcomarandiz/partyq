@@ -9,7 +9,7 @@ import io from 'socket.io-client';
 import notie from 'notie';
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
-import { isLinkValid } from '../../../common/utils/functions';
+import { isLinkValid, getVidFromUrl, songInQueue } from '../../../common/utils/functions';
 
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
 
@@ -22,7 +22,7 @@ class App extends React.Component {
     // Called when youtube api fails to get video
     socket.on('add_song_error', (error) => {
       console.error(error);
-      notie.alert(3, 'Invalid URL: song not added', 2.5);
+      notie.alert(3, 'Invalid video id: song not added', 2.5);
     });
 
     // Called when youtube api succeeds
@@ -36,12 +36,37 @@ class App extends React.Component {
     this.props.ga.pageview('/');
   }
 
+  songIsOkay(url) {
+    if (isLinkValid(url)) {
+      if (!songInQueue(this.props.queue, getVidFromUrl(url))) {
+        return true;
+      }
+      notie.alert(3, 'Song already in queue, not added', 2.5);
+    } else {
+      notie.alert(3, 'Invalid link: ' + url, 2.5);
+    }
+    return false;
+  }
+
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    if (isLinkValid(link)) {
+    if (this.songIsOkay(link)) {
       dispatch(addSongRequest(link));
+    }
+  }
+
+  addSongRequest(url, dispatch) {
+    if (this.songIsOkay(url)) {
+      dispatch(addSongRequest(url));
+    }
+  }
+
+  reAddSongRequest(song, dispatch) {
+    if (!songInQueue(this.props.queue, song.vid)) {
+      dispatch(addSong(song));
+      notie.alert(1, song.title + ' added!');
     } else {
-      console.log('Invalid link: ', link);
+      notie.alert(3, 'Song already in queue, not added', 2.5);
     }
   }
 
@@ -49,9 +74,9 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header onAddSong={songName => dispatch(addSongRequest(songName))}/>
+        <Header onAddSong={link => this.addSongRequest(link, dispatch)}/>
         <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
-          <History historySonglist={this.props.history.songlist} onReAddSong={song => dispatch(addSong(song))}/>
+          <History historySonglist={this.props.history.songlist} onReAddSong={song => this.reAddSongRequest(song, dispatch)}/>
           <div className={classNames('pusher', styles.pusher)}>
             <div className={classNames('ui', 'basic', 'segment', styles.application)}>
               <div className={classNames('ui', 'grid')}>

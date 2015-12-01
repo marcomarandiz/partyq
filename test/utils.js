@@ -1,7 +1,7 @@
 /* eslint "no-unused-expressions": 0 */
 
 import { expect } from 'chai';
-import { isLinkValid, getVidFromUrl } from '../common/utils/functions';
+import { isLinkValid, getVidFromUrl, songInQueue } from '../common/utils/functions';
 
 describe('utils', () => {
   const multipleQueryStringUrl = 'http://www.youtube.com/watch?v=mbyG85GZ0PI&feature=index';
@@ -62,4 +62,42 @@ describe('utils', () => {
     });
   });
 
+  describe('song already in queue', () => {
+    const queue = {
+      currentSong: {title: 'song1', vid: '1234'},
+      songlist: [
+        {title: 'song3', vid: 'abcd'},
+        {title: 'song2', vid: '4321'}
+      ]};
+
+    const empty = {};
+
+    const emptySongs = {
+      currentSong: {},
+      songlist: []
+    };
+
+    it('handles if song is the same as currentSong', () => {
+      const id = '1234';
+      expect(songInQueue(queue, id)).to.be.ok;
+    });
+    it('handles if song is in songlist', () => {
+      const id = '4321';
+      expect(songInQueue(queue, id)).to.be.ok;
+    });
+    it('handles if song is not in queue', () => {
+      const id = 'dcba';
+      expect(songInQueue(queue, id)).not.to.be.ok;
+    });
+
+    it('does not find songs in empty queue', () => {
+      const id = 'abc';
+      expect(songInQueue(empty, id)).to.not.be.ok;
+    });
+
+    it('does not find song with empty currentSong and songlist', () => {
+      const id = 'abc';
+      expect(songInQueue(emptySongs, id)).to.not.be.ok;
+    });
+  });
 });
