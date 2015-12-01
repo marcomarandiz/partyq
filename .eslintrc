@@ -21,15 +21,7 @@
     "no-console": 0,
     "comma-dangle": 0,
     "react/prop-types": 0,
-    "new-cap": [2, {
-      "capIsNewExceptions": [
-        "List", "Map", "Set", "OrderedSet", "Stack",
-        "Range", "Repeat", "Record", "Seq", "KeyedSeq",
-        "IndexedSeq", "SetSeq", "Iterable", "KeyedIterable",
-        "IndexedInterable", "SetIterable", "Collection",
-        "KeyedCollection", "IndexedCollection", "SetCollection"
-      ]
-    }]
+    "new-cap": 2
   },
   "plugins": [
     "react"

@@ -9,6 +9,7 @@ import {
   SET_OWNER
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
+import { songInQueue} from '../common/utils/functions.js';
 import moment from 'moment';
 
 export const initialState = {
@@ -29,7 +30,7 @@ function queueReducer(state = initialState.queue, action) {
     action.song.upvotes = 0;
     action.song.userUpvotes = [];
     action.song.endedAt = null;
-    if (Object.keys(currentSong).length === 0 ) {
+    if (Object.keys(currentSong).length === 0 && !songInQueue(state, action.song.vid)) {
       return {
         ...state,
         currentSong: action.song,
