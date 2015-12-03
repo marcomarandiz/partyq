@@ -46,7 +46,7 @@ export default function startServer(store) {
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
-
+      action.id = id;
       // Attach the remote address as id so we know who performed the actions
       // If we are in production, use the ip address
       // If we are developing, use the socket id
@@ -67,7 +67,6 @@ export default function startServer(store) {
             // Log the error since we are not listening anywhere
             console.error(error);
           } else {
-            action.id = id;
             action.type = ADD_SONG;
             action.song = song;
             socket.emit('add_song_success', song);
