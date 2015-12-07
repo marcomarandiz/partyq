@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import YouTube from 'react-youtube';
 import styles from './CurrentSong.css';
 import classNames from 'classnames';
+import { SoundPlayerContainer } from 'react-soundplayer/addons';
+import { PlayButton } from 'react-soundplayer/components';
 
 export default class CurrentSong extends React.Component {
   constructor(props) {
@@ -71,6 +73,15 @@ export default class CurrentSong extends React.Component {
         onEnd={(event) => this._onEnd(event, this)}/> :
         'Add songs to the queue!'}
       </div>
+
+      {/* Hard coded soundcloud player here */}
+      <SoundPlayerContainer
+        clientId='cbdd7f755416f67e838e272848d988d1'
+        resolveUrl='https://soundcloud.com/gracedmusic/hello-adele'
+      >
+        <PlayButton />
+      </SoundPlayerContainer>
+
       <div className={classNames('ui', 'grid', 'red', 'segment', styles.youtubeVideo)}>
         <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.currentSong)}>
           <div>
