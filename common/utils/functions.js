@@ -1,8 +1,10 @@
 const youtubeRegex =
         /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/(?:watch(?:\.php)?\?.*v=)|v\/|embed\/)([a-zA-Z0-9\-_]+).*/;
+const soundcloudRegex =
+        /(?:https?:\/\/)?(?:www.)?(?:m.)?soundcloud.com\/.*/;
 
 export function isLinkValid(url) {
-  if (youtubeRegex.test(url)) {
+  if (youtubeRegex.test(url) || soundcloudRegex.test(url)) {
     return true;
   }
   return false;
@@ -15,7 +17,6 @@ export function getVidFromUrl(url) {
     // Return the first group, which is the youtube id
     return match[1];
   }
-
   return 'error';
 }
 
