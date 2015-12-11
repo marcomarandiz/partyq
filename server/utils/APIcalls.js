@@ -48,3 +48,51 @@ export function youtubeAPI(url, next) {
     });
   });
 }
+
+// Start of API call
+// This API call cannot be called yet and therefore cannot be tested
+// Still needs errorchecking
+export function soundcloudAPI(url, next) {
+  const song = {};
+  const error = {};
+
+  if (!process.env.SOUNDCLOUD_CLIENT_ID) {
+    error.error = 'Need a soundcloud_client_id to handle soundcloud links.';
+    return next(error);
+  }
+
+  const resolveURL = 'http://api.soundcloud.com/resolve?url='
+                    + url + '&client_id=' + process.env.SOUNDCLOUD_CLIENT_ID;
+
+  // Resolve URL
+  // Soundcloud API has a neat thing called resolve
+  // We just pass it the url the user gives us and it
+  // gives us a new url that's the exact API call we
+  // need to get song information.
+  https.get(resolveURL, (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      // make API call for information on JSON.parse(data).location;
+      https.get(JSON.parse(data).location, (res2) => {
+        let songData = '';
+        res2.on('data', (chunk) => {
+          songData += chunk;
+        });
+        res2.on('end', () => {
+          const songInfo = JSON.parse(songData);
+          song.thumbnail = songInfo.artwork_url;
+          song.artist = songInfo.user.username;
+          song.duration = moment.duration(songInfo.duration);
+          song.title = songInfo.title;
+          song.url = songInfo.stream_url;   // might want to use 'uri' field instead
+          song.src = 'soundcloud';          // this should be set elsewhere
+          song.uploadDate = songInfo.created_at;
+          song.vid = songInfo.id;
+        });
+      });
+    });
+  });
+}

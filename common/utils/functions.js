@@ -1,7 +1,7 @@
 const youtubeRegex =
         /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/(?:watch(?:\.php)?\?.*v=)|v\/|embed\/)([a-zA-Z0-9\-_]+).*/;
 const soundcloudRegex =
-        /(?:https?:\/\/)?(?:www.)?(?:m.)?soundcloud.com\/.*/;
+        /(?:https:\/\/)?(?:www.)?(?:m.)?soundcloud.com\/.*/;
 
 export function isLinkValid(url) {
   if (youtubeRegex.test(url) || soundcloudRegex.test(url)) {
