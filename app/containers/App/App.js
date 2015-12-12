@@ -37,11 +37,15 @@ class App extends React.Component {
   }
 
   songIsOkay(url) {
-    if (isLinkValid(url)) {
+    const src = isLinkValid(url);
+    if (src === 'youtube') {
       if (!songInQueue(this.props.queue, getVidFromUrl(url))) {
-        return true;
+        return src;
       }
       notie.alert(3, 'Song already in queue, not added', 2.5);
+    } else if (src === 'soundcloud') {
+      // Need to check for duplicate song
+      return src;
     } else {
       notie.alert(3, 'Invalid link: ' + url, 2.5);
     }
@@ -50,13 +54,15 @@ class App extends React.Component {
 
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    if (this.songIsOkay(link)) {
-      dispatch(addSongRequest(link));
+    const src = this.songIsOkay(link);
+    if (src) {
+      dispatch(addSongRequest(link, src));
     }
   }
 
   addSongRequest(url, dispatch) {
-    if (this.songIsOkay(url)) {
+    const src = this.songIsOkay(url);
+    if (src) {
       dispatch(addSongRequest(url));
     }
   }

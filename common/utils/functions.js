@@ -4,8 +4,10 @@ const soundcloudRegex =
         /(?:https:\/\/)?(?:www.)?(?:m.)?soundcloud.com\/.*/;
 
 export function isLinkValid(url) {
-  if (youtubeRegex.test(url) || soundcloudRegex.test(url)) {
-    return true;
+  if (youtubeRegex.test(url)) {
+    return 'youtube';
+  } else if (soundcloudRegex.test(url)) {
+    return 'soundcloud';
   }
   return false;
 }
