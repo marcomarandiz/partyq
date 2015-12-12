@@ -62,7 +62,7 @@ export function soundcloudAPI(url, next) {
     return next(error);
   }
 
-  const resolveURL = 'http://api.soundcloud.com/resolve?url='
+  const resolveURL = 'https://api.soundcloud.com/resolve?url='
                     + url + '&client_id=' + process.env.SOUNDCLOUD_CLIENT_ID;
 
   // Resolve URL

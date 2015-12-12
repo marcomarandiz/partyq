@@ -1,5 +1,5 @@
 import Server from 'socket.io';
-import { youtubeAPI } from './utils/APIcalls.js';
+import { youtubeAPI, soundcloudAPI } from './utils/APIcalls.js';
 import { ADD_SONG, ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 
 const development = process.env.NODE_ENV !== 'production';
@@ -30,19 +30,35 @@ export default function startServer(store) {
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song
       if (action.type === ADD_SONG_REQUEST) {
-        youtubeAPI(action.url, (error, song) => {
-          if (error) {
-            // Send the error back to the client
-            socket.emit('add_song_error', error);
-            // Log the error since we are not listening anywhere
-            console.error(error);
-          } else {
-            action.type = ADD_SONG;
-            action.song = song;
-            socket.emit('add_song_success', song);
-            store.dispatch.bind(store)(action);
-          }
-        });
+        if (action.src === 'youtube') {
+          youtubeAPI(action.url, (error, song) => {
+            if (error) {
+              // Send the error back to the client
+              socket.emit('add_song_error', error);
+              // Log the error since we are not listening anywhere
+              console.error(error);
+            } else {
+              action.type = ADD_SONG;
+              action.song = song;
+              socket.emit('add_song_success', song);
+              store.dispatch.bind(store)(action);
+            }
+          });
+        } else if (action.src === 'soundcloud') {
+          soundcloudAPI(action.url, (error, song) => {
+            if (error) {
+              // Send the error back to the client
+              socket.emit('add_song_error', error);
+              // Log the error since we are not listening anywhere
+              console.error(error);
+            } else {
+              action.type = ADD_SONG;
+              action.song = song;
+              socket.emit('add_song_success', song);
+              store.dispatch.bind(store)(action);
+            }
+          });
+        }
       } else {
         store.dispatch.bind(store)(action);
       }
