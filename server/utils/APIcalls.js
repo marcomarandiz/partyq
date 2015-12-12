@@ -44,7 +44,7 @@ export function youtubeAPI(url, next) {
       song.uploadDate = youTubeSongData.items[0].snippet.publishedAt;
       song.thumbnail = youTubeSongData.items[0].snippet.thumbnails.default.url;
       song.src = 'youtube';
-      return next(null, song);
+      next(null, song);
     });
   });
 }
@@ -57,7 +57,8 @@ export function soundcloudAPI(url, next) {
   const error = {};
 
   if (!process.env.SOUNDCLOUD_CLIENT_ID) {
-    error.error = 'Need a soundcloud_client_id to handle soundcloud links.';
+    error.error = 'Need a soundcloud_client_id to handle soundcloud links.' +
+      '\nTo run with client_id do $SOUNDCLOUD_CLIENT_ID={KEY_HERE} npm start';
     return next(error);
   }
 
@@ -76,13 +77,20 @@ export function soundcloudAPI(url, next) {
     });
     res.on('end', () => {
       // make API call for information on JSON.parse(data).location;
-      https.get(JSON.parse(data).location, (res2) => {
-        let songData = '';
+      // Need to make errorcheck to make sure the resolve API worked
+      const resolveInfo = JSON.parse(data);
+      if (resolveInfo.errors) {
+        error.error = 'Resolve API error.';
+        error.message = resolveInfo.errors[1].error_message;
+        next(error);
+      }
+      https.get(resolveInfo.location, (res2) => {
+        let data2 = '';
         res2.on('data', (chunk) => {
-          songData += chunk;
+          data2 += chunk;
         });
         res2.on('end', () => {
-          const songInfo = JSON.parse(songData);
+          const songInfo = JSON.parse(data2);
           song.thumbnail = songInfo.artwork_url;
           song.artist = songInfo.user.username;
           song.duration = moment.duration(songInfo.duration);
@@ -91,6 +99,7 @@ export function soundcloudAPI(url, next) {
           song.src = 'soundcloud';          // this should be set elsewhere
           song.uploadDate = songInfo.created_at;
           song.vid = songInfo.id;
+          next(null, song);
         });
       });
     });
