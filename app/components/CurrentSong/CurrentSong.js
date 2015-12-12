@@ -65,22 +65,22 @@ export default class CurrentSong extends React.Component {
     return (
     <div>
       <div className={classNames()}>
-        {this.props.currentSong.url ?
-        <YouTube
-        url={this.props.currentSong.url}
-        opts={opts}
-        onReady={(event) => this._onReady(event, this)}
-        onEnd={(event) => this._onEnd(event, this)}/> :
-        'Add songs to the queue!'}
+        {(this.props.currentSong.url && this.props.currentSong.src === 'youtube') ?
+          <YouTube
+          url={this.props.currentSong.url}
+          opts={opts}
+          onReady={(event) => this._onReady(event, this)}
+          onEnd={(event) => this._onEnd(event, this)}/> : ''}
       </div>
-
-      {/* Hard coded soundcloud player here */}
-      <SoundPlayerContainer
-        clientId='cbdd7f755416f67e838e272848d988d1'
-        resolveUrl='https://soundcloud.com/gracedmusic/hello-adele'
-      >
-        <PlayButton />
-      </SoundPlayerContainer>
+      <div className={classNames()}>
+        {(this.props.currentSong.url && this.props.currentSong.src === 'soundcloud') ?
+          <SoundPlayerContainer
+            clientId='cbdd7f755416f67e838e272848d988d1'
+            streamUrl={this.props.currentSong.url}
+          >
+          <PlayButton />
+          </SoundPlayerContainer> : ''}
+      </div>
 
       <div className={classNames('ui', 'grid', 'red', 'segment', styles.youtubeVideo)}>
         <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.currentSong)}>
