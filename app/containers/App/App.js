@@ -63,7 +63,7 @@ class App extends React.Component {
   addSongRequest(url, dispatch) {
     const src = this.songIsOkay(url);
     if (src) {
-      dispatch(addSongRequest(url));
+      dispatch(addSongRequest(url, src));
     }
   }
 
@@ -80,7 +80,7 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header onAddSong={link => this.addSongRequest(link, dispatch)}/>
+        <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
         <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
           <History historySonglist={this.props.history.songlist} onReAddSong={song => this.reAddSongRequest(song, dispatch)}/>
           <div className={classNames('pusher', styles.pusher)}>

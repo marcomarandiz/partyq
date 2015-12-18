@@ -20,7 +20,6 @@ export default class YoutubePlayer extends React.Component {
     // this = this for this function to Youtube API
     context.youtube = event.target;
     context.props.onNextReady();
-    console.log(context);
   }
 
   _onEnd(event, context) {
@@ -38,7 +37,6 @@ export default class YoutubePlayer extends React.Component {
   }
 
   render() {
-    console.log('YoutubePlayer render');
     const opts = {
       height: '300',
       width: '100%',

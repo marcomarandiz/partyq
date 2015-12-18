@@ -28,7 +28,6 @@ function queueReducer(state = initialState.queue, action) {
     action.song.upvotes = 0;
     action.song.userUpvotes = [];
     action.song.endedAt = null;
-    console.log(state);
     if (Object.keys(currentSong).length === 0) {
       return {
         ...state,

@@ -8,7 +8,6 @@ export default class Player extends React.Component {
   }
 
   pause() {
-    console.log('Player pause');
     switch (this.props.currentSong.src) {
     case 'youtube':
       this.refs.YoutubePlayer.pause();
@@ -22,7 +21,6 @@ export default class Player extends React.Component {
   }
 
   play() {
-    console.log('Player play');
     switch (this.props.currentSong.src) {
     case 'youtube':
       this.refs.YoutubePlayer.play();
@@ -36,12 +34,7 @@ export default class Player extends React.Component {
   }
 
   render() {
-    console.log('Player render');
-    console.log(this.props);
-    // Make sure that play/pause stays up to date between clients
-
     if (this.props.currentSong.src) {
-      console.log('switch is valid');
       switch (this.props.currentSong.src) {
       case 'youtube':
         return (
@@ -54,7 +47,6 @@ export default class Player extends React.Component {
           />
         );
       case 'soundcloud':
-        console.log('soundcloud chosen from switch in player');
         return (
           <SoundcloudPlayer
             currentSong={this.props.currentSong}

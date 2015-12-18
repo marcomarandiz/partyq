@@ -79,27 +79,28 @@ export function soundcloudAPI(url, next) {
       const resolveInfo = JSON.parse(data);
       if (resolveInfo.errors) {
         error.error = 'Resolve API error.';
-        error.message = resolveInfo.errors[1].error_message;
+        error.message = resolveInfo.errors[0].error_message;
         next(error);
+      } else {
+        https.get(resolveInfo.location, (res2) => {
+          let data2 = '';
+          res2.on('data', (chunk) => {
+            data2 += chunk;
+          });
+          res2.on('end', () => {
+            const songInfo = JSON.parse(data2);
+            song.thumbnail = songInfo.artwork_url;
+            song.artist = songInfo.user.username;
+            song.duration = moment.duration(songInfo.duration);
+            song.title = songInfo.title;
+            song.url = songInfo.stream_url;   // might want to use 'uri' field instead
+            song.src = 'soundcloud';          // this should be set elsewhere
+            song.uploadDate = songInfo.created_at;
+            song.vid = songInfo.id;
+            next(null, song);
+          });
+        });
       }
-      https.get(resolveInfo.location, (res2) => {
-        let data2 = '';
-        res2.on('data', (chunk) => {
-          data2 += chunk;
-        });
-        res2.on('end', () => {
-          const songInfo = JSON.parse(data2);
-          song.thumbnail = songInfo.artwork_url;
-          song.artist = songInfo.user.username;
-          song.duration = moment.duration(songInfo.duration);
-          song.title = songInfo.title;
-          song.url = songInfo.stream_url;   // might want to use 'uri' field instead
-          song.src = 'soundcloud';          // this should be set elsewhere
-          song.uploadDate = songInfo.created_at;
-          song.vid = songInfo.id;
-          next(null, song);
-        });
-      });
     });
   });
 }

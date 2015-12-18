@@ -22,12 +22,7 @@ export default class CurrentSong extends React.Component {
     this.props.onNextSong();
   }
 
-  scOnReady(event, context) {
-    console.log(event);
-  }
-
   render() {
-    console.log('currentSong render');
     return (
     <div>
       {this.props.currentSong ?

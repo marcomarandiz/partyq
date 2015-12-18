@@ -11,6 +11,9 @@ export default class SoundcloudPlayer extends React.Component {
     if (this.props.isPlaying) {
       this.play();
     }
+    // Show in console SoundPlayerContainer object
+    console.log(this.refs.SoundPlayerContainer);
+
     // Handles next song when a song ends
     this.refs.SoundPlayerContainer.soundCloudAudio.on('ended', () => this.props.onNextSong());
   }
@@ -23,19 +26,15 @@ export default class SoundcloudPlayer extends React.Component {
   }
 
   pause() {
-    console.log('SCA');
-    console.log(this.refs.SoundPlayerContainer);
     this.refs.SoundPlayerContainer.soundCloudAudio.pause();
   }
 
   play() {
-    console.log('SCA');
-    console.log(this.refs.SoundPlayerContainer);
+
     this.refs.SoundPlayerContainer.soundCloudAudio.play();
   }
 
   render() {
-    console.log('SCP render');
     // Note that SoundPlayerContainer is constantly rerendered
     // This can cause weird problems
     // This also means we can have a progress bar for the song
