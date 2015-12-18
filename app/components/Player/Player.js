@@ -1,5 +1,6 @@
 import React from 'react';
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
+import SoundcloudPlayer from '../SoundcloudPlayer/SoundcloudPlayer.js';
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -44,6 +45,16 @@ export default class Player extends React.Component {
             onNextReady={() => this.props.onNextReady()}
             isPlaying={this.props.isPlaying}
             ref='YoutubePlayer'
+          />
+        );
+      case 'soundcloud':
+        return (
+          <SoundcloudPlayer
+            currentSong={this.props.currentSong}
+            onNextSong={() => this.props.onNextSong()}
+            onNextReady={() => this.props.onNextReady()}
+            isPlaying={this.props.isPlaying}
+            ref='SouncloudPlayer'
           />
         );
       default:
