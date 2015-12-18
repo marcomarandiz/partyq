@@ -7,8 +7,16 @@ export default class SoundcloudPlayer extends React.Component {
   }
 
   componentDidMount() {
+    // For autoplay functionality
     if (this.props.isPlaying) {
       this.play();
+    }
+  }
+
+  componentWillUnmount() {
+    // For next functionality
+    if (this.props.isPlaying) {
+      this.pause();
     }
   }
 
