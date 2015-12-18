@@ -1,18 +1,34 @@
 import React from 'react';
-import SoundCloudAudio from 'soundcloud-audio';
+import { SoundPlayerContainer } from 'react-soundplayer/addons';
 
 export default class SoundcloudPlayer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  pause() {
+    console.log('SCA');
+    console.log(this.refs.SoundPlayerContainer);
+    this.refs.SoundPlayerContainer.soundCloudAudio.pause();
+  }
+
+  play() {
+    console.log('SCA');
+    console.log(this.refs.SoundPlayerContainer);
+    this.refs.SoundPlayerContainer.soundCloudAudio.play();
+  }
+
   render() {
-    if (this.props.currentSong.src === 'soundcloud') {
-      const scPlayer = new SoundCloudAudio('cbdd7f755416f67e838e272848d988d1');
-      scPlayer.audio.autoplay = true;
-      scPlayer.play({streamUrl: this.props.currentSong.url});
-      console.log(scPlayer);
-    }
+    console.log('SCP render');
+    // Note that SoundPlayerContainer is constantly rerendered
+    // This can cause weird problems
+    // This also means we can have a progress bar for the song
     return (
-      <div>
-        Im soundcloud player
-      </div>
+        <SoundPlayerContainer
+          clientId='cbdd7f755416f67e838e272848d988d1'
+          streamUrl={this.props.currentSong.url}
+          ref='SoundPlayerContainer'
+         />
     );
   }
 }

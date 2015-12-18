@@ -13,6 +13,9 @@ export default class Player extends React.Component {
     case 'youtube':
       this.refs.YoutubePlayer.pause();
       break;
+    case 'soundcloud':
+      this.refs.SoundcloudPlayer.pause();
+      break;
     default:
       console.log('Pause button pressed with no song in queue or invalid src in Currentsong');
     }
@@ -23,6 +26,9 @@ export default class Player extends React.Component {
     switch (this.props.currentSong.src) {
     case 'youtube':
       this.refs.YoutubePlayer.play();
+      break;
+    case 'soundcloud':
+      this.refs.SoundcloudPlayer.play();
       break;
     default:
       console.log('Play button pressed with no song in queue or invalid src in Currentsong');
@@ -48,19 +54,19 @@ export default class Player extends React.Component {
           />
         );
       case 'soundcloud':
+        console.log('soundcloud chosen from switch in player');
         return (
           <SoundcloudPlayer
             currentSong={this.props.currentSong}
             onNextSong={() => this.props.onNextSong()}
             onNextReady={() => this.props.onNextReady()}
-            isPlaying={this.props.isPlaying}
-            ref='SouncloudPlayer'
+            ref='SoundcloudPlayer'
           />
         );
       default:
         return (
           <div>
-            Something weird happened. We have a song but the src isn't supported.
+            Something weird happened. We have a song but the src isnt supported.
           </div>
         );
       }

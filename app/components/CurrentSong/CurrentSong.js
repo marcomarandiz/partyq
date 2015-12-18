@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import styles from './CurrentSong.css';
 import classNames from 'classnames';
-import SoundCloudAudio from 'soundcloud-audio';
 import Player from '../Player/Player.js';
 
 export default class CurrentSong extends React.Component {
@@ -29,14 +28,6 @@ export default class CurrentSong extends React.Component {
 
   render() {
     console.log('currentSong render');
-
-    if (this.props.currentSong.src === 'soundcloud') {
-      const scPlayer = new SoundCloudAudio('cbdd7f755416f67e838e272848d988d1');
-      scPlayer.audio.autoplay = true;
-      scPlayer.play({streamUrl: this.props.currentSong.url});
-      console.log(scPlayer);
-    }
-
     return (
     <div>
       {this.props.currentSong ?
