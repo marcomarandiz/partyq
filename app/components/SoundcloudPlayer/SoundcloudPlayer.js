@@ -11,6 +11,8 @@ export default class SoundcloudPlayer extends React.Component {
     if (this.props.isPlaying) {
       this.play();
     }
+    // Handles next song when a song ends
+    this.refs.SoundPlayerContainer.soundCloudAudio.on('ended', () => this.props.onNextSong());
   }
 
   componentWillUnmount() {
@@ -42,7 +44,7 @@ export default class SoundcloudPlayer extends React.Component {
           clientId='cbdd7f755416f67e838e272848d988d1'
           streamUrl={this.props.currentSong.url}
           ref='SoundPlayerContainer'
-         />
+        />
     );
   }
 }
