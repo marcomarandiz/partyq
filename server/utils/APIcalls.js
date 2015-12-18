@@ -50,8 +50,6 @@ export function youtubeAPI(url, next) {
 }
 
 // Start of API call
-// This API call cannot be called yet and therefore cannot be tested
-// Still needs errorchecking
 export function soundcloudAPI(url, next) {
   const song = {};
   const error = {};
