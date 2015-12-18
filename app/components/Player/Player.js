@@ -60,6 +60,7 @@ export default class Player extends React.Component {
             currentSong={this.props.currentSong}
             onNextSong={() => this.props.onNextSong()}
             onNextReady={() => this.props.onNextReady()}
+            isPlaying={this.props.isPlaying}
             ref='SoundcloudPlayer'
           />
         );

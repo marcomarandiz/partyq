@@ -6,6 +6,12 @@ export default class SoundcloudPlayer extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    if (this.props.isPlaying) {
+      this.play();
+    }
+  }
+
   pause() {
     console.log('SCA');
     console.log(this.refs.SoundPlayerContainer);
