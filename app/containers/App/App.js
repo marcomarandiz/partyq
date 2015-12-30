@@ -84,7 +84,7 @@ class App extends React.Component {
         <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
           <History historySonglist={this.props.history.songlist} onReAddSong={song => this.reAddSongRequest(song, dispatch)}/>
           <div className={classNames('pusher', styles.pusher)}>
-            <div className={classNames('ui', 'basic', 'segment', styles.application)}>
+            <div className={classNames('ui', 'basic', 'segment')}>
               <div className={classNames('ui', 'grid')}>
                 <div className={classNames('three', 'wide', 'column')}></div>
                 <div className={classNames('seven', 'wide', 'column')}>
