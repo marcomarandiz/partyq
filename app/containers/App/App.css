@@ -11,28 +11,6 @@
 	border: 0 !important;
 }
 
-.application {
-	background-color: #1A1A1A !important;
-	margin: 0 0 0 0 !important;
-	border: 0 !important;
-}
-
 .pusher {
 	background-color: #1A1A1A !important;
 }
-
-.sidebar{
-	background-color: #1A1A1A !important;
-	margin: 0 0 0 0 !important;
-}
-
-.head {
-	color: black !important;
-	text-align: center;
-	font-size: 28px;
-}
-
-.body {
-	background-color: #1A1A1A;
-}
-
