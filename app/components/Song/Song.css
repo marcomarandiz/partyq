@@ -36,11 +36,11 @@
   border-right: 1px solid #1A1A1A;
 }
 
-.song:hover .upvoteButton {
+.song:hover :not .upvoteButton {
   display: inline;
   visibility: initial;
-  opacity: 10;
   transition: all .5s ease-in-out;
+  opacity: 1;
 }
 
 .song:hover .title {
@@ -55,6 +55,10 @@
 .upvoteButton {
     opacity: 0.25;
     color: #30AAFF;
+}
+
+.upvoteBotton:hover {
+  opacity: 1;
 }
 
 .songInfo {
