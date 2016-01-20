@@ -12,3 +12,10 @@ export function upvoteSong(index) {
     index
   };
 }
+
+export function requestSong(url) {
+  return {
+    type: types.REQUEST_SONG,
+    url
+  };
+}
