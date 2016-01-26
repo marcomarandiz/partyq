@@ -28,20 +28,22 @@ function queueReducer(state = initialState.queue, action) {
     action.song.upvotes = 0;
     action.song.userUpvotes = [];
     action.song.endedAt = null;
-    if (Object.keys(currentSong).length === 0 && !songInQueue(state, action.song.vid)) {
+    if (Object.keys(currentSong).length === 0) {
       return {
         ...state,
         currentSong: action.song,
         isPlaying: true
       };
+    } else if (!songInQueue(state, action.song.vid)) {
+      return {
+        ...state,
+        songlist: [
+          ...queueSonglist,
+          action.song
+        ]
+      };
     }
-    return {
-      ...state,
-      songlist: [
-        ...queueSonglist,
-        action.song
-      ]
-    };
+    return state;
   case NEXT_READY:
     return {
       ...state,

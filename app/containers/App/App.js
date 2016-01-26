@@ -37,11 +37,15 @@ class App extends React.Component {
   }
 
   songIsOkay(url) {
-    if (isLinkValid(url)) {
+    const src = isLinkValid(url);
+    if (src === 'youtube') {
       if (!songInQueue(this.props.queue, getVidFromUrl(url))) {
-        return true;
+        return src;
       }
       notie.alert(3, 'Song already in queue, not added', 2.5);
+    } else if (src === 'soundcloud') {
+      // Need to check for duplicate song
+      return src;
     } else {
       notie.alert(3, 'Invalid link: ' + url, 2.5);
     }
@@ -50,14 +54,16 @@ class App extends React.Component {
 
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    if (this.songIsOkay(link)) {
-      dispatch(addSongRequest(link));
+    const src = this.songIsOkay(link);
+    if (src) {
+      dispatch(addSongRequest(link, src));
     }
   }
 
   addSongRequest(url, dispatch) {
-    if (this.songIsOkay(url)) {
-      dispatch(addSongRequest(url));
+    const src = this.songIsOkay(url);
+    if (src) {
+      dispatch(addSongRequest(url, src));
     }
   }
 
@@ -74,7 +80,7 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header onAddSong={link => this.addSongRequest(link, dispatch)}/>
+        <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
         <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
           <History historySonglist={this.props.history.songlist} onReAddSong={song => this.reAddSongRequest(song, dispatch)}/>
           <div className={classNames('pusher', styles.pusher)}>
