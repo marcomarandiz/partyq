@@ -30,7 +30,9 @@ export default function startServer(store) {
 
       // Checks if action is 'ADD_SONG_REQUEST' and if it is
       // it calls the youtubeAPI and if it is and makes
-      // a callback to handle errors or dispatch the song
+      // a callback to handle errors or dispatch the song.
+      // If action is not ADD_SONG_REQUEST it just
+      // dispatches the action.
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
