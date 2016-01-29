@@ -9,7 +9,7 @@ import io from 'socket.io-client';
 import notie from 'notie';
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
-import { isLinkValid, getVidFromUrl, songInQueue } from '../../../common/utils/functions';
+import { isLinkValid, songInQueue } from '../../../common/utils/functions';
 
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
 
@@ -23,7 +23,7 @@ class App extends React.Component {
     socket.on('add_song_result', (result) => {
       if (result.error) {
         console.error(result.error);
-        notie.alert(3, 'Invalid video id: song not added', 2.5);
+        notie.alert(3, result.error, 2.5);
       }
       if (result.song) {
         console.log(result.song);
@@ -36,6 +36,7 @@ class App extends React.Component {
     this.props.ga.pageview('/');
   }
 
+  /*
   songIsOkay(url) {
     const src = isLinkValid(url);
     if (src === 'youtube') {
@@ -51,28 +52,28 @@ class App extends React.Component {
     }
     return false;
   }
+  */
 
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    const src = this.songIsOkay(link);
-    if (src) {
-      dispatch(addSongRequest(link, src));
-    }
+    addSongRequest(link, dispatch);
   }
 
   addSongRequest(url, dispatch) {
-    const src = this.songIsOkay(url);
+    const src = isLinkValid(url);
     if (src) {
       dispatch(addSongRequest(url, src));
     }
   }
 
   reAddSongRequest(song, dispatch) {
-    if (!songInQueue(this.props.queue, song.vid)) {
+    const index = songInQueue(this.props.queue, song.vid);
+    if (index) {
       dispatch(addSong(song));
       notie.alert(1, song.title + ' added!');
     } else {
-      notie.alert(3, 'Song already in queue, not added', 2.5);
+      notie.alert(3, 'Song already in queue, upvoting instead', 2.5);
+      dispatch(upvoteSong(index));
     }
   }
 

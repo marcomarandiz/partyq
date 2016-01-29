@@ -2,7 +2,8 @@ import Server from 'socket.io';
 import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
 import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
-import { callbackAPI } from './utils/lib';
+import { songInQueue, getVidFromUrl } from '../common/utils/functions';
+import { callbackApiSuccess, callbackApiError, dispatchUpvote } from './utils/lib';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -33,16 +34,36 @@ export default function startServer(store) {
       // a callback to handle errors or dispatch the song.
       // If action is not ADD_SONG_REQUEST it just
       // dispatches the action.
+      console.log(store.getState());
       if (action.type === ADD_SONG_REQUEST) {
+        const index = {};
         switch (action.src) {
         case YouTube:
-          youtubeAPI(action.url, (error, song) => {
-            callbackAPI(error, song, socket, store, action);
-          });
+          index = songInQueue(store.getState().queue, getVidFromUrl(action.url));
+          if (index) {
+            dispatchUpvote(action.id, index, socket, store);
+          } else {
+            youtubeAPI(action.url, (error, song) => {
+              if (error) {
+                callbackApiError(error, socket, store);
+              } else if (song) {
+                callbackApiSuccess(song, socket, store);
+              }
+            });
+          }
           break;
         case SoundCloud:
           soundcloudAPI(action.url, (error, song) => {
-            callbackAPI(error, song, socket, store, action);
+            if (error) {
+              callbackApiError(error, socket, store);
+            } else if (song) {
+              index = songInQueue(store.getState().queue, song.vid);
+              if (index) {
+                dispatchUpvote(action.id, index, socket, store);
+              } else {
+                callbackApiSuccess(song, socket, store);
+              }
+            }
           });
           break;
         default:
