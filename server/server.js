@@ -1,6 +1,8 @@
 import Server from 'socket.io';
-import { youtubeAPI, soundcloudAPI } from './utils/APIcalls.js';
-import { ADD_SONG, ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
+import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
+import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
+import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
+import { callbackAPI } from './utils/lib';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -26,38 +28,25 @@ export default function startServer(store) {
       action.id = development ? socket.id :
         socket.request.connection.remoteAddress;
 
-      // Checks if action is 'ADD_SONG' and if it is
+      // Checks if action is 'ADD_SONG_REQUEST' and if it is
       // it calls the youtubeAPI and if it is and makes
-      // a callback to handle errors or dispatch the song
+      // a callback to handle errors or dispatch the song.
+      // If action is not ADD_SONG_REQUEST it just
+      // dispatches the action.
       if (action.type === ADD_SONG_REQUEST) {
-        if (action.src === 'youtube') {
+        switch (action.src) {
+        case YouTube:
           youtubeAPI(action.url, (error, song) => {
-            if (error) {
-              // Send the error back to the client
-              socket.emit('add_song_error', error);
-              // Log the error since we are not listening anywhere
-              console.error(error);
-            } else {
-              action.type = ADD_SONG;
-              action.song = song;
-              socket.emit('add_song_success', song);
-              store.dispatch.bind(store)(action);
-            }
+            callbackAPI(error, song, socket, store, action);
           });
-        } else if (action.src === 'soundcloud') {
+          break;
+        case SoundCloud:
           soundcloudAPI(action.url, (error, song) => {
-            if (error) {
-              // Send the error back to the client
-              socket.emit('add_song_error', error);
-              // Log the error since we are not listening anywhere
-              console.error(error);
-            } else {
-              action.type = ADD_SONG;
-              action.song = song;
-              socket.emit('add_song_success', song);
-              store.dispatch.bind(store)(action);
-            }
+            callbackAPI(error, song, socket, store, action);
           });
+          break;
+        default:
+          console.log('How did you get this source?' + action.src);
         }
       } else {
         store.dispatch.bind(store)(action);

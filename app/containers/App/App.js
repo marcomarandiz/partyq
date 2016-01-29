@@ -20,15 +20,15 @@ class App extends React.Component {
     this.props.ga.initialize('UA-70628505-1');
 
     // Called when youtube api fails to get video
-    socket.on('add_song_error', (error) => {
-      console.error(error);
-      notie.alert(3, 'Invalid video id: song not added', 2.5);
-    });
-
-    // Called when youtube api succeeds
-    socket.on('add_song_success', (song) => {
-      console.log(song);
-      notie.alert(1, song.title + ' added!');
+    socket.on('add_song_result', (result) => {
+      if (result.error) {
+        console.error(result.error);
+        notie.alert(3, 'Invalid video id: song not added', 2.5);
+      }
+      if (result.song) {
+        console.log(result.song);
+        notie.alert(1, result.song.title + ' added!');
+      }
     });
   }
 
