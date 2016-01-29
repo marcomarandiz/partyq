@@ -1,6 +1,7 @@
 import Server from 'socket.io';
 import { youtubeAPI, soundcloudAPI } from './utils/APIcalls.js';
 import { ADD_SONG, ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
+import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -30,7 +31,10 @@ export default function startServer(store) {
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song
       if (action.type === ADD_SONG_REQUEST) {
-        if (action.src === 'youtube') {
+        console.log(action.src);
+        switch (action.src) {
+        case YouTube:
+          console.log('starting youtube');
           youtubeAPI(action.url, (error, song) => {
             if (error) {
               // Send the error back to the client
@@ -38,13 +42,15 @@ export default function startServer(store) {
               // Log the error since we are not listening anywhere
               console.error(error);
             } else {
+              console.log('sucess');
               action.type = ADD_SONG;
               action.song = song;
               socket.emit('add_song_success', song);
               store.dispatch.bind(store)(action);
             }
           });
-        } else if (action.src === 'soundcloud') {
+          break;
+        case SoundCloud:
           soundcloudAPI(action.url, (error, song) => {
             if (error) {
               // Send the error back to the client
@@ -58,6 +64,9 @@ export default function startServer(store) {
               store.dispatch.bind(store)(action);
             }
           });
+          break;
+        default:
+          console.log('How did you get this source?' + action.src);
         }
       } else {
         store.dispatch.bind(store)(action);
