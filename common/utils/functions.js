@@ -25,13 +25,19 @@ export function getVidFromUrl(url) {
 export function songInQueue(queue, id) {
   if (queue.currentSong && !(Object.keys(queue.currentSong).length === 0)) {
     if (queue.currentSong.vid === id) {
-      return true;
+      return -1;
     }
   }
 
   if (queue.songlist) {
+
+    // Find song by vid, return song object if found, else return false
+    const index = queue.songlist.findIndex((song) => song.vid === id );
+    console.log('From functions: index = ' + index);
+    return ((index !== -1) ? index : false);
+
     // Find by song vid, and return as boolean
-    return Boolean(queue.songlist.find((song) => song.vid === id));
+    // return Boolean(queue.songlist.find((song) => song.vid === id));
     // Need to change to this when we start upvoting songs on duplicate adds
     // return (queue.songlist.findIndex((song) => song.vid === id));
   }
