@@ -36,27 +36,9 @@ class App extends React.Component {
     this.props.ga.pageview('/');
   }
 
-  /*
-  songIsOkay(url) {
-    const src = isLinkValid(url);
-    if (src === 'youtube') {
-      if (!songInQueue(this.props.queue, getVidFromUrl(url))) {
-        return src;
-      }
-      notie.alert(3, 'Song already in queue, not added', 2.5);
-    } else if (src === 'soundcloud') {
-      // Need to check for duplicate song
-      return src;
-    } else {
-      notie.alert(3, 'Invalid link: ' + url, 2.5);
-    }
-    return false;
-  }
-  */
-
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    addSongRequest(link, dispatch);
+    this.addSongRequest(link, dispatch);
   }
 
   addSongRequest(url, dispatch) {

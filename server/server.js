@@ -34,15 +34,15 @@ export default function startServer(store) {
       // a callback to handle errors or dispatch the song.
       // If action is not ADD_SONG_REQUEST it just
       // dispatches the action.
-      console.log(store.getState());
       if (action.type === ADD_SONG_REQUEST) {
-        const index = {};
         switch (action.src) {
         case YouTube:
-          index = songInQueue(store.getState().queue, getVidFromUrl(action.url));
-          if (index) {
+          const index = songInQueue(store.getState().queue, getVidFromUrl(action.url));
+          console.log('server index = ' + index);
+          if (index >= 0) {
+            console.log('dispatch upvote');
             dispatchUpvote(action.id, index, socket, store);
-          } else {
+          } else if (index === -1) {
             youtubeAPI(action.url, (error, song) => {
               if (error) {
                 callbackApiError(error, socket, store);
@@ -57,8 +57,8 @@ export default function startServer(store) {
             if (error) {
               callbackApiError(error, socket, store);
             } else if (song) {
-              index = songInQueue(store.getState().queue, song.vid);
-              if (index) {
+              const index = songInQueue(store.getState().queue, song.vid);
+              if (index >= 0) {
                 dispatchUpvote(action.id, index, socket, store);
               } else {
                 callbackApiSuccess(song, socket, store);

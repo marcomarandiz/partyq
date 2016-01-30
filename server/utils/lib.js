@@ -35,5 +35,7 @@ export function dispatchUpvote(id, index, socket, store) {
     error: 'Song already in queue, upvoting instead.'
   };
   socket.emit('add_song_result', result);
-  store.dispatch.bind(store)(action);
+  if (index >= 0) {
+    store.dispatch.bind(store)(action);
+  }
 }

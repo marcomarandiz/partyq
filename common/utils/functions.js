@@ -25,7 +25,7 @@ export function getVidFromUrl(url) {
 export function songInQueue(queue, id) {
   if (queue.currentSong && !(Object.keys(queue.currentSong).length === 0)) {
     if (queue.currentSong.vid === id) {
-      return -1;
+      return -2;
     }
   }
 
@@ -34,7 +34,7 @@ export function songInQueue(queue, id) {
     // Find song by vid, return song object if found, else return false
     const index = queue.songlist.findIndex((song) => song.vid === id );
     console.log('From functions: index = ' + index);
-    return ((index !== -1) ? index : false);
+    return index;
 
     // Find by song vid, and return as boolean
     // return Boolean(queue.songlist.find((song) => song.vid === id));

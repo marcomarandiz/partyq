@@ -34,15 +34,14 @@ function queueReducer(state = initialState.queue, action) {
         currentSong: action.song,
         isPlaying: true
       };
-    } else if (!songInQueue(state, action.song.vid)) {
-      return {
-        ...state,
-        songlist: [
-          ...queueSonglist,
-          action.song
-        ]
-      };
     }
+    return {
+      ...state,
+      songlist: [
+        ...queueSonglist,
+        action.song
+      ]
+    };
     return state;
   case NEXT_READY:
     return {
