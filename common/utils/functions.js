@@ -33,7 +33,6 @@ export function songInQueue(queue, id) {
 
     // Find song by vid, return song object if found, else return false
     const index = queue.songlist.findIndex((song) => song.vid === id );
-    console.log('From functions: index = ' + index);
     return index;
 
     // Find by song vid, and return as boolean

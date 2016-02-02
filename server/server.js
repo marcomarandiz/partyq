@@ -2,8 +2,8 @@ import Server from 'socket.io';
 import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
 import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
-import { songInQueue, getVidFromUrl } from '../common/utils/functions';
-import { callbackApiSuccess, callbackApiError, dispatchUpvote } from './utils/lib';
+import { getVidFromUrl } from '../common/utils/functions';
+import { callbackApiSuccess, callbackApiError, dispatchUpvoteIfSongInQueue } from './utils/lib';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -37,9 +37,7 @@ export default function startServer(store) {
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
-          console.log('dispatch');
-          if (!dispatchUpvote(action.id, getVidFromUrl(action.url), socket, store)) {
-            console.log('dispatch returned false');
+          if (!dispatchUpvoteIfSongInQueue(action.id, getVidFromUrl(action.url), socket, store)) {
             youtubeAPI(action.url, (error, song) => {
               if (error) {
                 callbackApiError(error, socket, store);
@@ -54,10 +52,7 @@ export default function startServer(store) {
             if (error) {
               callbackApiError(error, socket, store);
             } else if (song) {
-              const index = songInQueue(store.getState().queue, song.vid);
-              if (index >= 0) {
-                dispatchUpvote(action.id, index, socket, store);
-              } else {
+              if (!dispatchUpvoteIfSongInQueue(action.id, song.vid, socket, store)) {
                 callbackApiSuccess(song, socket, store);
               }
             }

@@ -26,6 +26,7 @@ export function callbackApiError(error, socket, store) {
   socket.emit('add_song_result', result);
 }
 
+// If song in queue it upvotes
 export function dispatchUpvote(id, songId, socket, store) {
   const index = songInQueue(store.getState().queue, songId);
   const result = {};
@@ -34,7 +35,6 @@ export function dispatchUpvote(id, songId, socket, store) {
     index: index,
     id: id
   };
-  console.log('index: ' + index);
   if (index >= 0) {
     result.error = 'Song already in queue, upvoting instead.';
     socket.emit('add_song_result', result);
