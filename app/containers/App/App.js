@@ -50,12 +50,14 @@ class App extends React.Component {
 
   reAddSongRequest(song, dispatch) {
     const index = songInQueue(this.props.queue, song.vid);
-    if (index) {
+    if (index === -1) {
       dispatch(addSong(song));
       notie.alert(1, song.title + ' added!');
-    } else {
+    } else if (index >= 0) {
       notie.alert(3, 'Song already in queue, upvoting instead', 2.5);
       dispatch(upvoteSong(index));
+    } else {
+      notie.alert(3, 'Song already in queue', 2.5);
     }
   }
 
