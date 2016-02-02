@@ -1,4 +1,5 @@
 import { ADD_SONG, UPVOTE_SONG } from '../../common/constants/ActionTypes';
+import { songInQueue } from '../../common/utils/functions';
 
 // Returns a songlist sorted by upvotes, descending
 export function sortByUpvotes(songlist) {
@@ -25,17 +26,24 @@ export function callbackApiError(error, socket, store) {
   socket.emit('add_song_result', result);
 }
 
-export function dispatchUpvote(id, index, socket, store) {
+export function dispatchUpvote(id, songId, socket, store) {
+  const index = songInQueue(store.getState().queue, songId);
+  const result = {};
   const action = {
     type: UPVOTE_SONG,
     index: index,
     id: id
   };
-  const result = {
-    error: 'Song already in queue, upvoting instead.'
-  };
-  socket.emit('add_song_result', result);
+  console.log('index: ' + index);
   if (index >= 0) {
+    result.error = 'Song already in queue, upvoting instead.';
+    socket.emit('add_song_result', result);
     store.dispatch.bind(store)(action);
+    return true;
+  } else if (index === -2) {
+    result.error = 'Song already playing.';
+    socket.emit('add_song_result', result);
+    return true;
   }
+  return false;
 }

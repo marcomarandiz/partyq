@@ -37,12 +37,9 @@ export default function startServer(store) {
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
-          const index = songInQueue(store.getState().queue, getVidFromUrl(action.url));
-          console.log('server index = ' + index);
-          if (index >= 0) {
-            console.log('dispatch upvote');
-            dispatchUpvote(action.id, index, socket, store);
-          } else if (index === -1) {
+          console.log('dispatch');
+          if (!dispatchUpvote(action.id, getVidFromUrl(action.url), socket, store)) {
+            console.log('dispatch returned false');
             youtubeAPI(action.url, (error, song) => {
               if (error) {
                 callbackApiError(error, socket, store);

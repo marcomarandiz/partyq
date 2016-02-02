@@ -8,7 +8,6 @@ import {
   NEXT_READY
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
-import { songInQueue} from '../common/utils/functions.js';
 import moment from 'moment';
 
 export const initialState = {
@@ -42,7 +41,6 @@ function queueReducer(state = initialState.queue, action) {
         action.song
       ]
     };
-    return state;
   case NEXT_READY:
     return {
       ...state,
