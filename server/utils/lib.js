@@ -6,13 +6,14 @@ export function sortByUpvotes(songlist) {
   return songlist.sort((item1, item2) => item2.upvotes - item1.upvotes);
 }
 
-export function callbackApiSuccess(song, socket, store) {
+export function callbackApiSuccess(song, id, socket, store) {
   const result = {
     song: song
   };
   const action = {
     type: ADD_SONG,
-    song: song
+    song: song,
+    id: id
   };
   store.dispatch.bind(store)(action);
   socket.emit('add_song_result', result);

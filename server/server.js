@@ -42,7 +42,7 @@ export default function startServer(store) {
               if (error) {
                 callbackApiError(error, socket, store);
               } else if (song) {
-                callbackApiSuccess(song, socket, store);
+                callbackApiSuccess(song, action.id, socket, store);
               }
             });
           }
@@ -53,7 +53,7 @@ export default function startServer(store) {
               callbackApiError(error, socket, store);
             } else if (song) {
               if (!dispatchUpvoteIfSongInQueue(action.id, song.vid, socket, store)) {
-                callbackApiSuccess(song, socket, store);
+                callbackApiSuccess(song, action.id, socket, store);
               }
             }
           });
