@@ -22,6 +22,7 @@ export function getVidFromUrl(url) {
   return 'error';
 }
 
+// Return -2 if currentsong, index if in songlist, -1 if not found
 export function songInQueue(queue, id) {
   if (queue.currentSong && !(Object.keys(queue.currentSong).length === 0)) {
     if (queue.currentSong.vid === id) {
