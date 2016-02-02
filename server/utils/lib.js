@@ -26,8 +26,8 @@ export function callbackApiError(error, socket, store) {
   socket.emit('add_song_result', result);
 }
 
-// If song in queue it upvotes
-export function dispatchUpvote(id, songId, socket, store) {
+// If song in queue it upvotes and returns true otherwise returns false
+export function dispatchUpvoteIfSongInQueue(id, songId, socket, store) {
   const index = songInQueue(store.getState().queue, songId);
   const result = {};
   const action = {
