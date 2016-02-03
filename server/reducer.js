@@ -8,7 +8,6 @@ import {
   NEXT_READY
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
-import { songInQueue} from '../common/utils/functions.js';
 import moment from 'moment';
 
 export const initialState = {
@@ -25,8 +24,8 @@ function queueReducer(state = initialState.queue, action) {
     if (!action.song) {
       return state;
     }
-    action.song.upvotes = 0;
-    action.song.userUpvotes = [];
+    action.song.upvotes = 1;
+    action.song.userUpvotes = [action.id];
     action.song.endedAt = null;
     if (Object.keys(currentSong).length === 0) {
       return {
@@ -34,16 +33,14 @@ function queueReducer(state = initialState.queue, action) {
         currentSong: action.song,
         isPlaying: true
       };
-    } else if (!songInQueue(state, action.song.vid)) {
-      return {
-        ...state,
-        songlist: [
-          ...queueSonglist,
-          action.song
-        ]
-      };
     }
-    return state;
+    return {
+      ...state,
+      songlist: [
+        ...queueSonglist,
+        action.song
+      ]
+    };
   case NEXT_READY:
     return {
       ...state,

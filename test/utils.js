@@ -87,7 +87,7 @@ describe('utils', () => {
     });
     it('handles if song is not in queue', () => {
       const id = 'dcba';
-      expect(songInQueue(queue, id)).not.to.be.ok;
+      expect(songInQueue(queue, id)).to.equal(-1);
     });
 
     it('does not find songs in empty queue', () => {
@@ -97,7 +97,7 @@ describe('utils', () => {
 
     it('does not find song with empty currentSong and songlist', () => {
       const id = 'abc';
-      expect(songInQueue(emptySongs, id)).to.not.be.ok;
+      expect(songInQueue(emptySongs, id)).to.equal(-1);
     });
   });
 });
