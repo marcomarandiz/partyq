@@ -32,6 +32,9 @@ export default function startServer(store) {
       action.id = development ? socket.id :
         socket.request.connection.remoteAddress;
 
+      console.log('Pathname: ' + socket.handshake.query.path);
+      action.pathname = socket.handshake.query.path;
+
       // Checks if action is 'ADD_SONG_REQUEST' and if it is
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song.
@@ -65,6 +68,7 @@ export default function startServer(store) {
           console.log('How did you get this source?' + action.src);
         }
       } else {
+        console.log(action);
         store.dispatch.bind(store)(action);
       }
     });

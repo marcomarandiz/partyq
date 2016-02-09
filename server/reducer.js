@@ -5,10 +5,15 @@ import {
   PLAY_SONG,
   PAUSE_SONG,
   SET_STATE,
-  NEXT_READY
+  NEXT_READY,
+  CREATE_ROOM
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
+
+export const initialState = {
+  rooms: {}
+};
 
 export const roomInitialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
@@ -84,8 +89,10 @@ function queueReducer(state = roomInitialState.queue, action) {
   }
 }
 
-
-function roomReducer(state, action) {
+// Will need to point this at a specific room.
+// This probably doesn't work at all right now
+function roomReducer(state = roomInitialState, action) {
+  console.log('Room reducer: ' + state);
   const { queue, history } = state;
   const queueSonglist = queue.songlist;
   const currentSong = queue.currentSong;
@@ -131,12 +138,32 @@ function roomReducer(state, action) {
   }
 }
 
-export default function mainReducer(state = roomInitialState, action) {
+export default function mainReducer(state = initialState, action) {
   switch (action.type) {
+  // This action runs when starting partyq. Using it to test things since we
+  // can't run any actions without being in a room and as of now we can't
+  // enter a room
+  case '@@redux/INIT':
+  case CREATE_ROOM:
+    const {rooms} = state;
+
+    // Used for testing can change it later
+    const pathname = 'blah';
+
+    // Proper line of code. action.name is passed in from createRoom action
+    // Possibly change this to use action.pathname? Need to discuss how we're
+    // going to handle url requests for non-existent queues
+
+    // const pathname = action.name;
+
+    rooms[pathname] = roomInitialState;
+    return {
+      ...state,
+    };
   default:
     return {
       ...state,
-      room: roomReducer
+      roomReducer
     };
   }
 }
