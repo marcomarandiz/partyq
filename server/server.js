@@ -16,7 +16,7 @@ export default function startServer(store) {
 
   // Emit 'state' to socket.io when Store changes
   store.subscribe(
-    () => partyq.emit('state', store.getState())
+    () => partyq.emit('state', store.getState()['default'])
   );
 
   partyq.on('connection', (socket) => {
@@ -24,7 +24,7 @@ export default function startServer(store) {
     // Get the path from the socket's window.location.pathname
     console.log('Pathname: ', roomname);
 
-    socket.emit('state', store.getState()['rooms']['default']);
+    socket.emit('state', store.getState()['default']);
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {

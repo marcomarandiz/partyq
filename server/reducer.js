@@ -11,9 +11,7 @@ import {
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
 
-export const initialState = {
-  rooms: {}
-};
+export const initialState = {};
 
 export const roomInitialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
@@ -139,31 +137,27 @@ function roomReducer(state = roomInitialState, action) {
 }
 
 export default function mainReducer(state = initialState, action) {
+  const roomname = 'default';
   switch (action.type) {
   // This action runs when starting partyq. Using it to test things since we
   // can't run any actions without being in a room and as of now we can't
   // enter a room
   case '@@redux/INIT':
   case CREATE_ROOM:
-    const {rooms} = state;
-
-    // Used for testing can change it later
-    const pathname = 'default';
-
+    console.log('Room name:', roomname);
     // Proper line of code. action.name is passed in from createRoom action
     // Possibly change this to use action.pathname? Need to discuss how we're
     // going to handle url requests for non-existent queues
 
     // const pathname = action.name;
 
-    rooms[pathname] = roomInitialState;
+    state[roomname] = roomInitialState;
+    console.log(state);
     return {
       ...state,
     };
   default:
-    return {
-      ...state,
-      roomReducer
-    };
+    state[roomname] = roomReducer(state[roomname], action);
+    return state;
   }
 }
