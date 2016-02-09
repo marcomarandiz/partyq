@@ -1,7 +1,8 @@
 import Server from 'socket.io';
 import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
-import { ADD_SONG_REQUEST, CREATE_ROOM } from '../common/constants/ActionTypes';
+import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
+import { createRoom } from '../common/actions/roomActions';
 import { getVidFromUrl } from '../common/utils/functions';
 import { callbackApiSuccess,
          callbackApiError,
@@ -15,8 +16,6 @@ export default function startServer(store) {
 
   const partyq = io.of('/partyq');
 
-  let rooms = { 'default': [] };
-
   // Emit 'state' to socket.io when Store changes
   store.subscribe(
     () => {
@@ -29,17 +28,11 @@ export default function startServer(store) {
     const pathname = socket.handshake.query.path;
     const roomname = pathToRoomName(pathname);
     // Get the path from the socket's window.location.pathname
-    console.log('Roomname: ', roomname);
 
-    // if (key in object)
     if (roomname in store.getState()) {
       socket.emit('state', store.getState()[roomname]);
     } else {
-      const action = {
-        type: CREATE_ROOM,
-        roomname: roomname
-      };
-      store.dispatch.bind(store)(action);
+      store.dispatch(createRoom(roomname));
     }
     // Feed action event from clients directly into store
     // Should probably put authentication here
@@ -54,7 +47,6 @@ export default function startServer(store) {
       // TODO: update to actual room name
       action.roomname = roomname;
 
-      console.log('ACTION: ', action);
       // Checks if action is 'ADD_SONG_REQUEST' and if it is
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song.

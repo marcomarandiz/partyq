@@ -87,8 +87,6 @@ function queueReducer(state = roomInitialState.queue, action) {
   }
 }
 
-// Will need to point this at a specific room.
-// This probably doesn't work at all right now
 function roomReducer(state = roomInitialState, action) {
   const { queue, history } = state;
   const queueSonglist = queue.songlist;
@@ -137,20 +135,15 @@ function roomReducer(state = roomInitialState, action) {
 
 export default function mainReducer(state = initialState, action) {
   const roomname = action.roomname || 'default';
-  console.log('Room name:', roomname);
-  console.log('Reducer action: ', action);
   switch (action.type) {
   case CREATE_ROOM:
     state[roomname] = roomInitialState;
-    console.log(state[roomname]);
-    console.log('State in Create room: ', state);
     return {
       ...state,
       lastroom: roomname
     };
   default:
     state[roomname] = roomReducer(state[roomname], action);
-    console.log('State after roomReducer: ', state);
     return {
       ...state,
       lastroom: roomname
