@@ -1,6 +1,6 @@
 import Server from 'socket.io';
 import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
-import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
+import { ADD_SONG_REQUEST, CREATE_ROOM } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
 import { getVidFromUrl } from '../common/utils/functions';
 import { callbackApiSuccess,
@@ -31,7 +31,16 @@ export default function startServer(store) {
     // Get the path from the socket's window.location.pathname
     console.log('Roomname: ', roomname);
 
-    socket.emit('state', store.getState()[roomname]);
+    // if (key in object)
+    if (roomname in store.getState()) {
+      socket.emit('state', store.getState()[roomname]);
+    } else {
+      const action = {
+        type: CREATE_ROOM,
+        roomname: roomname
+      };
+      store.dispatch.bind(store)(action);
+    }
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {

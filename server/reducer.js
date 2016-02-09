@@ -90,7 +90,6 @@ function queueReducer(state = roomInitialState.queue, action) {
 // Will need to point this at a specific room.
 // This probably doesn't work at all right now
 function roomReducer(state = roomInitialState, action) {
-  console.log('Room reducer: ' + state);
   const { queue, history } = state;
   const queueSonglist = queue.songlist;
   const currentSong = queue.currentSong;
@@ -138,25 +137,20 @@ function roomReducer(state = roomInitialState, action) {
 
 export default function mainReducer(state = initialState, action) {
   const roomname = action.roomname || 'default';
+  console.log('Room name:', roomname);
+  console.log('Reducer action: ', action);
   switch (action.type) {
-  // This action runs when starting partyq. Using it to test things since we
-  // can't run any actions without being in a room and as of now we can't
-  // enter a room
-  case '@@redux/INIT':
   case CREATE_ROOM:
-    console.log('Room name:', roomname);
-    // Proper line of code. action.name is passed in from createRoom action
-    // Possibly change this to use action.pathname? Need to discuss how we're
-    // going to handle url requests for non-existent queues
-
-    // const pathname = action.name;
-
     state[roomname] = roomInitialState;
-    console.log(state);
-    return state;
+    console.log(state[roomname]);
+    console.log('State in Create room: ', state);
+    return {
+      ...state,
+      lastroom: roomname
+    };
   default:
-    console.log(state);
     state[roomname] = roomReducer(state[roomname], action);
+    console.log('State after roomReducer: ', state);
     return {
       ...state,
       lastroom: roomname

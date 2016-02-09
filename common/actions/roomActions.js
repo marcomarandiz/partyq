@@ -1,15 +1,15 @@
 import * as types from '../constants/ActionTypes';
 
-export function createRoom(name) {
+export function createRoom(roomname) {
   return {
     type: types.CREATE_ROOM,
-    name
+    roomname
   };
 }
 
-export function joinRoom(name) {
+export function joinRoom(roomname) {
   return {
     type: types.JOIN_ROOM,
-    name
+    roomname
   };
 }
