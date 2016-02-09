@@ -42,3 +42,7 @@ export function dispatchUpvoteIfSongInQueue(action, songId, socket, store) {
   }
   return false;
 }
+
+export function pathToRoomName(path) {
+  return 'default';
+}

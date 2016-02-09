@@ -3,7 +3,10 @@ import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
 import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
 import { getVidFromUrl } from '../common/utils/functions';
-import { callbackApiSuccess, callbackApiError, dispatchUpvoteIfSongInQueue } from './utils/lib';
+import { callbackApiSuccess,
+         callbackApiError,
+         dispatchUpvoteIfSongInQueue,
+         pathToRoomName } from './utils/lib';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -16,15 +19,19 @@ export default function startServer(store) {
 
   // Emit 'state' to socket.io when Store changes
   store.subscribe(
-    () => partyq.emit('state', store.getState()['default'])
+    () => {
+      const lastroom = store.getState().lastroom;
+      partyq.emit('state', store.getState()[lastroom]);
+    }
   );
 
   partyq.on('connection', (socket) => {
-    const roomname = socket.handshake.query.path;
+    const pathname = socket.handshake.query.path;
+    const roomname = pathToRoomName(pathname);
     // Get the path from the socket's window.location.pathname
-    console.log('Pathname: ', roomname);
+    console.log('Roomname: ', roomname);
 
-    socket.emit('state', store.getState()['default']);
+    socket.emit('state', store.getState()[roomname]);
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
@@ -36,8 +43,7 @@ export default function startServer(store) {
         socket.request.connection.remoteAddress;
 
       // TODO: update to actual room name
-      //action.roomname = roomname;
-      action.roomname = 'default';
+      action.roomname = roomname;
 
       console.log('ACTION: ', action);
       // Checks if action is 'ADD_SONG_REQUEST' and if it is
