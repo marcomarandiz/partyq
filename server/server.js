@@ -18,6 +18,9 @@ export default function startServer(store) {
   );
 
   partyq.on('connection', (socket) => {
+    // Get the path from the socket's window.location.pathname
+    console.log('Pathname: ', socket.handshake.query.path);
+
     socket.emit('state', store.getState());
     // Feed action event from clients directly into store
     // Should probably put authentication here
