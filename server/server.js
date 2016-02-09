@@ -48,12 +48,12 @@ export default function startServer(store) {
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
-          if (!dispatchUpvoteIfSongInQueue(action.id, getVidFromUrl(action.url), socket, store)) {
+          if (!dispatchUpvoteIfSongInQueue(action, getVidFromUrl(action.url), socket, store)) {
             youtubeAPI(action.url, (error, song) => {
               if (error) {
                 callbackApiError(error, socket, store);
               } else if (song) {
-                callbackApiSuccess(song, action.id, socket, store);
+                callbackApiSuccess(song, action, socket, store);
               }
             });
           }
@@ -63,8 +63,8 @@ export default function startServer(store) {
             if (error) {
               callbackApiError(error, socket, store);
             } else if (song) {
-              if (!dispatchUpvoteIfSongInQueue(action.id, song.vid, socket, store)) {
-                callbackApiSuccess(song, action.id, socket, store);
+              if (!dispatchUpvoteIfSongInQueue(action, song.vid, socket, store)) {
+                callbackApiSuccess(song, action, socket, store);
               }
             }
           });

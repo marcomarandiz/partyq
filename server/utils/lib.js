@@ -6,15 +6,12 @@ export function sortByUpvotes(songlist) {
   return songlist.sort((item1, item2) => item2.upvotes - item1.upvotes);
 }
 
-export function callbackApiSuccess(song, id, socket, store) {
+export function callbackApiSuccess(song, action, socket, store) {
   const result = {
     song: song
   };
-  const action = {
-    type: ADD_SONG,
-    song: song,
-    id: id
-  };
+  action.type = ADD_SONG;
+  action.song = song;
   store.dispatch.bind(store)(action);
   socket.emit('add_song_result', result);
 }
@@ -28,14 +25,11 @@ export function callbackApiError(error, socket, store) {
 }
 
 // If song in queue it upvotes and returns true otherwise returns false
-export function dispatchUpvoteIfSongInQueue(id, songId, socket, store) {
-  const index = songInQueue(store.getState().queue, songId);
+export function dispatchUpvoteIfSongInQueue(action, songId, socket, store) {
+  const index = songInQueue(store.getState()[action.roomname].queue, songId);
   const result = {};
-  const action = {
-    type: UPVOTE_SONG,
-    index: index,
-    id: id
-  };
+  action.type = UPVOTE_SONG;
+  action.index = index;
   if (index >= 0) {
     result.error = 'Song already in queue, upvoting instead.';
     socket.emit('add_song_result', result);
