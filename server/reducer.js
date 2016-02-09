@@ -10,12 +10,12 @@ import {
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
 
-export const initialState = {
+export const roomInitialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
   history: { songlist: []}
 };
 
-function queueReducer(state = initialState.queue, action) {
+function queueReducer(state = roomInitialState.queue, action) {
   const queueSonglist = state.songlist;
   const currentSong = state.currentSong;
   const userid = action.id;
@@ -84,7 +84,8 @@ function queueReducer(state = initialState.queue, action) {
   }
 }
 
-export default function mainReducer(state = initialState, action) {
+
+function roomReducer(state, action) {
   const { queue, history } = state;
   const queueSonglist = queue.songlist;
   const currentSong = queue.currentSong;
@@ -123,9 +124,19 @@ export default function mainReducer(state = initialState, action) {
     return newState;
   default:
     return {
-      ...initialState,
+      ...roomInitialState,
       queue: queueReducer(queue, action),
       history
+    };
+  }
+}
+
+export default function mainReducer(state = roomInitialState, action) {
+  switch (action.type) {
+  default:
+    return {
+      ...state,
+      room: roomReducer
     };
   }
 }
