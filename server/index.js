@@ -6,6 +6,7 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config.js';
+import rewrite from 'express-urlrewrite';
 
 export const store = makeStore();
 
@@ -23,6 +24,8 @@ if (!isDeveloping) {
 if (isDeveloping) {
   const compiler = webpack(config);
 
+  app.use(rewrite(/\/[a-zA-Z0-9]+$/, '/'));
+
   app.use(webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
     contentBase: 'src',
@@ -38,10 +41,6 @@ if (isDeveloping) {
 
   app.use(webpackHotMiddleware(compiler));
 }
-
-app.get('*', function response(req, res) {
-  res.sendFile(path.join(__dirname, '..', '/dist/index.html'));
-});
 
 app.listen(port, hostname, function onStart(err) {
   if (err) {
