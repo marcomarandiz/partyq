@@ -148,7 +148,7 @@ export default function mainReducer(state = initialState, action) {
     const {rooms} = state;
 
     // Used for testing can change it later
-    const pathname = 'blah';
+    const pathname = 'default';
 
     // Proper line of code. action.name is passed in from createRoom action
     // Possibly change this to use action.pathname? Need to discuss how we're

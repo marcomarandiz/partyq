@@ -12,16 +12,19 @@ export default function startServer(store) {
 
   const partyq = io.of('/partyq');
 
+  let rooms = { 'default': [] };
+
   // Emit 'state' to socket.io when Store changes
   store.subscribe(
     () => partyq.emit('state', store.getState())
   );
 
   partyq.on('connection', (socket) => {
+    const roomname = socket.handshake.query.path;
     // Get the path from the socket's window.location.pathname
-    console.log('Pathname: ', socket.handshake.query.path);
+    console.log('Pathname: ', roomname);
 
-    socket.emit('state', store.getState());
+    socket.emit('state', store.getState()['rooms']['default']);
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
@@ -32,9 +35,11 @@ export default function startServer(store) {
       action.id = development ? socket.id :
         socket.request.connection.remoteAddress;
 
-      console.log('Pathname: ' + socket.handshake.query.path);
-      action.pathname = socket.handshake.query.path;
+      // TODO: update to actual room name
+      //action.roomname = roomname;
+      action.roomname = 'default';
 
+      console.log('ACTION: ', action);
       // Checks if action is 'ADD_SONG_REQUEST' and if it is
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song.
