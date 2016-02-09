@@ -137,7 +137,7 @@ function roomReducer(state = roomInitialState, action) {
 }
 
 export default function mainReducer(state = initialState, action) {
-  const roomname = action.roomname;
+  const roomname = action.roomname || 'default';
   switch (action.type) {
   // This action runs when starting partyq. Using it to test things since we
   // can't run any actions without being in a room and as of now we can't
@@ -155,6 +155,7 @@ export default function mainReducer(state = initialState, action) {
     console.log(state);
     return state;
   default:
+    console.log(state);
     state[roomname] = roomReducer(state[roomname], action);
     return {
       ...state,
