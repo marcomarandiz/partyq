@@ -20,7 +20,7 @@ export default function startServer(store) {
   store.subscribe(
     () => {
       const lastroom = store.getState().lastroom;
-      partyq.emit('state', store.getState()[lastroom]);
+      partyq.to(lastroom).emit('state', store.getState()[lastroom]);
     }
   );
 
@@ -29,11 +29,12 @@ export default function startServer(store) {
     const roomname = pathToRoomName(pathname);
     // Get the path from the socket's window.location.pathname
 
-    if (roomname in store.getState()) {
-      socket.emit('state', store.getState()[roomname]);
-    } else {
+    if (!(roomname in store.getState())) {
       store.dispatch(createRoom(roomname));
     }
+    socket.join(roomname);
+    partyq.to(roomname).emit('state', store.getState()[roomname]);
+
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
