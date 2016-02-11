@@ -76,12 +76,16 @@ class App extends React.Component {
                 <div className={classNames('three', 'wide', 'column')}></div>
                 <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
+
+                    id={socket.id}
+
                     currentSong={this.props.queue.currentSong}
                     isPlaying={this.props.queue.isPlaying}
                     onNextSong={() => dispatch(nextSong())}
                     onPlaySong={() => dispatch(playSong())}
                     onPauseSong={()=> dispatch(pauseSong())}
                     songlist={this.props.queue.songlist}
+                    owner={this.props.owner}
                     queueSonglist={this.props.queue.songlist}
                     onUpvoteSong={index => dispatch(upvoteSong(index))}
                     onNextSong={() => dispatch(nextSong())}
