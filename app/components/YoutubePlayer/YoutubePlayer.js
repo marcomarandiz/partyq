@@ -42,7 +42,8 @@ export default class YoutubePlayer extends React.Component {
       width: '100%',
       playerVars: {
         autoplay: 0, // enables autoplay
-        disablekb: 0 // disables keyboard controls
+        disablekb: 0, // disables keyboard controls
+        controls: 0
       }
     };
     return (
