@@ -5,17 +5,20 @@ import {
   PLAY_SONG,
   PAUSE_SONG,
   SET_STATE,
-  NEXT_READY
+  NEXT_READY,
+  CREATE_ROOM
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
 
-export const initialState = {
+export const initialState = {};
+
+export const roomInitialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
   history: { songlist: []}
 };
 
-function queueReducer(state = initialState.queue, action) {
+function queueReducer(state = roomInitialState.queue, action) {
   const queueSonglist = state.songlist;
   const currentSong = state.currentSong;
   const userid = action.id;
@@ -84,7 +87,7 @@ function queueReducer(state = initialState.queue, action) {
   }
 }
 
-export default function mainReducer(state = initialState, action) {
+function roomReducer(state = roomInitialState, action) {
   const { queue, history } = state;
   const queueSonglist = queue.songlist;
   const currentSong = queue.currentSong;
@@ -123,9 +126,27 @@ export default function mainReducer(state = initialState, action) {
     return newState;
   default:
     return {
-      ...initialState,
+      ...roomInitialState,
       queue: queueReducer(queue, action),
       history
+    };
+  }
+}
+
+export default function mainReducer(state = initialState, action) {
+  const roomname = action.roomname || 'default';
+  switch (action.type) {
+  case CREATE_ROOM:
+    state[roomname] = roomInitialState;
+    return {
+      ...state,
+      lastroom: roomname
+    };
+  default:
+    state[roomname] = roomReducer(state[roomname], action);
+    return {
+      ...state,
+      lastroom: roomname
     };
   }
 }

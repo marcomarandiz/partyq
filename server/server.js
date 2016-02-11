@@ -2,8 +2,12 @@ import Server from 'socket.io';
 import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
 import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
+import { createRoom } from '../common/actions/roomActions';
 import { getVidFromUrl } from '../common/utils/functions';
-import { callbackApiSuccess, callbackApiError, dispatchUpvoteIfSongInQueue } from './utils/lib';
+import { callbackApiSuccess,
+         callbackApiError,
+         dispatchUpvoteIfSongInQueue,
+         pathToRoomName } from './utils/lib';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -14,14 +18,23 @@ export default function startServer(store) {
 
   // Emit 'state' to socket.io when Store changes
   store.subscribe(
-    () => partyq.emit('state', store.getState())
+    () => {
+      const lastroom = store.getState().lastroom;
+      partyq.to(lastroom).emit('state', store.getState()[lastroom]);
+    }
   );
 
   partyq.on('connection', (socket) => {
+    const pathname = socket.handshake.query.path;
+    const roomname = pathToRoomName(pathname);
     // Get the path from the socket's window.location.pathname
-    console.log('Pathname: ', socket.handshake.query.path);
 
-    socket.emit('state', store.getState());
+    if (!(roomname in store.getState())) {
+      store.dispatch(createRoom(roomname));
+    }
+    socket.join(roomname);
+    partyq.to(roomname).emit('state', store.getState()[roomname]);
+
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
@@ -32,6 +45,9 @@ export default function startServer(store) {
       action.id = development ? socket.id :
         socket.request.connection.remoteAddress;
 
+      // TODO: update to actual room name
+      action.roomname = roomname;
+
       // Checks if action is 'ADD_SONG_REQUEST' and if it is
       // it calls the youtubeAPI and if it is and makes
       // a callback to handle errors or dispatch the song.
@@ -40,12 +56,12 @@ export default function startServer(store) {
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
-          if (!dispatchUpvoteIfSongInQueue(action.id, getVidFromUrl(action.url), socket, store)) {
+          if (!dispatchUpvoteIfSongInQueue(action, getVidFromUrl(action.url), socket, store)) {
             youtubeAPI(action.url, (error, song) => {
               if (error) {
                 callbackApiError(error, socket, store);
               } else if (song) {
-                callbackApiSuccess(song, action.id, socket, store);
+                callbackApiSuccess(song, action, socket, store);
               }
             });
           }
@@ -55,8 +71,8 @@ export default function startServer(store) {
             if (error) {
               callbackApiError(error, socket, store);
             } else if (song) {
-              if (!dispatchUpvoteIfSongInQueue(action.id, song.vid, socket, store)) {
-                callbackApiSuccess(song, action.id, socket, store);
+              if (!dispatchUpvoteIfSongInQueue(action, song.vid, socket, store)) {
+                callbackApiSuccess(song, action, socket, store);
               }
             }
           });
@@ -65,6 +81,7 @@ export default function startServer(store) {
           console.log('How did you get this source?' + action.src);
         }
       } else {
+        console.log(action);
         store.dispatch.bind(store)(action);
       }
     });
