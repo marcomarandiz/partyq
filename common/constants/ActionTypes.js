@@ -7,4 +7,5 @@ export const SET_STATE = 'SET_STATE';
 export const ADD_SONG_FROM_HISTORY = 'ADD_SONG_FROM_HISTORY';
 export const NEXT_READY = 'NEXT_READY';
 export const ADD_SONG_REQUEST = 'ADD_SONG_REQUEST';
-export const SET_OWNER = 'SET_OWNER';
+export const CREATE_ROOM = 'CREATE_ROOM';
+export const JOIN_ROOM = 'JOIN_ROOM';

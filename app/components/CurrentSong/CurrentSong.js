@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import YouTube from 'react-youtube';
 import styles from './CurrentSong.css';
 import classNames from 'classnames';
+import Player from '../Player/Player.js';
 
 export default class CurrentSong extends React.Component {
   constructor(props) {
@@ -10,67 +10,29 @@ export default class CurrentSong extends React.Component {
 
   handlePlay() {
     this.props.onPlaySong();
-    this.youtube.playVideo();
+    this.refs.Player.play();
   }
 
   handlePause() {
     this.props.onPauseSong();
-    this.youtube.pauseVideo();
+    this.refs.Player.pause();
   }
 
   handleNextSong() {
     this.props.onNextSong();
   }
 
-  _onReady(event, context) {
-    // Autoplay if isPlaying = true
-    if (context.props.isPlaying) {
-      context.props.onPlaySong();
-    }
-
-    // Max the volume out
-    event.target.setVolume(100);
-
-    // context = this from react
-    // this = this for this function to Youtube API
-    context.youtube = event.target;
-    context.props.onNextReady();
-    console.log(context);
-  }
-
-  _onEnd(event, context) {
-    // Handles events at the end of a song
-    // context.youtube = event.target;
-    context.handleNextSong();
-  }
-
   render() {
-    const opts = {
-      height: '300',
-      width: '100%',
-      playerVars: {
-        autoplay: 0, // enables autoplay
-        disablekb: 0 // disables keyboard controls
-      }
-    };
-
-    // Make sure that play/pause stays up to date between clients
-    if (this.youtube && this.props.isPlaying) {
-      this.youtube.playVideo();
-    } else if (this.youtube && ! this.props.isPlaying) {
-      this.youtube.pauseVideo();
-    }
     return (
     <div>
-      <div className={classNames()}>
-        {this.props.currentSong.url ?
-        <YouTube
-        url={this.props.currentSong.url}
-        opts={opts}
-        onReady={(event) => this._onReady(event, this)}
-        onEnd={(event) => this._onEnd(event, this)}/> :
-        'Add songs to the queue!'}
-      </div>
+      {this.props.currentSong ?
+      <Player
+        currentSong={this.props.currentSong}
+        onNextSong={() => this.props.onNextSong()}
+        onNextReady={() => this.props.onNextReady()}
+        isPlaying={this.props.isPlaying}
+        ref='Player'
+      /> : ''}
       <div className={classNames('ui', 'grid', 'red', 'segment', styles.youtubeVideo)}>
         <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.currentSong)}>
           <div>

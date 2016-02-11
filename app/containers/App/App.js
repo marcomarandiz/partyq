@@ -9,9 +9,11 @@ import io from 'socket.io-client';
 import notie from 'notie';
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
-import { isLinkValid, getVidFromUrl, songInQueue } from '../../../common/utils/functions';
+import { isLinkValid, songInQueue } from '../../../common/utils/functions';
 
-const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`);
+const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`, {
+  query: `path=${window.location.pathname}`
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -20,15 +22,15 @@ class App extends React.Component {
     this.props.ga.initialize('UA-70628505-1');
 
     // Called when youtube api fails to get video
-    socket.on('add_song_error', (error) => {
-      console.error(error);
-      notie.alert(3, 'Invalid video id: song not added', 2.5);
-    });
-
-    // Called when youtube api succeeds
-    socket.on('add_song_success', (song) => {
-      console.log(song);
-      notie.alert(1, song.title + ' added!');
+    socket.on('add_song_result', (result) => {
+      if (result.error) {
+        console.error(result.error);
+        notie.alert(3, result.error, 2.5);
+      }
+      if (result.song) {
+        console.log(result.song);
+        notie.alert(1, result.song.title + ' added!');
+      }
     });
   }
 
@@ -36,37 +38,28 @@ class App extends React.Component {
     this.props.ga.pageview('/');
   }
 
-  songIsOkay(url) {
-    if (isLinkValid(url)) {
-      if (!songInQueue(this.props.queue, getVidFromUrl(url))) {
-        return true;
-      }
-      notie.alert(3, 'Song already in queue, not added', 2.5);
-    } else {
-      notie.alert(3, 'Invalid link: ' + url, 2.5);
-    }
-    return false;
-  }
-
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
-    if (this.songIsOkay(link)) {
-      dispatch(addSongRequest(link));
-    }
+    this.addSongRequest(link, dispatch);
   }
 
   addSongRequest(url, dispatch) {
-    if (this.songIsOkay(url)) {
-      dispatch(addSongRequest(url));
+    const src = isLinkValid(url);
+    if (src) {
+      dispatch(addSongRequest(url, src));
     }
   }
 
   reAddSongRequest(song, dispatch) {
-    if (!songInQueue(this.props.queue, song.vid)) {
+    const index = songInQueue(this.props.queue, song.vid);
+    if (index === -1) {
       dispatch(addSong(song));
       notie.alert(1, song.title + ' added!');
+    } else if (index >= 0) {
+      notie.alert(3, 'Song already in queue, upvoting instead', 2.5);
+      dispatch(upvoteSong(index));
     } else {
-      notie.alert(3, 'Song already in queue, not added', 2.5);
+      notie.alert(3, 'Song already in queue', 2.5);
     }
   }
 
@@ -74,11 +67,11 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header onAddSong={link => this.addSongRequest(link, dispatch)}/>
+        <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
         <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
           <History historySonglist={this.props.history.songlist} onReAddSong={song => this.reAddSongRequest(song, dispatch)}/>
           <div className={classNames('pusher', styles.pusher)}>
-            <div className={classNames('ui', 'basic', 'segment', styles.application)}>
+            <div className={classNames('ui', 'basic', 'segment')}>
               <div className={classNames('ui', 'grid')}>
                 <div className={classNames('three', 'wide', 'column')}></div>
                 <div className={classNames('seven', 'wide', 'column')}>

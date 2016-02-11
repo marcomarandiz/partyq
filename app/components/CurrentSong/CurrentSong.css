@@ -1,14 +1,5 @@
-.currentSong {
-  background-color: #3F3F3F;
-  margin: 0 auto;
-  margin-top: 1.78%;
-  padding: 1%;
-  text-align: center;
-}
-
 .youtubeVideo {
-	margin: 0 auto;
-  	text-align: center;
+  text-align: center;
 	background-color: #3A3A3D !important;
 }
 
@@ -19,4 +10,8 @@
 .upvoteButton {
     opacity: 0.25;
     color: #30AAFF;
+}
+
+.upvoteButton:hover {
+  opacity: 1;
 }

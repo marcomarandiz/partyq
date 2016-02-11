@@ -1,6 +1,15 @@
 import Server from 'socket.io';
-import { youtubeAPI } from './utils/APIcalls.js';
-import { ADD_SONG, ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
+import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
+import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
+import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
+import { createRoom } from '../common/actions/roomActions';
+import { getVidFromUrl } from '../common/utils/functions';
+import { callbackApiSuccess,
+         callbackApiError,
+         dispatchUpvoteIfSongInQueue,
+         pathToRoomName } from './utils/lib';
+
+const development = process.env.NODE_ENV !== 'production';
 
 export default function startServer(store) {
   const io = new Server().attach(8090);
@@ -9,71 +18,70 @@ export default function startServer(store) {
 
   // Emit 'state' to socket.io when Store changes
   store.subscribe(
-    () => partyq.emit('state', store.getState())
+    () => {
+      const lastroom = store.getState().lastroom;
+      partyq.to(lastroom).emit('state', store.getState()[lastroom]);
+    }
   );
 
-  let owner = null;
-
   partyq.on('connection', (socket) => {
-    socket.emit('state', store.getState());
+    const pathname = socket.handshake.query.path;
+    const roomname = pathToRoomName(pathname);
+    // Get the path from the socket's window.location.pathname
 
-    // Determine id here so we can use it in other functions
-    const id = socket.id;
-
-    console.log(id + ' connected.');
-
-    // Sets first connection as owner
-    if (owner === null) {
-      owner = id;
-      console.log('Owner: ' + owner);
-      store.dispatch.bind(store)(
-        {
-          type: 'SET_OWNER',
-          id: owner
-        }
-      );
+    if (!(roomname in store.getState())) {
+      store.dispatch(createRoom(roomname));
     }
-
-    // Handle disconnect
-    socket.on('disconnect', () => {
-      if (id === owner) {
-        owner = null;
-        console.log('Owner \'' + id + '\' disconnnected.');
-      }
-      console.log(id + ' disconnected.');
-    });
+    socket.join(roomname);
+    partyq.to(roomname).emit('state', store.getState()[roomname]);
 
     // Feed action event from clients directly into store
     // Should probably put authentication here
     socket.on('action', (action) => {
-      action.id = id;
+
       // Attach the remote address as id so we know who performed the actions
       // If we are in production, use the ip address
       // If we are developing, use the socket id
+      action.id = development ? socket.id :
+        socket.request.connection.remoteAddress;
 
-      // Determining id on connect so this isn't necessary right now.
-      // action.id = development ? socket.id :
-      //   socket.request.connection.remoteAddress;
+      // TODO: update to actual room name
+      action.roomname = roomname;
 
-
-      // Checks if action is 'ADD_SONG' and if it is
+      // Checks if action is 'ADD_SONG_REQUEST' and if it is
       // it calls the youtubeAPI and if it is and makes
-      // a callback to handle errors or dispatch the song
+      // a callback to handle errors or dispatch the song.
+      // If action is not ADD_SONG_REQUEST it just
+      // dispatches the action.
       if (action.type === ADD_SONG_REQUEST) {
-        youtubeAPI(action.url, (error, song) => {
-          if (error) {
-            // Send the error back to the client
-            socket.emit('add_song_error', error);
-            // Log the error since we are not listening anywhere
-            console.error(error);
-          } else {
-            action.type = ADD_SONG;
-            action.song = song;
-            socket.emit('add_song_success', song);
-            store.dispatch.bind(store)(action);
+        switch (action.src) {
+        case YouTube:
+          if (!dispatchUpvoteIfSongInQueue(action, getVidFromUrl(action.url), socket, store)) {
+            youtubeAPI(action.url, (error, song) => {
+              if (error) {
+                callbackApiError(error, socket, store);
+              } else if (song) {
+                callbackApiSuccess(song, action, socket, store);
+              }
+            });
           }
-        });
+          break;
+        case SoundCloud:
+          soundcloudAPI(action.url, (error, song) => {
+            if (error) {
+              callbackApiError(error, socket, store);
+            } else if (song) {
+              if (!dispatchUpvoteIfSongInQueue(action, song.vid, socket, store)) {
+                callbackApiSuccess(song, action, socket, store);
+              }
+            }
+          });
+          break;
+        default:
+          console.log('How did you get this source?' + action.src);
+        }
       } else {
+        console.log(action);
         store.dispatch.bind(store)(action);
       }
     });
