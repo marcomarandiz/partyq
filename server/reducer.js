@@ -6,19 +6,19 @@ import {
   PAUSE_SONG,
   SET_STATE,
   NEXT_READY,
-  SET_OWNER
+  CREATE_ROOM
 } from '../common/constants/ActionTypes';
 import { sortByUpvotes } from './utils/lib';
-import { songInQueue} from '../common/utils/functions.js';
 import moment from 'moment';
 
-export const initialState = {
+export const initialState = {};
+
+export const roomInitialState = {
   queue: { songlist: [], currentSong: {}, isPlaying: false, nextReady: false },
-  history: { songlist: []},
-  production: process.env.NODE_ENV === 'production'
+  history: { songlist: []}
 };
 
-function queueReducer(state = initialState.queue, action) {
+function queueReducer(state = roomInitialState.queue, action) {
   const queueSonglist = state.songlist;
   const currentSong = state.currentSong;
   const userid = action.id;
@@ -27,10 +27,10 @@ function queueReducer(state = initialState.queue, action) {
     if (!action.song) {
       return state;
     }
-    action.song.upvotes = 0;
-    action.song.userUpvotes = [];
+    action.song.upvotes = 1;
+    action.song.userUpvotes = [action.id];
     action.song.endedAt = null;
-    if (Object.keys(currentSong).length === 0 && !songInQueue(state, action.song.vid)) {
+    if (Object.keys(currentSong).length === 0) {
       return {
         ...state,
         currentSong: action.song,
@@ -87,8 +87,8 @@ function queueReducer(state = initialState.queue, action) {
   }
 }
 
-export default function mainReducer(state = initialState, action) {
-  const { queue, history, owner } = state;
+function roomReducer(state = roomInitialState, action) {
+  const { queue, history } = state;
   const queueSonglist = queue.songlist;
   const currentSong = queue.currentSong;
   const historySonglist = history.songlist;
@@ -124,17 +124,29 @@ export default function mainReducer(state = initialState, action) {
       };
     }
     return newState;
-  case SET_OWNER:
-    return {
-      ...state,
-      owner: action.id
-    };
   default:
     return {
-      ...initialState,
+      ...roomInitialState,
       queue: queueReducer(queue, action),
-      history,
-      owner
+      history
+    };
+  }
+}
+
+export default function mainReducer(state = initialState, action) {
+  const roomname = action.roomname || 'default';
+  switch (action.type) {
+  case CREATE_ROOM:
+    state[roomname] = roomInitialState;
+    return {
+      ...state,
+      lastroom: roomname
+    };
+  default:
+    state[roomname] = roomReducer(state[roomname], action);
+    return {
+      ...state,
+      lastroom: roomname
     };
   }
 }

@@ -48,7 +48,7 @@
     "autoprefixer": "6.0.3",
     "babel": "6.1.18",
     "babel-core": "6.2.1",
-    "babel-eslint": "4.1.5",
+    "babel-eslint": "4.1.7",
     "babel-loader": "6.2.0",
     "babel-preset-es2015": "6.1.18",
     "babel-preset-react": "6.1.18",
@@ -80,15 +80,18 @@
   "dependencies": {
     "classnames": "2.2.0",
     "express": "4.13.3",
+    "express-urlrewrite": "1.2.0",
     "moment": "2.10.6",
     "notie": "2.1.0",
     "react": "0.14.0",
     "react-dom": "0.14.0",
     "react-ga": "1.2.0",
     "react-redux": "4.0.0",
+    "react-soundplayer": "0.3.1",
     "react-youtube": "4.1.2",
     "redux": "3.0.4",
     "socket.io": "1.3.7",
-    "socket.io-client": "1.3.7"
+    "socket.io-client": "1.3.7",
+    "soundcloud-audio": "0.1.7"
   }
 }

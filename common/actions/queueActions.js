@@ -7,10 +7,11 @@ export function addSong(song) {
   };
 }
 
-export function addSongRequest(url) {
+export function addSongRequest(url, src) {
   return {
     type: types.ADD_SONG_REQUEST,
-    url
+    url,
+    src
   };
 }
 

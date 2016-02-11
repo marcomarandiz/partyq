@@ -9,25 +9,17 @@ export default class History extends React.Component {
   }
   render() {
     return (
-        <div className={
-          classNames('ui', 'visible', 'inverted', 'left',
-                     'raised', 'vertical', 'sidebar', 'menu', styles.sidebar)}>
+      <div className={classNames('ui', 'visible', 'inverted', 'left', 'vertical', 'sidebar', 'menu', styles.sidebar)}>
         <div className={classNames('ui', 'segments')}>
           <div className={styles.history}>
-            <HistorySonglist
-              songs={this.props.historySonglist}
-              onReAddSong={this.props.onReAddSong}
-            />
+            <HistorySonglist songs={this.props.historySonglist} onReAddSong={this.props.onReAddSong} />
           </div>
         </div>
       </div>
-
     );
   }
 }
 
 History.propTypes = {
-  historySonglist: PropTypes.arrayOf(
-    PropTypes.object
-  ).isRequired
+  historySonglist: PropTypes.arrayOf(PropTypes.object).isRequired
 };
