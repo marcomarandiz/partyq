@@ -1,6 +1,7 @@
 import React from 'react';
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
 import SoundcloudPlayer from '../SoundcloudPlayer/SoundcloudPlayer.js';
+import VolumeSlider from '../Volume/VolumeSlider';
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -30,6 +31,20 @@ export default class Player extends React.Component {
       break;
     default:
       console.log('Play button pressed with no song in queue or invalid src in Currentsong');
+    }
+  }
+
+  changeVolume(newVolume) {
+    console.log('New volume: ' + newVolume);
+    switch (this.props.currentSong.src) {
+    case 'youtube':
+      this.refs.YoutubePlayer.setVolume(newVolume);
+      break;
+    case 'soundcloud':
+//      this.refs.SoundcloudPlayer.play();
+      break;
+    default:
+      console.log('Changing Volume');
     }
   }
 
@@ -67,6 +82,9 @@ export default class Player extends React.Component {
       return (
         <div>
           Add a song to queue!
+          <VolumeSlider
+            changeVolume={(newVolume) => this.changeVolume(newVolume)}
+          />
         </div>
       );
     }

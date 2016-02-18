@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import styles from './CurrentSong.css';
 import classNames from 'classnames';
 import Player from '../Player/Player.js';
-import VolumeSlider from '../Volume/VolumeSlider';
 
 export default class CurrentSong extends React.Component {
   constructor(props) {
@@ -34,7 +33,6 @@ export default class CurrentSong extends React.Component {
         isPlaying={this.props.isPlaying}
         ref='Player'
       /> : ''}
-      <VolumeSlider/>
       <div className={classNames('ui', 'grid', 'red', 'segment', styles.youtubeVideo)}>
         <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.currentSong)}>
           <div>
