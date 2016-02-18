@@ -44,60 +44,55 @@ export default class Player extends React.Component {
       this.refs.SoundcloudPlayer.setVolume(newVolume);
       break;
     default:
-      console.log('Changing Volume');
+      console.log('Volume: ' + newVolume);
     }
   }
 
-  render() {
-    if (this.props.currentSong.src) {
-      switch (this.props.currentSong.src) {
-      case 'youtube':
-        return (
-          <div>
-            <YoutubePlayer
-              currentSong={this.props.currentSong}
-              onNextSong={() => this.props.onNextSong()}
-              onNextReady={() => this.props.onNextReady()}
-              isPlaying={this.props.isPlaying}
-              ref='YoutubePlayer'
-            />
-            <VolumeSlider
-              changeVolume={(newVolume) => this.changeVolume(newVolume)}
-            />
-          </div>
-        );
-      case 'soundcloud':
-        return (
-          <div>
-            <SoundcloudPlayer
-              currentSong={this.props.currentSong}
-              onNextSong={() => this.props.onNextSong()}
-              onNextReady={() => this.props.onNextReady()}
-              isPlaying={this.props.isPlaying}
-              ref='SoundcloudPlayer'
-            />
-            <VolumeSlider
-              changeVolume={(newVolume) => this.changeVolume(newVolume)}
-            />
-          </div>
-        );
-      default:
-        return (
-          <div>
-            Something weird happened. We have a song but the src isnt supported.
-          </div>
-        );
-      }
-    } else {
+  selectPlayer(src) {
+    switch (src) {
+    case 'youtube':
+      return (
+        <YoutubePlayer
+          currentSong={this.props.currentSong}
+          onNextSong={() => this.props.onNextSong()}
+          onNextReady={() => this.props.onNextReady()}
+          isPlaying={this.props.isPlaying}
+          ref='YoutubePlayer'
+        />
+      );
+    case 'soundcloud':
+      return (
+        <SoundcloudPlayer
+          currentSong={this.props.currentSong}
+          onNextSong={() => this.props.onNextSong()}
+          onNextReady={() => this.props.onNextReady()}
+          isPlaying={this.props.isPlaying}
+          ref='SoundcloudPlayer'
+        />
+      );
+    default:
       return (
         <div>
-          Add a song to queue!
-          <VolumeSlider
-            changeVolume={(newVolume) => this.changeVolume(newVolume)}
-          />
+          Something weird happened. We have a song but the src isnt supported.
         </div>
       );
     }
-
   }
+
+
+  render() {
+    return (
+      <div>
+        {this.props.currentSong.src ?
+          <div>
+            {this.selectPlayer(this.props.currentSong.src)}
+            <VolumeSlider
+              changeVolume={(newVolume) => this.changeVolume(newVolume)}
+            />
+          </div> : '' }
+      </div>
+    );
+  }
+
 }
+
