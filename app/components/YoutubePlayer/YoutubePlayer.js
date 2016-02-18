@@ -18,7 +18,7 @@ export default class YoutubePlayer extends React.Component {
     }
 
     // Max the volume out
-    event.target.setVolume(100);
+    event.target.setVolume(50);
 
     // context = this from react
     // this = this for this function to Youtube API

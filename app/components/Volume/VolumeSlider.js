@@ -7,16 +7,17 @@ export default class VolumeSlider extends React.Component {
   }
 
   componentDidMount() {
-    this.updateVolume();
+    this.onUpdateVolume();
   }
 
-  updateVolume() {
+  onUpdateVolume() {
     $('#slider1').change(() => {
-      const newVolume = $('#slider1').val();
-      this.props.changeVolume(newVolume);
-      console.log(newVolume);
+      this.setVolume($('#slider1').val());
     });
-    // this.props.changeVolume(this.newVolume);
+  }
+
+  setVolume(volume) {
+    this.props.changeVolume(volume);
   }
 
   render() {

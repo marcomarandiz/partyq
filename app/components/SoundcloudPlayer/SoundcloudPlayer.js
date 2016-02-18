@@ -25,12 +25,15 @@ export default class SoundcloudPlayer extends React.Component {
     }
   }
 
+  setVolume(newVolume) {
+    this.refs.SoundPlayerContainer.soundCloudAudio.audio.volume = newVolume / 100;
+  }
+
   pause() {
     this.refs.SoundPlayerContainer.soundCloudAudio.pause();
   }
 
   play() {
-
     this.refs.SoundPlayerContainer.soundCloudAudio.play();
   }
 

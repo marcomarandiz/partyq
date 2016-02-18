@@ -41,7 +41,7 @@ export default class Player extends React.Component {
       this.refs.YoutubePlayer.setVolume(newVolume);
       break;
     case 'soundcloud':
-//      this.refs.SoundcloudPlayer.play();
+      this.refs.SoundcloudPlayer.setVolume(newVolume);
       break;
     default:
       console.log('Changing Volume');
@@ -53,23 +53,33 @@ export default class Player extends React.Component {
       switch (this.props.currentSong.src) {
       case 'youtube':
         return (
-          <YoutubePlayer
-            currentSong={this.props.currentSong}
-            onNextSong={() => this.props.onNextSong()}
-            onNextReady={() => this.props.onNextReady()}
-            isPlaying={this.props.isPlaying}
-            ref='YoutubePlayer'
-          />
+          <div>
+            <YoutubePlayer
+              currentSong={this.props.currentSong}
+              onNextSong={() => this.props.onNextSong()}
+              onNextReady={() => this.props.onNextReady()}
+              isPlaying={this.props.isPlaying}
+              ref='YoutubePlayer'
+            />
+            <VolumeSlider
+              changeVolume={(newVolume) => this.changeVolume(newVolume)}
+            />
+          </div>
         );
       case 'soundcloud':
         return (
-          <SoundcloudPlayer
-            currentSong={this.props.currentSong}
-            onNextSong={() => this.props.onNextSong()}
-            onNextReady={() => this.props.onNextReady()}
-            isPlaying={this.props.isPlaying}
-            ref='SoundcloudPlayer'
-          />
+          <div>
+            <SoundcloudPlayer
+              currentSong={this.props.currentSong}
+              onNextSong={() => this.props.onNextSong()}
+              onNextReady={() => this.props.onNextReady()}
+              isPlaying={this.props.isPlaying}
+              ref='SoundcloudPlayer'
+            />
+            <VolumeSlider
+              changeVolume={(newVolume) => this.changeVolume(newVolume)}
+            />
+          </div>
         );
       default:
         return (
