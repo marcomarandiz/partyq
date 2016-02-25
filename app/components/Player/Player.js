@@ -89,7 +89,7 @@ export default class Player extends React.Component {
             <VolumeSlider
               changeVolume={(newVolume) => this.changeVolume(newVolume)}
             />
-          </div> : '' }
+          </div> : 'Add a song to the queue!' }
       </div>
     );
   }
