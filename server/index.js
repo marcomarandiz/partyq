@@ -39,17 +39,17 @@ if (isDeveloping) {
   app.use(middleware);
 
   app.use(webpackHotMiddleware(compiler));
-
-  app.get('/', function response(req, res) {
-    res.write('Go to any route except / for a room');
-    res.end();
-  });
-
-  app.get('*', function response(req, res) {
-    const host = 'http://' + req.headers.host + '/room';
-    request(host).pipe(res);
-  });
 }
+
+app.get('/', function response(req, res) {
+  res.write('Go to any route except / for a room');
+  res.end();
+});
+
+app.get('*', function response(req, res) {
+  const host = 'http://' + req.headers.host + '/room.html';
+  request(host).pipe(res);
+});
 
 app.listen(port, hostname, function onStart(err) {
   if (err) {

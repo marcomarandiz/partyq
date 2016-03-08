@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist/'),
     filename: '[name].js',
-    publicPath: '/room'
+    publicPath: '/room.html'
   },
   plugins: [
     new HtmlWebpackPlugin({
