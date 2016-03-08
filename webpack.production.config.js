@@ -19,7 +19,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'app/index.template.html',
       inject: 'body',
-      filename: 'index.html'
+      filename: 'room.html'
     }),
     new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
