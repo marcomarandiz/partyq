@@ -41,7 +41,7 @@ if (isDeveloping) {
   app.use(webpackHotMiddleware(compiler));
 
   app.get('/', function response(req, res) {
-    res.write('Splash page');
+    res.write('Go to any route except / for a room');
     res.end();
   });
 
