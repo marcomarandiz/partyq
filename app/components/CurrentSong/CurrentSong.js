@@ -6,6 +6,9 @@ import Player from '../Player/Player.js';
 export default class CurrentSong extends React.Component {
   constructor(props) {
     super(props);
+
+    // Note: This should probably be a prop
+    this.roomname = window.location.pathname;
   }
 
   handlePlay() {
@@ -23,6 +26,7 @@ export default class CurrentSong extends React.Component {
   }
 
   render() {
+    const isOwner = localStorage.getItem(this.roomname) === 'owner';
     return (
     <div>
       {this.props.currentSong ?
@@ -43,18 +47,22 @@ export default class CurrentSong extends React.Component {
             {this.props.currentSong.upvotes}
           </div>
         </div>
-        <div className={classNames('twelve', 'wide', 'column', styles.currentSong)}>
-          {this.props.currentSong.title}
+        {
+          isOwner ?
+            <div className={classNames('twelve', 'wide', 'column', styles.currentSong)}>
+            {this.props.currentSong.title}
           {this.props.isPlaying ?
-          <ui onClick={() => this.handlePause()}>
-          <i className={classNames('huge', 'pause', 'link', 'icon', styles.buttonAccents)}></i>
-          </ui> :
-          <ui onClick={() => this.handlePlay()}>
-          <i className={classNames('huge', 'play', 'link', 'icon', styles.buttonAccents)}></i></ui>}
-          <ui onClick={() => this.handleNextSong()}>
-          <i className={classNames('huge', 'step', 'forward', 'link', 'icon', styles.buttonAccents)}></i></ui>
+           <ui onClick={() => this.handlePause()}>
+           <i className={classNames('huge', 'pause', 'link', 'icon', styles.buttonAccents)}></i>
+           </ui> :
+           <ui onClick={() => this.handlePlay()}>
+           <i className={classNames('huge', 'play', 'link', 'icon', styles.buttonAccents)}></i></ui>}
+            <ui onClick={() => this.handleNextSong()}>
+            <i className={classNames('huge', 'step', 'forward', 'link', 'icon', styles.buttonAccents)}></i></ui>
+            </div> :
+          null
+        }
         </div>
-      </div>
     </div>
     );
   }
