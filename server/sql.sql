@@ -16,7 +16,6 @@ CREATE TABLE songs(
 	playing BOOLEAN DEFAULT FALSE,
 	upvotes INT NOT NULL,
 	skipvotes INT NOT NULL,
-	room INT REFERENCES rooms (id),
 	date_added TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
 
