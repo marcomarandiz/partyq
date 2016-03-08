@@ -6,7 +6,7 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config.js';
-import rewrite from 'express-urlrewrite';
+import request from 'request';
 
 export const store = makeStore();
 
@@ -23,10 +23,7 @@ if (!isDeveloping) {
 
 if (isDeveloping) {
   const compiler = webpack(config);
-
-  app.use(rewrite(/\/[a-zA-Z0-9]+$/, '/'));
-
-  app.use(webpackMiddleware(compiler, {
+  const middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
     contentBase: 'src',
     stats: {
@@ -37,9 +34,21 @@ if (isDeveloping) {
       chunkModules: false,
       modules: false
     }
-  }));
+  });
+
+  app.use(middleware);
 
   app.use(webpackHotMiddleware(compiler));
+
+  app.get('/', function response(req, res) {
+    res.write('Splash page');
+    res.end();
+  });
+
+  app.get('*', function response(req, res) {
+    const host = 'http://' + req.headers.host + '/room';
+    request(host).pipe(res);
+  });
 }
 
 app.listen(port, hostname, function onStart(err) {
