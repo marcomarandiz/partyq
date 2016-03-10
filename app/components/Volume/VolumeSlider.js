@@ -6,13 +6,10 @@ export default class VolumeSlider extends React.Component {
   }
 
   componentDidMount() {
-    this.onUpdateVolume();
-  }
-
-  onUpdateVolume() {
-    $('#slider1').change(() => {
-      this.setVolume($('#slider1').val());
-    });
+    // Deals this bug where the VolumeSlider doesn't get rendered
+    // when it wasn't already rendered and a Soundcloud song is added
+    // I believe it's related to Soundcloud songs not updating the view
+    this.forceUpdate();
   }
 
   setVolume(volume) {
@@ -20,9 +17,15 @@ export default class VolumeSlider extends React.Component {
   }
 
   render() {
+    $('#volume').slider({
+      value: 50
+    });
+    $('#volume').on('slide', (event, ui) => {
+      this.setVolume(ui.value);
+    });
     return (
       <div>
-        <p><input id='slider1' type='range' min='0' max='100' step='1' defaultValue='50' /></p>
+        <div id='volume' animate='true' default='50' />
       </div>
     );
   }
