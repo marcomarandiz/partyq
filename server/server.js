@@ -30,6 +30,7 @@ export default function startServer(store) {
     // Get the path from the socket's window.location.pathname
 
     if (!(roomname in store.getState())) {
+      socket.emit('owner', roomname);
       store.dispatch(createRoom(roomname));
     }
     socket.join(roomname);
