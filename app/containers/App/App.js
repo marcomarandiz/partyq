@@ -32,6 +32,10 @@ class App extends React.Component {
         notie.alert(1, result.song.title + ' added!');
       }
     });
+
+    socket.on('owner', (roomname) => {
+      localStorage.setItem(roomname, 'owner');
+    });
   }
 
   componentDidMount() {
@@ -74,7 +78,7 @@ class App extends React.Component {
             <div className={classNames('ui', 'basic', 'segment')}>
               <div className={classNames('ui', 'grid')}>
                 <div className={classNames('three', 'wide', 'column')}></div>
-                <div className={classNames('seven', 'wide', 'column')}>
+                  <div className={classNames('seven', 'wide', 'column')}>
                   <Queue
 
                     id={socket.id}
