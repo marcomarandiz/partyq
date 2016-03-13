@@ -23,4 +23,4 @@ CREATE TABLE room_songs(
 	sid SERIAL REFERENCES songs (sid),
 	id SERIAL REFERENCES rooms (id),
 	PRIMARY KEY (sid, id)
-);
+);	
