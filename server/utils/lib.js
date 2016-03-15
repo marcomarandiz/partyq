@@ -49,3 +49,15 @@ export function pathToRoomName(path) {
   }
   return path;
 }
+
+// Boolean if we are past the tipping point for number of skips
+export function pastTippingPoint(numUsers, numSkips) {
+  const result = 1 / Math.log(numUsers);
+  let limit = numUsers * result;
+  if (limit >= numUsers) {
+    limit = numUsers;
+  }
+  limit = Math.floor(limit);
+
+  return (numSkips >= limit);
+}
