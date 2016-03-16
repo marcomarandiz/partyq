@@ -12,19 +12,37 @@ export function insertSongQuery(song) {
       + song.duration + ', 0, 0);';
 }
 
+export function createQueryConfig(song) {
+  const queryConfig = {
+    text: 'INSERT INTO songs (sid, source, title, artist, duration, upvotes, skipvotes) VALUES ($1, $2, $3, $4, $5, 0, 0);',
+    values: [
+      song.id,
+      song.src,
+      song.title,
+      song.artist,
+      song.duration
+    ]
+  };
+  console.log(queryConfig);
+  return queryConfig;
+}
+
 pg.connect(conString, (err, client, done) => {
   if (err) {
     return console.error('error fetching client from pool', err);
   }
-  const query = insertSongQuery({
+  const song = {
     id: 123456,
     src: 'youtube',
     title: 'Hello',
     artist: 'Adele',
     duration: 300
+  };
+  client.query(insertSongQuery(song), (error, result) => {
+    console.log(result);
+    console.log(error);
   });
-  console.log(query);
-  client.query(query, (error, result) => {
+  client.query(createQueryConfig(song), (error, result) => {
     console.log(result);
     console.log(error);
   });
