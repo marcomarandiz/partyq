@@ -6,14 +6,8 @@ const conString = process.env.PG_INFO;
 
 console.log(conString);
 
-export function insertSongQuery(song) {
-  return 'INSERT INTO songs (sid, source, title, artist, duration, upvotes, skipvotes) VALUES ('
-      + song.id + ', \'' + song.src + '\', \'' + song.title + '\', \'' + song.artist + '\', '
-      + song.duration + ', 0, 0);';
-}
-
-export function createQueryConfig(song) {
-  const queryConfig = {
+export function createInsertSongQuery(song) {
+  return {
     text: 'INSERT INTO songs (sid, source, title, artist, duration, upvotes, skipvotes) VALUES ($1, $2, $3, $4, $5, 0, 0);',
     values: [
       song.id,
@@ -23,8 +17,16 @@ export function createQueryConfig(song) {
       song.duration
     ]
   };
-  console.log(queryConfig);
-  return queryConfig;
+}
+
+export function createSelectSongByParam(param, value) {
+  return {
+    text: 'SELECT * FROM songs WHERE $1 = $2;',
+    values: [
+      param,
+      value
+    ]
+  };
 }
 
 pg.connect(conString, (err, client, done) => {
@@ -32,19 +34,29 @@ pg.connect(conString, (err, client, done) => {
     return console.error('error fetching client from pool', err);
   }
   const song = {
-    id: 123456,
+    id: 123456789,
     src: 'youtube',
     title: 'Hello',
     artist: 'Adele',
     duration: 300
   };
-  client.query(insertSongQuery(song), (error, result) => {
+  client.query(createInsertSongQuery(song), (error, result) => {
     console.log(result);
     console.log(error);
   });
-  client.query(createQueryConfig(song), (error, result) => {
+  const queryConfig = createSelectSongByParam('sid', song.id);
+  console.log(queryConfig);
+  client.query('SELECT * FROM songs WHERE sid = 123456789;', (error, result) => {
+    if (error) {
+      console.error(error);
+    }
     console.log(result);
-    console.log(error);
+  });
+  client.query(queryConfig, (error, result) => {
+    if (error) {
+      console.error(error);
+    }
+    console.log(result);
   });
 });
 
