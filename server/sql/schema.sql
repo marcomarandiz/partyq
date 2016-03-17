@@ -24,3 +24,4 @@ CREATE TABLE room_songs(
 	date_added TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
 	PRIMARY KEY (sid, id)
 );	
+
