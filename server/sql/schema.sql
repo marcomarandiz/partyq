@@ -11,7 +11,7 @@ CREATE TABLE songs(
 	source VARCHAR(200) NOT NULL,
 	title VARCHAR(50) NOT NULL,
 	artist VARCHAR(50) NOT NULL,
-	duration int NOT NULL,
+	duration int NOT NULL
 );
 
 CREATE TABLE room_songs(
