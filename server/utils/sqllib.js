@@ -76,7 +76,7 @@ export function insertIntoRoomSongs(sid, roomId, upvotes, skipvotes) {
 
 export function insertSongIntoSongs(song) {
   return {
-    text: 'INSERT INTO songs (sid, source, title, artist, duration, upvotes, skipvotes) VALUES ($1, $2, $3, $4, $5);',
+    text: 'INSERT INTO songs (sid, source, title, artist, duration) VALUES ($1, $2, $3, $4, $5);',
     values: [
       song.id,
       song.src,
@@ -87,6 +87,7 @@ export function insertSongIntoSongs(song) {
   };
 }
 
+/*
 pg.connect(conString, (err, client, done) => {
   if (err) {
     return console.error('error fetching client from pool', err);
@@ -117,4 +118,4 @@ pg.connect(conString, (err, client, done) => {
     console.log(result.rowCount);
   });
 });
-
+*/
