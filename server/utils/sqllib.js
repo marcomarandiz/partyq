@@ -1,10 +1,10 @@
-import pg from 'pg';
+// import pg from 'pg';
 
-const conString = process.env.PG_INFO;
+// const conString = process.env.PG_INFO;
 // Sample constring
 // pg://Alex@localhost/mydb
 
-console.log(conString);
+// console.log(conString);
 
 export function getSidsFromRoomSongs(roomId) {
   return {
@@ -57,7 +57,6 @@ export function insertNewRoom(creator, roomName) {
     values: [
       creator,
       roomName
-
     ]
   };
 }
