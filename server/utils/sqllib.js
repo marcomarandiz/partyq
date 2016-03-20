@@ -51,6 +51,15 @@ export function getNameFromRooms(roomId) {
   };
 }
 
+export function getRoomIdFromRoomName(roomName) {
+  return {
+    text: 'SELECT id FROM rooms WHERE name = $1',
+    values: [
+      roomName
+    ]
+  };
+}
+
 export function insertNewRoom(creator, roomName) {
   return {
     text: 'INSERT INTO rooms VALUES (DEFAULT, $1, DEFAULT, $2, DEFAULT)',
@@ -63,7 +72,7 @@ export function insertNewRoom(creator, roomName) {
 
 export function insertIntoRoomSongs(sid, roomId, upvotes, skipvotes) {
   return {
-    text: 'INSERT INTO room_songs VALUES ($1, $2, TRUE, TRUE, upvotes, skipvotes, DEFAULT)',
+    text: 'INSERT INTO room_songs VALUES ($1, $2, TRUE, TRUE, $3, $4, DEFAULT)',
     values: [
       sid,
       roomId,

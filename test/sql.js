@@ -10,7 +10,8 @@ import {
   getNameFromRooms,
   insertNewRoom,
   insertIntoRoomSongs,
-  insertSongIntoSongs
+  insertSongIntoSongs,
+  getRoomIdFromRoomName
 } from '../server/utils/sqllib';
 
 const song = {
@@ -21,18 +22,46 @@ const song = {
   duration: 300
 };
 
+const creator = 'steve';
+const roomName = 'jd2211';
+
 const conString = 'pg://' + process.env.USER + '@localhost/partyqtest';
 pg.connect(conString, (err, client, done) => {
-  describe('postgres tests', () => {
 
+  describe('postgres tests', () => {
     it('connected to partyqtest database', () => {
       expect(err).to.equal(null);
     });
+
     // TODO: Make sure correct tables exist
+
     // Empties Tables
-    client.query('DELETE FROM rooms');
-    client.query('DELETE FROM songs');
-    client.query('DELETE FROM room_songs');
+    describe('clear tables', () => {
+
+      // room_songs has to be deleted first
+      // Otherwise you can't delete the other tables
+
+      it('"DELETE FROM room_songs" should not throw error', (finished) => {
+        client.query('DELETE FROM room_songs', (error, result) => {
+          expect(error).to.equal(null);
+          finished();
+        });
+      });
+
+      it('"DELETE FROM rooms" should not throw error', (finished) => {
+        client.query('DELETE FROM rooms', (error, result) => {
+          expect(error).to.equal(null);
+          finished();
+        });
+      });
+
+      it('"DELETE FROM songs" should not throw error', (finished) => {
+        client.query('DELETE FROM songs', (error, result) => {
+          expect(error).to.equal(null);
+          finished();
+        });
+      });
+    });
 
     describe('insert song', () => {
       it('should not throw error', (finished) => {
@@ -58,8 +87,6 @@ pg.connect(conString, (err, client, done) => {
 
     describe('insert room', () => {
       it('should not throw error', (finished) => {
-        const creator =  'steve';
-        const roomName = 'jd2211';
         client.query(insertNewRoom(creator, roomName), (error, result) => {
           expect(error).to.equal(null);
           finished();
@@ -75,9 +102,27 @@ pg.connect(conString, (err, client, done) => {
         });
       });
     });
-    
 
+    let roomId = null;
+    describe('get roomid from room "steve"', () => {
+      it('should return a roomId', (finished) => {
+        client.query(getRoomIdFromRoomName(roomName), (error, result) => {
+          expect(error).to.equal(null);
+          expect(result.rowCount).to.equal(1);
+          roomId = result.rows[0].id;
+          finished();
+        });
+      });
+    });
 
+    describe('insert song into room_songs', () => {
+      it('should not throw error', (finished) => {
+        client.query(insertIntoRoomSongs(song.id, roomId, 0, 0), (error, result) => {
+          expect(error).to.equal(null);
+          finished();
+        });
+      });
+    });
 
   });
 });
