@@ -1,23 +1,20 @@
 import pg from 'pg';
 
-const conString = process.env.PG_INFO;
 // Sample constring
 // pg://Alex@localhost/mydb
 
-// console.log(conString);
-
-export function runQuery(ourQuery, next) {
+export function runQuery(ourQuery, next, connectionString) {
+  const conString = connectionString ? connectionString : process.env.PG_INFO;
   pg.connect(conString, (err, client, done) => {
     if (err) {
       return console.error('error fetching client from pool', err);
     }
     client.query(ourQuery, (error, result) => {
       if (error) {
-        return console.error('Error running query:', error);
-      } else {
-        next(result);
-        return; 
+        console.error('Error running query:', error);
       }
+      next(error, result);
+      return;
     });
     done();
   });
