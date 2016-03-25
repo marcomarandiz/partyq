@@ -3,11 +3,11 @@
 import {expect } from 'chai';
 import pg from 'pg';
 import {
-  // getSidsFromRoomSongs,
+  getSidsFromRoomSongs,
   getSongBySid,
-  // getUpvotesFromRoomSongs,
-  // getSkipVotesFromRoomSongs,
-  // getNameFromRooms,
+  getUpvotesFromRoomSongs,
+  getSkipvotesFromRoomSongs,
+  getNameFromRooms,
   insertNewRoom,
   insertIntoRoomSongs,
   insertSongIntoSongs,
@@ -126,5 +126,50 @@ describe('postgres tests', () => {
       }, conString);
     });
   });
+
+  describe('get sids from room_songs', () => {
+    it('should return a row containing a sid', (finished) => {
+      runQuery(getSidsFromRoomSongs(roomId), (error, result) => {
+        expect(error).to.equal(null);
+        expect(result.rowCount).to.equal(1);
+        expect(result.rows[0].sid).to.equal(song.id);
+        finished();
+      }, conString);
+    });
+  });
+
+  describe('get upvotes for song in room_songs', () => {
+    it('should return a row containing an upvote count', (finished) => {
+      runQuery(getUpvotesFromRoomSongs(roomId, song.id), (error, result) => {
+        expect(error).to.equal(null);
+        expect(result.rowCount).to.equal(1);
+        expect(result.rows[0].upvotes).to.equal(0);
+        finished();
+      }, conString);
+    });
+  });
+
+  describe('get skipvotes for song in room_songs', () => {
+    it('should return a row containing an skipupvote count', (finished) => {
+      runQuery(getSkipvotesFromRoomSongs(roomId, song.id), (error, result) => {
+        expect(error).to.equal(null);
+        expect(result.rowCount).to.equal(1);
+        expect(result.rows[0].skipvotes).to.equal(0);
+        finished();
+      }, conString);
+    });
+  });
+
+  describe('get room_name by id from rooms', () => {
+    it('should return a row containing a name', (finished) => {
+      runQuery(getNameFromRooms(roomId), (error, result) => {
+        expect(error).to.equal(null);
+        expect(result.rowCount).to.equal(1);
+        expect(result.rows[0].name).to.equal(roomName);
+        finished();
+      }, conString);
+    });
+  });
+
 });
 

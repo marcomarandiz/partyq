@@ -23,7 +23,9 @@ export function runQuery(ourQuery, next, connectionString) {
 export function getSidsFromRoomSongs(roomId) {
   return {
     text: 'SELECT sid FROM room_songs WHERE id = $1',
-    values: roomId
+    values: [
+      roomId
+    ]
   };
 }
 
