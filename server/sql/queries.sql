@@ -10,7 +10,7 @@ WHERE id = 'some room id' AND sid = 'some song id';
 SELECT skipvotes FROM room_songs
 WHERE id = 'some room id' AND sid = 'some song id';
 
-SELECT name FROM rooms 
+SELECT name FROM rooms
 WHERE id = 'some room id';
 
 INSERT INTO rooms VALUES
@@ -21,3 +21,10 @@ INSERT INTO room_songs VALUES
 
 INSERT INTO songs VALUES
 	(DEFAULT, 'some source', 'some title',' some artist', 'some duration');
+
+UPDATE room_songs SET upvotes = upvotes + 1
+WHERE id = 'some room id' AND sid = 'some song id';
+
+UPDATE room_songs SET skipvotes = skipvotes + 1
+WHERE id = 'some room id' AND sid = 'some song id';
+

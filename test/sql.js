@@ -12,6 +12,8 @@ import {
   insertIntoRoomSongs,
   insertSongIntoSongs,
   getRoomIdFromRoomName,
+  updateUpvotesInRoomSongs,
+  updateSkipvotesInRoomSongs,
   runQuery
 } from '../server/utils/sqllib';
 
@@ -138,12 +140,30 @@ describe('postgres tests', () => {
     });
   });
 
+  describe('update upvotes for song in room_songs', () => {
+    it('should not throw error', (finished) => {
+      runQuery(updateUpvotesInRoomSongs(roomId, song.id), (error, result) => {
+        expect(error).to.equal(null);
+        finished();
+      }, conString);
+    });
+  });
+
+  describe('update skipvotes for song in room_songs', () => {
+    it('should not throw error', (finished) => {
+      runQuery(updateSkipvotesInRoomSongs(roomId, song.id), (error, result) => {
+        expect(error).to.equal(null);
+        finished();
+      }, conString);
+    });
+  });
+
   describe('get upvotes for song in room_songs', () => {
     it('should return a row containing an upvote count', (finished) => {
       runQuery(getUpvotesFromRoomSongs(roomId, song.id), (error, result) => {
         expect(error).to.equal(null);
         expect(result.rowCount).to.equal(1);
-        expect(result.rows[0].upvotes).to.equal(0);
+        expect(result.rows[0].upvotes).to.equal(1);
         finished();
       }, conString);
     });
@@ -154,7 +174,7 @@ describe('postgres tests', () => {
       runQuery(getSkipvotesFromRoomSongs(roomId, song.id), (error, result) => {
         expect(error).to.equal(null);
         expect(result.rowCount).to.equal(1);
-        expect(result.rows[0].skipvotes).to.equal(0);
+        expect(result.rows[0].skipvotes).to.equal(1);
         finished();
       }, conString);
     });

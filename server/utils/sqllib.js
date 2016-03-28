@@ -111,3 +111,23 @@ export function insertSongIntoSongs(song) {
   };
 }
 
+export function updateSkipvotesInRoomSongs(roomId, sid) {
+  return {
+    text: 'UPDATE room_songs SET skipvotes = skipvotes + 1 WHERE id = $1 AND sid = $2',
+    values: [
+      roomId,
+      sid
+    ]
+  };
+}
+
+export function updateUpvotesInRoomSongs(roomId, sid) {
+  return {
+    text: 'UPDATE room_songs SET upvotes = upvotes + 1 WHERE id = $1 AND sid = $2',
+    values: [
+      roomId,
+      sid
+    ]
+  };
+}
+
