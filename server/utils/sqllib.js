@@ -131,3 +131,24 @@ export function updateUpvotesInRoomSongs(roomId, sid) {
   };
 }
 
+// Create tables if they don't already exist.
+// These should not be getting used outside
+// of tests or initial setup.
+
+export function createRoomsTable() {
+  return {
+    text: 'CREATE TABLE IF NOT EXISTS rooms(id SERIAL PRIMARY KEY NOT NULL, creator VARCHAR(50) NOT NULL, creation_date TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(), name VARCHAR(20) UNIQUE NOT NULL, expired BOOLEAN DEFAULT FALSE)'
+  };
+}
+
+export function createSongsTable() {
+  return {
+    text: 'CREATE TABLE IF NOT EXISTS songs(sid SERIAL PRIMARY KEY NOT NULL, source VARCHAR(200) NOT NULL, title VARCHAR(50) NOT NULL, artist VARCHAR(50) NOT NULL, duration int NOT NULL)'
+  };
+}
+
+export function createRoomSongsTable() {
+  return {
+    text: 'CREATE TABLE IF NOT EXISTS room_songs(sid SERIAL REFERENCES songs (sid), id SERIAL REFERENCES rooms (id), current BOOLEAN DEFAULT FALSE, playing BOOLEAN DEFAULT FALSE, upvotes INT NOT NULL, skipvotes INT NOT NULL, date_added TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(), PRIMARY KEY (sid, id))'
+  };
+}

@@ -14,6 +14,9 @@ import {
   getRoomIdFromRoomName,
   updateUpvotesInRoomSongs,
   updateSkipvotesInRoomSongs,
+  createRoomsTable,
+  createSongsTable,
+  createRoomSongsTable,
   runQuery
 } from '../server/utils/sqllib';
 
@@ -39,6 +42,27 @@ describe('postgres tests', () => {
   });
 
   // TODO: Make sure correct tables exist
+  describe('create tables if they dont exist', () => {
+    it('create table rooms should not throw error', (finished) => {
+      runQuery(createRoomsTable(), (error, result) => {
+        expect(error).to.equal(null);
+        finished();
+      });
+    });
+    it('create table rooms should not throw error', (finished) => {
+      runQuery(createSongsTable(), (error, result) => {
+        expect(error).to.equal(null);
+        finished();
+      });
+    });
+    it('create table rooms should not throw error', (finished) => {
+      runQuery(createRoomSongsTable(), (error, result) => {
+        expect(error).to.equal(null);
+        finished();
+      });
+    });
+  });
+
 
   // Empties Tables
   describe('clear tables', () => {
