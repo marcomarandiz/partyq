@@ -11,13 +11,16 @@ import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../.
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid, songInQueue } from '../../../common/utils/functions';
 
+const roomname = window.location.pathname.replace('/', '');
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`, {
-  query: `path=${window.location.pathname}`
+  query: `path=${roomname}`
 });
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    document.title += ` - ${roomname}`;
 
     this.props.ga.initialize('UA-70628505-1');
 
@@ -33,8 +36,8 @@ class App extends React.Component {
       }
     });
 
-    socket.on('owner', (roomname) => {
-      localStorage.setItem(roomname, 'owner');
+    socket.on('owner', (rname) => {
+      localStorage.setItem(rname, 'owner');
     });
   }
 
