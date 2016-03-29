@@ -7,6 +7,10 @@ export default class YoutubePlayer extends React.Component {
     super(props);
   }
 
+  setVolume(newVolume) {
+    this.youtube.setVolume(newVolume);
+  }
+
   _onReady(event, context) {
     // Autoplay if isPlaying = true
     if (context.props.isPlaying) {
@@ -14,7 +18,7 @@ export default class YoutubePlayer extends React.Component {
     }
 
     // Max the volume out
-    event.target.setVolume(100);
+    event.target.setVolume(50);
 
     // context = this from react
     // this = this for this function to Youtube API
