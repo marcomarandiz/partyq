@@ -70,15 +70,6 @@ export default function startServer(store) {
           }
           break;
         case SoundCloud:
-          // soundcloudAPI(action.url, (error, song) => {
-          //   if (error) {
-          //     callbackApiError(error, socket, store);
-          //   } else if (song) {
-          //     if (!dispatchUpvoteIfSongInQueue(action, song.vid, socket, store)) {
-          //       callbackApiSuccess(song, action, socket, store);
-          //     }
-          //   }
-          // });
           soundcloudResolveAPI(action.url, (error, resolvedUrl) => {
             if (error) {
               callbackApiError(error, socket, store);
