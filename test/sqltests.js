@@ -31,7 +31,9 @@ const song = {
 const creator = 'steve';
 const roomName = 'jd2211';
 
-const conString = 'pg://' + process.env.USER + '@localhost/partyqtest';
+const user = process.env.USER === undefined ? 'postgres' : process.env.USER;
+
+const conString = 'pg://' + user + '@localhost/partyqtest';
 console.log('Constring: ' + conString);
 
 describe('postgres tests', () => {
