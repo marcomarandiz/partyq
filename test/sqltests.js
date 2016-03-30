@@ -32,6 +32,7 @@ const creator = 'steve';
 const roomName = 'jd2211';
 
 const conString = 'pg://' + process.env.USER + '@localhost/partyqtest';
+console.log('Constring: ' + conString);
 
 describe('postgres tests', () => {
   it('connected to partyqtest database', () => {
