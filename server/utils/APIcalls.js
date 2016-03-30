@@ -12,13 +12,16 @@ export function youtubeAPI(url, next) {
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
   if (!process.env.YOUTUBE_API) {
-    error.error = 'You didnt put in an API key correctly so partyq will not pull song information from the YouTube API.'
-                  + '\nTo run with API key do $YOUTUBE_API={API_KEY_HERE} npm start';
+    error.error =
+      'You didnt put in an API key correctly so partyq will not pull ' +
+      'song information from the YouTube API.' +
+      '\nTo run with API key do $YOUTUBE_API={API_KEY_HERE} npm start';
     return next(error);
   }
 
-  const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
-           + song.vid + '&key=' + process.env.YOUTUBE_API;
+  const callAPIURL =
+    'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id=' +
+    song.vid + '&key=' + process.env.YOUTUBE_API;
 
   https.get(callAPIURL, (res) => {
     let data = '';
@@ -75,7 +78,6 @@ export function soundcloudAPI(url, next) {
     });
     res.on('end', () => {
       // make API call for information on JSON.parse(data).location;
-      // Need to make errorcheck to make sure the resolve API worked
       const resolveInfo = JSON.parse(data);
       if (resolveInfo.errors) {
         error.error = 'Resolve API error.';
@@ -101,6 +103,59 @@ export function soundcloudAPI(url, next) {
           });
         });
       }
+    });
+  });
+}
+
+export function soundcloudResolveAPI(url, next) {
+  const error = {};
+  if (!process.env.SOUNDCLOUD_CLIENT_ID) {
+    error.error = 'Need a soundcloud_client_id to handle soundcloud links.' +
+      '\nTo run with client_id do $SOUNDCLOUD_CLIENT_ID={KEY_HERE} npm start';
+    return next(error);
+  }
+
+  const resolveURL = 'https://api.soundcloud.com/resolve?url='
+                    + url + '&client_id=' + process.env.SOUNDCLOUD_CLIENT_ID;
+
+  https.get(resolveURL, (res) => {
+    let data = null;
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      // make API call for information on JSON.parse(data).location;
+      const resolveInfo = JSON.parse(data);
+      if (resolveInfo.errors) {
+        error.error = 'Resolve API error.';
+        error.message = resolveInfo.errors[0].error_message;
+        next(error);
+      } else {
+        next(resolveInfo.location);
+      }
+    });
+  });
+}
+
+export function soundcloudGetSongAPI(url, next) {
+  https.get(url, (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    // Really should add error check here
+    res.on('end', () => {
+      const song = {};
+      const songInfo = JSON.parse(data);
+      song.thumbnail = songInfo.artwork_url;
+      song.artist = songInfo.user.username;
+      song.duration = moment.duration(songInfo.duration);
+      song.title = songInfo.title;
+      song.url = songInfo.stream_url;   // might want to use 'uri' field instead
+      song.src = 'soundcloud';          // this should be set elsewhere
+      song.uploadDate = songInfo.created_at;
+      song.vid = songInfo.id;
+      next(null, song);
     });
   });
 }
