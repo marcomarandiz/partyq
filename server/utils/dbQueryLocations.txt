@@ -1,0 +1,16 @@
+|----------------------------+--------------------------+-------------------+------|
+| query                      | when                     | location          | done |
+|----------------------------+--------------------------+-------------------+------|
+| getSidsFromRoomSongs       | When reinitializing room | reducer           |      |
+| getSongBySid               | When reinitializing room | reducer           |      |
+| getUpvotesFromRoomSongs    | When reinitializing room | reducer           |      |
+| getSkipvotesFromRoomSongs  | When reinitializing room | reducer           |      |
+| getNameFromRooms           | Never?                   | tests             |      |
+| getRoomIdFromRoomName      | various                  | server or reducer |      |
+| insertNewRoom              | New room creation        | server            | 100% |
+| insertIntoRoomSongs        | Adding song to room      | server or reducer | 100% |
+| insertSongIntoSongs        | After new song is added  | server or reducer | 100% |
+| updateSkipvotesInRoomSongs | When song is upvoted     | reducer           |      |
+| updateUpvotesInRoomSongs   | When song is upvoted     | reducer           |      |
+|----------------------------+--------------------------+-------------------+------|
+

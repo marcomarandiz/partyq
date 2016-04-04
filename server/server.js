@@ -7,7 +7,15 @@ import { getVidFromUrl } from '../common/utils/functions';
 import { callbackApiSuccess,
          callbackApiError,
          dispatchUpvoteIfSongInQueue,
-         pathToRoomName } from './utils/lib';
+         pathToRoomName,
+         cleanupSong } from './utils/lib';
+import { runQuery,
+         insertNewRoom,
+         addSongToRoomSongs,
+         getSidsFromRoomSongs,
+         insertSongIntoSongs,
+         getSongBySid,
+         getRoomIdFromRoomName } from './utils/sqllib';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -31,6 +39,21 @@ export default function startServer(store) {
 
     if (!(roomname in store.getState())) {
       socket.emit('owner', roomname);
+      // TODO: Use different id for production
+      runQuery(getRoomIdFromRoomName(roomname), (error, result) => {
+        if (result.rowCount === 0) {
+          runQuery(insertNewRoom(socket.id, roomname), (err, res) => {
+            console.log(result);
+          });
+        } else {
+          console.log(result);
+          console.log('Room', roomname, 'already exists');
+          // TODO: Logic to restore room from db here
+          runQuery(getSidsFromRoomSongs(result.rows[0].id), (err, res) => {
+            console.log(res);
+          });
+        }
+      });
       store.dispatch(createRoom(roomname));
     }
     socket.join(roomname);
@@ -57,12 +80,29 @@ export default function startServer(store) {
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
-          if (!dispatchUpvoteIfSongInQueue(action, getVidFromUrl(action.url), socket, store)) {
-            youtubeAPI(action.url, (error, song) => {
+          const youtubeVid = getVidFromUrl(action.url);
+          if (!dispatchUpvoteIfSongInQueue(action, youtubeVid, socket, store)) {
+            runQuery(getSongBySid(youtubeVid), (error, result) => {
               if (error) {
-                callbackApiError(error, socket, store);
-              } else if (song) {
-                callbackApiSuccess(song, action, socket, store);
+                console.err('Error getting song by sid', error);
+              } else if (result.rowCount === 0) {
+                youtubeAPI(action.url, (error2, song) => {
+                  if (error) {
+                    callbackApiError(error, socket, store);
+                  } else if (song) {
+                    const cleanSong = cleanupSong(song);
+                    callbackApiSuccess(cleanSong, action, socket, store);
+                    runQuery(insertSongIntoSongs(cleanSong), (error3, result2) => {
+                      if (error2) {
+                        console.err('Error inserting song into songs.', error3);
+                      } else {
+                        addSongToRoomSongs(youtubeVid, roomname);
+                      }
+                    });
+                  }
+                });
+              } else {
+                addSongToRoomSongs(youtubeVid, roomname);
               }
             });
           }

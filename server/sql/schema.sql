@@ -7,15 +7,15 @@ CREATE TABLE rooms(
 );
 
 CREATE TABLE songs(
-	sid SERIAL PRIMARY KEY NOT NULL,
-	source VARCHAR(200) NOT NULL,
-	title VARCHAR(50) NOT NULL,
+	sid VARCHAR(15) PRIMARY KEY NOT NULL,
+	source VARCHAR(20) NOT NULL,
+	title VARCHAR(250) NOT NULL,
 	artist VARCHAR(50) NOT NULL,
 	duration int NOT NULL
 );
 
 CREATE TABLE room_songs(
-	sid SERIAL REFERENCES songs (sid),
+	sid VARCHAR(15) REFERENCES songs (sid),
 	id SERIAL REFERENCES rooms (id),
 	current BOOLEAN DEFAULT FALSE,
 	playing BOOLEAN DEFAULT FALSE,
@@ -23,5 +23,5 @@ CREATE TABLE room_songs(
 	skipvotes INT NOT NULL,
 	date_added TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
 	PRIMARY KEY (sid, id)
-);	
+);
 

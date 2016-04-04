@@ -11,7 +11,7 @@ export function runQuery(ourQuery, next, connectionString) {
     }
     client.query(ourQuery, (error, result) => {
       if (error) {
-        console.error('Error running query:', error);
+        console.error('Error running query', ourQuery, error);
       }
       next(error, result);
       return;
@@ -102,7 +102,7 @@ export function insertSongIntoSongs(song) {
   return {
     text: 'INSERT INTO songs (sid, source, title, artist, duration) VALUES ($1, $2, $3, $4, $5);',
     values: [
-      song.id,
+      song.vid,
       song.src,
       song.title,
       song.artist,
@@ -130,6 +130,26 @@ export function updateUpvotesInRoomSongs(roomId, sid) {
     ]
   };
 }
+
+// These functions are combinations of queries to do something
+export function addSongToRoomSongs(sid, roomName) {
+  // Get room id from roomName
+  // TODO: Possibly handle song requests from history?
+  runQuery(getRoomIdFromRoomName(roomName), (error, result) => {
+    if (error) {
+      console.err('Error getting room id from roomname.', error);
+    } else if (result.rowCount !== 1) {
+      console.err('Couldn\' find a room with name ' + roomName);
+    } else {
+      runQuery(insertIntoRoomSongs(sid, result.rows[0].id, 1, 0), (error2, res) => {
+        if (error2) {
+          console.err('Error adding song to room songs.', error2);
+        }
+      });
+    }
+  });
+}
+
 
 // Create tables if they don't already exist.
 // These should not be getting used outside

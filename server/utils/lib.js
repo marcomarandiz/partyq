@@ -1,5 +1,6 @@
 import { ADD_SONG, UPVOTE_SONG } from '../../common/constants/ActionTypes';
 import { songInQueue } from '../../common/utils/functions';
+import { YouTube } from '../../common/constants/SourceTypes';
 
 // Returns a songlist sorted by upvotes, descending
 export function sortByUpvotes(songlist) {
@@ -48,4 +49,14 @@ export function pathToRoomName(path) {
     return 'default';
   }
   return path;
+}
+
+export function cleanupSong(song) {
+  // Youtube's API doesn't handle duration properly for videos longer than an hour
+  // It always uses MM:SS
+  if (song.src === YouTube) {
+    const durationSplit = song.duration.split(':');
+    song.duration = parseInt(durationSplit[0], 10) * 60 + parseInt(durationSplit[1], 10);
+  }
+  return song;
 }
