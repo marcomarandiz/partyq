@@ -1,9 +1,11 @@
 import Server from 'socket.io';
-import { youtubeAPI, soundcloudAPI } from './utils/APIcalls';
 import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
 import { createRoom } from '../common/actions/roomActions';
 import { getVidFromUrl } from '../common/utils/functions';
+import { youtubeAPI,
+         soundcloudResolveAPI,
+         soundcloudGetSongAPI } from './utils/APIcalls';
 import { callbackApiSuccess,
          callbackApiError,
          dispatchUpvoteIfSongInQueue,
@@ -68,13 +70,19 @@ export default function startServer(store) {
           }
           break;
         case SoundCloud:
-          soundcloudAPI(action.url, (error, song) => {
+          soundcloudResolveAPI(action.url, (error, resolvedUrl) => {
             if (error) {
               callbackApiError(error, socket, store);
-            } else if (song) {
-              if (!dispatchUpvoteIfSongInQueue(action, song.vid, socket, store)) {
-                callbackApiSuccess(song, action, socket, store);
-              }
+            } else if (resolvedUrl) {
+              soundcloudGetSongAPI(resolvedUrl, (err, song) => {
+                if (err) {
+                  callbackApiError(err, socket, store);
+                } else {
+                  if (!dispatchUpvoteIfSongInQueue(action, song.vid, socket, store)) {
+                    callbackApiSuccess(song, action, socket, store);
+                  }
+                }
+              });
             }
           });
           break;

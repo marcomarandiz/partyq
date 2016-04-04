@@ -25,6 +25,14 @@ export default class VolumeSlider extends React.Component {
     document.getElementById('volume').style.display = 'none';
   }
 
+  toggleVolume() {
+    if (document.getElementById('volume').style.display === 'block') {
+      this.toggleVolumeOff();
+    } else {
+      this.toggleVolumeOn();
+    }
+  }
+
   render() {
     $('#volume').slider({
       value: 50,
@@ -38,8 +46,7 @@ export default class VolumeSlider extends React.Component {
         <input
           type='button'
           value='volume'
-          onMouseOver={() => this.toggleVolumeOn()}
-          onMouseOut={() => this.toggleVolumeOff()}
+          onClick={() => this.toggleVolume()}
         />
         <div id='volume' animate='true' default='50' />
       </div>
