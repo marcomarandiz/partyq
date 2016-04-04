@@ -12,8 +12,10 @@ export function youtubeAPI(url, next) {
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
   if (!process.env.YOUTUBE_API) {
-    error.error = 'You didnt put in an API key correctly so partyq will not pull song information from the YouTube API.'
-                  + '\nTo run with API key do $YOUTUBE_API={API_KEY_HERE} npm start';
+    error.error =
+      'You didnt put in an API key correctly so partyq will not pull ' +
+      'song information from the YouTube API.' +
+      '\nTo run with API key do $YOUTUBE_API={API_KEY_HERE} npm start';
     return next(error);
   }
 
@@ -49,11 +51,8 @@ export function youtubeAPI(url, next) {
   });
 }
 
-// Start of API call
-export function soundcloudAPI(url, next) {
-  const song = {};
+export function soundcloudResolveAPI(url, next) {
   const error = {};
-
   if (!process.env.SOUNDCLOUD_CLIENT_ID) {
     error.error = 'Need a soundcloud_client_id to handle soundcloud links.' +
       '\nTo run with client_id do $SOUNDCLOUD_CLIENT_ID={KEY_HERE} npm start';
@@ -63,11 +62,6 @@ export function soundcloudAPI(url, next) {
   const resolveURL = 'https://api.soundcloud.com/resolve?url='
                     + url + '&client_id=' + process.env.SOUNDCLOUD_CLIENT_ID;
 
-  // Resolve URL
-  // Soundcloud API has a neat thing called resolve
-  // We just pass it the url the user gives us and it
-  // gives us a new url that's the exact API call we
-  // need to get song information.
   https.get(resolveURL, (res) => {
     let data = '';
     res.on('data', (chunk) => {
@@ -75,32 +69,47 @@ export function soundcloudAPI(url, next) {
     });
     res.on('end', () => {
       // make API call for information on JSON.parse(data).location;
-      // Need to make errorcheck to make sure the resolve API worked
       const resolveInfo = JSON.parse(data);
       if (resolveInfo.errors) {
         error.error = 'Resolve API error.';
         error.message = resolveInfo.errors[0].error_message;
-        next(error);
-      } else {
-        https.get(resolveInfo.location, (res2) => {
-          let data2 = '';
-          res2.on('data', (chunk) => {
-            data2 += chunk;
-          });
-          res2.on('end', () => {
-            const songInfo = JSON.parse(data2);
-            song.thumbnail = songInfo.artwork_url;
-            song.artist = songInfo.user.username;
-            song.duration = moment.duration(songInfo.duration);
-            song.title = songInfo.title;
-            song.url = songInfo.stream_url;   // might want to use 'uri' field instead
-            song.src = 'soundcloud';          // this should be set elsewhere
-            song.uploadDate = songInfo.created_at;
-            song.id = songInfo.id;
-            next(null, song);
-          });
-        });
+        return next(error);
       }
+      next(null, resolveInfo.location);
+    });
+  });
+}
+
+export function soundcloudGetSongAPI(url, next) {
+  https.get(url, (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    // Really should add error check here
+    res.on('end', () => {
+      const error = {};
+      if (data === '') {
+        error.error = 'Some issue with getting Soundcloud song.';
+        error.message = 'Probably a forbidden song on Soundcloud.';
+        return next(error);
+      }
+      const songInfo = JSON.parse(data);
+      if (songInfo.errors) {
+        error.error = 'Soundcloud get song API error.';
+        error.message = songInfo.errors[0].error_message;
+        return next(error);
+      }
+      const song = {};
+      song.thumbnail = songInfo.artwork_url;
+      song.artist = songInfo.user.username;
+      song.duration = moment.duration(songInfo.duration);
+      song.title = songInfo.title;
+      song.url = songInfo.stream_url;   // might want to use 'uri' field instead
+      song.src = 'soundcloud';          // this should be set elsewhere
+      song.uploadDate = songInfo.created_at;
+      song.vid = songInfo.id;
+      next(null, song);
     });
   });
 }
