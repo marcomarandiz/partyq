@@ -113,16 +113,32 @@ export default function startServer(store) {
           soundcloudResolveAPI(action.url, (error, resolvedUrl) => {
             if (error) {
               callbackApiError(error, socket, store);
-            } else if (resolvedUrl) {
-              soundcloudGetSongAPI(resolvedUrl, (err, song) => {
-                if (err) {
-                  callbackApiError(err, socket, store);
-                } else {
-                  if (!dispatchUpvoteIfSongInQueue(action, song.vid, socket, store)) {
-                    callbackApiSuccess(song, action, socket, store);
+            } else {
+              if (!dispatchUpvoteIfSongInQueue(action, getVidFromUrl(resolvedUrl), socket, store)) {
+                runQuery(getSongBySid(getVidFromUrl(resolvedUrl)), (getSongError, result) => {
+                  if (getSongError) {
+                    console.err('Error getting Soundcloud song from db.', getSongError);
+                  } else if (result.rowCount === 0) {
+                    soundcloudGetSongAPI(resolvedUrl, (soundcloudGetSongError, song) => {
+                      if (soundcloudGetSongError) {
+                        callbackApiError(soundcloudGetSongError, socket, store);
+                      } else if (song) {
+                        const cleanSong = cleanupSong(song);
+                        callbackApiSuccess(cleanSong, action, socket, store);
+                        runQuery(insertSongIntoSongs(cleanSong), (insertSongError, resultOfInsertSong) => {
+                          if (insertSongError) {
+                            console.err('Error inserting song into songs.', insertSongError);
+                          } else {
+                            addSongToRoomSongs(song.id, roomname);
+                          }
+                        });
+                      }
+                    });
+                  } else {
+                    addSongToRoomSongs(getVidFromUrl(resolvedUrl), roomname);
                   }
-                }
-              });
+                });
+              }
             }
           });
           break;

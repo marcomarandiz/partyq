@@ -3,7 +3,7 @@ const youtubeRegex =
 const soundcloudRegex =
         /(?:https:\/\/)?(?:www.)?(?:m.)?soundcloud.com\/.*/;
 const soundcloudResolvedRegex =
-        /https:\/\/api\.soundcloud\.com\/tracks\/([0-9]+).*$/;
+        /https:\/\/api\.soundcloud\.com\/[a-z]+\/([0-9]+).*$/;
 
 export function isLinkValid(url) {
   if (youtubeRegex.test(url)) {
