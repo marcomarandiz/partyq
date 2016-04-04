@@ -108,7 +108,7 @@ export function soundcloudGetSongAPI(url, next) {
       song.url = songInfo.stream_url;   // might want to use 'uri' field instead
       song.src = 'soundcloud';          // this should be set elsewhere
       song.uploadDate = songInfo.created_at;
-      song.vid = songInfo.id;
+      song.id = songInfo.id;
       next(null, song);
     });
   });
