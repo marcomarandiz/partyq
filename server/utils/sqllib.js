@@ -102,7 +102,7 @@ export function insertSongIntoSongs(song) {
   return {
     text: 'INSERT INTO songs (sid, source, title, artist, duration) VALUES ($1, $2, $3, $4, $5);',
     values: [
-      song.vid,
+      song.id,
       song.src,
       song.title,
       song.artist,

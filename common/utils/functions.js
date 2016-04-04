@@ -33,13 +33,13 @@ export function songInQueue(queue, id) {
   if (queue.songlist) {
 
     // Find song by vid, return song object if found, else return false
-    const index = queue.songlist.findIndex((song) => song.vid === id );
+    const index = queue.songlist.findIndex((song) => song.id === id );
     return index;
 
     // Find by song vid, and return as boolean
-    // return Boolean(queue.songlist.find((song) => song.vid === id));
+    // return Boolean(queue.songlist.find((song) => song.id === id));
     // Need to change to this when we start upvoting songs on duplicate adds
-    // return (queue.songlist.findIndex((song) => song.vid === id));
+    // return (queue.songlist.findIndex((song) => song.id === id));
   }
 
   return false;

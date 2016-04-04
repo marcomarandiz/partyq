@@ -7,7 +7,7 @@ export function youtubeAPI(url, next) {
   const song = {};
   const error = {};
   song.url = url;
-  song.vid = getVidFromUrl(url);
+  song.id = getVidFromUrl(url);
 
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
@@ -18,7 +18,7 @@ export function youtubeAPI(url, next) {
   }
 
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
-           + song.vid + '&key=' + process.env.YOUTUBE_API;
+           + song.id + '&key=' + process.env.YOUTUBE_API;
 
   https.get(callAPIURL, (res) => {
     let data = '';
@@ -34,7 +34,7 @@ export function youtubeAPI(url, next) {
         return next(error);
       }
       if (!youTubeSongData.items[0]) {
-        error.error = 'Invalid VID: ' + song.vid;
+        error.error = 'Invalid VID: ' + song.id;
         return next(error);
       }
       song.duration = moment.duration(youTubeSongData.items[0].contentDetails.duration).asMilliseconds();
@@ -96,7 +96,7 @@ export function soundcloudAPI(url, next) {
             song.url = songInfo.stream_url;   // might want to use 'uri' field instead
             song.src = 'soundcloud';          // this should be set elsewhere
             song.uploadDate = songInfo.created_at;
-            song.vid = songInfo.id;
+            song.id = songInfo.id;
             next(null, song);
           });
         });
