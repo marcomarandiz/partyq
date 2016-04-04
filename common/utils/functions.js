@@ -2,6 +2,8 @@ const youtubeRegex =
         /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/(?:watch(?:\.php)?\?.*v=)|v\/|embed\/)([a-zA-Z0-9\-_]+).*/;
 const soundcloudRegex =
         /(?:https:\/\/)?(?:www.)?(?:m.)?soundcloud.com\/.*/;
+const soundcloudResolvedRegex =
+        /https:\/\/api\.soundcloud\.com\/tracks\/([0-9]+).*$/;
 
 export function isLinkValid(url) {
   if (youtubeRegex.test(url)) {
@@ -13,12 +15,19 @@ export function isLinkValid(url) {
 }
 
 export function getVidFromUrl(url) {
-  const match = youtubeRegex.exec(url);
+  const matchYoutube = youtubeRegex.exec(url);
 
-  if (match && match.length >= 1) {
+  if (matchYoutube && matchYoutube.length >= 1) {
     // Return the first group, which is the youtube id
-    return match[1];
+    return matchYoutube[1];
   }
+
+  const matchSoundcloudResolved = soundcloudResolvedRegex.exec(url);
+
+  if (matchSoundcloudResolved) {
+    return matchSoundcloudResolved[1];
+  }
+
   return 'error';
 }
 
@@ -44,3 +53,4 @@ export function songInQueue(queue, id) {
 
   return false;
 }
+
