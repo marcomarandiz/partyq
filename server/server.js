@@ -2,7 +2,7 @@ import Server from 'socket.io';
 import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
 import { createRoom } from '../common/actions/roomActions';
-import { getVidFromUrl } from '../common/utils/functions';
+import { getSidFromUrl } from '../common/utils/functions';
 import { youtubeAPI,
          soundcloudResolveAPI,
          soundcloudGetSongAPI } from './utils/APIcalls';
@@ -82,7 +82,7 @@ export default function startServer(store) {
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
-          const youtubeVid = getVidFromUrl(action.url);
+          const youtubeVid = getSidFromUrl(action.url);
           if (!dispatchUpvoteIfSongInQueue(action, youtubeVid, socket, store)) {
             runQuery(getSongBySid(youtubeVid), (error, result) => {
               if (error) {
@@ -114,8 +114,8 @@ export default function startServer(store) {
             if (error) {
               callbackApiError(error, socket, store);
             } else {
-              if (!dispatchUpvoteIfSongInQueue(action, getVidFromUrl(resolvedUrl), socket, store)) {
-                runQuery(getSongBySid(getVidFromUrl(resolvedUrl)), (getSongError, result) => {
+              if (!dispatchUpvoteIfSongInQueue(action, getSidFromUrl(resolvedUrl), socket, store)) {
+                runQuery(getSongBySid(getSidFromUrl(resolvedUrl)), (getSongError, result) => {
                   if (getSongError) {
                     console.err('Error getting Soundcloud song from db.', getSongError);
                   } else if (result.rowCount === 0) {
@@ -129,13 +129,13 @@ export default function startServer(store) {
                           if (insertSongError) {
                             console.err('Error inserting song into songs.', insertSongError);
                           } else {
-                            addSongToRoomSongs(song.id, roomname);
+                            addSongToRoomSongs(song.sid, roomname);
                           }
                         });
                       }
                     });
                   } else {
-                    addSongToRoomSongs(getVidFromUrl(resolvedUrl), roomname);
+                    addSongToRoomSongs(getSidFromUrl(resolvedUrl), roomname);
                   }
                 });
               }

@@ -14,7 +14,7 @@ export function isLinkValid(url) {
   return false;
 }
 
-export function getVidFromUrl(url) {
+export function getSidFromUrl(url) {
   const matchYoutube = youtubeRegex.exec(url);
 
   if (matchYoutube && matchYoutube.length >= 1) {
@@ -42,13 +42,13 @@ export function songInQueue(queue, id) {
   if (queue.songlist) {
 
     // Find song by vid, return song object if found, else return false
-    const index = queue.songlist.findIndex((song) => song.id === id );
+    const index = queue.songlist.findIndex((song) => song.sid === id );
     return index;
 
     // Find by song vid, and return as boolean
-    // return Boolean(queue.songlist.find((song) => song.id === id));
+    // return Boolean(queue.songlist.find((song) => song.sid === id));
     // Need to change to this when we start upvoting songs on duplicate adds
-    // return (queue.songlist.findIndex((song) => song.id === id));
+    // return (queue.songlist.findIndex((song) => song.sid === id));
   }
 
   return false;

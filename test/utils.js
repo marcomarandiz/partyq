@@ -1,7 +1,7 @@
 /* eslint "no-unused-expressions": 0 */
 
 import { expect } from 'chai';
-import { isLinkValid, getVidFromUrl, songInQueue } from '../common/utils/functions';
+import { isLinkValid, getSidFromUrl, songInQueue } from '../common/utils/functions';
 
 describe('utils', () => {
   const multipleQueryStringUrl = 'http://www.youtube.com/watch?v=mbyG85GZ0PI&feature=index';
@@ -13,25 +13,25 @@ describe('utils', () => {
   const expectedId = 'mbyG85GZ0PI';
 
   describe('youtube links', () => {
-    describe('getVidFromUrl', () => {
+    describe('getSidFromUrl', () => {
       it('gets id with multiple query strings', () => {
-        expect(getVidFromUrl(multipleQueryStringUrl)).to.equal(expectedId);
+        expect(getSidFromUrl(multipleQueryStringUrl)).to.equal(expectedId);
       });
 
       it('gets id from /v/id style links', () => {
-        expect(getVidFromUrl(vIdUrl)).to.equal(expectedId);
+        expect(getSidFromUrl(vIdUrl)).to.equal(expectedId);
       });
 
       it('gets id from youtu.be/id links', () => {
-        expect(getVidFromUrl(shortYoutubeUrl)).to.equal(expectedId);
+        expect(getSidFromUrl(shortYoutubeUrl)).to.equal(expectedId);
       });
 
       it('gets id from regular single query string links', () => {
-        expect(getVidFromUrl(regularUrl)).to.equal(expectedId);
+        expect(getSidFromUrl(regularUrl)).to.equal(expectedId);
       });
 
       it('gets id from embed links', () => {
-        expect(getVidFromUrl(embedUrl)).to.equal(expectedId);
+        expect(getSidFromUrl(embedUrl)).to.equal(expectedId);
       });
     });
 

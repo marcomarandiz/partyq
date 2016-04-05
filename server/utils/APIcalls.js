@@ -1,13 +1,13 @@
 import https from 'https';
 import moment from 'moment';
-import { getVidFromUrl } from '../../common/utils/functions.js';
+import { getSidFromUrl } from '../../common/utils/functions.js';
 
 // next is a callback
 export function youtubeAPI(url, next) {
   const song = {};
   const error = {};
   song.url = url;
-  song.id = getVidFromUrl(url);
+  song.sid = getSidFromUrl(url);
 
   // key has to be passed in as an environment varibale
   // Example: YOUTUBE_API=aksdfjalksdfjalskdfjlk npm start
@@ -20,7 +20,7 @@ export function youtubeAPI(url, next) {
   }
 
   const callAPIURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='
-           + song.id + '&key=' + process.env.YOUTUBE_API;
+           + song.sid + '&key=' + process.env.YOUTUBE_API;
 
   https.get(callAPIURL, (res) => {
     let data = '';
@@ -36,7 +36,7 @@ export function youtubeAPI(url, next) {
         return next(error);
       }
       if (!youTubeSongData.items[0]) {
-        error.error = 'Invalid VID: ' + song.id;
+        error.error = 'Invalid VID: ' + song.sid;
         return next(error);
       }
       song.duration = moment.duration(youTubeSongData.items[0].contentDetails.duration).asMilliseconds();
@@ -108,7 +108,7 @@ export function soundcloudGetSongAPI(url, next) {
       song.url = songInfo.stream_url;   // might want to use 'uri' field instead
       song.src = 'soundcloud';          // this should be set elsewhere
       song.uploadDate = songInfo.created_at;
-      song.id = songInfo.id;
+      song.sid = songInfo.id;
       next(null, song);
     });
   });
