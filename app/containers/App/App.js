@@ -58,7 +58,7 @@ class App extends React.Component {
   }
 
   reAddSongRequest(song, dispatch) {
-    const index = songInQueue(this.props.queue, song.vid);
+    const index = songInQueue(this.props.queue, song.sid);
     if (index === -1) {
       dispatch(addSong(song));
       notie.alert(1, song.title + ' added!');

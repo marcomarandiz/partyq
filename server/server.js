@@ -2,21 +2,12 @@ import Server from 'socket.io';
 import { ADD_SONG_REQUEST } from '../common/constants/ActionTypes';
 import { YouTube, SoundCloud } from '../common/constants/SourceTypes';
 import { createRoom } from '../common/actions/roomActions';
-import { getSidFromUrl } from '../common/utils/functions';
-import { youtubeAPI,
-         soundcloudResolveAPI,
-         soundcloudGetSongAPI } from './utils/APIcalls';
-import { callbackApiSuccess,
-         callbackApiError,
-         dispatchUpvoteIfSongInQueue,
+import { handleAddSongSoundcloud,
          pathToRoomName,
-         cleanupSong } from './utils/lib';
+         handleAddSongYoutube } from './utils/lib';
 import { runQuery,
          insertNewRoom,
-         addSongToRoomSongs,
          getSidsFromRoomSongs,
-         insertSongIntoSongs,
-         getSongBySid,
          getRoomIdFromRoomName } from './utils/sqllib';
 
 const development = process.env.NODE_ENV !== 'production';
@@ -82,65 +73,10 @@ export default function startServer(store) {
       if (action.type === ADD_SONG_REQUEST) {
         switch (action.src) {
         case YouTube:
-          const youtubeVid = getSidFromUrl(action.url);
-          if (!dispatchUpvoteIfSongInQueue(action, youtubeVid, socket, store)) {
-            runQuery(getSongBySid(youtubeVid), (error, result) => {
-              if (error) {
-                console.err('Error getting song by sid', error);
-              } else if (result.rowCount === 0) {
-                youtubeAPI(action.url, (error2, song) => {
-                  if (error) {
-                    callbackApiError(error, socket, store);
-                  } else if (song) {
-                    const cleanSong = cleanupSong(song);
-                    callbackApiSuccess(cleanSong, action, socket, store);
-                    runQuery(insertSongIntoSongs(cleanSong), (error3, result2) => {
-                      if (error2) {
-                        console.err('Error inserting song into songs.', error3);
-                      } else {
-                        addSongToRoomSongs(youtubeVid, roomname);
-                      }
-                    });
-                  }
-                });
-              } else {
-                addSongToRoomSongs(youtubeVid, roomname);
-              }
-            });
-          }
+          handleAddSongYoutube(action, socket, store);
           break;
         case SoundCloud:
-          soundcloudResolveAPI(action.url, (error, resolvedUrl) => {
-            if (error) {
-              callbackApiError(error, socket, store);
-            } else {
-              if (!dispatchUpvoteIfSongInQueue(action, getSidFromUrl(resolvedUrl), socket, store)) {
-                runQuery(getSongBySid(getSidFromUrl(resolvedUrl)), (getSongError, result) => {
-                  if (getSongError) {
-                    console.err('Error getting Soundcloud song from db.', getSongError);
-                  } else if (result.rowCount === 0) {
-                    soundcloudGetSongAPI(resolvedUrl, (soundcloudGetSongError, song) => {
-                      if (soundcloudGetSongError) {
-                        callbackApiError(soundcloudGetSongError, socket, store);
-                      } else if (song) {
-                        const cleanSong = cleanupSong(song);
-                        callbackApiSuccess(cleanSong, action, socket, store);
-                        runQuery(insertSongIntoSongs(cleanSong), (insertSongError, resultOfInsertSong) => {
-                          if (insertSongError) {
-                            console.err('Error inserting song into songs.', insertSongError);
-                          } else {
-                            addSongToRoomSongs(song.sid, roomname);
-                          }
-                        });
-                      }
-                    });
-                  } else {
-                    addSongToRoomSongs(getSidFromUrl(resolvedUrl), roomname);
-                  }
-                });
-              }
-            }
-          });
+          handleAddSongSoundcloud(action, socket, store);
           break;
         default:
           console.log('How did you get this source?' + action.src);

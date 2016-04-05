@@ -1,6 +1,8 @@
 import { ADD_SONG, UPVOTE_SONG } from '../../common/constants/ActionTypes';
-import { songInQueue } from '../../common/utils/functions';
+import { songInQueue, getSidFromUrl } from '../../common/utils/functions';
 import { YouTube, SoundCloud } from '../../common/constants/SourceTypes';
+import { youtubeAPI, soundcloudResolveAPI, soundcloudGetSongAPI } from './APIcalls';
+import { addSongToDatabase } from './sqllib';
 import moment from 'moment';
 
 // Returns a songlist sorted by upvotes, descending
@@ -68,3 +70,42 @@ export function cleanupSong(song) {
   return song;
 }
 
+export function handleAddSongYoutube(action, socket, store) {
+  // Get sid from url
+  const sid = getSidFromUrl(action.url);
+
+  // Check if song is in queue
+  if (!dispatchUpvoteIfSongInQueue(action, sid, socket, store)) {
+    // Check if song is in database
+    youtubeAPI(action.url, (error, song) => {
+      if (error) {
+        console.log('Error with youtubeAPI', error);
+        callbackApiError(error, socket, store);
+      } else {
+        const cleanSong = cleanupSong(song);
+        addSongToDatabase(cleanSong, action.roomname);
+        callbackApiSuccess(cleanSong, action, socket, store);
+      }
+    });
+  }
+}
+
+export function handleAddSongSoundcloud(action, socket, store) {
+  soundcloudResolveAPI(action.url, (error, resolvedUrl) => {
+    if (error) {
+      console.log('Error with soundcloud resolve song api', error);
+      callbackApiError(error, socket, store);
+    } else if (!dispatchUpvoteIfSongInQueue(action, getSidFromUrl(resolvedUrl), socket, store)) {
+      soundcloudGetSongAPI(resolvedUrl, (getSongError, song) => {
+        if (getSongError) {
+          console.log('Error with soundcloud get song api', error);
+          callbackApiError(error, socket, store);
+        } else {
+          const cleanSong = cleanupSong(song);
+          addSongToDatabase(cleanSong, action.roomname);
+          callbackApiSuccess(cleanSong, action, socket, store);
+        }
+      });
+    }
+  });
+}

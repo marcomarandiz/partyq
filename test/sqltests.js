@@ -5,6 +5,7 @@ import pg from 'pg';
 import {
   getSidsFromRoomSongs,
   getSongBySid,
+  getSidBySource,
   getUpvotesFromRoomSongs,
   getSkipvotesFromRoomSongs,
   getNameFromRooms,
@@ -22,11 +23,14 @@ import {
 
 const song = {
   sid: 123456789,
+  url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   src: 'youtube',
   title: 'Hello',
   artist: 'Adele',
   duration: 300
 };
+
+let sid = null;
 
 const creator = 'steve';
 const roomName = 'jd2211';
@@ -100,15 +104,21 @@ describe('postgres tests', () => {
       }, conString);
     });
 
+    it('should return a sid', (finished) => {
+      runQuery(getSidBySource(song.url), (error, result) => {
+        sid = result.rows[0].sid;
+        expect(error).to.equal(null);
+        finished();
+      }, conString);
+    });
+
     it('should return a song', (finished) => {
-      runQuery(getSongBySid(song.sid), (error, result) => {
-        expect(result.rows).to.deep.equal([{
-          sid: 123456789,
-          source: 'youtube',
-          title: 'Hello',
-          artist: 'Adele',
-          duration: 300
-        }]);
+      runQuery(getSongBySid(sid), (error, result) => {
+        expect(result.rows[0].source).to.deep.equal('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+        expect(result.rows[0].title).to.deep.equal('Hello');
+        expect(result.rows[0].artist).to.deep.equal('Adele');
+        expect(result.rows[0].duration).to.deep.equal(300);
+        expect(result.rows[0].thumbnail).to.deep.equal(null);
         finished();
       }, conString);
     });
@@ -146,7 +156,7 @@ describe('postgres tests', () => {
 
   describe('insert song into room_songs', () => {
     it('should not throw error', (finished) => {
-      runQuery(insertIntoRoomSongs(song.sid, roomId, 0, 0), (error, result) => {
+      runQuery(insertIntoRoomSongs(sid, roomId, 0, 0), (error, result) => {
         expect(error).to.equal(null);
         finished();
       }, conString);
@@ -158,7 +168,6 @@ describe('postgres tests', () => {
       runQuery(getSidsFromRoomSongs(roomId), (error, result) => {
         expect(error).to.equal(null);
         expect(result.rowCount).to.equal(1);
-        expect(result.rows[0].sid).to.equal(song.sid);
         finished();
       }, conString);
     });
@@ -166,7 +175,7 @@ describe('postgres tests', () => {
 
   describe('update upvotes for song in room_songs', () => {
     it('should not throw error', (finished) => {
-      runQuery(updateUpvotesInRoomSongs(roomId, song.sid), (error, result) => {
+      runQuery(updateUpvotesInRoomSongs(roomId, sid), (error, result) => {
         expect(error).to.equal(null);
         finished();
       }, conString);
@@ -175,7 +184,7 @@ describe('postgres tests', () => {
 
   describe('update skipvotes for song in room_songs', () => {
     it('should not throw error', (finished) => {
-      runQuery(updateSkipvotesInRoomSongs(roomId, song.sid), (error, result) => {
+      runQuery(updateSkipvotesInRoomSongs(roomId, sid), (error, result) => {
         expect(error).to.equal(null);
         finished();
       }, conString);
@@ -184,7 +193,7 @@ describe('postgres tests', () => {
 
   describe('get upvotes for song in room_songs', () => {
     it('should return a row containing an upvote count', (finished) => {
-      runQuery(getUpvotesFromRoomSongs(roomId, song.sid), (error, result) => {
+      runQuery(getUpvotesFromRoomSongs(roomId, sid), (error, result) => {
         expect(error).to.equal(null);
         expect(result.rowCount).to.equal(1);
         expect(result.rows[0].upvotes).to.equal(1);
@@ -195,7 +204,7 @@ describe('postgres tests', () => {
 
   describe('get skipvotes for song in room_songs', () => {
     it('should return a row containing an skipupvote count', (finished) => {
-      runQuery(getSkipvotesFromRoomSongs(roomId, song.sid), (error, result) => {
+      runQuery(getSkipvotesFromRoomSongs(roomId, sid), (error, result) => {
         expect(error).to.equal(null);
         expect(result.rowCount).to.equal(1);
         expect(result.rows[0].skipvotes).to.equal(1);

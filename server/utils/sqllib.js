@@ -38,6 +38,15 @@ export function getSongBySid(value) {
   };
 }
 
+export function getSidBySource(url) {
+  return {
+    text: 'SELECT sid FROM songs WHERE source = $1',
+    values: [
+      url
+    ]
+  };
+}
+
 export function getUpvotesFromRoomSongs(roomId, sid) {
   return {
     text: 'SELECT upvotes FROM room_songs WHERE id = $1 AND sid = $2',
@@ -100,13 +109,13 @@ export function insertIntoRoomSongs(sid, roomId, upvotes, skipvotes) {
 
 export function insertSongIntoSongs(song) {
   return {
-    text: 'INSERT INTO songs (sid, source, title, artist, duration) VALUES ($1, $2, $3, $4, $5);',
+    text: 'INSERT INTO songs (source, title, artist, duration, thumbnail) VALUES ($1, $2, $3, $4, $5);',
     values: [
-      song.sid,
-      song.src,
+      song.url,
       song.title,
       song.artist,
-      song.duration
+      song.duration,
+      song.thumbnail
     ]
   };
 }
@@ -132,24 +141,45 @@ export function updateUpvotesInRoomSongs(roomId, sid) {
 }
 
 // These functions are combinations of queries to do something
-export function addSongToRoomSongs(sid, roomName) {
-  // Get room id from roomName
-  // TODO: Possibly handle song requests from history?
-  runQuery(getRoomIdFromRoomName(roomName), (error, result) => {
-    if (error) {
-      console.err('Error getting room id from roomname.', error);
-    } else if (result.rowCount !== 1) {
-      console.err('Couldn\' find a room with name ' + roomName);
-    } else {
-      runQuery(insertIntoRoomSongs(sid, result.rows[0].id, 1, 0), (error2, res) => {
-        if (error2) {
-          console.err('Error adding song to room songs.', error2);
+export function addSongToDatabase(song, roomName) {
+  runQuery(insertSongIntoSongs(song), (insertSongError, insertSongResult) => {
+    if (insertSongError) {
+      console.log('Insert song into songs error');
+      console.log(insertSongError);
+    }
+
+    const sidPromise = new Promise((resolve, reject) => {
+      runQuery(getSidBySource(song.url), (error, result) => {
+        if (error) {
+          reject('Get song by source error', error);
+        } else {
+          resolve(result.rows[0].sid);
         }
       });
-    }
-  });
-}
+    });
 
+    const ridPromise = new Promise((resolve, reject) => {
+      runQuery(getRoomIdFromRoomName(roomName), (error, result) => {
+        if (error) {
+          reject('Get roomId by roomname error', error);
+        } else {
+          resolve(result.rows[0].id);
+        }
+      });
+    });
+
+    Promise.all([sidPromise, ridPromise]).then((results) => {
+      runQuery(insertIntoRoomSongs(results[0], results[1], 1, 0), (error, result) => {
+        if (error) {
+          console.log('Error in insertIntoRoomSongs');
+          console.log(error);
+        }
+      });
+    });
+
+  });
+
+}
 
 // Create tables if they don't already exist.
 // These should not be getting used outside
