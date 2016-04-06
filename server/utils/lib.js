@@ -79,7 +79,7 @@ export function handleAddSongYoutube(action, socket, store) {
     // Check if song is in database
     youtubeAPI(action.url, (error, song) => {
       if (error) {
-        console.log('Error with youtubeAPI', error);
+        console.error('Error with youtubeAPI', error);
         callbackApiError(error, socket, store);
       } else {
         const cleanSong = cleanupSong(song);
@@ -93,12 +93,12 @@ export function handleAddSongYoutube(action, socket, store) {
 export function handleAddSongSoundcloud(action, socket, store) {
   soundcloudResolveAPI(action.url, (error, resolvedUrl) => {
     if (error) {
-      console.log('Error with soundcloud resolve song api', error);
+      console.error('Error with soundcloud resolve song api', error);
       callbackApiError(error, socket, store);
     } else if (!dispatchUpvoteIfSongInQueue(action, getSidFromUrl(resolvedUrl), socket, store)) {
       soundcloudGetSongAPI(resolvedUrl, (getSongError, song) => {
         if (getSongError) {
-          console.log('Error with soundcloud get song api', error);
+          console.error('Error with soundcloud get song api', error);
           callbackApiError(error, socket, store);
         } else {
           const cleanSong = cleanupSong(song);

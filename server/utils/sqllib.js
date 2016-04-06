@@ -144,8 +144,8 @@ export function updateUpvotesInRoomSongs(roomId, sid) {
 export function addSongToDatabase(song, roomName) {
   runQuery(insertSongIntoSongs(song), (insertSongError, insertSongResult) => {
     if (insertSongError) {
-      console.log('Insert song into songs error');
-      console.log(insertSongError);
+      console.error('Insert song into songs error');
+      console.error(insertSongError);
     }
 
     const sidPromise = new Promise((resolve, reject) => {
@@ -171,8 +171,8 @@ export function addSongToDatabase(song, roomName) {
     Promise.all([sidPromise, ridPromise]).then((results) => {
       runQuery(insertIntoRoomSongs(results[0], results[1], 1, 0), (error, result) => {
         if (error) {
-          console.log('Error in insertIntoRoomSongs');
-          console.log(error);
+          console.error('Error in insertIntoRoomSongs');
+          console.error(error);
         }
       });
     });
