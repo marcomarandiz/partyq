@@ -141,6 +141,79 @@ export function updateUpvotesInRoomSongs(roomId, sid) {
 }
 
 // These functions are combinations of queries to do something
+export function updateUpvotes(roomName, song) {
+  console.log(song);
+  const sidPromise = new Promise((resolve, reject) => {
+    runQuery(getSidBySource(song.url), (error, result) => {
+      if (error) {
+        console.error(error);
+        reject('Get song by source error', error);
+      } else {
+        console.log('Promise 1');
+        resolve(result.rows[0].sid);
+      }
+    });
+  });
+
+  const ridPromise = new Promise((resolve, reject) => {
+    runQuery(getRoomIdFromRoomName(roomName), (error, result) => {
+      if (error) {
+        console.error(error);
+        reject('Get roomId by roomname error', error);
+      } else {
+        console.log('Promise 2');
+        resolve(result.rows[0].id);
+      }
+    });
+  });
+
+  Promise.all([sidPromise, ridPromise]).then((results) => {
+    runQuery(updateUpvotesInRoomSongs(results[1], results[0]), (error, result) => {
+      if (error) {
+        console.error('Error in updateUpvotes');
+        console.error(error);
+      } else {
+        console.log('upvotes updated.');
+      }
+    });
+  });
+}
+
+export function updateSkipvotes(roomName, song) {
+  const sidPromise = new Promise((resolve, reject) => {
+    runQuery(getSidBySource(song.url), (error, result) => {
+      if (error) {
+        console.error(error);
+        reject('Get song by source error', error);
+      } else {
+        resolve(result.rows[0].sid);
+      }
+    });
+  });
+
+  const ridPromise = new Promise((resolve, reject) => {
+    runQuery(getRoomIdFromRoomName(roomName), (error, result) => {
+      if (error) {
+        console.error(error);
+        reject('Get roomId by roomname error', error);
+      } else {
+        resolve(result.rows[0].id);
+      }
+    });
+  });
+
+  Promise.all([sidPromise, ridPromise]).then((results) => {
+    runQuery(updateSkipvotesInRoomSongs(results[1], results[0]), (error, result) => {
+      if (error) {
+        console.error('Error in updateSkipvotes');
+        console.error(error);
+      } else {
+        console.log('skipvotes updated.');
+      }
+    });
+  });
+}
+
 export function addSongToDatabase(song, roomName) {
   runQuery(insertSongIntoSongs(song), (insertSongError, insertSongResult) => {
     if (insertSongError) {
@@ -151,6 +224,7 @@ export function addSongToDatabase(song, roomName) {
     const sidPromise = new Promise((resolve, reject) => {
       runQuery(getSidBySource(song.url), (error, result) => {
         if (error) {
+          console.error(error);
           reject('Get song by source error', error);
         } else {
           resolve(result.rows[0].sid);
@@ -161,6 +235,7 @@ export function addSongToDatabase(song, roomName) {
     const ridPromise = new Promise((resolve, reject) => {
       runQuery(getRoomIdFromRoomName(roomName), (error, result) => {
         if (error) {
+          console.error(error);
           reject('Get roomId by roomname error', error);
         } else {
           resolve(result.rows[0].id);
@@ -176,9 +251,7 @@ export function addSongToDatabase(song, roomName) {
         }
       });
     });
-
   });
-
 }
 
 // Create tables if they don't already exist.

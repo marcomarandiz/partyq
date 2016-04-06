@@ -8,6 +8,10 @@ import {
   NEXT_READY,
   CREATE_ROOM
 } from '../common/constants/ActionTypes';
+import {
+  updateSkipvotes,
+  updateUpvotes,
+} from './utils/sqllib';
 import { sortByUpvotes } from './utils/lib';
 import moment from 'moment';
 
@@ -55,6 +59,7 @@ function queueReducer(state = roomInitialState.queue, action) {
     if (queueSonglist[action.index].userUpvotes.indexOf(userid) > -1) {
       return state;
     }
+    updateUpvotes(action.roomname, queueSonglist[action.index]);
     return {
       ...state,
       // Upvote song in songlist
@@ -97,6 +102,10 @@ function roomReducer(state = roomInitialState, action) {
     return action.state;
   case NEXT_SONG:
     // TODO: Move this out of NEXT_SONG and into own function
+
+    // Updating skipvotes won't do anything until we implement tipping point
+    updateSkipvotes(action.roomname, currentSong);
+
     let newState = state;
     if (Object.keys(currentSong).length !== 0 ) {
       const songEndMoment = moment();
