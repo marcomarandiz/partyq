@@ -42,8 +42,7 @@ if (isDeveloping) {
 }
 
 app.get('/', function response(req, res) {
-  res.write('Go to any route except / for a room');
-  res.end();
+  res.sendFile(path.join(__dirname, 'landing', 'index.html'));
 });
 
 app.get('*', function response(req, res) {
