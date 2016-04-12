@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  ​
+  <head>
+    ​
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    ​
+    <title>partyq.io</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    ​
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    ​
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.1/animate.min.css" type="text/css">
+    ​
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-creative/1.0.2/css/creative.min.css" type="text/css">
+    ​
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+         <![endif]-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
+    -    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.css">
+    ​
+    <style type="text/css">
+     body
+     {
+         background-image: url("http://i.imgur.com/v4SrCQl.jpg") !important;
+     }
+     .join
+     {
+         padding: 15px 0;
+     }
+
+     .join > p
+     {
+         margin-top: 15px;
+         margin-bottom: 20px !important;
+     }
+
+     .join > h2
+     {
+         margin-top: 5px !important;
+         margin-bottom: 0px !important;
+     }
+
+     .join input
+     {
+         border: 2px solid #f05f40 !important;
+         background-color: transparent !important;
+         max-width: 600px;
+         height: 75px;
+         margin: 0 auto;
+         border-radius: 35px 35px 35px 35px;
+         -moz-border-radius: 35px 35px 35px 35px;
+         -webkit-border-radius: 35px 35px 35px 35px;
+     }
+
+     .join input[type="text"]
+     {
+         font-size: 24px;
+         color: #fff;
+     }
+
+     .btn-primary
+     {
+         background-color: transparent !important;
+         border: 2px solid #f05f40 !important;
+     }
+
+     .join .btn-primary:hover
+     {
+         background-color: #f05f40 !important;
+     }
+
+     .header-content-inner
+     {
+         /*imax-width: 600px !important;*/
+     }
+
+     .onoff img:last-child
+     {
+         display: none;
+     }
+
+     .onoff:hover img:first-child
+     {
+         display: none;
+     }
+
+     .onoff:hover img:last-child
+     {
+         display: inline-block;
+     }
+
+    </style>
+
+    <script   src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+     function go(e, rn)
+     {
+       //alert($("#roomName").val());
+
+       var rname = rn;
+
+       if(rname.length === 0)
+       {
+         alert("Not a valid room");
+         return;
+       }
+
+       var url = window.location.href;
+       url += (url[url.length-1] === "/") ? rname : "/" + rname;
+       window.location.href = url;
+
+     }
+
+     $(document).ready(function(){
+
+       $("#joinRoom").on("click", function(e){
+         go(e, $("#roomName").val());
+       });
+
+     });
+    </script>
+
+  </head>
+  ​
+  <body id="page-top">
+    ​
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand page-scroll" href="#page-top">partyq.io</a>
+        </div>
+        ​
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <!--<a class="page-scroll" href="#about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
+              <i class="inverted blue large circular info icon" style="float: right;"></i>
+            </li>
+            <li>
+              <i class="inverted blue large circular facebook icon" style="float: right;"></i>
+            </li>
+            <li>
+              <i class="inverted blue large circular twitter icon" style="float: right;"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    ​
+    <header>
+      <div class="header-content">
+        <div class="header-content-inner join">
+          <h1>Placeholder</h1>
+          <h2>Because the party is better when you're the DJ.</h2>
+          <p><input id="roomName" type="text" class="form-control" placeholder="Enter the name of your room" ></p>
+          <!--<a href="" id="joinRoom" class="btn btn-primary btn-xl page-scroll"></a>-->
+          <button type="button" id="joinRoom" class="btn btn-primary btn-xl">Create/Join Room</button>
+        </div>
+      </div>
+    </header>
+    ​
+    ​
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    ​
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    ​
+    <!-- Custom Theme JavaScript -->
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    ​
+  </body>
+  ​
+</html>
