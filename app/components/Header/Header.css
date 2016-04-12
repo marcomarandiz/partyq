@@ -1,15 +1,20 @@
-.header {
-  text-align: center;
-  background-color: #000;
-  color: #30AAFF;
-  position: relative;
-}
-
-.addSong {
-  float: left;
-}
-
 .logo{
-	 width: 70px !important;
-    height: 70px !important;
+  width: 70px !important;
+  height: 70px !important;
+}
+
+.topnav
+{
+  padding-top: 8px;
+}
+
+.top-nav i
+{
+  opacity: 0.5;
+}
+
+.top-nav i:hover
+{
+  opacity: 1.0;
+  cursor: pointer;
 }
