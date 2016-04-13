@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 export default class VolumeSlider extends React.Component {
   constructor(props) {
@@ -43,12 +44,11 @@ export default class VolumeSlider extends React.Component {
     });
     return (
       <div>
-        <input
-          type='button'
-          value='volume'
-          onClick={() => this.toggleVolume()}
-        />
-        <div id='volume' animate='true' default='50' />
+        <div id='volume' animate='true' default='50' style={{position: 'fixed'}} />
+        <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
+          value='volume' onClick={() => this.toggleVolume()}>
+          Volume
+        </button>
       </div>
     );
   }

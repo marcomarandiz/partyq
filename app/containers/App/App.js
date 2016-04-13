@@ -3,6 +3,7 @@ import styles from './App.css';
 import History from '../../components/History/History.js';
 import Queue from '../../components/Queue/Queue.js';
 import Header from '../../components/Header/Header.js';
+import Controls from '../../components/Controls/Controls.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import io from 'socket.io-client';
@@ -102,6 +103,7 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        <Controls />
       </div>
     );
   }
