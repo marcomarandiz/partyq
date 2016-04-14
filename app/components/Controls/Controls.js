@@ -13,6 +13,9 @@ export default class Controls extends React.Component {
     .sticky({
       context: 'body'
     });
+    $('#Volume').on('mouseenter', () => this.refs.VolumeSlider.toggleVolumeOn());
+    $('#Volume').on('mouseleave', () => this.refs.VolumeSlider.toggleVolumeOff());
+    console.log(this);
   }
 
   handlePlay() {
@@ -24,14 +27,16 @@ export default class Controls extends React.Component {
   }
 
   render() {
+
     return (
       <div className={classNames('footer-controls', styles.footercontrols)}>
         <div className={classNames('row')}>
           <div className={classNames('btn-group', 'btn-group-justified')} role='group' aria-label='...'>
-            <div className={classNames('btn-group')} role='group'>
+            <div className={classNames('btn-group')} id='Volume' role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}>
-                Volume
-              <VolumeSlider />
+                <VolumeSlider
+                  ref='VolumeSlider'
+                />
               </button>
             </div>
             <div className={classNames('btn-group')} role='group'>

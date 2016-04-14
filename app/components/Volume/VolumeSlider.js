@@ -18,11 +18,15 @@ export default class VolumeSlider extends React.Component {
   }
 
   toggleVolumeOn() {
+    console.log('Volume on');
     document.getElementById('volume').style.display = 'block';
+    document.getElementById('volumetext').style.display = 'none';
   }
 
   toggleVolumeOff() {
+    console.log('Volume off');
     document.getElementById('volume').style.display = 'none';
+    document.getElementById('volumetext').style.display = 'block';
   }
 
   toggleVolume() {
@@ -43,7 +47,10 @@ export default class VolumeSlider extends React.Component {
     });
 
     return (
-      <div id='volume' animate='true' default='50' style={{position: 'fixed'}} />
+      <div>
+        <div id='volumetext'>Volume</div>
+        <div id='volume' animate='true' default='50' style={{position: 'fixed'}} />
+      </div>
     );
   }
 }
