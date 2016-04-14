@@ -16,7 +16,7 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <nav id='mainNav' className={classNames('navbar', 'navbar-default', 'navbar-fixed-top')}>
+      <nav className={classNames('navbar', 'navbar-default', 'navbar-fixed-top', 'mainNav')}>
         <div className={classNames('container-fluid')}>
           <div className={classNames('navbar-header')}>
             <button type='button' className={classNames('navbar-toggle', 'collapsed')} data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>
@@ -25,10 +25,10 @@ export default class Header extends React.Component {
               <span className={classNames('icon-bar')}></span>
               <span className={classNames('icon-bar')}></span>
             </button>
-            <a className={classNames('navbar-brand', 'page-scroll')} href='#page-top'>partyq.io</a>
+            <span className={classNames('navbar-brand', 'page-scroll')}>partyq.io</span>
           </div>
 
-          <div className={classNames('collapse', 'navbar-collapse', styles.topnav)} id='top-nav'>
+          <div className={classNames('collapse', 'navbar-collapse', styles.topnav)}>
             <ul className={classNames('nav navbar-nav', 'navbar-right')}>
               <li>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'info', 'icon')} style={{float: 'right'}}></i>

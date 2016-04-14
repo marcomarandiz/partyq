@@ -130,17 +130,17 @@ body {
   text-align: center;
 }
 
-#top-nav
+.topnav
 {
-  padding-top: 8px;
+  padding-top: 4px !important;
 }
 
-#top-nav i
+.topnav i
 {
   opacity: 0.5;
 }
 
-#top-nav i:hover
+.topnav i:hover
 {
   opacity: 1.0;
   cursor: pointer;
@@ -151,7 +151,7 @@ body {
   height: 437px;
 }
 
-#mainNav
+.mainNav
 {
   height: 60px;
 }
