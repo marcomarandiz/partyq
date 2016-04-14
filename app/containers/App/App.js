@@ -65,6 +65,10 @@ class App extends React.Component {
     dispatch(pauseSong());
   }
 
+  changeVolume(volume) {
+    this.refs.Queue.refs.CurrentSong.refs.Player.changeVolume(volume);
+  }
+
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
     this.addSongRequest(link, dispatch);
@@ -120,6 +124,7 @@ class App extends React.Component {
           onPlaySong={() => this.onPlaySong()}
           onPauseSong={() => this.onPauseSong()}
           onNextSong={() => this.onNextSong()}
+          changeVolume={(volume) => this.changeVolume(volume)}
           isPlaying={this.props.queue.isPlaying}
           nextReady={this.props.queue.nextReady}
         />

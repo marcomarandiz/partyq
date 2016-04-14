@@ -15,7 +15,6 @@ export default class Controls extends React.Component {
     });
     $('#Volume').on('mouseenter', () => this.refs.VolumeSlider.toggleVolumeOn());
     $('#Volume').on('mouseleave', () => this.refs.VolumeSlider.toggleVolumeOff());
-    console.log(this);
   }
 
   handlePlay() {
@@ -33,11 +32,15 @@ export default class Controls extends React.Component {
         <div className={classNames('row')}>
           <div className={classNames('btn-group', 'btn-group-justified')} role='group' aria-label='...'>
             <div className={classNames('btn-group')} id='Volume' role='group'>
-              <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}>
+            {/*
+              Old bootstrap styling that breaks slider
+              <div type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
+              */}
                 <VolumeSlider
+                  changeVolume={(volume) => this.props.changeVolume(volume)}
                   ref='VolumeSlider'
                 />
-              </button>
+            {/* </div> */}
             </div>
             <div className={classNames('btn-group')} role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
