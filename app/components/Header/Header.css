@@ -24,7 +24,7 @@ body {
   padding: 0;
 }
 .header {
-  border-bottom: 1px solid #000;
+  border-bottom: 100px solid #2bb673 !important;
   width: 100%;
   float: right;
   padding-right: 5%;
@@ -42,12 +42,12 @@ body {
 
 .video {
   padding-left: 5% !important;
-  border: 1px solid #000;
+  border: 1px solid #2bb673;
   margin-left: 5% !important;
 }
 
 .list {
-  border: 1px solid #000;
+  border: 1px solid #2bb673;
   margin-left: 2% !important;
 }
 
@@ -72,14 +72,14 @@ body {
 
 .join input
 {
-  border: 2px solid #f05f40 !important;
+  border: 2px solid #2bb673 !important;
   background-color: transparent !important;
   max-width: 600px;
   height: 75px;
   margin: 0 auto;
-  border-radius: 35px 35px 35px 35px;
-  -moz-border-radius: 35px 35px 35px 35px;
-  -webkit-border-radius: 35px 35px 35px 35px;
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px 8px 8px 8px;
+  -webkit-border-radius: 8px 8px 8px 8px;
 }
 
 .join input[type="text"]
@@ -91,7 +91,7 @@ body {
 .btn-primary
 {
   background-color: transparent !important;
-  border: 2px solid #f05f40 !important;
+  border: 2px solid #2bb673 !important;
 }
 
 .join .btn-primary:hover
