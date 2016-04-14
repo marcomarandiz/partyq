@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import styles from './AddSong.css';
 import { isLinkValid } from '../../../common/utils/functions.js';
 import classNames from 'classnames';
 import notie from 'notie';
@@ -33,19 +32,17 @@ export default class AddSong extends React.Component {
 
   render() {
     return (
-            
-        <div class="row">
-           <div class="col-md-6 col-md-offset-3" id="room">
+        <div className={classNames('row')}>
+           <div className={classNames('col-md-6', 'col-md-offset-3')} id='room'>
 
-             <div class="input-group">
-               <input type="text" class="form-control"/>
-               <span class="input-group-btn">
-                 <button class="btn btn-default" type="button">Add Song</button>
+             <div className={classNames('input-group')}>
+               <input type='text' className={classNames('form-control')}/>
+               <span className={classNames('input-group-btn')}>
+                 <button className={('btn btn-default')} type='button'>Add Song</button>
                </span>
              </div>
            </div>
          </div>
-
     );
   }
 }
