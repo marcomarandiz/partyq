@@ -25,7 +25,7 @@ export default class Header extends React.Component {
               <span className={classNames('icon-bar')}></span>
               <span className={classNames('icon-bar')}></span>
             </button>
-            <a className={classNames('navbar-brand', 'page-scroll')} href='#page-top'>partyq.io</a>
+            <a className={classNames('navbar-brand', 'page-scroll')} href='#page-top'><img src='http://i.imgur.com/gOxrFtn.png'/></a>
           </div>
 
           <div className={classNames('collapse', 'navbar-collapse', styles.topnav)} id='top-nav'>
@@ -46,4 +46,3 @@ export default class Header extends React.Component {
     );
   }
 }
-
