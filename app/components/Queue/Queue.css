@@ -1,0 +1,18 @@
+.content {
+  clear: both;
+  padding-top: 2%;
+  width: 100%;
+  margin: 100px auto 0;
+  float: middle;
+}
+
+.video {
+  padding-left: 5% !important;
+  border: 1px solid #000;
+  margin-left: 5% !important;
+}
+
+.list {
+  border: 1px solid #000;
+  margin-left: 2% !important;
+}

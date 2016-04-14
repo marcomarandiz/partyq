@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 export default class VolumeSlider extends React.Component {
   constructor(props) {
@@ -37,19 +36,14 @@ export default class VolumeSlider extends React.Component {
   render() {
     $('#volume').slider({
       value: 50,
-      orientation: 'vertical'
+      orientation: 'horizontal'
     });
     $('#volume').on('slide', (event, ui) => {
       this.setVolume(ui.value);
     });
+
     return (
-      <div>
-        <div id='volume' animate='true' default='50' style={{position: 'fixed'}} />
-        <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
-          value='volume' onClick={() => this.toggleVolume()}>
-          Volume
-        </button>
-      </div>
+      <div id='volume' animate='true' default='50' style={{position: 'fixed'}} />
     );
   }
 }

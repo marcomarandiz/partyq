@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import QueueSonglist from '../QueueSonglist/QueueSonglist.js';
 import CurrentSong from '../CurrentSong/CurrentSong.js';
+import classNames from 'classnames';
+import styles from './Queue.css';
 
 export default class Queue extends React.Component {
   constructor(props) {
@@ -9,19 +11,22 @@ export default class Queue extends React.Component {
 
   render() {
     return (
-      // Only show current song if there is one
-        <div>
-          {this.props.currentSong !== null ?
-            <CurrentSong
-              currentSong={this.props.currentSong}
-              onPlaySong={() => this.props.onPlaySong()}
-              onPauseSong={() => this.props.onPauseSong()}
-              onNextSong={() => this.props.onNextSong()}
-              onNextReady={() => this.props.onNextReady()}
-              isPlaying={this.props.isPlaying} />
-          : ''}
+      <div className={classNames(styles.content)}>
+        <div className={classNames('row')}>
+          <div className={classNames('col-md-7', styles.video)}>
+            {this.props.currentSong !== null ?
+              <CurrentSong
+                currentSong={this.props.currentSong}
+                onPlaySong={() => this.props.onPlaySong()}
+                onPauseSong={() => this.props.onPauseSong()}
+                onNextSong={() => this.props.onNextSong()}
+                onNextReady={() => this.props.onNextReady()}
+                isPlaying={this.props.isPlaying} />
+            : ''}
+          </div>
           <QueueSonglist songs={this.props.songlist} onUpvoteSong={this.props.onUpvoteSong} />
         </div>
+      </div>
     );
   }
 }
@@ -38,3 +43,18 @@ Queue.propTypes = {
     PropTypes.object
   ).isRequired
 };
+
+
+      // // Only show current song if there is one
+      //   <div>
+      //     {this.props.currentSong !== null ?
+      //       <CurrentSong
+      //         currentSong={this.props.currentSong}
+      //         onPlaySong={() => this.props.onPlaySong()}
+      //         onPauseSong={() => this.props.onPauseSong()}
+      //         onNextSong={() => this.props.onNextSong()}
+      //         onNextReady={() => this.props.onNextReady()}
+      //         isPlaying={this.props.isPlaying} />
+      //     : ''}
+      //     <QueueSonglist songs={this.props.songlist} onUpvoteSong={this.props.onUpvoteSong} />
+      //   </div>

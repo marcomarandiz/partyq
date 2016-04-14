@@ -21,7 +21,10 @@ export default class Controls extends React.Component {
         <div className={classNames('row')}>
           <div className={classNames('btn-group', 'btn-group-justified')} role='group' aria-label='...'>
             <div className={classNames('btn-group')} role='group'>
+              <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}>
+              Volume
               <VolumeSlider />
+              </button>
             </div>
             <div className={classNames('btn-group')} role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}>Play/Pause</button>
