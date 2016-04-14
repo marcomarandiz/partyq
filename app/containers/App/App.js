@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import styles from './App.css';
-import History from '../../components/History/History.js';
+// import History from '../../components/History/History.js';
 import Queue from '../../components/Queue/Queue.js';
 import Header from '../../components/Header/Header.js';
+import Controls from '../../components/Controls/Controls.js';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import io from 'socket.io-client';
@@ -10,6 +11,7 @@ import notie from 'notie';
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid, songInQueue } from '../../../common/utils/functions';
+import AddSong from '../../components/AddSong/AddSong.js';
 
 const roomname = window.location.pathname.replace('/', '');
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`, {
@@ -43,6 +45,24 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.ga.pageview('/');
+    console.log(this.props);
+  }
+
+  onNextSong() {
+    const { dispatch } = this.props;
+    dispatch(nextSong());
+  }
+
+  onPlaySong() {
+    const { dispatch } = this.props;
+    this.refs.Queue.refs.CurrentSong.refs.Player.play();
+    dispatch(playSong());
+  }
+
+  onPauseSong() {
+    const { dispatch } = this.props;
+    this.refs.Queue.refs.CurrentSong.refs.Player.pause();
+    dispatch(pauseSong());
   }
 
   pasteLink(event, dispatch) {
@@ -75,33 +95,31 @@ class App extends React.Component {
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
-        <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
-          <History historySonglist={this.props.history.songlist} onReAddSong={song => this.reAddSongRequest(song, dispatch)}/>
-          <div className={classNames('pusher', styles.pusher)}>
-            <div className={classNames('ui', 'basic', 'segment')}>
-              <div className={classNames('ui', 'grid')}>
-                <div className={classNames('three', 'wide', 'column')}></div>
-                  <div className={classNames('seven', 'wide', 'column')}>
-                  <Queue
+        <Queue
+          id={socket.id}
 
-                    id={socket.id}
+          currentSong={this.props.queue.currentSong}
+          isPlaying={this.props.queue.isPlaying}
+          onNextSong={() => dispatch(nextSong())}
+          onPlaySong={() => dispatch(playSong())}
+          onPauseSong={()=> dispatch(pauseSong())}
+          songlist={this.props.queue.songlist}
+          owner={this.props.owner}
+          queueSonglist={this.props.queue.songlist}
+          onUpvoteSong={index => dispatch(upvoteSong(index))}
+          onNextSong={() => dispatch(nextSong())}
+          onNextReady={() => dispatch(nextReady())}
+          ref='Queue'
+        />
+        <AddSong/>
 
-                    currentSong={this.props.queue.currentSong}
-                    isPlaying={this.props.queue.isPlaying}
-                    onNextSong={() => dispatch(nextSong())}
-                    onPlaySong={() => dispatch(playSong())}
-                    onPauseSong={()=> dispatch(pauseSong())}
-                    songlist={this.props.queue.songlist}
-                    owner={this.props.owner}
-                    queueSonglist={this.props.queue.songlist}
-                    onUpvoteSong={index => dispatch(upvoteSong(index))}
-                    onNextSong={() => dispatch(nextSong())}
-                    onNextReady={() => dispatch(nextReady())} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Controls
+          onPlaySong={() => this.onPlaySong()}
+          onPauseSong={() => this.onPauseSong()}
+          onNextSong={() => this.onNextSong()}
+          isPlaying={this.props.queue.isPlaying}
+          nextReady={this.props.queue.nextReady}
+        />
       </div>
     );
   }
@@ -130,3 +148,36 @@ function select(state) {
 
 // Wrap the component to inject dispatch and state into it
 export default connect(select)(App);
+
+
+//       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
+//         <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
+//         <div className={classNames('ui', 'attached', 'segment', 'pushable', styles.app)}>
+//           <History historySonglist={this.props.history.songlist} onReAddSong={song => this.reAddSongRequest(song, dispatch)}/>
+//           <div className={classNames('pusher', styles.pusher)}>
+//             <div className={classNames('ui', 'basic', 'segment')}>
+//               <div className={classNames('ui', 'grid')}>
+//                 <div className={classNames('three', 'wide', 'column')}></div>
+//                   <div className={classNames('seven', 'wide', 'column')}>
+//                   <Queue
+//
+//                     id={socket.id}
+//
+//                     currentSong={this.props.queue.currentSong}
+//                     isPlaying={this.props.queue.isPlaying}
+//                     onNextSong={() => dispatch(nextSong())}
+//                     onPlaySong={() => dispatch(playSong())}
+//                     onPauseSong={()=> dispatch(pauseSong())}
+//                     songlist={this.props.queue.songlist}
+//                     owner={this.props.owner}
+//                     queueSonglist={this.props.queue.songlist}
+//                     onUpvoteSong={index => dispatch(upvoteSong(index))}
+//                     onNextSong={() => dispatch(nextSong())}
+//                     onNextReady={() => dispatch(nextReady())} />
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//         <Controls />
+//       </div>

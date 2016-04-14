@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import styles from './AddSong.css';
 import { isLinkValid } from '../../../common/utils/functions.js';
 import classNames from 'classnames';
 import notie from 'notie';
@@ -33,6 +32,22 @@ export default class AddSong extends React.Component {
 
   render() {
     return (
+        <div className={classNames('row')}>
+           <div className={classNames('col-md-6', 'col-md-offset-3')} id='room'>
+
+             <div className={classNames('input-group')}>
+               <input type='text' className={classNames('form-control')}/>
+               <span className={classNames('input-group-btn')}>
+                 <button className={('btn btn-default')} type='button'>Add Song</button>
+               </span>
+             </div>
+           </div>
+         </div>
+    );
+  }
+}
+
+  /*
       <div className={classNames(styles.addsong)}>
         <span className={classNames('link', styles.addIcon)} onClick={() => this.showModal()}>
           <i className={classNames('big', 'add', 'circle', 'link', 'icon')}></i>
@@ -52,10 +67,7 @@ export default class AddSong extends React.Component {
             </button>
           </form>
         </div>
-      </div>
-    );
-  }
-}
+      </div>*/
 
 AddSong.propTypes = {
   onAddSong: PropTypes.func.isRequired

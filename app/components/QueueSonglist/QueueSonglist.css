@@ -1,0 +1,15 @@
+#videolist {
+  list-style-type: none;
+}
+
+#playlist {
+  height: 437px;
+}
+
+.list {
+  border: 2px solid #2bb673;
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px 8px 8px 8px;
+  -webkit-border-radius: 8px 8px 8px 8px;
+  margin-left: 2% !important;
+}

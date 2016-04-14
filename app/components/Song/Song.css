@@ -1,15 +1,16 @@
- .twosongbackground { 
+/*
+ .twosongbackground {
   background-color: #3A3A3D !important;
   margin-top: 0 !important;
 }
 
-.fivesongbackground { 
+.fivesongbackground {
   background-color: #3A3A3D !important;
   margin-top: 0;
   margin-left: 0 !important;
 }
 
-.onesongbackground { 
+.onesongbackground {
   background-color: #3A3A3D !important;
 }
 
@@ -81,7 +82,9 @@
   float: left;
 }
 
+*/
 .ytThumb {
   width: 40px;
   height: 30px;
 }
+

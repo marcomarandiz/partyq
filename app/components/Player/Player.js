@@ -1,7 +1,6 @@
 import React from 'react';
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
 import SoundcloudPlayer from '../SoundcloudPlayer/SoundcloudPlayer.js';
-import VolumeSlider from '../Volume/VolumeSlider';
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -86,9 +85,6 @@ export default class Player extends React.Component {
         {this.props.currentSong.src ?
           <div>
             {this.selectPlayer(this.props.currentSong.src)}
-            <VolumeSlider
-              changeVolume={(newVolume) => this.changeVolume(newVolume)}
-            />
           </div> : 'Add a song to the queue!' }
       </div>
     );

@@ -36,20 +36,14 @@ export default class VolumeSlider extends React.Component {
   render() {
     $('#volume').slider({
       value: 50,
-      orientation: 'vertical'
+      orientation: 'horizontal'
     });
     $('#volume').on('slide', (event, ui) => {
       this.setVolume(ui.value);
     });
+
     return (
-      <div>
-        <input
-          type='button'
-          value='volume'
-          onClick={() => this.toggleVolume()}
-        />
-        <div id='volume' animate='true' default='50' />
-      </div>
+      <div id='volume' animate='true' default='50' style={{position: 'fixed'}} />
     );
   }
 }
