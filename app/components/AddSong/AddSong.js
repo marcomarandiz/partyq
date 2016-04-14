@@ -8,26 +8,15 @@ export default class AddSong extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    $('#addModalButton').click((event) => event.preventDefault());
-  }
-
-  showModal() {
-    $('.ui.basic.modal').modal({
-      transition: 'slide down',
-      onApprove: () => {
-        const node = this.refs.songname;
-        const text = node.value.trim();
-        if (isLinkValid(text)) {
-          this.props.onAddSong(text);
-        } else {
-          notie.alert(3, 'Invalid URL: song not added', 2.5);
-        }
-        node.value = '';
-        return true;
-      },
-      selector: { approve: '.button', close: '.button' }
-    }).modal('show');
+  addSong() {
+    const text = this.refs.addsong;
+    const url = text.value.trim();
+    if (isLinkValid(url)) {
+      this.props.onAddSong(url);
+    } else {
+      notie.alert(3, 'Invalid URL: song not added', 2.5);
+    }
+    this.refs.addsong.value = '';
   }
 
   render() {
@@ -36,9 +25,12 @@ export default class AddSong extends React.Component {
            <div className={classNames('col-md-6', 'col-md-offset-3')} id='room'>
 
              <div className={classNames('input-group')}>
-               <input type='text' className={classNames('form-control')}/>
+               <input ref='addsong' type='text' className={classNames('form-control')}/>
                <span className={classNames('input-group-btn')}>
-                 <button className={('btn btn-default')} type='button'>Add Song</button>
+                 <button className={('btn btn-default')} type='button'
+                 onClick={() => this.addSong()}>
+                   Add Song
+                 </button>
                </span>
              </div>
            </div>

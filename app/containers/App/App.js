@@ -94,7 +94,7 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
+        <Header/>
         <Queue
           id={socket.id}
 
@@ -111,7 +111,10 @@ class App extends React.Component {
           onNextReady={() => dispatch(nextReady())}
           ref='Queue'
         />
-        <AddSong/>
+
+        <AddSong
+           onAddSong={(link) => this.addSongRequest(link, dispatch)}
+        />
 
         <Controls
           onPlaySong={() => this.onPlaySong()}
