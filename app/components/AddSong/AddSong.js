@@ -33,6 +33,24 @@ export default class AddSong extends React.Component {
 
   render() {
     return (
+            
+        <div class="row">
+           <div class="col-md-6 col-md-offset-3" id="room">
+
+             <div class="input-group">
+               <input type="text" class="form-control"/>
+               <span class="input-group-btn">
+                 <button class="btn btn-default" type="button">Add Song</button>
+               </span>
+             </div>
+           </div>
+         </div>
+
+    );
+  }
+}
+
+  /*
       <div className={classNames(styles.addsong)}>
         <span className={classNames('link', styles.addIcon)} onClick={() => this.showModal()}>
           <i className={classNames('big', 'add', 'circle', 'link', 'icon')}></i>
@@ -52,10 +70,7 @@ export default class AddSong extends React.Component {
             </button>
           </form>
         </div>
-      </div>
-    );
-  }
-}
+      </div>*/
 
 AddSong.propTypes = {
   onAddSong: PropTypes.func.isRequired

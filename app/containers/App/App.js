@@ -11,6 +11,7 @@ import notie from 'notie';
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid, songInQueue } from '../../../common/utils/functions';
+import AddSong from "../../components/AddSong/AddSong.js";
 
 const roomname = window.location.pathname.replace('/', '');
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`, {
@@ -90,6 +91,9 @@ class App extends React.Component {
             onUpvoteSong={index => dispatch(upvoteSong(index))}
             onNextSong={() => dispatch(nextSong())}
             onNextReady={() => dispatch(nextReady())} />
+            
+            <AddSong/>          
+            
         <Controls />
       </div>
     );
