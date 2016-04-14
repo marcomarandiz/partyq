@@ -11,20 +11,6 @@ export default class CurrentSong extends React.Component {
     this.roomname = window.location.pathname;
   }
 
-  handlePlay() {
-    this.props.onPlaySong();
-    this.refs.Player.play();
-  }
-
-  handlePause() {
-    this.props.onPauseSong();
-    this.refs.Player.pause();
-  }
-
-  handleNextSong() {
-    this.props.onNextSong();
-  }
-
   render() {
     return (
       <div>

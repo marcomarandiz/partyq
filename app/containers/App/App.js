@@ -44,6 +44,24 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.ga.pageview('/');
+    console.log(this.props);
+  }
+
+  onNextSong() {
+    const { dispatch } = this.props;
+    dispatch(nextSong());
+  }
+
+  onPlaySong() {
+    const { dispatch } = this.props;
+    this.refs.Queue.refs.CurrentSong.refs.Player.play();
+    dispatch(playSong());
+  }
+
+  onPauseSong() {
+    const { dispatch } = this.props;
+    this.refs.Queue.refs.CurrentSong.refs.Player.pause();
+    dispatch(pauseSong());
   }
 
   pasteLink(event, dispatch) {
@@ -76,21 +94,30 @@ class App extends React.Component {
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
         <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
-          <Queue
-            id={socket.id}
+        <Queue
+          id={socket.id}
 
-            currentSong={this.props.queue.currentSong}
-            isPlaying={this.props.queue.isPlaying}
-            onNextSong={() => dispatch(nextSong())}
-            onPlaySong={() => dispatch(playSong())}
-            onPauseSong={()=> dispatch(pauseSong())}
-            songlist={this.props.queue.songlist}
-            owner={this.props.owner}
-            queueSonglist={this.props.queue.songlist}
-            onUpvoteSong={index => dispatch(upvoteSong(index))}
-            onNextSong={() => dispatch(nextSong())}
-            onNextReady={() => dispatch(nextReady())} />
-        <Controls />
+          currentSong={this.props.queue.currentSong}
+          isPlaying={this.props.queue.isPlaying}
+          onNextSong={() => dispatch(nextSong())}
+          onPlaySong={() => dispatch(playSong())}
+          onPauseSong={()=> dispatch(pauseSong())}
+          songlist={this.props.queue.songlist}
+          owner={this.props.owner}
+          queueSonglist={this.props.queue.songlist}
+          onUpvoteSong={index => dispatch(upvoteSong(index))}
+          onNextSong={() => dispatch(nextSong())}
+          onNextReady={() => dispatch(nextReady())}
+          ref='Queue'
+        />
+
+        <Controls
+          onPlaySong={() => this.onPlaySong()}
+          onPauseSong={() => this.onPauseSong()}
+          onNextSong={() => this.onNextSong()}
+          isPlaying={this.props.queue.isPlaying}
+          nextReady={this.props.queue.nextReady}
+        />
       </div>
     );
   }
