@@ -6,6 +6,9 @@ import VolumeSlider from '../Volume/VolumeSlider.js';
 export default class Controls extends React.Component {
   constructor(props) {
     super(props);
+
+    // Note: This should probably be a prop
+    this.roomname = window.location.pathname;
   }
 
   componentDidMount() {
@@ -26,6 +29,8 @@ export default class Controls extends React.Component {
   }
 
   render() {
+    const isOwner = localStorage.getItem(this.roomname) === 'owner';
+    console.log(isOwner);
 
     return (
       <div className={classNames('footer-controls', styles.footercontrols)}>
@@ -50,7 +55,7 @@ export default class Controls extends React.Component {
             </div>
             <div className={classNames('btn-group')} role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
-              onClick={() => this.props.nextReady ? this.props.onNextSong() : console.error('Next not ready yet.')}>
+              onClick={() => this.props.nextReady && isOwner ? this.props.onNextSong() : console.error('Owner?', isOwner)}>
                 Skip
               </button>
             </div>

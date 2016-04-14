@@ -6,9 +6,6 @@ import Player from '../Player/Player.js';
 export default class CurrentSong extends React.Component {
   constructor(props) {
     super(props);
-
-    // Note: This should probably be a prop
-    this.roomname = window.location.pathname;
   }
 
   render() {
@@ -44,40 +41,3 @@ CurrentSong.propTypes = {
   onNextSong: PropTypes.func.isRequired
 };
 
-//   const isOwner = localStorage.getItem(this.roomname) === 'owner';
-//     <div>
-//       <div className={classNames('ui', 'grid', 'red', 'segment', styles.youtubeVideo)}>
-//         <div className={classNames('four', 'wide', 'column', 'center', 'aligned', styles.currentSong)}>
-//           <div>
-//             <i className={classNames('big', 'white', 'double', 'angle', 'up', 'link', 'icon', styles.upvoteButton)}
-//             onClick={() => this.props.handleUpvote(this.props.index)}></i>
-//           </div>
-//           <div>
-//             {this.props.currentSong.upvotes}
-//           </div>
-//         </div>
-//         {
-//           isOwner ?
-//             <div className={classNames('twelve', 'wide', 'column', styles.currentSong)}>
-//             {this.props.currentSong.title}
-//           {this.props.isPlaying ?
-//            <ui onClick={() => this.handlePause()}>
-//            <i className={classNames('huge', 'pause', 'link', 'icon', styles.buttonAccents)}></i>
-//            </ui> :
-//            <ui onClick={() => this.handlePlay()}>
-//            <i className={classNames('huge', 'play', 'link', 'icon', styles.buttonAccents)}></i></ui>}
-//             <ui onClick={() => this.handleNextSong()}>
-//             <i className={classNames('huge', 'step', 'forward', 'link', 'icon', styles.buttonAccents)}></i></ui>
-//             </div> :
-//           null
-//         }
-//           {this.props.currentSong ?
-//           <Player
-//             currentSong={this.props.currentSong}
-//             onNextSong={() => this.props.onNextSong()}
-//             onNextReady={() => this.props.onNextReady()}
-//             isPlaying={this.props.isPlaying}
-//             ref='Player'
-//           /> : ''}
-//         </div>
-//     </div>
