@@ -42,8 +42,8 @@ export default class YoutubePlayer extends React.Component {
 
   render() {
     const opts = {
-      height: '394',
-      width: '700',
+      height: '350',
+      width: '100%',
       frameborder: 0,
       playerVars: {
         autoplay: 0, // enables autoplay
