@@ -9,6 +9,16 @@ export default class Header extends React.Component {
     console.log(this);
   }
 
+  goToFacebook() {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href));
+  }
+
+  goToTwitter() {
+    window.open('https://twitter.com/intent/tweet' +
+      '?text=' + encodeURIComponent('Because the party is better when you\'re the DJ!') +
+      '&url=' + encodeURIComponent(location.href));
+  }
+
   componentDidMount() {
     $('.ui.sticky')
     .sticky({
@@ -37,10 +47,10 @@ export default class Header extends React.Component {
               <li>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'info', 'icon')} style={{float: 'right'}}></i>
               </li>
-              <li>
+              <li onClick={this.goToFacebook}>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'facebook', 'icon')} style={{float: 'right'}}></i>
               </li>
-              <li>
+              <li onClick={this.goToTwitter}>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'twitter', 'icon')} style={{float: 'right'}}></i>
               </li>
             </ul>
