@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import styles from './CurrentSong.css';
 import classNames from 'classnames';
 import Player from '../Player/Player.js';
+import { isMobile } from '../../utils/functions.js';
 
 export default class CurrentSong extends React.Component {
   constructor(props) {
@@ -9,10 +10,12 @@ export default class CurrentSong extends React.Component {
   }
 
   render() {
+    console.log(isMobile());
+
     return (
       <div>
         <h2 className={classNames(styles.title)}>{this.props.currentSong.title}</h2>
-        {this.props.currentSong ?
+        {this.props.currentSong && !isMobile() ?
           <Player
             currentSong={this.props.currentSong}
             onNextSong={() => this.props.onNextSong()}
