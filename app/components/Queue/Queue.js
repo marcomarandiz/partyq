@@ -3,7 +3,7 @@ import QueueSonglist from '../QueueSonglist/QueueSonglist.js';
 import CurrentSong from '../CurrentSong/CurrentSong.js';
 import classNames from 'classnames';
 import styles from './Queue.css';
-
+import { isMobile } from '../../utils/functions.js';
 
 export default class Queue extends React.Component {
   constructor(props) {
@@ -11,11 +11,32 @@ export default class Queue extends React.Component {
   }
 
   render() {
+    if (isMobile()) {
+      return (
+        <div className={classNames(styles.content)}>
+          <div className={classNames('row')}>
+            <div id='video-box' className={classNames('col-md-7', styles.mobilevideo)}>
+              {this.props.currentSong !== null ?
+                <CurrentSong
+                  currentSong={this.props.currentSong}
+                  onPlaySong={() => this.props.onPlaySong()}
+                  onPauseSong={() => this.props.onPauseSong()}
+                  onNextSong={() => this.props.onNextSong()}
+                  onNextReady={() => this.props.onNextReady()}
+                  isPlaying={this.props.isPlaying}
+                  ref='CurrentSong'
+                />
+              : ''}
+            </div>
+            <QueueSonglist songs={this.props.songlist} onUpvoteSong={this.props.onUpvoteSong} />
+          </div>
+        </div>
+      );
+    }
     return (
       <div className={classNames(styles.content)}>
         <div className={classNames('row')}>
-
-          <div className={classNames('col-md-7', styles.video)}>
+          <div id='video-box' className={classNames('col-md-7', styles.video)}>
             {this.props.currentSong !== null ?
               <CurrentSong
                 currentSong={this.props.currentSong}
@@ -27,14 +48,11 @@ export default class Queue extends React.Component {
                 ref='CurrentSong'
               />
             : ''}
-
-
           </div>
           <QueueSonglist songs={this.props.songlist} onUpvoteSong={this.props.onUpvoteSong} />
-
         </div>
       </div>
-    );
+      );
   }
 }
 
