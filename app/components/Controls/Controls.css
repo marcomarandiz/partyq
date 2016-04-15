@@ -6,11 +6,17 @@
   border-top: 2px solid #2bb673;
 }
 
-.noOver {
-  overflow: hidden;
+.icon {
+  width: auto;
+  max-height: 100%;
+  display: inline-block;
 }
 
-.icon {
-  height: 20%;
-  width: 20%;
+.vol {
+  text-align: center;
+}
+
+.mybtn {
+  border: none;
+  background: none;
 }
