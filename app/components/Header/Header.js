@@ -6,14 +6,6 @@ import AddSong from '../../components/AddSong/AddSong.js';
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this);
-  }
-
-  componentDidMount() {
-    $('.ui.sticky')
-    .sticky({
-      context: 'body'
-    });
   }
 
   goToFacebook() {

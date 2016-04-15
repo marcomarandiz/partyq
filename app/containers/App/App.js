@@ -28,11 +28,9 @@ class App extends React.Component {
     // Called when youtube api fails to get video
     socket.on('add_song_result', (result) => {
       if (result.error) {
-        console.error(result.error);
         notie.alert(3, result.error, 2.5);
       }
       if (result.song) {
-        console.log(result.song);
         notie.alert(1, result.song.title + ' added!');
       }
     });
@@ -44,7 +42,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.ga.pageview('/');
-    console.log(this.props);
   }
 
   onNextSong() {
