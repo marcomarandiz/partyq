@@ -10,11 +10,12 @@ export default class Song extends React.Component {
   render() {
     return (
       <div className={classNames(styles.song)} onClick={() => this.props.handleUpvote()}>
-        <div><h4>{this.props.song.upvotes} upvotes</h4></div>
+        { this.props.song.upvotes > 1
+          ? <h4>{this.props.song.upvotes} upvotes</h4>
+          : <h4>{this.props.song.upvotes} upvote</h4>
+        }
         <div>
-          <a href={this.props.song.url}>
-            <img src={this.props.song.thumbnail} className={classNames(styles.ytThumb)} />
-          </a>
+          <img src={this.props.song.thumbnail} className={classNames(styles.ytThumb)} />
         </div>
         <div>
           {this.props.song.title ? this.props.song.title : 'Unknown Title'}<br/>

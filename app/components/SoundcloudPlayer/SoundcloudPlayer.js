@@ -12,7 +12,7 @@ export default class SoundcloudPlayer extends React.Component {
       this.play();
     }
     // Show in console SoundPlayerContainer object
-    console.log(this.refs.SoundPlayerContainer);
+    // console.log(this.refs.SoundPlayerContainer);
 
     // Handles next song when a song ends
     this.refs.SoundPlayerContainer.soundCloudAudio.on('ended', () => this.props.onNextSong());
