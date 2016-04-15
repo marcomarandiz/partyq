@@ -1,6 +1,9 @@
 .logo {
-  width: 70px !important;
-  height: 70px !important;
+  /*width: 70px !important;
+  height: 70px !important;*/
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .topnav
@@ -143,5 +146,5 @@ body {
 }
 
 .mainNav {
-  height: 60px;
+  min-height: 100px !important;
 }
