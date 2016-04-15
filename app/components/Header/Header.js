@@ -18,7 +18,7 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <nav className={classNames('navbar', 'navbar-default', 'navbar-fixed-top', 'mainNav')}>
+      <nav className={classNames('navbar', 'navbar-default', 'navbar-fixed-top', styles.mainNav)}>
         <div className={classNames('container-fluid')}>
           <div className={classNames('navbar-header')}>
             <button type='button' className={classNames('navbar-toggle', 'collapsed')} data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>
@@ -33,7 +33,7 @@ export default class Header extends React.Component {
           <AddSong onAddSong={(link) => this.props.onAddSong(link)} />
 
           <div className={classNames('collapse', 'navbar-collapse', styles.topnav)}>
-            <ul className={classNames('nav navbar-nav', 'navbar-right')}>
+            <ul className={classNames('nav navbar-nav', styles.navbarRight)}>
               <li>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'info', 'icon')} style={{float: 'right'}}></i>
               </li>

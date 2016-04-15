@@ -2,8 +2,8 @@
   /*width: 70px !important;
   height: 70px !important;*/
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 5px;
 }
 
 .topnav
@@ -125,12 +125,6 @@ body {
   list-style-type: none;
 }
 
-#room
-{
-  margin-top: 50px;
-  text-align: center;
-}
-
 .topnav
 {
   padding-top: 4px !important;
@@ -146,5 +140,10 @@ body {
 }
 
 .mainNav {
-  min-height: 100px !important;
+  min-height: 75px !important;
+}
+
+.navbarRight {
+  margin-right: 0px !important;
+  float: right;
 }
