@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-// import styles from './CurrentSong.css';
-// import classNames from 'classnames';
+import styles from './CurrentSong.css';
+import classNames from 'classnames';
 import Player from '../Player/Player.js';
 
 export default class CurrentSong extends React.Component {
@@ -11,7 +11,7 @@ export default class CurrentSong extends React.Component {
   render() {
     return (
       <div>
-        {this.props.currentSong.title}
+        <h2 className={classNames(styles.title)}>{this.props.currentSong.title}</h2>
         {this.props.currentSong ?
           <Player
             currentSong={this.props.currentSong}
@@ -40,4 +40,3 @@ CurrentSong.propTypes = {
   onPauseSong: PropTypes.func.isRequired,
   onNextSong: PropTypes.func.isRequired
 };
-

@@ -9,13 +9,17 @@ export default class Song extends React.Component {
 
   render() {
     return (
-      <div onClick={() => this.props.handleUpvote()}>
-        {this.props.song.upvotes}
+      <div className={classNames(styles.song)} onClick={() => this.props.handleUpvote()}>
+        <div><h4>{this.props.song.upvotes} upvotes</h4></div>
+        <div>
           <a href={this.props.song.url}>
             <img src={this.props.song.thumbnail} className={classNames(styles.ytThumb)} />
           </a>
-        {this.props.song.title ? this.props.song.title : 'Unknown Title'}
-        {this.props.song.artist ? this.props.song.artist : 'Unknown Artist'}
+        </div>
+        <div>
+          {this.props.song.title ? this.props.song.title : 'Unknown Title'}<br/>
+          {this.props.song.artist ? this.props.song.artist : 'Unknown Artist'}
+        </div>
       </div>
     );
   }
@@ -29,4 +33,3 @@ Song.propTypes = {
     upvotes: PropTypes.number.isRequired
   })
 };
-

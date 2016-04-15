@@ -145,5 +145,6 @@ body {
 
 .navbarRight {
   margin-right: 0px !important;
+  margin-top: -.5%;
   float: right;
 }
