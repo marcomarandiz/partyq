@@ -5,3 +5,18 @@
   left: 0;
   border-top: 2px solid #2bb673;
 }
+
+.icon {
+  width: auto;
+  max-height: 100%;
+  display: inline-block;
+}
+
+.vol {
+  text-align: center;
+}
+
+.mybtn {
+  border: none;
+  background: none;
+}

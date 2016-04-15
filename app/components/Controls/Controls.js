@@ -33,29 +33,29 @@ export default class Controls extends React.Component {
 
     return (
       <div className={classNames('footer-controls', styles.footercontrols)}>
-        <div className={classNames('row')}>
+        <div className={classNames('row', styles.noOver)}>
           <div className={classNames('btn-group', 'btn-group-justified')} role='group' aria-label='...'>
-            <div className={classNames('btn-group')} id='Volume' role='group'>
+            <div className={classNames('btn-group', styles.vol)} id='Volume' role='group'>
             {/*
               Old bootstrap styling that breaks slider
               <div type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
               */}
-                <VolumeSlider
+                <VolumeSlider className={classNames(styles.icon)}
                   changeVolume={(volume) => this.props.changeVolume(volume)}
                   ref='VolumeSlider'
                 />
             {/* </div> */}
             </div>
             <div className={classNames('btn-group')} role='group'>
-              <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
-              onClick={() => this.props.isPlaying && isOwner ? this.handlePause() : this.handlePlay()}>
-                {this.props.isPlaying && isOwner ? <div>Pause</div> : <div>Play</div>}
+              <button type='button' className={classNames('btn', 'btn-default', 'btn-lg', styles.mybtn)}
+              onClick={() => this.props.isPlaying ? this.handlePause() : this.handlePlay()}>
+                {this.props.isPlaying ? <img className={classNames(styles.icon)} src='http://i.imgur.com/ERX781m.png'/> : <img className={classNames(styles.icon)} src='http://i.imgur.com/c4Cj4rv.png'/> }
               </button>
             </div>
             <div className={classNames('btn-group')} role='group'>
-              <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
+              <button type='button' className={classNames('btn', 'btn-default', 'btn-lg', styles.mybtn)}
               onClick={() => this.props.nextReady && isOwner ? this.props.onNextSong() : console.error('Owner?', isOwner)}>
-                Skip
+                <img className={classNames(styles.icon)} src='http://i.imgur.com/mHDFyMX.png'/>
               </button>
             </div>
           </div>
@@ -65,4 +65,3 @@ export default class Controls extends React.Component {
   }
 
 }
-

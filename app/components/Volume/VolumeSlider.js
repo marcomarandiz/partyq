@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+import styles from './VolumeSlider.css';
 
 export default class VolumeSlider extends React.Component {
   constructor(props) {
@@ -46,7 +48,7 @@ export default class VolumeSlider extends React.Component {
 
     return (
       <div>
-        <div id='volumetext'>Volume</div>
+        <div id='volumetext'><img className={classNames(styles.slider)} src='http://i.imgur.com/06EwVMJ.png'/></div>
         <div id='volume' animate='true' default='50'/>
       </div>
     );
