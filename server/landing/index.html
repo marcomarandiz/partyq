@@ -141,8 +141,17 @@
 
        $("#joinRoom").on("submit", function(e){
          e.preventDefault();
-         console.log('shayan test');
          go(e, $("#roomName").val());
+       });
+
+       $("#goToFacebook").on("click", function(){
+         window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href));
+       });
+
+       $("#goToTwitter").on("click", function(){
+         window.open('https://twitter.com/intent/tweet' +
+           '?text=' + encodeURIComponent('Because the party is better when you\'re the DJ!') +
+           '&url=' + encodeURIComponent(location.href));
        });
 
      });
@@ -172,10 +181,10 @@
               <!--<a class="page-scroll" href="#about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
               <i class="inverted blue large circular info icon" style="float: right;"></i>
             </li>
-            <li>
+            <li id="goToFacebook">
               <i class="inverted blue large circular facebook icon" style="float: right;"></i>
             </li>
-            <li>
+            <li id="goToTwitter">
               <i class="inverted blue large circular twitter icon" style="float: right;"></i>
             </li>
           </ul>
