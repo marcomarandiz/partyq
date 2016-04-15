@@ -11,8 +11,6 @@ import { callbackApiSuccess,
          dispatchUpvoteIfSongInQueue,
          pathToRoomName } from './utils/lib';
 
-const development = process.env.NODE_ENV !== 'production';
-
 export default function startServer(store) {
   const io = new Server().attach(8090);
 
@@ -45,8 +43,7 @@ export default function startServer(store) {
       // Attach the remote address as id so we know who performed the actions
       // If we are in production, use the ip address
       // If we are developing, use the socket id
-      action.id = development ? socket.id :
-        socket.request.connection.remoteAddress;
+      action.id = socket.id;
 
       // TODO: update to actual room name
       action.roomname = roomname;
