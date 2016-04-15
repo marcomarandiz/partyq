@@ -139,7 +139,9 @@
 
      $(document).ready(function(){
 
-       $("#joinRoom").on("click", function(e){
+       $("#joinRoom").on("submit", function(e){
+         e.preventDefault();
+         console.log('shayan test');
          go(e, $("#roomName").val());
        });
 
@@ -183,16 +185,18 @@
     </nav>
     ​
     <header>
-      <div class="header-content">
-        <div class="header-content-inner join">
-          <!-- <h1><img src='http://i.imgur.com/K6M1P3z.png' style="height:40%;width:40%;"/></h1> -->
-          <h1><img src='http://i.imgur.com/ib1ZmYy.png' style="height:50%;width:50%;padding-left:2%;"/></h1>
-          <h2>Because the party is better when you're the DJ.</h2>
-          <p><input id="roomName" type="text" placeholder="Enter your room name" ></p>
-          <!--<a href="" id="joinRoom" class="btn btn-primary btn-xl page-scroll"></a>-->
-          <button type="button" id="joinRoom" class="btn btn-primary btn-xl">Create/Join Room</button>
+      <form id="joinRoom">
+        <div class="header-content">
+          <div class="header-content-inner join">
+            <!-- <h1><img src='http://i.imgur.com/K6M1P3z.png' style="height:40%;width:40%;"/></h1> -->
+            <h1><img src='http://i.imgur.com/ib1ZmYy.png' style="height:50%;width:50%;padding-left:2%;"/></h1>
+            <h2>Because the party is better when you're the DJ.</h2>
+            <p><input id="roomName" type="text" placeholder="Enter your room name" ></p>
+            <!--<a href="" id="joinRoom" class="btn btn-primary btn-xl page-scroll"></a>-->
+            <button type="submit" class="btn btn-primary btn-xl">Create/Join Room</button>
+          </div>
         </div>
-      </div>
+      </form>
     </header>
     ​
     ​
