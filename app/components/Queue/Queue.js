@@ -4,6 +4,7 @@ import CurrentSong from '../CurrentSong/CurrentSong.js';
 import classNames from 'classnames';
 import styles from './Queue.css';
 
+
 export default class Queue extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,7 @@ export default class Queue extends React.Component {
     return (
       <div className={classNames(styles.content)}>
         <div className={classNames('row')}>
+
           <div className={classNames('col-md-7', styles.video)}>
             {this.props.currentSong !== null ?
               <CurrentSong
@@ -25,8 +27,11 @@ export default class Queue extends React.Component {
                 ref='CurrentSong'
               />
             : ''}
+
+
           </div>
           <QueueSonglist songs={this.props.songlist} onUpvoteSong={this.props.onUpvoteSong} />
+
         </div>
       </div>
     );

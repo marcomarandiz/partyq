@@ -1,6 +1,9 @@
-.logo{
-  width: 70px !important;
-  height: 70px !important;
+.logo {
+  /*width: 70px !important;
+  height: 70px !important;*/
+  position: fixed;
+  top: 10px;
+  left: 5px;
 }
 
 .topnav
@@ -50,8 +53,6 @@ body {
   border: 1px solid #2bb673;
   margin-left: 2% !important;
 }
-
-
 
 .join
 {
@@ -124,41 +125,25 @@ body {
   list-style-type: none;
 }
 
-#room
-{
-  margin-top: 50px;
-  text-align: center;
-}
-
 .topnav
 {
   padding-top: 4px !important;
 }
 
-.topnav i
-{
+.topnav i {
   opacity: 0.5;
 }
 
-.topnav i:hover
-{
+.topnav i:hover {
   opacity: 1.0;
   cursor: pointer;
 }
 
-#playlist
-{
-  height: 437px;
+.mainNav {
+  min-height: 75px !important;
 }
 
-.mainNav
-{
-  height: 60px;
-}
-
-.footer-controls
-{
-  position: fixed;
-  bottom: 0;
-  left: 0;
+.navbarRight {
+  margin-right: 0px !important;
+  float: right;
 }

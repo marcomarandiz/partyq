@@ -1,1 +1,14 @@
+.volumetext
+{
+  text-align: center;
+}
 
+.volumeIcon {
+  width: 15%;
+  max-height: 15%;
+}
+
+.volumeSlider {
+  width: 70%;
+  margin: auto;
+}

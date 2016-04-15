@@ -42,11 +42,16 @@ export default class SoundcloudPlayer extends React.Component {
     // This can cause weird problems
     // This also means we can have a progress bar for the song
     return (
+      <div style={{textAlign: 'center'}}>
         <SoundPlayerContainer
           clientId='cbdd7f755416f67e838e272848d988d1'
           streamUrl={this.props.currentSong.url}
           ref='SoundPlayerContainer'
         />
+        {this.props.currentSong.src === 'soundcloud' ?
+          <img src='http://i.imgur.com/gkKut28.png' style={{width: '20%', height: '20%'}}/>
+            : ''}
+      </div>
     );
   }
 }

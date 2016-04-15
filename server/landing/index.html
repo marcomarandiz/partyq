@@ -39,7 +39,10 @@
     <style type="text/css">
      body
      {
-         background-image: url("http://i.imgur.com/v4SrCQl.jpg") !important;
+         /*background-image: url("http://i.imgur.com/v4SrCQl.jpg") !important;*/
+     }
+     .share {
+       padding-right: 40px;
      }
      .join
      {
@@ -60,31 +63,32 @@
 
      .join input
      {
-         border: 2px solid #f05f40 !important;
+         border: 1px solid #5fb1e3 !important;
          background-color: transparent !important;
-         max-width: 600px;
+         min-width: 50%;
          height: 75px;
          margin: 0 auto;
-         border-radius: 35px 35px 35px 35px;
-         -moz-border-radius: 35px 35px 35px 35px;
-         -webkit-border-radius: 35px 35px 35px 35px;
+         border-radius: 15px 15px 15px 15px;
+         -moz-border-radius: 15px 15px 15px 15px;
+         -webkit-border-radius: 15px 15px 15px 15px;
+         text-align: center;
      }
 
      .join input[type="text"]
      {
          font-size: 24px;
-         color: #fff;
+         color: #000;
      }
 
      .btn-primary
      {
-         background-color: transparent !important;
-         border: 2px solid #f05f40 !important;
+         background-color: #5fb1e3 !important;
+         border: 2px solid #5fb1e3 !important;
      }
 
      .join .btn-primary:hover
      {
-         background-color: #f05f40 !important;
+         background-color: #2bb673 !important;
      }
 
      .header-content-inner
@@ -105,6 +109,9 @@
      .onoff:hover img:last-child
      {
          display: inline-block;
+     }
+     #roomName {
+       outline: none;
      }
 
     </style>
@@ -178,9 +185,10 @@
     <header>
       <div class="header-content">
         <div class="header-content-inner join">
-          <h1>Placeholder</h1>
+          <!-- <h1><img src='http://i.imgur.com/K6M1P3z.png' style="height:40%;width:40%;"/></h1> -->
+          <h1><img src='http://i.imgur.com/ib1ZmYy.png' style="height:50%;width:50%;padding-left:2%;"/></h1>
           <h2>Because the party is better when you're the DJ.</h2>
-          <p><input id="roomName" type="text" class="form-control" placeholder="Enter the name of your room" ></p>
+          <p><input id="roomName" type="text" placeholder="Enter your room name" ></p>
           <!--<a href="" id="joinRoom" class="btn btn-primary btn-xl page-scroll"></a>-->
           <button type="button" id="joinRoom" class="btn btn-primary btn-xl">Create/Join Room</button>
         </div>

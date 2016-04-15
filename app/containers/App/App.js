@@ -11,7 +11,6 @@ import notie from 'notie';
 import { addSong, addSongRequest, nextReady, playSong, pauseSong } from '../../../common/actions/queueActions';
 import { nextSong, upvoteSong } from '../../../common/actions/mainActions';
 import { isLinkValid, songInQueue } from '../../../common/utils/functions';
-import AddSong from '../../components/AddSong/AddSong.js';
 
 const roomname = window.location.pathname.replace('/', '');
 const socket = io(`${location.protocol}//${location.hostname}:8090/partyq`, {
@@ -65,6 +64,10 @@ class App extends React.Component {
     dispatch(pauseSong());
   }
 
+  changeVolume(volume) {
+    this.refs.Queue.refs.CurrentSong.refs.Player.changeVolume(volume);
+  }
+
   pasteLink(event, dispatch) {
     const link = event.clipboardData.getData('Text').trim();
     this.addSongRequest(link, dispatch);
@@ -94,7 +97,7 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header onAddSong={(link) => this.addSongRequest(link, dispatch)}/>
+        <Header onAddSong={(link) => this.addSongRequest(link, dispatch)} />
         <Queue
           id={socket.id}
 
@@ -111,12 +114,12 @@ class App extends React.Component {
           onNextReady={() => dispatch(nextReady())}
           ref='Queue'
         />
-        <AddSong/>
 
         <Controls
           onPlaySong={() => this.onPlaySong()}
           onPauseSong={() => this.onPauseSong()}
           onNextSong={() => this.onNextSong()}
+          changeVolume={(volume) => this.changeVolume(volume)}
           isPlaying={this.props.queue.isPlaying}
           nextReady={this.props.queue.nextReady}
         />

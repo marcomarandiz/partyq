@@ -2,8 +2,8 @@
   list-style-type: none;
 }
 
-#playlist {
-  height: 437px;
+.playlist {
+  min-height: 437px;
 }
 
 .list {
