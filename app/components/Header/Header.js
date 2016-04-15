@@ -9,6 +9,13 @@ export default class Header extends React.Component {
     console.log(this);
   }
 
+  componentDidMount() {
+    $('.ui.sticky')
+    .sticky({
+      context: 'body'
+    });
+  }
+
   goToFacebook() {
     window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href));
   }
@@ -17,13 +24,6 @@ export default class Header extends React.Component {
     window.open('https://twitter.com/intent/tweet' +
       '?text=' + encodeURIComponent('Because the party is better when you\'re the DJ!') +
       '&url=' + encodeURIComponent(location.href));
-  }
-
-  componentDidMount() {
-    $('.ui.sticky')
-    .sticky({
-      context: 'body'
-    });
   }
 
   render() {
