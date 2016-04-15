@@ -26,7 +26,7 @@ export default class Controls extends React.Component {
   render() {
     return (
       <div className={classNames('footer-controls', styles.footercontrols)}>
-        <div className={classNames('row')}>
+        <div className={classNames('row', styles.noOver)}>
           <div className={classNames('btn-group', 'btn-group-justified')} role='group' aria-label='...'>
             <div className={classNames('btn-group')} role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}>
@@ -37,7 +37,7 @@ export default class Controls extends React.Component {
             <div className={classNames('btn-group')} role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
               onClick={() => this.props.isPlaying ? this.handlePause() : this.handlePlay()}>
-                {this.props.isPlaying ? <div>Pause</div> : <div>Play</div>}
+                {this.props.isPlaying ? <img className={classNames(styles.icon)} src='http://i.imgur.com/ERX781m.png'/> : <img className={classNames(styles.icon)} src='http://i.imgur.com/c4Cj4rv.png'/> }
               </button>
             </div>
             <div className={classNames('btn-group')} role='group'>
@@ -53,4 +53,3 @@ export default class Controls extends React.Component {
   }
 
 }
-
