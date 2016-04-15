@@ -7,6 +7,7 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config.js';
 import request from 'request';
+import os from 'os';
 
 export const store = makeStore();
 
@@ -46,7 +47,7 @@ app.get('/', function response(req, res) {
 });
 
 app.get('*', function response(req, res) {
-  const host = 'http://' + req.headers.host + '/room.html';
+  const host = 'http://' + os.hostname() + ':' + port + '/room.html';
   request(host).pipe(res);
 });
 
