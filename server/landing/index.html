@@ -136,10 +136,7 @@
          return;
        }
 
-       var url = window.location.href;
-       url += (url[url.length-1] === "/") ? rname : "/" + rname;
-       window.location.href = url;
-
+       window.location.href = rname;
      }
 
      $(document).ready(function(){
