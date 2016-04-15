@@ -1,17 +1,3 @@
-.youtubeVideo {
+.title {
   text-align: center;
-	background-color: #3A3A3D !important;
-}
-
-.buttonAccents {
-  color: #30AAFF;
-}
-
-.upvoteButton {
-    opacity: 0.25;
-    color: #30AAFF;
-}
-
-.upvoteButton:hover {
-  opacity: 1;
 }

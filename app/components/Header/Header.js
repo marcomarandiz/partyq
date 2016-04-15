@@ -44,9 +44,6 @@ export default class Header extends React.Component {
 
           <div className={classNames('collapse', 'navbar-collapse', styles.topnav)}>
             <ul className={classNames('nav navbar-nav', styles.navbarRight)}>
-              <li>
-                <i className={classNames('inverted', 'blue', 'large', 'circular', 'info', 'icon')} style={{float: 'right'}}></i>
-              </li>
               <li onClick={this.goToFacebook}>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'facebook', 'icon')} style={{float: 'right'}}></i>
               </li>

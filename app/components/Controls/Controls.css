@@ -1,6 +1,7 @@
 .footercontrols
 {
   position: fixed;
+  background: white;
   bottom: 0;
   left: 0;
   border-top: 2px solid #2bb673;
@@ -19,4 +20,8 @@
 .mybtn {
   border: none;
   background: none;
+}
+
+.mybtn:focus {
+  outline: none;
 }

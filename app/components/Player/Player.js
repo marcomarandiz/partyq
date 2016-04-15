@@ -84,10 +84,9 @@ export default class Player extends React.Component {
         {this.props.currentSong.src ?
           <div>
             {this.selectPlayer(this.props.currentSong.src)}
-          </div> : 'Add a song to the queue!' }
+          </div> : <h2>'Add a song to the queue!'</h2> }
       </div>
     );
   }
 
 }
-

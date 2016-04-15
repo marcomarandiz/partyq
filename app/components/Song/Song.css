@@ -88,3 +88,10 @@
   height: 30px;
 }
 
+.song {
+  border: 1px solid #5fb1e3 !important;
+
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px 8px 8px 8px;
+  -webkit-border-radius: 8px 8px 8px 8px;
+}
