@@ -55,6 +55,10 @@
          margin-bottom: 20px !important;
      }
 
+     h2 {
+       color: black;
+     }
+
      .join > h2
      {
          margin-top: 5px !important;
@@ -89,6 +93,7 @@
      .join .btn-primary:hover
      {
          background-color: #2bb673 !important;
+         border: 2px solid #2bb673 !important;
      }
 
      .header-content-inner
@@ -167,10 +172,6 @@
         <div class="collapse navbar-collapse" id="top-nav">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <!--<a class="page-scroll" href="#about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
-              <i class="inverted blue large circular info icon" style="float: right;"></i>
-            </li>
-            <li>
               <i class="inverted blue large circular facebook icon" style="float: right;"></i>
             </li>
             <li>
@@ -187,7 +188,9 @@
         <div class="header-content-inner join">
           <!-- <h1><img src='http://i.imgur.com/K6M1P3z.png' style="height:40%;width:40%;"/></h1> -->
           <h1><img src='http://i.imgur.com/ib1ZmYy.png' style="height:50%;width:50%;padding-left:2%;"/></h1>
-          <h2>Because the party is better when you're the DJ.</h2>
+          <br>
+          <h2 type='text'>Because the party is better when you're the DJ.</h2>
+          <br>
           <p><input id="roomName" type="text" placeholder="Enter your room name" ></p>
           <!--<a href="" id="joinRoom" class="btn btn-primary btn-xl page-scroll"></a>-->
           <button type="button" id="joinRoom" class="btn btn-primary btn-xl">Create/Join Room</button>
