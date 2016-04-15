@@ -16,6 +16,16 @@ export default class Header extends React.Component {
     });
   }
 
+  goToFacebook() {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href));
+  }
+
+  goToTwitter() {
+    window.open('https://twitter.com/intent/tweet' +
+      '?text=' + encodeURIComponent('Because the party is better when you\'re the DJ!') +
+      '&url=' + encodeURIComponent(location.href));
+  }
+
   render() {
     return (
       <nav className={classNames('navbar', 'navbar-default', 'navbar-fixed-top', styles.mainNav)}>
@@ -34,10 +44,10 @@ export default class Header extends React.Component {
 
           <div className={classNames('collapse', 'navbar-collapse', styles.topnav)}>
             <ul className={classNames('nav navbar-nav', styles.navbarRight)}>
-              <li>
+              <li onClick={this.goToFacebook}>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'facebook', 'icon')} style={{float: 'right'}}></i>
               </li>
-              <li>
+              <li onClick={this.goToTwitter}>
                 <i className={classNames('inverted', 'blue', 'large', 'circular', 'twitter', 'icon')} style={{float: 'right'}}></i>
               </li>
             </ul>

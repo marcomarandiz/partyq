@@ -144,8 +144,19 @@
 
      $(document).ready(function(){
 
-       $("#joinRoom").on("click", function(e){
+       $("#joinRoom").on("submit", function(e){
+         e.preventDefault();
          go(e, $("#roomName").val());
+       });
+
+       $("#goToFacebook").on("click", function(){
+         window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href));
+       });
+
+       $("#goToTwitter").on("click", function(){
+         window.open('https://twitter.com/intent/tweet' +
+           '?text=' + encodeURIComponent('Because the party is better when you\'re the DJ!') +
+           '&url=' + encodeURIComponent(location.href));
        });
 
      });
@@ -171,10 +182,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="top-nav">
           <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li id="goToFacebook">
               <i class="inverted blue large circular facebook icon" style="float: right;"></i>
             </li>
-            <li>
+            <li id="goToTwitter">
               <i class="inverted blue large circular twitter icon" style="float: right;"></i>
             </li>
           </ul>
@@ -184,18 +195,18 @@
     </nav>
     ​
     <header>
-      <div class="header-content">
-        <div class="header-content-inner join">
-          <!-- <h1><img src='http://i.imgur.com/K6M1P3z.png' style="height:40%;width:40%;"/></h1> -->
-          <h1><img src='http://i.imgur.com/ib1ZmYy.png' style="height:50%;width:50%;padding-left:2%;"/></h1>
-          <br>
-          <h2 type='text'>Because the party is better when you're the DJ.</h2>
-          <br>
-          <p><input id="roomName" type="text" placeholder="Enter your room name" ></p>
-          <!--<a href="" id="joinRoom" class="btn btn-primary btn-xl page-scroll"></a>-->
-          <button type="button" id="joinRoom" class="btn btn-primary btn-xl">Create/Join Room</button>
+      <form id="joinRoom">
+        <div class="header-content">
+          <div class="header-content-inner join">
+            <!-- <h1><img src='http://i.imgur.com/K6M1P3z.png' style="height:40%;width:40%;"/></h1> -->
+            <h1><img src='http://i.imgur.com/ib1ZmYy.png' style="height:50%;width:50%;padding-left:2%;"/></h1>
+            <h2 type='text'>Because the party is better when you're the DJ.</h2>
+            <p><input id="roomName" type="text" placeholder="Enter your room name" ></p>
+            <!--<a href="" id="joinRoom" class="btn btn-primary btn-xl page-scroll"></a>-->
+            <button type="submit" class="btn btn-primary btn-xl">Create/Join Room</button>
+          </div>
         </div>
-      </div>
+      </form>
     </header>
     ​
     ​
