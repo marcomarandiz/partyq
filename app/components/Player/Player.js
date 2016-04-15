@@ -34,7 +34,6 @@ export default class Player extends React.Component {
   }
 
   changeVolume(newVolume) {
-    console.log('New volume: ' + newVolume);
     switch (this.props.currentSong.src) {
     case 'youtube':
       this.refs.YoutubePlayer.setVolume(newVolume);

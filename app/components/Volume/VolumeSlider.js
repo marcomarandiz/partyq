@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+import styles from './VolumeSlider.css';
 
 export default class VolumeSlider extends React.Component {
   constructor(props) {
@@ -9,8 +11,8 @@ export default class VolumeSlider extends React.Component {
     // Deals this bug where the VolumeSlider doesn't get rendered
     // when it wasn't already rendered and a Soundcloud song is added
     // I believe it's related to Soundcloud songs not updating the view
+    // this.forceUpdate();
     this.toggleVolumeOff();
-    this.forceUpdate();
   }
 
   setVolume(volume) {
@@ -19,10 +21,12 @@ export default class VolumeSlider extends React.Component {
 
   toggleVolumeOn() {
     document.getElementById('volume').style.display = 'block';
+    document.getElementById('volumetext').style.display = 'none';
   }
 
   toggleVolumeOff() {
     document.getElementById('volume').style.display = 'none';
+    document.getElementById('volumetext').style.display = 'block';
   }
 
   toggleVolume() {
@@ -43,7 +47,10 @@ export default class VolumeSlider extends React.Component {
     });
 
     return (
-      <div id='volume' animate='true' default='50' style={{position: 'fixed'}} />
+      <div>
+        <div id='volumetext'><img className={classNames(styles.volumeIcon)} src='http://i.imgur.com/06EwVMJ.png'/></div>
+        <div id='volume' className={classNames(styles.volumeSlider)} animate='true' default='50' />
+      </div>
     );
   }
 }

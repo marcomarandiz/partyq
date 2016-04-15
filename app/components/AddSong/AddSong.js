@@ -2,43 +2,36 @@ import React, { PropTypes } from 'react';
 import { isLinkValid } from '../../../common/utils/functions.js';
 import classNames from 'classnames';
 import notie from 'notie';
+import styles from './AddSong.css';
 
 export default class AddSong extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    $('#addModalButton').click((event) => event.preventDefault());
-  }
-
-  showModal() {
-    $('.ui.basic.modal').modal({
-      transition: 'slide down',
-      onApprove: () => {
-        const node = this.refs.songname;
-        const text = node.value.trim();
-        if (isLinkValid(text)) {
-          this.props.onAddSong(text);
-        } else {
-          notie.alert(3, 'Invalid URL: song not added', 2.5);
-        }
-        node.value = '';
-        return true;
-      },
-      selector: { approve: '.button', close: '.button' }
-    }).modal('show');
+  addSong() {
+    const text = this.refs.addsong;
+    const url = text.value.trim();
+    if (isLinkValid(url)) {
+      this.props.onAddSong(url);
+    } else {
+      notie.alert(3, 'Invalid URL: song not added', 2.5);
+    }
+    this.refs.addsong.value = '';
   }
 
   render() {
     return (
-        <div className={classNames('row')}>
+        <div className={classNames(styles.addsong)}>
            <div className={classNames('col-md-6', 'col-md-offset-3')} id='room'>
 
-             <div className={classNames('input-group')}>
-               <input type='text' className={classNames('form-control')}/>
+             <div className={classNames('input-group', styles.inputbox)}>
+               <input ref='addsong' type='text' className={classNames('form-control', styles.textarea)}/>
                <span className={classNames('input-group-btn')}>
-                 <button className={('btn btn-default')} type='button'>Add Song</button>
+                 <button className={('btn btn-default')} type='button'
+                 onClick={() => this.addSong()}>
+                   Add Song
+                 </button>
                </span>
              </div>
            </div>
