@@ -18,6 +18,17 @@
   min-height: 437px;
 }
 
+.mobilevideo {
+  /*padding-left: 5% !important;*/
+  height: 100% !important;
+  border: 2px solid #5fb1e3;
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px 8px 8px 8px;
+  -webkit-border-radius: 8px 8px 8px 8px;
+  margin-left: 5% !important;
+}
+
+
 .list {
   border: 1px solid #000;
   margin-left: 2% !important;
