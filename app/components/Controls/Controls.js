@@ -6,6 +6,9 @@ import VolumeSlider from '../Volume/VolumeSlider.js';
 export default class Controls extends React.Component {
   constructor(props) {
     super(props);
+
+    // Note: This should probably be a prop
+    this.roomname = window.location.pathname;
   }
 
   componentDidMount() {
@@ -13,6 +16,8 @@ export default class Controls extends React.Component {
     .sticky({
       context: 'body'
     });
+    $('#Volume').on('mouseenter', () => this.refs.VolumeSlider.toggleVolumeOn());
+    $('#Volume').on('mouseleave', () => this.refs.VolumeSlider.toggleVolumeOff());
   }
 
   handlePlay() {
@@ -24,15 +29,22 @@ export default class Controls extends React.Component {
   }
 
   render() {
+    const isOwner = localStorage.getItem(this.roomname) === 'owner';
+
     return (
       <div className={classNames('footer-controls', styles.footercontrols)}>
         <div className={classNames('row', styles.noOver)}>
           <div className={classNames('btn-group', 'btn-group-justified')} role='group' aria-label='...'>
-            <div className={classNames('btn-group')} role='group'>
-              <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}>
-                Volume
-              <VolumeSlider />
-              </button>
+            <div className={classNames('btn-group')} id='Volume' role='group'>
+            {/*
+              Old bootstrap styling that breaks slider
+              <div type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
+              */}
+                <VolumeSlider
+                  changeVolume={(volume) => this.props.changeVolume(volume)}
+                  ref='VolumeSlider'
+                />
+            {/* </div> */}
             </div>
             <div className={classNames('btn-group')} role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
@@ -42,7 +54,7 @@ export default class Controls extends React.Component {
             </div>
             <div className={classNames('btn-group')} role='group'>
               <button type='button' className={classNames('btn', 'btn-default', 'btn-lg')}
-              onClick={() => this.props.nextReady ? this.props.onNextSong() : console.error('Next not ready yet.')}>
+              onClick={() => this.props.nextReady && isOwner ? this.props.onNextSong() : console.error('Owner?', isOwner)}>
                 Skip
               </button>
             </div>

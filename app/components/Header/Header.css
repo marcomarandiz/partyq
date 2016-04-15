@@ -1,4 +1,4 @@
-.logo{
+.logo {
   width: 70px !important;
   height: 70px !important;
 }
@@ -138,30 +138,15 @@ body {
   padding-top: 4px !important;
 }
 
-.topnav i
-{
+.topnav i {
   opacity: 0.5;
 }
 
-.topnav i:hover
-{
+.topnav i:hover {
   opacity: 1.0;
   cursor: pointer;
 }
 
-#playlist
-{
-  height: 437px;
-}
-
-.mainNav
-{
+.mainNav {
   height: 60px;
-}
-
-.footer-controls
-{
-  position: fixed;
-  bottom: 0;
-  left: 0;
 }
