@@ -13,6 +13,7 @@
   -moz-border-radius: 8px 8px 8px 8px;
   -webkit-border-radius: 8px 8px 8px 8px;
   margin-left: 5% !important;
+  min-height: 437px;
 }
 
 .list {

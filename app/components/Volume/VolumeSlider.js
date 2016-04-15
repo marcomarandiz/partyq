@@ -47,7 +47,7 @@ export default class VolumeSlider extends React.Component {
     return (
       <div>
         <div id='volumetext'>Volume</div>
-        <div id='volume' animate='true' default='50'/>
+        <div id='volume' animate='true' default='50'></div>
       </div>
     );
   }

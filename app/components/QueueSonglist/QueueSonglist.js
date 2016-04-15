@@ -17,7 +17,7 @@ export default class QueueSonglist extends React.Component {
       <Song key={index} song={song} index={index} handleUpvote={() => this.handleUpvote(index)} />
     );
     return (
-      <div id='playlist' className={classNames('col-md-3', styles.list, styles.playlist)}>
+      <div className={classNames('col-md-3', 'playlist', styles.list, styles.playlist)}>
         <h3>Playlist</h3>
         <ul id='videolist' className={classNames(styles.videolist)}>
           {songList}
