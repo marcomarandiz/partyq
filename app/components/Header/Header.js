@@ -6,6 +6,7 @@ import AddSong from '../../components/AddSong/AddSong.js';
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this);
   }
 
   componentDidMount() {
@@ -29,7 +30,7 @@ export default class Header extends React.Component {
             <a className={classNames('navbar-brand', 'page-scroll')} href='#page-top'><img className={classNames(styles.logo)} width='125' height='54' src='http://i.imgur.com/ib1ZmYy.png'/></a>
           </div>
 
-          <AddSong onAddSong={(link) => this.addSongRequest(link, dispatch)} />
+          <AddSong onAddSong={(link) => this.props.onAddSong(link)} />
 
           <div className={classNames('collapse', 'navbar-collapse', styles.topnav)}>
             <ul className={classNames('nav navbar-nav', 'navbar-right')}>
