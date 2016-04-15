@@ -25,7 +25,7 @@ export default class Header extends React.Component {
               <span className={classNames('icon-bar')}></span>
               <span className={classNames('icon-bar')}></span>
             </button>
-            <a className={classNames('navbar-brand', 'page-scroll')} href='#page-top'><img className={classNames(styles.logo)} src='http://i.imgur.com/ib1ZmYy.png'/></a>
+            <a className={classNames('navbar-brand', 'page-scroll')} href='#page-top'><img className={classNames(styles.logo)} width='125' height='54' src='http://i.imgur.com/ib1ZmYy.png'/></a>
           </div>
 
           <div className={classNames('collapse', 'navbar-collapse', styles.topnav)}>
