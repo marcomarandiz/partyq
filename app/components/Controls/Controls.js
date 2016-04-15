@@ -29,7 +29,8 @@ export default class Controls extends React.Component {
   }
 
   render() {
-    const isOwner = localStorage.getItem(this.roomname) === 'owner';
+    // Everyone is owner for showcase
+    const isOwner = true;
 
     return (
       <div className={classNames('footer-controls', styles.footercontrols)}>
