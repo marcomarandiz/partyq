@@ -97,7 +97,7 @@ class App extends React.Component {
     const { dispatch } = this.props;
     return (
       <div className={classNames(styles.app)} onPaste={(event) => this.pasteLink(event, dispatch)}>
-        <Header/>
+        <Header onAddSong={(link) => this.addSongRequest(link, dispatch)} />
         <Queue
           id={socket.id}
 

@@ -23,7 +23,7 @@ export default class AddSong extends React.Component {
   render() {
     return (
         <div className={classNames(styles.addsong)}>
-           <div className={classNames('col-md-6', 'col-md-offset-3')} id='room'>
+           <div className={classNames('col-md-9', 'col-md-offset-2')} id='room'>
 
              <div className={classNames('input-group', styles.inputbox)}>
                <input ref='addsong' type='text' className={classNames('form-control', styles.textarea)}/>

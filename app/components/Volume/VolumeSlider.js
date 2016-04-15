@@ -48,8 +48,8 @@ export default class VolumeSlider extends React.Component {
 
     return (
       <div>
-        <div id='volumetext'><img className={classNames(styles.slider)} src='http://i.imgur.com/06EwVMJ.png'/></div>
-        <div id='volume' animate='true' default='50'/>
+        <div id='volumetext'><img className={classNames(styles.volumeIcon)} src='http://i.imgur.com/06EwVMJ.png'/></div>
+        <div id='volume' className={classNames(styles.volumeSlider)} animate='true' default='50' />
       </div>
     );
   }
