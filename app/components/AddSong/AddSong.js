@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { isLinkValid } from '../../../common/utils/functions.js';
 import classNames from 'classnames';
 import notie from 'notie';
+import styles from './AddSong.css';
 
 export default class AddSong extends React.Component {
   constructor(props) {
@@ -21,11 +22,11 @@ export default class AddSong extends React.Component {
 
   render() {
     return (
-        <div className={classNames('row')}>
+        <div className={classNames(styles.addsong)}>
            <div className={classNames('col-md-6', 'col-md-offset-3')} id='room'>
 
-             <div className={classNames('input-group')}>
-               <input ref='addsong' type='text' className={classNames('form-control')}/>
+             <div className={classNames('input-group', styles.inputbox)}>
+               <input ref='addsong' type='text' className={classNames('form-control', styles.textarea)}/>
                <span className={classNames('input-group-btn')}>
                  <button className={('btn btn-default')} type='button'
                  onClick={() => this.addSong()}>

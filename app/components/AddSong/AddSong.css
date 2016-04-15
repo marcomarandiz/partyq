@@ -1,10 +1,11 @@
 .addsong{
-    float: left;
-    clear: both;
     margin-top: 1% !important;
     margin-left: 0% !important;
-    border: 0 !important;
-    width: 100%;
+    width: 50%;
+}
+
+.textarea:focus {
+  outline:none;
 }
 
 .songURL {
@@ -18,5 +19,5 @@
 }
 
 .addIcon {
-    color: #30AAFF !important;
+  color: #30AAFF !important;
 }
