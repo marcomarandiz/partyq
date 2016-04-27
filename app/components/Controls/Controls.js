@@ -8,7 +8,7 @@ export default class Controls extends React.Component {
     super(props);
 
     // Note: This should probably be a prop
-    this.roomname = window.location.pathname;
+    this.roomname = window.location.pathname.replace('/', '');
   }
 
   componentDidMount() {
@@ -30,7 +30,7 @@ export default class Controls extends React.Component {
 
   render() {
     // Everyone is owner for showcase
-    const isOwner = true;
+    const isOwner = localStorage.getItem(this.roomname) === 'owner';
 
     return (
       <div className={classNames('footer-controls', styles.footercontrols)}>

@@ -5,6 +5,8 @@
 
 .playlist {
   min-height: 437px;
+  overflow-y: auto;
+  max-height: 437px;
 }
 
 .list {
